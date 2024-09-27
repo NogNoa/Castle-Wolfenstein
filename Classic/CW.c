@@ -9,15 +9,22 @@ fun_8e2d(char* call)
         ++call;
         local[0x16] = 1;
     }
-    int si;
+    int si, di;
     char al, bvar1;
     local[0] = *call;
     bvar1 = *(char *)((*call) + 0xa0b5);
-    while (bvar1 & 4 != 0)
+    if (bvar1 & 4 != 0)
     {   if (local[0] == 0x30)
             {local[0x12] = 0x30;}
         local[0x11] = *call & 0xf;
         ++call;
+        lab8e93:
+        si = call;
+        di = *call + 1;
+        al = *(char *)(di + 0xa0b4);
+        if (al & 4 != 0)
+        {}
+
     }
     
 }
