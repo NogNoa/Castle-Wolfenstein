@@ -9,8 +9,8 @@ fun_8e2d(char* call)
         ++call;
         local[0x16] = 1;
     }
-    int si, di;
-    char al, bvar1;
+    int si, di, ax;
+    char al, bvar1, bl;
     local[0] = *call;
     bvar1 = *(char *)((*call) + 0xa0b5);
     if (bvar1 & 4 != 0)
@@ -19,11 +19,13 @@ fun_8e2d(char* call)
         local[0x11] = *call & 0xf;
         ++call;
         lab8e93:
-        si = call;
-        di = *call + 1;
-        al = *(char *)(di + 0xa0b4);
+        bvar1 = *(char *)(*call + 0xa0b5);
         if (al & 4 != 0)
-        {}
+        {   ax = local[11] * 0xa;
+            bl =*(char *)(call++) & 0xf;
+            local[0x11] = ax + bl;
+            goto lab8e93;
+        }
 
     }
     
