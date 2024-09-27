@@ -13,20 +13,11 @@ fun_8e2d(char* call)
     char al, bvar1, bl;
     local[0] = *call;
     bvar1 = *(char *)((*call) + 0xa0b5);
-    if (bvar1 & 4 != 0)
-    {   if (local[0] == 0x30)
-            {local[0x12] = 0x30;}
-        local[0x11] = *call & 0xf;
+    if (bvar1 & 4 != 0 && local[0] == 0x30)
+        {local[0x12] = 0x30;}
+    for (;bvar1 & 4 != 0;bvar1 = *(char *)(*call + 0xa0b5))
+    {   local[0x11] *= 0xa;
+        local[0x11] += (*call & 0xf);
         ++call;
-        lab8e93:
-        bvar1 = *(char *)(*call + 0xa0b5);
-        if (bvar1 & 4 != 0)
-        {   local[0x11] *= 0xa;
-            local[0x11] += (*call & 0xf);
-            ++call;
-            goto lab8e93;
-        }
-
     }
-    
 }
