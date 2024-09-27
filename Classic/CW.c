@@ -20,10 +20,10 @@ fun_8e2d(char* call)
         ++call;
         lab8e93:
         bvar1 = *(char *)(*call + 0xa0b5);
-        if (al & 4 != 0)
-        {   ax = local[11] * 0xa;
-            bl =*(char *)(call++) & 0xf;
-            local[0x11] = ax + bl;
+        if (bvar1 & 4 != 0)
+        {   local[0x11] *= 0xa;
+            local[0x11] += (*call & 0xf);
+            ++call;
             goto lab8e93;
         }
 
