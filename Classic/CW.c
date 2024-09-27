@@ -6,14 +6,18 @@ fun_8e2d(char* call)
     local[0x16] = local[0x11] = local[0x15] = local[0x14] = 0;
     if (*call == 0x2d)
     {
-        call += 1;
+        ++call;
         local[0x16] = 1;
     }
     int si;
-    char al;
+    char al, bvar1;
     local[0] = *call;
-    si = (*call) + 1;
-    al = *(char *)((*call) + 0xa0b5);
-    if (al & 4 != 0)
+    bvar1 = *(char *)((*call) + 0xa0b5);
+    while (bvar1 & 4 != 0)
+    {   if (local[0] == 0x30)
+            {local[0x12] = 0x30;}
+        local[0x11] = *call & 0xf;
+        ++call;
+    }
     
 }
