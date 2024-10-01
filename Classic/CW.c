@@ -22,27 +22,35 @@ fun_8e2d(char* call)
     }
 }
 
+char f1, ee;
+signed char Rank_Index;
+
 signed char rank_calculate(void)
 {
   char bVar1;
   
   if (f1 < 0x80) {
     if (1 < f1) {
-      Rank_Index = Rank_Index - 1;
+      Rank_Index -= 1;
     }
   }
   else {
     do {
       bVar1 = ee;
-      if (0xef < Rank_Index) break;
-      Rank_Index = Rank_Index + 0x10;
+      if (-0x11 < Rank_Index && Rank_Index < 0) break;
+      Rank_Index += 0x10;
       ee = 0;
     } while (bVar1 != 0);
-    if (0xf0 < Rank_Index) {
-      Rank_Index = 0xf0;
+    if ((-0x11 < Rank_Index && Rank_Index < 0)) {
+      Rank_Index = -0x10;
     }
   }
   if (Rank_Index < 0x10) {
     Rank_Index = 0x10;
   }
   return Rank_Index;
+
+  /*     100 > ur >=  f0
+          00 > sr >= -10
+  
+  */
