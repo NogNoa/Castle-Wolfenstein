@@ -37,7 +37,7 @@ signed char rank_calculate(void)
   else {
     if (-0x10 > Rank_Index || Rank_Index > -1) 
     {   Rank_Index += 0x10;
-        if (-0x10 > Rank_Index || Rank_Index > -1)
+        if (ee && (-0x10 > Rank_Index || Rank_Index > -1))
             {Rank_Index += 0x10;}
     }
     if ((-0x11 < Rank_Index && Rank_Index < 0)) {
@@ -48,8 +48,18 @@ signed char rank_calculate(void)
     Rank_Index = 0x10;
   }
   return Rank_Index;
-
+}
   /*     100 > ur >=  f0
           00 > sr >= -10
   
   */
+
+char *rank_area_top=0x91b0;
+void Rank_print(void)
+{
+  Set_Video_mode(4);
+  BIOS_Video(0x200,0,0,0x100);
+  puts("Your Rank is ");
+  puts(*(char **)(rank_area_top + ((int)Rank_Index >> 5) * 2));
+  return;
+}
