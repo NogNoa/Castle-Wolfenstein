@@ -15,9 +15,34 @@ fun_8e2d(char* call)
     bvar1 = *(char *)((*call) + 0xa0b5);
     if (bvar1 & 4 != 0 && local[0] == 0x30)
         {local[0x12] = 0x30;}
-    for (;bvar1 & 4 != 0;bvar1 = *(char *)(*call + 0xa0b5))
+    for (;bvar1 & 4 != 0; bvar1 = *(char *)(*call + 0xa0b5))
     {   local[0x11] *= 0xa;
         local[0x11] += (*call & 0xf);
         ++call;
     }
 }
+
+signed char rank_calculate(void)
+{
+  char bVar1;
+  
+  if (f1 < 0x80) {
+    if (1 < f1) {
+      Rank_Index = Rank_Index - 1;
+    }
+  }
+  else {
+    do {
+      bVar1 = ee;
+      if (0xef < Rank_Index) break;
+      Rank_Index = Rank_Index + 0x10;
+      ee = 0;
+    } while (bVar1 != 0);
+    if (0xf0 < Rank_Index) {
+      Rank_Index = 0xf0;
+    }
+  }
+  if (Rank_Index < 0x10) {
+    Rank_Index = 0x10;
+  }
+  return Rank_Index;
