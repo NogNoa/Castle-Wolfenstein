@@ -35,12 +35,11 @@ signed char rank_calculate(void)
     }
   }
   else {
-    do {
-      bVar1 = ee;
-      if (-0x11 < Rank_Index && Rank_Index < 0) break;
-      Rank_Index += 0x10;
-      ee = 0;
-    } while (bVar1 != 0);
+    if (-0x10 > Rank_Index || Rank_Index > -1) 
+    {   Rank_Index += 0x10;
+        if (-0x10 > Rank_Index || Rank_Index > -1)
+            {Rank_Index += 0x10;}
+    }
     if ((-0x11 < Rank_Index && Rank_Index < 0)) {
       Rank_Index = -0x10;
     }
