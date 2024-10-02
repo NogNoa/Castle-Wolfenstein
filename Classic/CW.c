@@ -55,7 +55,7 @@ signed char rank_calculate(void)
   */
 
 char *rank_area_top=0x91b0;
-void Rank_print(void)
+void Rank_print(signed char Rank_Index)
 {
   Set_Video_mode(4);
   BIOS_Video(0x200,0,0,0x100);
@@ -63,3 +63,5 @@ void Rank_print(void)
   puts(*(char **)(rank_area_top + ((int)Rank_Index >> 5) * 2));
   return;
 }
+Rank_print(-0x10) {0x91b0 + (0xf0 >> 5) << 1} = {0x91b0 + (0xff ) << 1} = {0x91b0 + 0xfe} = {0x91b0 + -2} = {0x90ae} =
+Rank_print(0x10) {0x91b0 + (0x10 >> 5) << 1} = {0x91b0 + (0) << 1} = 0x91b0
