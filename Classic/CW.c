@@ -1,7 +1,7 @@
 char cl;
 short si;
 
-fun_8e2d(char* call)
+void fun_8e2d(char* call)
 {
     int local[0x1B];
     local[0x13] = -1;
@@ -26,9 +26,9 @@ fun_8e2d(char* call)
 }
 
 char f1, ee;
-signed char Rank_Index;
+char Rank_Index;
 
-signed char rank_calculate(void)
+char rank_calculate(void)
 {
   char bVar1;
   
@@ -38,13 +38,13 @@ signed char rank_calculate(void)
     }
   }
   else {
-    if (-0x10 > Rank_Index || Rank_Index > -1) 
+    if (Rank_Index <= 0xf0) 
     {   Rank_Index += 0x10;
-        if (ee && (-0x10 > Rank_Index || Rank_Index > -1))
+        if (ee && (Rank_Index <= 0xf0))
             {Rank_Index += 0x10;}
     }
-    if ((-0x11 < Rank_Index && Rank_Index < 0)) {
-      Rank_Index = -0x10;
+    if ((0xf0 < Rank_Index)) {
+      Rank_Index = 0xf0;
     }
   }
   if (Rank_Index < 0x10) {
@@ -57,17 +57,13 @@ signed char rank_calculate(void)
   
   */
 
-char *rank_area_top=0x91b0;
-void Rank_print(signed char Rank_Index)
+char *rank_table[8];
+void Rank_print(char Rank_Index)
 {
   Set_Video_mode(4);
   BIOS_Video(0x200,0,0,0x100);
   puts("Your Rank is ");
-  cl = 5;
-  si = (Rank_Index >> 5) << 1;
-  puts(*(char **)(rank_area_top + ((int)Rank_Index >> 5) * 2));
+  puts(rank_table[(int)Rank_Index >> 5]);
   return;
 }
-Rank_print(-0x10) {0x91b0 + (0xfff0 >> 5) << 1} = {0x91b0 + (0xffff ) << 1} = {0x91b0 + 0xfffe * 2} = {0x91b0 - 4} = {0x91ad}
-Rank_print(-0x10) {0x91b0 + (0x00f0 >> 5) << 1} = {0x91b0 + (0x7 ) << 1} = {0x91b0 + 0x0e} = {0x91be}
-Rank_print(0x10) {0x91b0 + (0x10 >> 5) << 1} = {0x91b0 + (0) << 1} = 0x91b0
+
