@@ -1,3 +1,6 @@
+char cl;
+short si;
+
 fun_8e2d(char* call)
 {
     int local[0x1B];
@@ -60,8 +63,11 @@ void Rank_print(signed char Rank_Index)
   Set_Video_mode(4);
   BIOS_Video(0x200,0,0,0x100);
   puts("Your Rank is ");
+  cl = 5;
+  si = (Rank_Index >> 5) << 1;
   puts(*(char **)(rank_area_top + ((int)Rank_Index >> 5) * 2));
   return;
 }
-Rank_print(-0x10) {0x91b0 + (0xf0 >> 5) << 1} = {0x91b0 + (0xff ) << 1} = {0x91b0 + 0xfe} = {0x91b0 + -2} = {0x90ae} =
+Rank_print(-0x10) {0x91b0 + (0xfff0 >> 5) << 1} = {0x91b0 + (0xffff ) << 1} = {0x91b0 + 0xfffe} = {0x91b0 - 2} = {0x91ae}
+Rank_print(-0x10) {0x91b0 + (0x00f0 >> 5) << 1} = {0x91b0 + (0x7 ) << 1} = {0x91b0 + 0x0e} = {0x91be}
 Rank_print(0x10) {0x91b0 + (0x10 >> 5) << 1} = {0x91b0 + (0) << 1} = 0x91b0
