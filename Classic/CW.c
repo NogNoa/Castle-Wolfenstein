@@ -1,27 +1,27 @@
 char cl;
 short si;
+extern char ascii_flags[];
 
-void fun_8e2d(char* call)
+void _pfmt(char* format_type)
 {
-    int local[0x1B];
+    int local[0x1B] = {0};
     local[0x13] = -1;
-    local[0x12] == 0x20;
+    local[0x12] = 0x20;
     local[0x16] = local[0x11] = local[0x15] = local[0x14] = 0;
-    if (*call == 0x2d)
+    if (*format_type == 0x2d)
     {
-        ++call;
+        ++format_type;
         local[0x16] = 1;
     }
-    int si, di, ax;
-    char al, bvar1, bl;
-    local[0] = *call;
-    bvar1 = *(char *)((*call) + 0xa0b5);
+    char bvar1;
+    local[0] = *format_type;
+    bvar1 = ascii_flags[*format_type];
     if (bvar1 & 4 != 0 && local[0] == 0x30)
         {local[0x12] = 0x30;}
-    for (;bvar1 & 4 != 0; bvar1 = *(char *)(*call + 0xa0b5))
+    for (;bvar1 & 4 != 0; bvar1 = *(char *)(*format_type + 0xa0b5))
     {   local[0x11] *= 0xa;
-        local[0x11] += (*call & 0xf);
-        ++call;
+        local[0x11] += (*format_type & 0xf);
+        ++format_type;
     }
 }
 
