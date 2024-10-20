@@ -1,5 +1,7 @@
 *.bak
 *.exe*
 *.gch
+*.OBJ
+*.Q
 
 Classic/dosbox/HD/

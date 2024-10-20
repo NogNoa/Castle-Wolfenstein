@@ -1,8 +1,8 @@
 PGROUP	GROUP	PROG
 PROG	SEGMENT	BYTE PUBLIC 'PROG'
-	PUBLIC	seg0_memmove, seg_memset
+	PUBLIC	aseg0_memmove, seg_memset
 	ASSUME	CS:PGROUP
-seg0_memmove proc near
+aseg0_memmove proc near
 ;
 ;   bp.4    i           word
 ;   bp.6    source.i    byte
@@ -36,7 +36,7 @@ return:
     add         sp, 8
     pop         bp
     ret
-seg0_memmove endp
+aseg0_memmove endp
 
 seg_memset  proc near
 ;
