@@ -77,9 +77,7 @@ byte seg_memget();
 int debug_frustrate0368()
 {
     if (WSegMem_Get(d7e) != 0x13cd) {return -1;}
-    LSeg_Mem_Set(CtrlBreak, );
-    seg_memset(CtrlBreak>> 0x10, CtrlBreak,0xa0);
-    seg_memset(CtrlBreak>> 0x10, CtrlBreak+1,3);
-    seg_memset(CtrlBreak>> 0x10, CtrlBreak+2,0);
-    seg_memset(CtrlBreak>> 0x10, CtrlBreak+3,0x10);
+    LSeg_Mem_Set(CtrlBreak, 0x100003a0);
+    LSeg_Mem_Set(PrntScrn,  0x100003a0);
+    return 0;
 }
