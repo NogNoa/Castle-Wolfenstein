@@ -17,13 +17,13 @@ byte *source;
 bool mem_compare(int start,int limit,byte *source,byte *reference)
 {
     byte val;
-    int similar;
-    int i;
+    int similar, i;
   
-    for (i = 0; i <= limit - start; ++i) 
-    {   val = SegMemGet(source + i + start); //from segment 0
-        if (val != reference[i + start]) {return 0;}
+    for (similar = 0, i = similar + start;
+        similar <= limit - start;
+        ++similar, ++i)
+    {   val = SegMemGet(source + i); //from segment 0
+        if (val != reference[i]) {return 0;}
     }
-    if (limit < i) {return 1;}
-     else {return 0;}
+    return limit < similar;
 }
