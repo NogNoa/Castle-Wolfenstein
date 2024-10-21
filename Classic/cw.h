@@ -1,4 +1,12 @@
+typedef char * string;
+typedef unsigned int uint;
+
+#ifndef LATTICE
 typedef char byte;
-typedef char* string;
+#endif
+
+#ifndef NULL
+#define NULL 0
+#endif
 
 int sum(int *list, int len);
