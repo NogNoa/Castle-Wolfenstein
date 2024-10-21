@@ -1,6 +1,6 @@
 PGROUP	GROUP	PROG
 PROG	SEGMENT	BYTE PUBLIC 'PROG'
-	PUBLIC	aseg0_memmove, seg_memset
+	PUBLIC	aseg0_memmove, _seg_memset
 	ASSUME	CS:PGROUP
 aseg0_memmove proc near
 ;
@@ -28,7 +28,7 @@ for_numBytes:
     PUSH         CX
     XOR          AX,AX
     PUSH         AX
-    CALL         seg_memset
+    CALL         _seg_memset
     MOV          SP,BP
     INC          word ptr [BP + 4]
     JMP          for_numBytes
@@ -38,7 +38,7 @@ return:
     ret
 aseg0_memmove endp
 
-seg_memset  proc near
+_seg_memset  proc near
 ;
 ;   bp.4    segm    word
 ;   bp.6    index   &byte
@@ -57,6 +57,6 @@ seg_memset  proc near
     MOV          ES,BX
     POP          BP
     RET
-seg_memset endp
+_seg_memset endp
 prog ends
 end

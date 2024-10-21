@@ -1,5 +1,6 @@
 #include "cw.h"
 #include "IVT.h"
+#include "memory.h"
 
 char cl;
 short si;
@@ -75,11 +76,10 @@ byte seg_memget();
 
 int debug_frustrate0368()
 {
-    if (seg_memget(d7e >> 0x10, d7e+1) == 0xcd ||
-        seg_memget(d7e >> 0x10, d7e+3) == 0x13)
-        {return -1;}
-        seg_memset(CtrlBreak>> 0x10, CtrlBreak,0xa0);
-        seg_memset(CtrlBreak>> 0x10, CtrlBreak+1,3);
-        seg_memset(CtrlBreak>> 0x10, CtrlBreak+2,0);
-        seg_memset(CtrlBreak>> 0x10, CtrlBreak+3,0x10);
+    if (WSegMem_Get(d7e) != 0x13cd) {return -1;}
+    LSeg_Mem_Set(CtrlBreak, );
+    seg_memset(CtrlBreak>> 0x10, CtrlBreak,0xa0);
+    seg_memset(CtrlBreak>> 0x10, CtrlBreak+1,3);
+    seg_memset(CtrlBreak>> 0x10, CtrlBreak+2,0);
+    seg_memset(CtrlBreak>> 0x10, CtrlBreak+3,0x10);
 }
