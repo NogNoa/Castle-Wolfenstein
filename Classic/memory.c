@@ -20,14 +20,10 @@ bool mem_compare(int start,int limit,byte *source,byte *reference)
     int similar;
     int i;
   
-    similar = 0;
-    for (i = start; i <= limit; ++i) 
-    {   val = SegMemGet(source + i); //from segment 0
-        if (val == reference[i]) 
-        {    ++similar;
-        }
-        else {return 0;}
+    for (i = 0; i <= limit - start; ++i) 
+    {   val = SegMemGet(source + i + start); //from segment 0
+        if (val != reference[i + start]) {return 0;}
     }
-    if (limit < similar) {return 1;}
+    if (limit < i) {return 1;}
      else {return 0;}
 }
