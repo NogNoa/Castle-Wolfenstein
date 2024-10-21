@@ -1,5 +1,5 @@
 #include "cw.h"
-#include "dos.h"
+#include "doscall.h"
 
 int Set_Video_mode (byte mode_p);
 void BIOS_Video(int A, int B, int C, int D); 

@@ -2,7 +2,7 @@
 
 extern byte seg_memset();
 
-void seg0_memmovee(numBytes, dest, source)
+seg0_memmovee(numBytes, dest, source)
 int numBytes;
 byte *dest;
 byte *source;

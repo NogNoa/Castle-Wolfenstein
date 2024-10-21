@@ -1,3 +1,6 @@
+#include "cw.h"
+#include "IVT.h"
+
 char cl;
 short si;
 extern char ascii_flags[];
@@ -60,10 +63,23 @@ char rank_calculate(void)
 char *rank_table[8];
 void Rank_print(char Rank_Index)
 {
-  Set_Video_mode(4);
-  BIOS_Video(0x200,0,0,0x100);
-  puts("Your Rank is ");
-  puts(rank_table[(int)Rank_Index >> 5]);
-  return;
+    Set_Video_mode(4);
+    BIOS_Video(0x200,0,0,0x100);
+    puts("Your Rank is ");
+    puts(rank_table[(int)Rank_Index >> 5]);
+    return;
 }
 
+long d7e = IntBreakpoint;
+byte seg_memget();
+
+int debug_frustrate0368()
+{
+    if (seg_memget(d7e >> 0x10, d7e+1) == 0xcd ||
+        seg_memget(d7e >> 0x10, d7e+3) == 0x13)
+        {return -1;}
+        seg_memset(CtrlBreak>> 0x10, CtrlBreak,0xa0);
+        seg_memset(CtrlBreak>> 0x10, CtrlBreak+1,3);
+        seg_memset(CtrlBreak>> 0x10, CtrlBreak+2,0);
+        seg_memset(CtrlBreak>> 0x10, CtrlBreak+3,0x10);
+}
