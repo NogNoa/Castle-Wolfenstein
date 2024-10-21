@@ -4,6 +4,9 @@
 typedef char * string;
 typedef unsigned int uint;
 
+typedef char bool;
+enum {false, true};
+
 #ifndef LATTICE
 typedef char byte;
 #endif

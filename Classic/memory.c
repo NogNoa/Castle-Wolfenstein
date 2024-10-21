@@ -12,3 +12,27 @@ byte *source;
         _seg_memset(0, dest + i, v);
     }
 }
+
+
+bool mem_compare(int start,int limit,byte *source,byte *reference)
+{
+    bool back;
+    byte val;
+    int similar;
+    int i;
+  
+    similar = back = 0;
+    for (i = start; i <= limit; ++i) 
+    {   val = SegMemGet(source + i); //from segment 0
+        if (val == reference[i]) 
+        {    ++similar;
+        }
+        else 
+        {   back = true;
+        }
+    }
+    if ((limit < similar) && (!back)) 
+    {    return 0x1;
+    }
+    return 0x0;
+}
