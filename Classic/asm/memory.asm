@@ -59,4 +59,22 @@ _seg_memset  proc near
     RET
 _seg_memset endp
 prog ends
+;
+_seg_memget proc near
+;
+;   bp.4    segment word
+;   bp.6    index   &byte
+    push         BP
+    MOV          BP,SP
+    MOV          SI,word ptr [BP + 4]
+    MOV          ES,SI  ;ES := segment
+    MOV          BX,word ptr [BP + 6]
+    MOV          AL,byte ptr ES:[BX]
+    MOV          AH, 0
+    POP          BP
+    PUSH         DS
+    POP          ES     ;ES := DS
+    RET
+_seg_memget endp
+
 end
