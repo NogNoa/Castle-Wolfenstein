@@ -12,3 +12,6 @@ extern byte _seg_memget();
 #define SegMemGet(A)       (_seg_memget((int) (A) >> 0x10, (char *) (A)))
 #define WSegMem_Get(A)  ((SegMemGet(A)) + (SegMemGet(A+1)) * 0x100)
 #define LSeg_Mem_Get(A) ((WSegMem_Get(A)) + (WSegMem_Get(A+2)) * 0x10000)
+
+#define Seg0Assert(lmt, cur, ref, fix) {if (seg0_mem_compare(0, (lmt), (cur), (ref)))\
+{seg0_memmovee((lmt)+1, (cur), (fix))}}

@@ -1,6 +1,7 @@
 #include "DOS.H"
 #include "memory.h"
 
+/*void*/
 seg0_memmovee(numBytes, dest, source)
 int numBytes;
 byte *dest;
@@ -14,7 +15,9 @@ byte *source;
 }
 
 
-bool mem_compare(int start,int limit,byte *source,byte *reference)
+bool seg0_mem_compare(start,limit,source,reference)
+int start, limit;
+byte *source, *reference;
 {
     byte val;
     int similar, i;
