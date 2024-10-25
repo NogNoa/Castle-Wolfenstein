@@ -1,0 +1,39 @@
+ code [pgroup:0..dgroup:0]
+ data [dgroup:(0..d_size)]
+ d_size = module.size - pg_size
+ dgroup = pgroup + (pg_size / 10)
+ dgroup:d_size =  (pgroup + (pg_size / 10)) * 10 + module.size - pg_size = pgroup*10 + module_size
+ ss = dgroup
+ es = pgroup - 10
+ stack_min_size = 80
+ bx0 = module.size / 10
+ bx1 = total.size / 10 - dgroup = (total.size - pg_size) /10 - pgroup
+ if bx1 < 1000:
+    bx2 = total.size - dgroup*10
+    stack [dgroup:(stack_base..total.size - dgroup*10)] =
+          [dgroup *10 + ceil(d_size, 10).. dgroup*10 + total.size - dgroup*10] =
+          [dgroup *10 + ceil(d_size, 10).. total.size]
+ else:
+    bx2 = fff0
+    stack [dgroup:(stack_base..fff0)]
+sp = stack_top = bx2
+
+bx1 < 1000 then
+    total.size / 10 - dgroup < 1000
+    total.size < 10000 + dgroup*10
+    total.size <= dgroup:ffff
+
+empirically:
+    pg_size = a270
+    module.size >> 4 = 1452
+    total.size >> 4 = 4000
+    d_size = 1451c - a270 = a2ac
+    stack_base = a2b0 = ceil(d_size, 10)
+
+let pgroup=50a then
+    dgroup =  50a +a27 = f31
+    bx1 = 30cf
+
+let prgoup=1000
+    dgroup = 1a27
+    bx1 = 25D9

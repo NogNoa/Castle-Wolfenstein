@@ -1,0 +1,110 @@
+paragraph = 10 bytes
+page = sector
+size(header) = header[4] = 20*paragraph = page
+load(header)
+load-module = relocateable part of the program = the program itself
+size(file) = header[2] = A4 pages
+size(file) = 14780 Bytes = 1478 paragraph = A4 pages
+size(load-module, pages) = size(file) - size(header) = A3 pages
+last_page_bytes = header[1] = 11c
+size(load-module, bytes) = (size(load-module, pages) - 1) * page_bytes + last_page_bytes
+                         = A2 * 200 + 11C = 1451c
+size(load-module, paragraph) = 1452
+size(load-module, pages => paragraph) = A3 * 20 = 1460
+low_memory = (header[6] == -1) = True
+maximum_extra_memory = maximum number of paragraph required to exist above the end of load module.
+maximum_extra_memory = header[6] if (not low_memory)
+
+loaded in low memory means just above the 100 bytes PSP that is built just on top the loading program (command in this case)
+
+ES and DS point to the segement containing the PSP
+ES = DS = (&module - 100) // 10 = CS - 10
+
+define CS = 1000
+ES = DS = 0FF0
+
+relocate: add CS to word at (CS+entry[1]):entry[0]
+len(relocation_table, entry) = header[3] = 1
+relocation_table[0] = 0000 0010
+CS:f[..3] = 0a 27 b8 
+disasm(1a 27 b8) = mov, 1a27
+
+ES:0x2 = 0FF2
+which is in the PSP. the size of the module in paragraphs
+
+first byte after module = size(load-module, bytes) + CS*10 = 1451c + 10000 = 2451c = 1a27:a2ac
+[0FF2] = 1460
+bx = 1460 - 1A27 = -(5C7) = FA39
+
+bx2 & #F000 != 0 \iff
+(bx2 >> 12) != 0 \iff
+bx2 > 0FFF
+
+bx1 = len(module, paragraph)
+first_parag_after_module = bx1 + CS
+reloc = CS + a27
+bx2 = len(module, paragraph) - reloc
+
+if bx2 < 1000; {SP = bx3 = bx2 << 4}, else; {SP = FFF0}
+SP = FFF0
+
+SS = reloc
+
+SS:SP = (CS + a27 + FFF)*10 = (CS+a26)*10 = CS:a260
+SS:SP = (1000 + a27 + FFF)*10 = 2a26:0 = 2000:a260
+
+SS:SP - reloc:0 = (reloc + FFF - reloc)*10 = FFF0
+SS:SP - CS+bx1:0 = (CS + a27 + FFF - CS - len)*10 = (1a26 - len)*10 
+(1a26 - len)*10  = (1a26 - 1460)*10 = 5C60
+
+2000:0000 = 1a27:5d90
+
+
+assume CS= 0
+reloc = a27
+bx2 = 1460 - a27 = A39
+SP = A390
+
+SS:SP = reloc:A390 =a270 + a390 = 1:4600
+
+SS:SP = (reloc+bx2)*10 = (len(module, paragraph))*10
+
+ax1 = 1a27
+bx1 = prog_sz_par = 1452
+bx2 = 1452 - 1a27 = -5d5 = fa2b
+
+0d64K bytes = 40 * 400 = 10000B = 1000 paragraph
+
+so prog_sz_par - data_segmetn > 1000 paragraph
+
+stack_top = sp = bx3 = fff0
+stack_base = a2b0
+
+1a27:fff0 = 2a260 = 2000:a260
+1a27:a2b0 = 1a520
+
+bx - ax > 0 
+
+ 1452
+ 1a27
+=  3
+- 605
+=-5d5
+
+2000:a25c = 2a25c = 1a27:00ec
+
+2000
+1a27
+ 5d9
+ 
+2a2ab
+1a27
+   3b
+   
+2a25c
+1a27 
+   ec
+
+2a25c
+1000
+1a25c

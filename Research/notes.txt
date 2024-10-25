@@ -1,0 +1,4 @@
+void Rank_print(Rank_Index=(0..F) * 10)
+puts(rank_table[((0..F) * 10) >> 5]) = 
+puts(rank_table[(0..F) >> 1]) =
+puts(rank_table(0, 0..7)) =
