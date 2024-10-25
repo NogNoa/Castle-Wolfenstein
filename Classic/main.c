@@ -2,12 +2,8 @@
 #include "doscall.h"
 
 int Set_Video_mode (byte mode_p);
-void BIOS_Video(int A, int B, int C, int D); 
+void BIOS_Video(int A, int B, int C, int D);
 
-int row_coll(byte row, byte coll)
-{   
-    return (row - 1) << 8 | (coll - 1);
-}
 
 int sum_5fd6;
 int arr_5fd6[36];
