@@ -4,6 +4,7 @@ at the start of fun_29e SP is decremented by 12 and this is bp_29e
 than the call adress is pushed by the call, along with BP
 and SP is decremented by an additional 6
 so bp_613f  = bp_29e - 1c
+
 bp_29e[2..12] = bp_613f[1e..2e]
 bp_613f + 6 = bp_29e - 16
 bp_613f - 4 = bp_29e - 20
@@ -11,6 +12,5 @@ bp_613f - 4 = bp_29e - 20
 we'll use stack as return address offset as in ghidra.
 
 stack_613f = bp_613f + 8
-stack_613f - c = bp_613f + 14 = bp_29e - 8
 stack_29e = bp_29e + 14
-bp_29e - 8 = stack_29e - 1c
+stack_613f - c = bp_613f - 4 = bp_29e - 18 = stack_29e - 2c
