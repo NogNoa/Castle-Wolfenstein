@@ -4,5 +4,6 @@
 *.OBJ
 *.Q
 *.log
+*.o
 
 Classic/dosbox/HD/

@@ -57,13 +57,15 @@ char rank_calculate(void)
   
   */
 
+#include "video.h"
+
 char *rank_table[8];
 void Rank_print(char Rank_Index)
 {
-  Set_Video_mode(4);
-  BIOS_Video(0x200,0,0,0x100);
-  puts("Your Rank is ");
-  puts(rank_table[(int)Rank_Index >> 5]);
+  setVideoMode(4);
+  BiosVideo(0x200,0,0,0x100);
+  cputs("Your Rank is ");
+  cputs(rank_table[(int)Rank_Index >> 5]);
   return;
 }
 

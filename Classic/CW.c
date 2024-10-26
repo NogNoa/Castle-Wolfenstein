@@ -66,8 +66,8 @@ void Rank_print(char Rank_Index)
 {
     Set_Video_mode(4);
     BIOS_Video(0x200,0,0,0x100);
-    puts("Your Rank is ");
-    puts(rank_table[(int)Rank_Index >> 5]);
+    cputs("Your Rank is ");
+    cputs(rank_table[(int)Rank_Index >> 5]);
     return;
 }
 
