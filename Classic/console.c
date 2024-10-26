@@ -3,7 +3,7 @@
 
 extern bool pcjr; 
 
-/*void*/ 
+void
 put_2_lines(line0, line1)
 char *line0, *line1;
 {   

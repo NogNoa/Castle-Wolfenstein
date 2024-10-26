@@ -41,7 +41,7 @@ byte patch_3ebd[8] = "\x8e\x16\xd3\2\x8b\x26\xd1\2";
 byte test_3fff[4]  = "\x8c\xc4\x8e\xd4";
 byte patch_3fff[4] = "\x8c\xc5\x8e\xd5";
 
-/*void*/
+void
 setup_memory()
 {
     if (pcjr && isDos210())

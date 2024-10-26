@@ -2,7 +2,7 @@
 
 bool del_5ff9 = false;
 
-/*void*/
+void
 del_inst_5ff9(void)
 {
     del_5ff9 = true;

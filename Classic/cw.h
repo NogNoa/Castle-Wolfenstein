@@ -9,6 +9,8 @@ enum {false, true};
 
 #ifndef LATTICE
 typedef char byte;
+#else
+typedef int void;
 #endif
 
 #ifndef NULL
