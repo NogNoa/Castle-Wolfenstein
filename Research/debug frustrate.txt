@@ -4,11 +4,20 @@ int 03  breakpoint
 debug.t or trace calls int 01 when stepping thru the code
 debug.g make a breakpoint by keeping the old byte somewhere step and replacing it with an int 03 command
 when debug is started
+on the IBM PC
 the value of int 01 is 34c:811
 and of int 03 is 34c:80a
 
 the whole first paragraph is
 01 15 bf 00-11 08 4c 03*c3 e2 00 f0-0a 08 4c 03
+
+
+on the IBM XT
+the value of int 01 is 307:811
+and of int 03 is 307:80a
+
+the whole first paragraph is
+01 15 bf 00-11 08 07 03*c3 e2 00 f0-0a 08 07 03
 
 the first anti_debug function replace 
 int 01 to ff4c:3411
@@ -42,9 +51,17 @@ this memory is a single cf  IRET instruction, inhibiting those interupts
 
 rewrote
 cw.exe[170a] to EB 1C 90    JMP CS:1528 NOP
-cw.exe[1760] to EB 0C 90    JMP CS:157e NOP
-cw.exe[56B] to EB 11 90 90  JMP CS:57E NOP NOP
+cw.exe[1760] to EB 1C 90    JMP CS:157e NOP
+cw.exe[56f] to EB 0D 90 90  JMP CS:37E NOP NOP
+
+oops caused a curroption of the string "Program cannot execute" 
+and was close to blame the anti temper
 
 function setup_memory at CS:00ba again set
 int 01 to ff4c:3411
 int 03 to 134c:cd0a
+
+rewrite
+cw.exe[3bd] to EB 0e 90    JMP cs:1cd NOP
+cw.exe[3e2] to EB 14 90    JMP cs:1f8 NOP
+cw.exe[410] to EB 1c 90    JMP cs:22e NOP

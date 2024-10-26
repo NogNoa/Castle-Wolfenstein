@@ -1,5 +1,6 @@
 #include "cw.h"
 #include "IVT.h"
+#include "ibm.h"
 #include "memory.h"
 
 char cl;
@@ -80,4 +81,23 @@ int debug_frustrate0368()
     LSeg_Mem_Set(CtrlBreak, 0x100003a0);
     LSeg_Mem_Set(PrntScrn,  0x100003a0);
     return 0;
+}
+
+int d2ae, d29c; 
+
+void debug_frustrate1504()
+{
+  SegMem_Set(SingleStep+1, 0x34);
+  SegMem_Set(SingleStep+3, 0xff);
+  pcjr = (_seg_memget(0xf000, 0xffff) == 0xfd);
+  if (pcjr)
+  { d2ae = 3300;
+    d29c = 600;
+  }
+  else
+  { d2ae = 900;
+    d29c = 200;
+  }
+  SegMem_Set(IntBreakpoint+1, 0xcd);
+  SegMem_Set(IntBreakpoint+3, 0x13);
 }
