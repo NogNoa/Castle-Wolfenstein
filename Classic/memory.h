@@ -2,7 +2,11 @@
 
 extern byte _seg_memset();
 extern byte _seg_memget();
-/* void seg0_memmovee(int numBytes, byte *dest, byte *source)
+       bool seg0_mem_compare();
+/*  byte _seg_memset(word, byte*, byte)
+    byte _seg_memget(word, byte*)
+    void seg0_memmovee(int numBytes, byte *dest, byte *source)
+    bool seg0_mem_compare(int start, int limit, byte *source, byte *reference)
 */
 
 #define SegMemSet(A, b)    (_seg_memset((int) (A) >> 0x10, (char *) (A), (byte) b))

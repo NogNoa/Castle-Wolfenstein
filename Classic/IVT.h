@@ -1,3 +1,4 @@
+// long_address_t* intTable(byte)
 #define intTable(i) (i*4)
 
 #define IntBreakpoint intTable(3)

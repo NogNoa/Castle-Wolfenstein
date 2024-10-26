@@ -43,6 +43,7 @@ _seg_memset  proc near
 ;   bp.4    segm    word
 ;   bp.6    index   &byte
 ;   bp.8    value   byte
+;   ret     bp.8
 ;
     PUSH         BP
     MOV          BP,SP
@@ -64,6 +65,8 @@ _seg_memget proc near
 ;
 ;   bp.4    segment word
 ;   bp.6    index   &byte
+;   ret     value   byte
+;
     push         BP
     MOV          BP,SP
     MOV          SI,word ptr [BP + 4]
