@@ -2,17 +2,13 @@
 #include "doscall.h"
 #include "video.h"
 
-int Set_Video_mode (byte mode_p);
-void BIOS_Video(int A, int B, int C, int D);
-
-
 int sum_5fd6;
 int arr_5fd6[36];
 
 int main()
 {
-    Set_Video_mode(4);
-    BIOS_Video(SET_CURSOR_POSITION, 0, 0, RowColl(2,2));
+    setVideoMode(PXL_CLR_LO);
+    BiosVideo(SET_CURSOR_POSITION, 0, 0, RowColl(2,2));
     cputs("072684");
     sum_5fd6 = sum(arr_5fd6, 36);
 }

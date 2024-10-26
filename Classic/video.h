@@ -7,6 +7,7 @@ enum VIDEO_MODES {TXT_GREY_WD, TXT_CLR_WD, TXT_GREY_THN, TXT_CLR_THN,
                   PXL_CLR_LO, PXL_GREY_HI, PXL_MONO_HI, MDA, 
                   JR_TINY, JR_WIDE};
 
-/* extern int setVideoMode(byte);*/
-/* extern void BiosVideo(int, int, int, int);*/
+/* extern int setVideoMode(byte mode_p);*/
+/* extern void BiosVideo(int A, int B, int C, int D);*/
+
 

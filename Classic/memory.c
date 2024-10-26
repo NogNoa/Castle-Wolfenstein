@@ -1,5 +1,6 @@
 #include "DOS.H"
 #include "memory.h"
+#include "ibm.h"
 
 /*void*/
 seg0_memmovee(numBytes, dest, source)
@@ -23,10 +24,22 @@ byte *source, *reference;
     int similar, i;
   
     for (similar = 0, i = similar + start;
-        similar <= limit - start;
+        i <= limit;
         ++similar, ++i)
     {   val = SegMemGet(source + i); //from segment 0
         if (val != reference[i]) {return 0;}
     }
     return limit < similar;
+}
+
+byte dc[10] = "\x2e\x8b\x26\xd1\2\x2e\x8e\x16\xd3\2";
+
+/*void*/
+setup_memory()
+{
+    if (pcjr && isDos210())
+    {   if (seg0_mem_compare(0, 9, (byte *)0x1a71  ,(byte *)dc))
+        {seg0_memmovee}
+
+    }
 }
