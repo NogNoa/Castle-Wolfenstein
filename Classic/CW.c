@@ -75,7 +75,7 @@ void Rank_print(char Rank_Index)
 long d7e = IntBreakpoint;
 byte seg_memget();
 
-int debug_frustrate0368()
+int inhibitInterrupts()
 {
     if (WSegMem_Get(d7e) != 0x13cd) {return -1;}
     LSeg_Mem_Set(CtrlBreak, 0x100003a0);
@@ -85,11 +85,11 @@ int debug_frustrate0368()
 
 int d2ae, d29c; 
 
-void debug_frustrate1504()
+void isPcJr()
 {
   SegMem_Set(SingleStep+1, 0x34);
   SegMem_Set(SingleStep+3, 0xff);
-  pcjr = (_seg_memget(0xf000, 0xffff) == 0xfd);
+  pcjr = (_seg_memget(0xf000, 0xffff) == 0xfd); /* from the PC Jr BIOS*/
   if (pcjr)
   { d2ae = 3300;
     d29c = 600;

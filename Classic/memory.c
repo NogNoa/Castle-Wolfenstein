@@ -2,6 +2,7 @@
 #include "memory.h"
 #include "ibm.h"
 #include "video.h"
+#include "IVT.h"
 
 /*void*/
 seg0_memmovee(numBytes, dest, source)
@@ -56,9 +57,9 @@ setup_memory()
         _exit(-1);
     }
     _seg_memset(0xb800, 1, 0);
-    _seg_memset(0, 5, 34);
-    _seg_memset(0, 7, 0xff);
+    SegMem_Set(SingleStep+1, 0x34);
+    SegMem_Set(SingleStep+3, 0xff);
     _seg_memset(0x40, 0x10, _seg_memget(0x40, 0x10) & 0xcf | 0x10);
-    _seg_memset(0, 0xd, 0xcd);
-    _seg_memset(0, 0xf, 0x13);
+    SegMem_Set(IntBreakpoint+1, 0xcd);
+    SegMem_Set(IntBreakpoint+3, 0x13);
 }
