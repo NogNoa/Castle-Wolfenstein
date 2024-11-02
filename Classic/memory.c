@@ -46,10 +46,10 @@ void
 setup_memory()
 {
     if (pcjr && isDos210())
-    {   Seg0Assert(9, (byte *)0x1a71, (byte *)test_1a71, (byte *)patch_1a71);
-        Seg0Assert(9, (byte *)0x22c2, (byte *)test_22c2, (byte *)patch_1a71);
-        Seg0Assert(7, (byte *)0x3ebd, (byte *)test_3ebd, (byte *)patch_3ebd);
-        Seg0Assert(3, (byte *)0x3fff, (byte *)test_3fff, (byte *)patch_3fff);
+    {   Seg0Assert(10, (byte *)0x1a71, (byte *)test_1a71, (byte *)patch_1a71);
+        Seg0Assert(10, (byte *)0x22c2, (byte *)test_22c2, (byte *)patch_1a71);
+        Seg0Assert(8, (byte *)0x3ebd, (byte *)test_3ebd, (byte *)patch_3ebd);
+        Seg0Assert(4, (byte *)0x3fff, (byte *)test_3fff, (byte *)patch_3fff);
     }
     if (_seg_memset(0xb800, 1, 0xa5) != 0xa5) /*tryna to poke color screen buffer, is it there?*/
     {   setVideoMode(MDA);
