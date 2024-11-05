@@ -2,6 +2,7 @@
 #include "ibm.h"
 
 int i5ff9 = 0x1000;
+int i5ff0 = 0;
 
 void
 del_inst_5ff9(void)
@@ -9,25 +10,22 @@ del_inst_5ff9(void)
     i5ff9 = 0x9090;
 }
 
-int f5fd6(int p1, void* p2)
+int goober_function(int p1, void* dest, register byte* si)
 {
-    int b, a;
+    int a;
     byte   i;
-    byte * si;
-    int i5ff0 = 0;
-    i5ff0 = b = p2;
+    i5ff0 = dest;
     switch(i5ff9)
     {case 0x1000:
-        *(si + b) = *default_drive;
+        *(si + i5ff0) += *default_drive;
         break;
     case 0x9090:
         break;
     case 0x200:
-        *(si + b) = 1;
+        *(si + i5ff0) = 1;
         break;
     }
-    a = 0x200;
-    i5ff9 = a;
+    i5ff9 = a = 0x200;
     for (a = 0, si= 0x10, i=28;
          i;
             a |= *(si + i5ff0),

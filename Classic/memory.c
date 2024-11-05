@@ -41,7 +41,7 @@ int check_for_debugger()
         {_exit(-1);} 
     else
     {   isDos210();
-        return f_5fd6(0x26, 0x2bd);
+        return goober_function(0x26, 0x2bd, 0x40);
     }
 }
 
