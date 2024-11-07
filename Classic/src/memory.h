@@ -1,13 +1,12 @@
 #include "cw.h"
 
-extern byte _seg_memset();
-extern byte _seg_memget();
-       bool seg0_mem_compare();
-/*  byte _seg_memset(word, byte*, byte)
-    byte _seg_memget(word, byte*)
-    void seg0_memmovee(int numBytes, byte *dest, byte *source)
-    bool seg0_mem_compare(int start, int limit, byte *source, byte *reference)
-*/
+extern byte _seg_memset(/*word, byte*, byte*/);
+extern byte _seg_memget(/*word, byte**/);
+       bool seg0_mem_compare(/*int start, int limit, byte *source, byte *reference*/);
+#ifndef LATTICE
+void seg0_memmovee(int numBytes, byte *dest, byte *source);
+int check_for_debugger(void);
+#endif
 
 #define SegMemSet(A, b)    (_seg_memset((int) (A) >> 0x10, (char *) (A), (byte) b))
 #define WSegMem_Set(A, w)  {(SegMemSet(A, w));   (SegMemSet(A+1, w>>8));}
@@ -19,3 +18,5 @@ extern byte _seg_memget();
 
 #define Seg0Assert(lmt, cur, ref, fix) {if (seg0_mem_compare(0, (lmt)-1, (cur), (ref)))\
 {seg0_memmovee((lmt), (cur), (fix));}}
+
+

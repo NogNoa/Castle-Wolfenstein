@@ -1,5 +1,5 @@
-/*	Lattice 8086 Compiler and Code Generator V3.30
-	Copyright (C) 1988 by Lattice, Inc.
+/*	Lattice iAPX 86 C Compiler (Phase 1) V3.30         
+	Copyright (C) 1987,1988 Lattice, Inc.
 */                                                 
 /**
 *

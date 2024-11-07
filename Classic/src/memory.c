@@ -4,7 +4,7 @@
 #include "video.h"
 #include "IVT.h"
 
-/*void*/
+void
 seg0_memmovee(numBytes, dest, source)
 int numBytes;
 byte *dest;

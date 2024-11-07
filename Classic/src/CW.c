@@ -2,6 +2,8 @@
 #include "IVT.h"
 #include "ibm.h"
 #include "memory.h"
+#include "video.h"
+#include "conio.h"
 
 char cl;
 short si;
@@ -9,7 +11,8 @@ extern char ascii_flags[];
 
 void _pfmt(char* format_type)
 {
-    int local[0x1B] = {0};
+    int local[0x1B];
+    char bvar1;
     local[0x13] = -1;
     local[0x12] = 0x20;
     local[0x16] = local[0x11] = local[0x15] = local[0x14] = 0;
@@ -18,9 +21,8 @@ void _pfmt(char* format_type)
         ++format_type;
         local[0x16] = 1;
     }
-    char bvar1;
     local[0] = *format_type;
-    bvar1 = ascii_flags[*format_type];
+    bvar1 = ascii_flags[(int)*format_type];
     if (bvar1 & 4 != 0 && local[0] == 0x30)
         {local[0x12] = 0x30;}
     for (;bvar1 & 4 != 0; bvar1 = *(char *)(*format_type + 0xa0b5))
@@ -35,7 +37,6 @@ char Rank_Index;
 
 char rank_calculate(void)
 {
-  char bVar1;
   
   if (f1 < 0x80) {
     if (1 < f1) {
@@ -65,8 +66,8 @@ char rank_calculate(void)
 char *rank_table[8];
 void Rank_print(char Rank_Index)
 {
-    Set_Video_mode(4);
-    BIOS_Video(0x200,0,0,0x100);
+    setVideoMode(4);
+    BiosVideo(0x200,0,0,0x100);
     cputs("Your Rank is ");
     cputs(rank_table[(int)Rank_Index >> 5]);
     return;

@@ -1,0 +1,1 @@
+void put_2_lines(char *line0, char  *line1);

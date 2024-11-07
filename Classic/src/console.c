@@ -1,5 +1,6 @@
 #include "cw.h"
 #include "video.h"
+#include "conio.h"
 
 extern bool pcjr; 
 
