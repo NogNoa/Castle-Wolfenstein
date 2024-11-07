@@ -2,14 +2,14 @@
 ;
 ;   equates
     gt_default_drv      equ 1900
-    default_drive       equ 9ae1
     gt_oem_os_version  equ 3000
 ;
-PGROUP	GROUP	PROG
-PROG	SEGMENT	BYTE PUBLIC 'PROG'
-	PUBLIC	isDos210
-	ASSUME	CS:PGROUP
+PGROUP  GROUP   PROG
+PROG    SEGMENT BYTE PUBLIC 'PROG'
+        PUBLIC  isDos210
+        ASSUME  CS:PGROUP
     extrn   del_inst_5ff9:near
+    extrn   default_drive:near
 isDos210 proc near
 ;
 ;   ret 1- success 0- fail  bool
@@ -17,7 +17,7 @@ isDos210 proc near
     push    bp
     mov     ax,gt_default_drv   ;get current default drive
     int     21
-    mov     [default_drive], AL
+    mov     byte ptr [default_drive], AL
     CALL    del_inst_5ff9
     mov     ax, gt_oem_os_version
     int     21
@@ -33,5 +33,5 @@ return_zero:
     POP     BP
     RET
 isDos210 endp
-
+PROG ends
 end

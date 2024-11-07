@@ -18,6 +18,4 @@ typedef int void;
 #define NULL 0
 #endif
 
-
-
 #endif

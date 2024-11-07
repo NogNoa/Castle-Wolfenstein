@@ -2,10 +2,11 @@
 ;
 ;   equates
 ;
-PGROUP	GROUP	PROG
-PROG	SEGMENT	BYTE PUBLIC 'PROG'
-	PUBLIC	setVideoMode
-	ASSUME	CS:PGROUP
+PGROUP  GROUP   PROG
+PROG    SEGMENT BYTE PUBLIC 'PROG'
+        PUBLIC  setVideoMode
+        ASSUME  CS:PGROUP
+;
 setVideoMode proc near
 ;
 ;   bp.4    mode_p  byte
@@ -27,6 +28,7 @@ invalid_mode:
     JMP     epilog
 setVideoMode    endp
 ;
+;
 BiosVideo proc near
 ;   
 ;   arguments self-evident. no return
@@ -43,7 +45,5 @@ BiosVideo proc near
     POP          BP
     RET
 BiosVideo   endp
-
-
-
+PROG ends
 end

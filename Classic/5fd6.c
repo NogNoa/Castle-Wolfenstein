@@ -14,6 +14,7 @@ int goober_function(int p1, void* dest, register int si)
 {
     int a;
     byte i;
+    (void)p1;
     i5ff0 = dest;
     switch(i5ff9)
     {case 0x1000:
