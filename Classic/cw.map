@@ -1,7 +1,7 @@
 Open Watcom Linker Version 2.0 beta Nov  2 2024 02:20:33 (64-bit)
 Copyright (c) 2002-2024 The Open Watcom Contributors. All Rights Reserved.
 Portions Copyright (c) 1985-2002 Sybase, Inc. All Rights Reserved.
-Created on:       24/11/08 14:43:26
+Created on:       24/11/08 15:43:41
 Executable Image: cw.exe
 creating a DOS executable
 Error! E2028: del_inst_5ff9 is an undefined reference
@@ -22,8 +22,8 @@ Error! E2028: setup_memory_ is an undefined reference
 Group                           Address              Size
 =====                           =======              ====
 
-PGROUP                          0213:0006            000000b9
-DGROUP                          021f:0000            000009e0
+PGROUP                          0214:0006            000000b9
+DGROUP                          0220:0000            000009e0
 
 
 
@@ -38,30 +38,30 @@ dos_TEXT               CODE           AUTO           0000:0000       00000000
 memorya_TEXT           CODE           AUTO           0000:0000       00000000
 video_TEXT             CODE           AUTO           0000:0000       00000000
 5fd6_TEXT              CODE           AUTO           0000:0000       00000128
-anti_debug_TEXT        CODE           AUTO           0000:0128       000001ce
-console_TEXT           CODE           AUTO           0000:02f6       0000006d
-CtrlConfig_TEXT        CODE           AUTO           0000:0363       000001f1
-CW_TEXT                CODE           AUTO           0000:0554       000000e3
-helper_TEXT            CODE           AUTO           0000:0637       00000050
-main_TEXT              CODE           AUTO           0000:0687       00000079
-rank_TEXT              CODE           AUTO           0000:0700       00000102
-_TEXT                  CODE           AUTO           0000:0810       00001926
-PROG                   PROG           PGROUP         0213:0006       000000b9
-FAR_DATA               FAR_DATA       AUTO           021e:000f       00000000
-_NULL                  BEGDATA        DGROUP         021f:0000       00000020
-_AFTERNULL             BEGDATA        DGROUP         0221:0000       00000002
-_DATA                  DATA           DGROUP         0221:0002       000000a2
-CONST                  DATA           DGROUP         022b:0004       00000052
-CONST2                 DATA           DGROUP         0230:0006       00000000
-XIB                    DATA           DGROUP         0230:0006       00000000
-XI                     DATA           DGROUP         0230:0006       0000000c
-XIE                    DATA           DGROUP         0231:0002       00000000
-YIB                    DATA           DGROUP         0231:0002       00000000
-YI                     DATA           DGROUP         0231:0002       00000006
-YIE                    DATA           DGROUP         0231:0008       00000000
-DATA                   DATA           DGROUP         0231:0008       00000000
-_BSS                   BSS            DGROUP         0231:0008       000000b6
-STACK                  STACK          DGROUP         023d:0000       00000800
+anti_debug_TEXT        CODE           AUTO           0000:0128       000001e6
+console_TEXT           CODE           AUTO           0000:030e       0000006d
+CtrlConfig_TEXT        CODE           AUTO           0000:037b       000001f1
+CW_TEXT                CODE           AUTO           0000:056c       000000e3
+helper_TEXT            CODE           AUTO           0000:064f       00000050
+main_TEXT              CODE           AUTO           0000:069f       00000079
+rank_TEXT              CODE           AUTO           0000:0718       00000102
+_TEXT                  CODE           AUTO           0000:0820       00001926
+PROG                   PROG           PGROUP         0214:0006       000000b9
+FAR_DATA               FAR_DATA       AUTO           021f:000f       00000000
+_NULL                  BEGDATA        DGROUP         0220:0000       00000020
+_AFTERNULL             BEGDATA        DGROUP         0222:0000       00000002
+_DATA                  DATA           DGROUP         0222:0002       000000a2
+CONST                  DATA           DGROUP         022c:0004       00000052
+CONST2                 DATA           DGROUP         0231:0006       00000000
+XIB                    DATA           DGROUP         0231:0006       00000000
+XI                     DATA           DGROUP         0231:0006       0000000c
+XIE                    DATA           DGROUP         0232:0002       00000000
+YIB                    DATA           DGROUP         0232:0002       00000000
+YI                     DATA           DGROUP         0232:0002       00000006
+YIE                    DATA           DGROUP         0232:0008       00000000
+DATA                   DATA           DGROUP         0232:0008       00000000
+_BSS                   BSS            DGROUP         0232:0008       000000b6
+STACK                  STACK          DGROUP         023e:0000       00000800
 
 
                         +----------------+
@@ -75,227 +75,227 @@ Address        Symbol
 =======        ======
 
 Module: dos.obj(dos)
-0213:0006*     isDos210
+0214:0006*     isDos210
 Module: memorya.obj(memorya)
-0213:002b*     aseg0_memmove
-0213:0063*     _seg_memset
+0214:002b*     aseg0_memmove
+0214:0063*     _seg_memset
 Module: video.obj(video)
-0213:0093*     setVideoMode
+0214:0093*     setVideoMode
 Module: 5fd6.obj(5fd6)
 0000:0000+     del_inst_5ff9_
 0000:0024+     goober_function_
-021f:0022+     _i5ff9
-021f:0024+     _i5ff0
+0220:0022+     _i5ff9
+0220:0024+     _i5ff0
 Module: anti_debug.obj(anti_debug)
 0000:0128      inhibitInterrupts_
-0000:0238      isPcJr_
-021f:0028+     _d7e
-021f:002c      _default_drive
-021f:012c      _pcjr
+0000:0250      isPcJr_
+0220:0028+     _d7e
+0220:002c      _default_drive
+0220:012c      _pcjr
 Module: console.obj(console)
-0000:02f6      put_2_lines_
+0000:030e      put_2_lines_
 Module: CtrlConfig.obj(CtrlConfig)
-0000:0363+     ctrls_read_
-0000:03ee+     ctrls_load_
-021f:012e+     _b4ae4
-021f:0139+     _b4ad9
-021f:0144+     _b4ace
-021f:014f+     _b4ac3
-021f:015a+     _b4b39
-021f:015b+     _b2ba
-021f:015c+     _b4b3a
-021f:015d+     _affirmation
+0000:037b+     ctrls_read_
+0000:0406+     ctrls_load_
+0220:012e+     _b4ae4
+0220:0139+     _b4ad9
+0220:0144+     _b4ace
+0220:014f+     _b4ac3
+0220:015a+     _b4b39
+0220:015b+     _b2ba
+0220:015c+     _b4b3a
+0220:015d+     _affirmation
 Module: CW.obj(CW)
-0000:0554+     _pfmt_
-021f:015e+     _si
-021f:0160+     _cl
+0000:056c+     _pfmt_
+0220:015e+     _si
+0220:0160+     _cl
 Module: helper.obj(helper)
-0000:0637      sum_
+0000:064f      sum_
 Module: main.obj(main)
-0000:0687      main_
-021f:0162+     _arr_5fd6
-021f:01aa+     _sum_5fd6
+0000:069f      main_
+0220:0162+     _arr_5fd6
+0220:01aa+     _sum_5fd6
 Module: rank.obj(rank)
-021f:01ac+     _rank_table
-0000:0700+     rank_calculate_
-0000:079b+     Rank_print_
+0220:01ac+     _rank_table
+0000:0718+     rank_calculate_
+0000:07b3+     Rank_print_
 Module: D:\Apps\64\WATCOM\lib286\dos\clibl.lib(stk)
-0000:0815      __STK
-0000:0835*     __STKOVERFLOW_
+0000:0825      __STK
+0000:0845*     __STKOVERFLOW_
 Module: D:\Apps\64\WATCOM\lib286\dos\clibl.lib(cmodel)
-0000:0852      _big_code_
-0000:0852*     CodeModelMismatch
+0000:0862      _big_code_
+0000:0862*     CodeModelMismatch
 Module: D:\Apps\64\WATCOM\lib286\dos\clibl.lib(cputs)
-0000:0852      cputs_
+0000:0862      cputs_
 Module: D:\Apps\64\WATCOM\lib286\dos\clibl.lib(lseek)
-0000:0868      lseek_
+0000:0878      lseek_
 Module: D:\Apps\64\WATCOM\lib286\dos\clibl.lib(read)
-0000:0899      read_
+0000:08a9      read_
 Module: D:\Apps\64\WATCOM\lib286\dos\clibl.lib(exit)
-0000:098f+     __null_int23_exit_
-0000:0990      exit_
-0000:09bf      _exit_
-021f:0032+     ___int23_exit
-021f:0036+     ___FPE_handler_exit
+0000:099f+     __null_int23_exit_
+0000:09a0      exit_
+0000:09cf      _exit_
+0220:0032+     ___int23_exit
+0220:0036+     ___FPE_handler_exit
 Module: D:\Apps\64\WATCOM\lib286\dos\clibl.lib(open)
-0000:0bd3      open_
-0000:0bfa+     _sopen_
+0000:0be3      open_
+0000:0c0a+     _sopen_
 Module: D:\Apps\64\WATCOM\lib286\dos\clibl.lib(close)
-0000:0c19      close_
+0000:0c29      close_
 Module: D:\Apps\64\WATCOM\lib286\dos\clibl.lib(cstart)
-021f:0000*     __nullarea
-021f:003a*     __ovlflag
-021f:003b*     __intno
-021f:003c*     __ovlvec
-0000:0c1e      _cstart_
-0000:0dcf      __exit_
-0000:0dec      __do_exit_with_msg_
-0000:0ecb      __GETDS
+0220:0000*     __nullarea
+0220:003a*     __ovlflag
+0220:003b*     __intno
+0220:003c*     __ovlvec
+0000:0c2e      _cstart_
+0000:0ddf      __exit_
+0000:0dfc      __do_exit_with_msg_
+0000:0edb      __GETDS
 Module: D:\Apps\64\WATCOM\lib286\dos\clibl.lib(xmsg)
-0000:0ed5*     __exit_with_msg_
-0000:0eda      __fatal_runtime_error_
+0000:0ee5*     __exit_with_msg_
+0000:0eea      __fatal_runtime_error_
 Module: D:\Apps\64\WATCOM\lib286\dos\clibl.lib(crwdata)
-021f:0040      __curbrk
-021f:0048      __STACKLOW
-021f:004a      __STACKTOP
-021f:004c      __cbyte
-021f:004e      __child
-021f:0050      __no87
-021f:005d      ___FPE_handler
-021f:0042      __psp
-021f:0051      __get_ovl_stack
-021f:0055      __restore_ovl_stack
-021f:0059      __close_ovl_file
-021f:0061      __LpCmdLine
-021f:0065      __LpPgmName
-021f:0044      __osmajor
-021f:0045      __osminor
-021f:0046      __osmode
-021f:0047      __HShift
+0220:0040      __curbrk
+0220:0048      __STACKLOW
+0220:004a      __STACKTOP
+0220:004c      __cbyte
+0220:004e      __child
+0220:0050      __no87
+0220:005d      ___FPE_handler
+0220:0042      __psp
+0220:0051      __get_ovl_stack
+0220:0055      __restore_ovl_stack
+0220:0059      __close_ovl_file
+0220:0061      __LpCmdLine
+0220:0065      __LpPgmName
+0220:0044      __osmajor
+0220:0045      __osminor
+0220:0046      __osmode
+0220:0047      __HShift
 Module: D:\Apps\64\WATCOM\lib286\dos\clibl.lib(putch)
-0000:0ef4      putch_
+0000:0f04      putch_
 Module: D:\Apps\64\WATCOM\lib286\dos\clibl.lib(iomode)
-0000:0f03      __GetIOMode_
-0000:0f28      __SetIOMode_nogrow_
-021f:006a      ___NFiles
-021f:006c      ___init_mode
-021f:0094      ___io_mode
+0000:0f13      __GetIOMode_
+0000:0f38      __SetIOMode_nogrow_
+0220:006a      ___NFiles
+0220:006c      ___init_mode
+0220:0094      ___io_mode
 Module: D:\Apps\64\WATCOM\lib286\dos\clibl.lib(__lseek)
-0000:0f4b      __lseek_
+0000:0f5b      __lseek_
 Module: D:\Apps\64\WATCOM\lib286\dos\clibl.lib(iomodtty)
-0000:0f85      __ChkTTYIOMode_
-0000:0fc3*     __IOMode_
+0000:0f95      __ChkTTYIOMode_
+0000:0fd3*     __IOMode_
 Module: D:\Apps\64\WATCOM\lib286\dos\clibl.lib(errno)
-0000:0fd3      __get_errno_ptr_
-021f:01d0+     _errno
+0000:0fe3      __get_errno_ptr_
+0220:01d0+     _errno
 Module: D:\Apps\64\WATCOM\lib286\dos\clibl.lib(dosret)
-0000:0fda      __set_errno_dos_
-0000:1066*     __set_errno_dos_reterr_
+0000:0fea      __set_errno_dos_
+0000:1076*     __set_errno_dos_reterr_
 Module: D:\Apps\64\WATCOM\lib286\dos\clibl.lib(initrtns)
-0000:10a3      __InitRtns
-0000:10a3*     __FInitRtns
-0000:10fa      __FiniRtns
-0000:10fa*     __FFiniRtns
+0000:10b3      __InitRtns
+0000:10b3*     __FInitRtns
+0000:110a      __FiniRtns
+0000:110a*     __FFiniRtns
 Module: D:\Apps\64\WATCOM\lib286\dos\clibl.lib(opendos)
-0000:115a      _dos_open_
+0000:116a      _dos_open_
 Module: D:\Apps\64\WATCOM\lib286\dos\clibl.lib(isatt)
-0000:1180      isatty_
+0000:1190      isatty_
 Module: D:\Apps\64\WATCOM\lib286\dos\clibl.lib(doserrno)
-0000:119c      __get_doserrno_ptr_
-021f:01d2+     __doserrno
+0000:11ac      __get_doserrno_ptr_
+0220:01d2+     __doserrno
 Module: D:\Apps\64\WATCOM\lib286\dos\clibl.lib(umaskval)
-021f:00ac      ___umaskval
+0220:00ac      ___umaskval
 Module: D:\Apps\64\WATCOM\lib286\dos\clibl.lib(creatdos)
-0000:11a3      _dos_creat_
-0000:11c7*     _dos_creatnew_
+0000:11b3      _dos_creat_
+0000:11d7*     _dos_creatnew_
 Module: D:\Apps\64\WATCOM\lib286\dos\clibl.lib(stiomode)
-0000:11e8+     __grow_iomode_
-0000:12ae+     __shrink_iomode_
-0000:12e9      __SetIOMode_
+0000:11f8+     __grow_iomode_
+0000:12be+     __shrink_iomode_
+0000:12f9      __SetIOMode_
 Module: D:\Apps\64\WATCOM\lib286\dos\clibl.lib(textmode)
-021f:00ae      __fmode
+0220:00ae      __fmode
 Module: D:\Apps\64\WATCOM\lib286\dos\clibl.lib(_clse)
-0000:134c      __close_
+0000:135c      __close_
 Module: D:\Apps\64\WATCOM\lib286\dos\clibl.lib(cmain086)
-0000:1384      __CMain
+0000:1394      __CMain
 Module: D:\Apps\64\WATCOM\lib286\dos\clibl.lib(uselfn)
-021f:00b0      ___uselfn
+0220:00b0      ___uselfn
 Module: D:\Apps\64\WATCOM\lib286\dos\clibl.lib(dosseg)
-0000:13a4      __DOSseg__
+0000:13b4      __DOSseg__
 Module: D:\Apps\64\WATCOM\lib286\dos\clibl.lib(enterdb)
-0000:13a5      __EnterWVIDEO_
-021f:00b2+     __WD_Present
+0000:13b5      __EnterWVIDEO_
+0220:00b2+     __WD_Present
 Module: D:\Apps\64\WATCOM\lib286\dos\clibl.lib(sgdef086)
-021f:0116      __Start_XI
-021f:0122      __End_XI
-021f:0122      __Start_YI
-021f:0128      __End_YI
+0220:0116      __Start_XI
+0220:0122      __End_XI
+0220:0122      __Start_YI
+0220:0128      __End_YI
 Module: D:\Apps\64\WATCOM\lib286\dos\clibl.lib(doserror)
-0000:13ca      __doserror_
-0000:13d8*     __doserror1_
+0000:13da      __doserror_
+0000:13e8*     __doserror1_
 Module: D:\Apps\64\WATCOM\lib286\dos\clibl.lib(frealloc)
-0000:13e4*     _frealloc_
-0000:13e4      realloc_
+0000:13f4*     _frealloc_
+0000:13f4      realloc_
 Module: D:\Apps\64\WATCOM\lib286\dos\clibl.lib(fmalloc)
-0000:14bc      _fmalloc_
-0000:14bc      malloc_
-021f:00b4+     ___fheapbeg
-021f:00b6      ___fheapRover
-021f:00b8      ___LargestSizeB4Rover
+0000:14cc      _fmalloc_
+0000:14cc      malloc_
+0220:00b4+     ___fheapbeg
+0220:00b6      ___fheapRover
+0220:00b8      ___LargestSizeB4Rover
 Module: D:\Apps\64\WATCOM\lib286\dos\clibl.lib(ffree)
-0000:15cc      _ffree_
-0000:15cc      free_
+0000:15dc      _ffree_
+0000:15dc      free_
 Module: D:\Apps\64\WATCOM\lib286\dos\clibl.lib(___argc)
-021f:01d6      ____Argv
-021f:01da      ____Argc
+0220:01d6      ____Argv
+0220:01da      ____Argc
 Module: D:\Apps\64\WATCOM\lib286\dos\clibl.lib(fmsize)
-0000:1614*     _msize_
-0000:1614      _fmsize_
+0000:1624*     _msize_
+0000:1624      _fmsize_
 Module: D:\Apps\64\WATCOM\lib286\dos\clibl.lib(nmalloc)
-0000:1625      _nmalloc_
-021f:00ba      ___nheapbeg
-021f:00bc      ___MiniHeapRover
-021f:00be      ___LargestSizeB4MiniHeapRover
+0000:1635      _nmalloc_
+0220:00ba      ___nheapbeg
+0220:00bc      ___MiniHeapRover
+0220:00be      ___LargestSizeB4MiniHeapRover
 Module: D:\Apps\64\WATCOM\lib286\dos\clibl.lib(nexpand)
-0000:16fc      _nexpand_
+0000:170c      _nexpand_
 Module: D:\Apps\64\WATCOM\lib286\dos\clibl.lib(fexpand)
-0000:174c      _fexpand_
-0000:174c*     _expand_
+0000:175c      _fexpand_
+0000:175c*     _expand_
 Module: D:\Apps\64\WATCOM\lib286\dos\clibl.lib(mem)
-0000:1790      __MemAllocator
-0000:1856      __MemFree
+0000:17a0      __MemAllocator
+0000:1866      __MemFree
 Module: D:\Apps\64\WATCOM\lib286\dos\clibl.lib(growseg)
-0000:19cd      __GrowSeg_
+0000:19dd      __GrowSeg_
 Module: D:\Apps\64\WATCOM\lib286\dos\clibl.lib(allocseg)
-0000:1a9c      __AllocSeg_
+0000:1aac      __AllocSeg_
 Module: D:\Apps\64\WATCOM\lib286\dos\clibl.lib(fmemneed)
-0000:1b3b      __fmemneed_
+0000:1b4b      __fmemneed_
 Module: D:\Apps\64\WATCOM\lib286\dos\clibl.lib(heapgrow)
-0000:1b3e*     _heapgrow_
-0000:1b3e*     _fheapgrow_
-0000:1b3f      _nheapgrow_
+0000:1b4e*     _heapgrow_
+0000:1b4e*     _fheapgrow_
+0000:1b4f      _nheapgrow_
 Module: D:\Apps\64\WATCOM\lib286\dos\clibl.lib(nfree)
-0000:1bb6      _nfree_
-021f:01dc+     ___MiniHeapFreeRover
+0000:1bc6      _nfree_
+0220:01dc+     ___MiniHeapFreeRover
 Module: D:\Apps\64\WATCOM\lib286\dos\clibl.lib(nmemneed)
-0000:1cb3      __nmemneed_
+0000:1cc3      __nmemneed_
 Module: D:\Apps\64\WATCOM\lib286\dos\clibl.lib(grownear)
-0000:1d35      __LastFree_
-0000:1dad      __ExpandDGROUP_
+0000:1d45      __LastFree_
+0000:1dbd      __ExpandDGROUP_
 Module: D:\Apps\64\WATCOM\lib286\dos\clibl.lib(_expand)
-0000:1eb2      __HeapManager_expand_
+0000:1ec2      __HeapManager_expand_
 Module: D:\Apps\64\WATCOM\lib286\dos\clibl.lib(bexpand)
-0000:2032      _bexpand_
+0000:2042      _bexpand_
 Module: D:\Apps\64\WATCOM\lib286\dos\clibl.lib(heapen)
-0000:208b*     _heapenable_
-021f:00c0      ___heap_enabled
+0000:209b*     _heapenable_
+0220:00c0      ___heap_enabled
 Module: D:\Apps\64\WATCOM\lib286\dos\clibl.lib(amblksiz)
-021f:00c2      __amblksiz
+0220:00c2      __amblksiz
 Module: D:\Apps\64\WATCOM\lib286\dos\clibl.lib(sbrk)
-0000:209c      __brk_
-0000:2101*     sbrk_
+0000:20ac      __brk_
+0000:2111*     sbrk_
 Module: D:\Apps\64\WATCOM\lib286\dos\clibl.lib(bfree)
-0000:2111      _bfree_
+0000:2121      _bfree_
 
 
                         +---------------------------+
@@ -333,6 +333,6 @@ D:\Apps\64\WATCOM\lib286\dos\clibl.lib
                         +-----------------------+
 
 Stack size:  0800 (2048.)
-Memory size:  2bd0 (11216.)
-Entry point address: 0000:0c1e
+Memory size:  2be0 (11232.)
+Entry point address: 0000:0c2e
 Link time: 00:00.01

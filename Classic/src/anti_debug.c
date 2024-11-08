@@ -3,14 +3,14 @@
 #include "memory.h"
 
 long d7e = IntBreakpoint;
-byte* default_drive = 0x9ae1;
+byte* default_drive = 0;
 byte seg_memget();
 
 int inhibitInterrupts()
 {
     if (WSegMem_Get(d7e) != 0x13cd) {return -1;}
-    LSeg_Mem_Set(CtrlBreak, 0x100003a0);
-    LSeg_Mem_Set(PrntScrn,  0x100003a0);
+    LSeg_Mem_Set(CtrlBreak, 0x100003a0l);
+    LSeg_Mem_Set(PrntScrn,  0x100003a0l);
     return 0;
 }
 

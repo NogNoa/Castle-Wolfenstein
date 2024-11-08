@@ -1,5 +1,5 @@
 // long_address_t* intTable(byte)
-#define intTable(i) (i*4)
+#define intTable(i) ((long) i*4)
 
 #define SingleStep  intTable(1)
 #define IntBreakpoint   intTable(3)
