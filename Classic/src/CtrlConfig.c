@@ -3,6 +3,7 @@
 #include "STDLIB.H"
 #include "memory.h"
 #include "console.h"
+#include "anti_debug.h"
 
 bool b4b39, b4b3a, affirmation;
 byte b2ba, b4ac3[0xb], b4ace[0xb], b4ad9[0xb], b4ae4[0xb];

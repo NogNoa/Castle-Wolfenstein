@@ -6,5 +6,7 @@
 *.log
 *.o
 *.err
+*.wpj
+*.tgt
 
 Classic/dosbox/HD/

@@ -2,7 +2,7 @@
 
 char cl;
 short si;
-extern char ascii_flags[];
+char ascii_flags[];
 
 void _pfmt(char* format_type)
 {

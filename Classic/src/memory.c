@@ -34,16 +34,7 @@ byte *source, *reference;
     return limit < similar;
 }
 
-int check_for_debugger()
-{
-    if (SegMemGet(IntBreakpoint+1) != 0xcd ||
-        SegMemGet(SingleStep+1) != 0x13)
-        {_exit(-1);} 
-    else
-    {   isDos210();
-        return goober_function(0x26, 0x2bd, 0x40);
-    }
-}
+
 
 byte test_1a71[10]  = "\x2e\x8b\x26\xd1\2\x2e\x8e\x16\xd3\2";
 byte patch_1a71[10] = "\x2e\x8e\x16\xd3\2\x2e\x8b\x26\xd1\2";

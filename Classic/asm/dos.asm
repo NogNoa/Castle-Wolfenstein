@@ -6,11 +6,11 @@
 ;
 PGROUP  GROUP   PROG
 PROG    SEGMENT BYTE PUBLIC 'PROG'
-        PUBLIC  isDos210
+        PUBLIC  isDos210_
         ASSUME  CS:PGROUP
     extrn   del_inst_5ff9:near
     extrn   default_drive:near
-isDos210 proc near
+isDos210_ proc near
 ;
 ;   ret 1- success 0- fail  bool
 ;
@@ -32,6 +32,6 @@ return_zero:
     mov     ax, 0
     POP     BP
     RET
-isDos210 endp
+isDos210_ endp
 PROG ends
 end

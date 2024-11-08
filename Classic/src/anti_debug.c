@@ -4,7 +4,7 @@
 
 long d7e = IntBreakpoint;
 byte* default_drive = 0;
-byte seg_memget();
+int goober_function(int p1, void* dest, register int si);
 
 int inhibitInterrupts()
 {
@@ -32,4 +32,15 @@ void isPcJr()
   }
   SegMemSet(IntBreakpoint+1, 0xcd);
   SegMemSet(IntBreakpoint+3, 0x13);
+}
+
+int check_for_debugger()
+{
+    if (SegMemGet(IntBreakpoint+1) != 0xcd ||
+        SegMemGet(SingleStep+1) != 0x13)
+        {_exit(-1);} 
+    else
+    {   isDos210();
+        return goober_function(0x26, 0x2bd, 0x40);
+    }
 }

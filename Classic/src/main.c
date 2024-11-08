@@ -3,6 +3,7 @@
 #include "video.h"
 #include "conio.h"
 #include "anti_debug.h"
+#include "memory.h"
 
 int sum_5fd6;
 int arr_5fd6[36];
