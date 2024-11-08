@@ -1,5 +1,5 @@
 #include "cw.h"
-#include "ibm.h"
+#include "anti_debug.h"
 
 int i5ff9 = 0x1000;
 byte* i5ff0 = 0;

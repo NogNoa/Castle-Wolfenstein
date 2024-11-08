@@ -1,6 +1,7 @@
 #include "cw.h"
 #include "video.h"
 #include "conio.h"
+#include "anti_debug.h"
 
 extern bool pcjr; 
 

@@ -1,9 +1,4 @@
 #include "cw.h"
-#include "IVT.h"
-#include "ibm.h"
-#include "memory.h"
-#include "video.h"
-#include "conio.h"
 
 char cl;
 short si;
@@ -32,74 +27,3 @@ void _pfmt(char* format_type)
     }
 }
 
-char f1, ee;
-char Rank_Index;
-
-char rank_calculate(void)
-{
-  
-  if (f1 < 0x80) {
-    if (1 < f1) {
-      Rank_Index -= 1;
-    }
-  }
-  else {
-    if (Rank_Index <= 0xf0) 
-    {   Rank_Index += 0x10;
-        if (ee && (Rank_Index <= 0xf0))
-            {Rank_Index += 0x10;}
-    }
-    if ((0xf0 < Rank_Index)) {
-      Rank_Index = 0xf0;
-    }
-  }
-  if (Rank_Index < 0x10) {
-    Rank_Index = 0x10;
-  }
-  return Rank_Index;
-}
-  /*     100 > ur >=  f0
-          00 > sr >= -10
-  
-  */
-
-char *rank_table[8];
-void Rank_print(char Rank_Index)
-{
-    setVideoMode(4);
-    BiosVideo(0x200,0,0,0x100);
-    cputs("Your Rank is ");
-    cputs(rank_table[(int)Rank_Index >> 5]);
-    return;
-}
-
-long d7e = IntBreakpoint;
-byte seg_memget();
-
-int inhibitInterrupts()
-{
-    if (WSegMem_Get(d7e) != 0x13cd) {return -1;}
-    LSeg_Mem_Set(CtrlBreak, 0x100003a0);
-    LSeg_Mem_Set(PrntScrn,  0x100003a0);
-    return 0;
-}
-
-int d2ae, d29c;
-bool pcjr;
-
-void isPcJr()
-{
-  SegMemSet(SingleStep+1, 0x34);
-  SegMemSet(SingleStep+3, 0xff);
-  pcjr = (_seg_memget(0xf000, (char *)0xffff) == 0xfd); /* from the PC Jr BIOS*/
-  if (pcjr)
-  { d2ae = 3300;
-    d29c = 600;
-  }
-  else
-  { d2ae = 900;
-    d29c = 200;
-  }
-  SegMemSet(IntBreakpoint+1, 0xcd);
-  SegMemSet(IntBreakpoint+3, 0x13);
-}

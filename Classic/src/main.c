@@ -2,11 +2,10 @@
 #include "doscall.h"
 #include "video.h"
 #include "conio.h"
-#include "ibm.h"
+#include "anti_debug.h"
 
 int sum_5fd6;
 int arr_5fd6[36];
-byte* default_drive = 0x9ae1;
 
 int main()
 {
