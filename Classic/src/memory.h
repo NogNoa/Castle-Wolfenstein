@@ -13,11 +13,11 @@ void setup_memory(void);
 #define WSegMem_Set(A, w)  {(SegMemSet((long) A, w));   (SegMemSet((long) A+1, w >> 8));}
 #define LSeg_Mem_Set(A, l) {{WSegMem_Set(A, l)} {WSegMem_Set(A+2, l >> 0x10)}}
 
-#define SegMemGet(A)       (_seg_memget((int) (A) >> 0x10, (char *) (A)))
+#define SegMemGet(A)       (_seg_memget((int) ((A) >> 0x10), (char *) (A)))
 #define WSegMem_Get(A)  ((SegMemGet((long)A)) + (SegMemGet((long) A+1)) * 0x100)
 #define LSeg_Mem_Get(A) ((WSegMem_Get(A)) + (WSegMem_Get(A+2)) * 0x10000)
 
-#define Seg0Assert(lmt, cur, ref, fix) {if (seg0_mem_compare(0, (lmt)-1, (cur), (ref)))\
-{seg0_memmovee((lmt), (cur), (fix));}}
+#define Seg0Assert(lmt, cur, ref, fix) {if (seg0_mem_compare(0, (lmt)-1, (byte *) (cur), (byte *) (ref)))\
+{seg0_memmovee((lmt), (byte *) (cur), (byte *) (fix));}}
 
 

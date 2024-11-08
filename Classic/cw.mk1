@@ -45,13 +45,6 @@ s\Code\C\Castle Wolfenstein\Classic\src\CtrlConfig.c" .AUTODEPEND
  *wcc src\CtrlConfig.c -i="D:\Apps\64\WATCOM/h" -w4 -e25 -zq -od -d2 -bt=dos&
  -fo=.obj -ml
 
-"D:\Projects\Code\C\Castle Wolfenstein\Classic\CW.obj" : "D:\Projects\Code\C&
-\Castle Wolfenstein\Classic\src\CW.c" .AUTODEPEND
- @D:
- cd "D:\Projects\Code\C\Castle Wolfenstein\Classic"
- *wcc src\CW.c -i="D:\Apps\64\WATCOM/h" -w4 -e25 -zq -od -d2 -bt=dos -fo=.ob&
-j -ml
-
 "D:\Projects\Code\C\Castle Wolfenstein\Classic\helper.obj" : "D:\Projects\Co&
 de\C\Castle Wolfenstein\Classic\src\helper.c" .AUTODEPEND
  @D:
@@ -66,6 +59,13 @@ de\C\Castle Wolfenstein\Classic\src\helper.c" .AUTODEPEND
  *wcc src\main.c -i="D:\Apps\64\WATCOM/h" -w4 -e25 -zq -od -d2 -bt=dos -fo=.&
 obj -ml
 
+"D:\Projects\Code\C\Castle Wolfenstein\Classic\memory.obj" : "D:\Projects\Co&
+de\C\Castle Wolfenstein\Classic\src\memory.c" .AUTODEPEND
+ @D:
+ cd "D:\Projects\Code\C\Castle Wolfenstein\Classic"
+ *wcc src\memory.c -i="D:\Apps\64\WATCOM/h" -w4 -e25 -zq -od -d2 -bt=dos -fo&
+=.obj -ml
+
 "D:\Projects\Code\C\Castle Wolfenstein\Classic\rank.obj" : "D:\Projects\Code&
 \C\Castle Wolfenstein\Classic\src\rank.c" .AUTODEPEND
  @D:
@@ -79,20 +79,20 @@ Classic\memorya.obj" "D:\Projects\Code\C\Castle Wolfenstein\Classic\video.ob&
 j" "D:\Projects\Code\C\Castle Wolfenstein\Classic\5fd6.obj" "D:\Projects\Cod&
 e\C\Castle Wolfenstein\Classic\anti_debug.obj" "D:\Projects\Code\C\Castle Wo&
 lfenstein\Classic\console.obj" "D:\Projects\Code\C\Castle Wolfenstein\Classi&
-c\CtrlConfig.obj" "D:\Projects\Code\C\Castle Wolfenstein\Classic\CW.obj" "D:&
-\Projects\Code\C\Castle Wolfenstein\Classic\helper.obj" "D:\Projects\Code\C\&
-Castle Wolfenstein\Classic\main.obj" "D:\Projects\Code\C\Castle Wolfenstein\&
-Classic\rank.obj" "D:\Projects\Code\C\Castle Wolfenstein\Classic\src\anti_de&
-bug.h" "D:\Projects\Code\C\Castle Wolfenstein\Classic\src\cw.h" "D:\Projects&
-\Code\C\Castle Wolfenstein\Classic\src\DOS.H" "D:\Projects\Code\C\Castle Wol&
-fenstein\Classic\src\doscall.h" "D:\Projects\Code\C\Castle Wolfenstein\Class&
-ic\src\FCNTL.H" "D:\Projects\Code\C\Castle Wolfenstein\Classic\src\ibm.h" "D&
-:\Projects\Code\C\Castle Wolfenstein\Classic\src\IVT.h" "D:\Projects\Code\C\&
-Castle Wolfenstein\Classic\src\video.h" .AUTODEPEND
+c\CtrlConfig.obj" "D:\Projects\Code\C\Castle Wolfenstein\Classic\helper.obj"&
+ "D:\Projects\Code\C\Castle Wolfenstein\Classic\main.obj" "D:\Projects\Code\&
+C\Castle Wolfenstein\Classic\memory.obj" "D:\Projects\Code\C\Castle Wolfenst&
+ein\Classic\rank.obj" "D:\Projects\Code\C\Castle Wolfenstein\Classic\src\ant&
+i_debug.h" "D:\Projects\Code\C\Castle Wolfenstein\Classic\src\cw.h" "D:\Proj&
+ects\Code\C\Castle Wolfenstein\Classic\src\DOS.H" "D:\Projects\Code\C\Castle&
+ Wolfenstein\Classic\src\doscall.h" "D:\Projects\Code\C\Castle Wolfenstein\C&
+lassic\src\FCNTL.H" "D:\Projects\Code\C\Castle Wolfenstein\Classic\src\ibm.h&
+" "D:\Projects\Code\C\Castle Wolfenstein\Classic\src\IVT.h" "D:\Projects\Cod&
+e\C\Castle Wolfenstein\Classic\src\video.h" .AUTODEPEND
  @D:
  cd "D:\Projects\Code\C\Castle Wolfenstein\Classic"
  @%write cw.lk1 FIL dos.obj,memorya.obj,video.obj,5fd6.obj,anti_debug.obj,co&
-nsole.obj,CtrlConfig.obj,CW.obj,helper.obj,main.obj,rank.obj
+nsole.obj,CtrlConfig.obj,helper.obj,main.obj,memory.obj,rank.obj
  @%append cw.lk1 
  *wlink name cw d all sys dos op m op maxe=25 op q op symf @cw.lk1
 

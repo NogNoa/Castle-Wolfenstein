@@ -4,11 +4,12 @@
 #include "conio.h"
 #include "anti_debug.h"
 #include "memory.h"
+#include "STDLIB.H"
 
 int sum_5fd6;
 int arr_5fd6[36];
 
-int main()
+void main()
 {
     setVideoMode(PXL_CLR_LO);
     BiosVideo(SET_CURSOR_POSITION, 0, 0, RowColl(2,2));

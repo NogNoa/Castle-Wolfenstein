@@ -1,6 +1,8 @@
 #include "cw.h"
 #include "IVT.h"
 #include "memory.h"
+#include "STDLIB.H"
+#include "ibm.h"
 
 long d7e = IntBreakpoint;
 byte* default_drive = 0;
@@ -38,7 +40,7 @@ int check_for_debugger()
 {
     if (SegMemGet(IntBreakpoint+1) != 0xcd ||
         SegMemGet(SingleStep+1) != 0x13)
-        {_exit(-1);} 
+        {return _exit(-1), -1;} /*doesn't return*/
     else
     {   isDos210();
         return goober_function(0x26, 0x2bd, 0x40);

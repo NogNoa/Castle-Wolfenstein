@@ -7,7 +7,7 @@ enum VIDEO_MODES {TXT_GREY_WD, TXT_CLR_WD, TXT_GREY_THN, TXT_CLR_THN,
                   PXL_CLR_LO, PXL_GREY_HI, PXL_MONO_HI, MDA, 
                   JR_TINY, JR_WIDE};
 
-#ifndef LATTICE
+
 int setVideoMode(char mode_p);
 void BiosVideo(int A, int B, int C, int D);
-#endif
+
