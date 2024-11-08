@@ -84,13 +84,14 @@ int inhibitInterrupts()
     return 0;
 }
 
-int d2ae, d29c; 
+int d2ae, d29c;
+bool pcjr;
 
 void isPcJr()
 {
-  SegMem_Set(SingleStep+1, 0x34);
-  SegMem_Set(SingleStep+3, 0xff);
-  pcjr = (_seg_memget(0xf000, 0xffff) == 0xfd); /* from the PC Jr BIOS*/
+  SegMemSet(SingleStep+1, 0x34);
+  SegMemSet(SingleStep+3, 0xff);
+  pcjr = (_seg_memget(0xf000, (char *)0xffff) == 0xfd); /* from the PC Jr BIOS*/
   if (pcjr)
   { d2ae = 3300;
     d29c = 600;
@@ -99,6 +100,6 @@ void isPcJr()
   { d2ae = 900;
     d29c = 200;
   }
-  SegMem_Set(IntBreakpoint+1, 0xcd);
-  SegMem_Set(IntBreakpoint+3, 0x13);
+  SegMemSet(IntBreakpoint+1, 0xcd);
+  SegMemSet(IntBreakpoint+3, 0x13);
 }

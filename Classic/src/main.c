@@ -1,10 +1,12 @@
 #include "cw.h"
 #include "doscall.h"
 #include "video.h"
+#include "conio.h"
+#include "ibm.h"
 
 int sum_5fd6;
 int arr_5fd6[36];
-int* default_drive = 0x9ae1;
+byte* default_drive = 0x9ae1;
 
 int main()
 {

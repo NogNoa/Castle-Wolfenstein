@@ -3,6 +3,7 @@
 
 typedef char * string;
 typedef unsigned int uint;
+typedef unsigned int word;
 
 typedef char bool;
 enum {false, true};
