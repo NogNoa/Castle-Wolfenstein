@@ -3,6 +3,7 @@
 
 int i5ff9 = 0x1000;
 byte* i5ff0 = 0;
+int si;
 
 void
 del_inst_5ff9(void)
@@ -10,7 +11,7 @@ del_inst_5ff9(void)
     i5ff9 = 0x9090;
 }
 
-int goober_function(int p1, void* dest, register int si)
+int goober_function(int p1, void* dest)
 {
     int a;
     byte i;
