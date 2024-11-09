@@ -1,1 +1,1 @@
-void put_2_lines(char *line0, char  *line1);
+void put_2_strings(char *line0, char  *line1);

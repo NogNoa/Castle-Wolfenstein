@@ -6,7 +6,7 @@
 extern bool pcjr; 
 
 void
-put_2_lines(line0, line1)
+put_2_strings(line0, line1)
 char *line0, *line1;
 {   
     if (pcjr) {setVideoMode(TXT_GREY_WD);}

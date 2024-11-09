@@ -15,7 +15,7 @@ int fd; byte *buf; long offset; int nbytes;
     lseek(fd, offset, 0);
     length = read(fd, buf, nbytes);
     if (length != nbytes)
-    {   put_2_lines("Error reading control file!", "");
+    {   put_2_strings("Error reading control file!", "");
         _exit(-1);
     }
     return length;
@@ -28,7 +28,7 @@ void ctrls_load()
     fd = open("ctrls", O_RAW); /* doesn't use drive letter*/
     if (fd < 0) 
     {
-        put_2_lines("Cannot open control file", "");
+        put_2_strings("Cannot open control file", "");
         _exit(-1);
     }
     ctrls_read(fd, &b4b39, 0, 1);

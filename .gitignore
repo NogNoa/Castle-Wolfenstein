@@ -8,5 +8,6 @@
 *.err
 *.wpj
 *.tgt
+*.sym
 
 Classic/dosbox/HD/

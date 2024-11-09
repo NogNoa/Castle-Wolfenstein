@@ -7,7 +7,7 @@
 #include "STDLIB.H"
 
 void
-seg0_memmovee(numBytes, dest, source)
+seg0_memmove(numBytes, dest, source)
 int numBytes;
 byte *dest;
 byte *source;
@@ -57,7 +57,7 @@ setup_memory()
     }
     if (_seg_memset(0xb800, (byte*)1, 0xa5) != 0xa5) /*tryna to poke color screen buffer, is it there?*/
     {   setVideoMode(MDA);
-        put_2_lines("Color graphics card not installed\n\r", "Program cannot execute");
+        put_2_strings("Color graphics card not installed\n\r", "Program cannot execute");
         _exit(-1);
     }
     _seg_memset(0xb800, (byte*) 1, 0);

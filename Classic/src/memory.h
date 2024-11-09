@@ -4,7 +4,7 @@ byte _seg_memset(word, byte*, byte);
 byte _seg_memget(word, byte*);
        bool seg0_mem_compare(int start, int limit, byte *source, byte *reference);
 #ifndef LATTICE
-void seg0_memmovee(int numBytes, byte *dest, byte *source);
+void seg0_memmove(int numBytes, byte *dest, byte *source);
 int check_for_debugger(void);
 void setup_memory(void);
 #endif
@@ -18,6 +18,6 @@ void setup_memory(void);
 #define LSeg_Mem_Get(A) ((WSegMem_Get(A)) + (WSegMem_Get(A+2)) * 0x10000)
 
 #define Seg0Assert(lmt, cur, ref, fix) {if (seg0_mem_compare(0, (lmt)-1, (byte *) (cur), (byte *) (ref)))\
-{seg0_memmovee((lmt), (byte *) (cur), (byte *) (fix));}}
+{seg0_memmove((lmt), (byte *) (cur), (byte *) (fix));}}
 
 
