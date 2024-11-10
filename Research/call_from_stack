@@ -3,6 +3,7 @@ the stack is [b8 01 02 bb 62 7c b9 14 {w:arg1 - 4600} {w:default_drive} 90 90 cb
 
 arg1 in practice is always 23 therfore
 23 - 4600 = 23 + ba00 = ba23
+and at any rate will be arg1 + ba00
 default_drive will usually be 1 for A
 
 so the code will end up something like 
