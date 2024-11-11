@@ -1,29 +1,36 @@
 #include "cw.h"
 
-char cl;
-short si;
-char ascii_flags[];
+byte d7716, d9e8e;
+byte *p7717;
+int d7712, d7714;
+bool b4b3c;
 
-void _pfmt(char* format_type)
+byte f3a1(void)
 {
-    int local[0x1B];
-    char bvar1;
-    local[0x13] = -1;
-    local[0x12] = 0x20;
-    local[0x16] = local[0x11] = local[0x15] = local[0x14] = 0;
-    if (*format_type == 0x2d)
-    {
-        ++format_type;
-        local[0x16] = 1;
-    }
-    local[0] = *format_type;
-    bvar1 = ascii_flags[(int)*format_type];
-    if (bvar1 & 4 != 0 && local[0] == 0x30)
-        {local[0x12] = 0x30;}
-    for (;bvar1 & 4 != 0; bvar1 = *(char *)(*format_type + 0xa0b5))
-    {   local[0x11] *= 0xa;
-        local[0x11] += (*format_type & 0xf);
-        ++format_type;
-    }
+    byte al;
+    bool cf, ct;
+    int bx;
+    if (d7716)
+        {al = *(++p7717);}
+    else
+        {al = SegMemGet((long)0x46c);}
+    cf = al & 1;
+    al >>= 1;
+    ct = d7712 & 1;
+    d7712 = (d7712 >> 1) | (cf << 0x10);
+    cf = d7714 & 1;
+    d7714 = (d7714 >> 1) | (ct << 0x10);
+    ct = cf;
+    bx = (d7714 >> 1) | (cf << 0x10);
+    d7714 = (int) al ^ bx;
+    al = (byte) d7714;
+    if (d9e8e < al || !b4b3c)
+        {out(0x61, in(0x61) & 0xfe ^ 2);}
+    return al;
 }
 
+void f3d4()
+{   
+    if (!b4b3c)
+        {out(0x61, in(0x61) & 0xfe ^ 2);}
+}

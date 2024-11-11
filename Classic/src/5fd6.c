@@ -1,9 +1,9 @@
 #include "cw.h"
 #include "anti_debug.h"
 
-int i5ff9 = 0x1000;
-byte* i5ff0 = 0;
-int si;
+static int i5ff9 = 0x1000;
+static byte* i5ff0 = 0;
+static int si;
 
 void
 del_inst_5ff9(void)

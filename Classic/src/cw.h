@@ -9,7 +9,7 @@ typedef char bool;
 enum {false, true};
 
 #ifndef LATTICE
-typedef char byte;
+typedef unsigned char byte;
 int sum(int *list, int len);
 #endif
 
