@@ -1,15 +1,12 @@
-#include "cw.h"
-#include "doscall.h"
-#include "video.h"
-#include "conio.h"
-#include "anti_debug.h"
-#include "memory.h"
-#include "STDLIB.H"
+#define SET_CURSOR_POSITION 0x200
+#define PXL_CLR_LO 4
 
 int sum_5fd6;
 int arr_5fd6[36];
+int setVideoMode();
+int BiosVideo();
 
-void main()
+int main()
 {
     setVideoMode(PXL_CLR_LO);
     BiosVideo(SET_CURSOR_POSITION, 0, 0, RowColl(2,2));
