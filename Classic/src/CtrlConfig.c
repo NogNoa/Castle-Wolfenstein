@@ -8,20 +8,32 @@
 bool b4b39, b4b3a, affirmation;
 byte b2ba, b4ac3[0xb], b4ace[0xb], b4ad9[0xb], b4ae4[0xb];
 
-int ctrls_read(fd, buf, offset, nbytes)
-int fd; byte *buf; long offset; int nbytes;
+int ctrls_read(int ctrls, string buffer, long offset, int length)
 {
-    int length;
-    lseek(fd, offset, 0);
-    length = read(fd, buf, nbytes);
-    if (length != nbytes)
+    int nbytes;
+    lseek(ctrls, offset, 0); /*start+ offset*/
+    nbytes = read(ctrls, buffer, length);
+    if (nbytes != length)
     {   put_2_strings("Error reading control file!", "");
         _exit(-1);
     }
-    return length;
+    return nbytes;
 }
 
-void ctrls_load()
+int ctrls_write(int ctrls, string buffer, long offset, int length)
+{
+    int nbytes;
+    lseek(ctrls, offset, 0); /*start+ offset*/
+    nbytes = write(ctrls, buffer, length);
+    if (write(ctrls, buffer, length) != length)
+    {   cputs("Error writing control file!");
+        _exit(-1);
+    }
+    return nbytes;
+}
+
+
+void ctrls_load_r()
 {
     int fd;
     if (check_for_debugger()) {_exit(-1);}

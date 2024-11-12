@@ -48,20 +48,4 @@ void load_file(string file_name, void *dest, int length)
     close(fildsc);
 }
 
-void ctrls_write(int ctrls, string buffer, long offset, int length)
-{
-    lseek(ctrls, offset, 0); /*start+ offset*/
-    if (write(ctrls, buffer, length) != length)
-    {   cputs("Error writing control file!");
-        _exit(-1);
-    }
-}
 
-void ctrls_read(int ctrls, string buffer, long offset, int length)
-{
-    lseek(ctrls, offset, 0); /*start+ offset*/
-    if (read(ctrls, buffer, length) != length)
-    {   put_2_strings("Error reading control file!", "");
-        _exit(-1);
-    }
-}
