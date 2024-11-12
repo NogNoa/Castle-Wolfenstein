@@ -8,14 +8,14 @@ PGROUP  GROUP   PROG
 PROG    SEGMENT BYTE PUBLIC 'PROG'
         PUBLIC  Goober_ isDos210_
         ASSUME  CS:PGROUP
-    extrn   _default_drive:near
+        extrn   _default_drive:near
 ;
 DelInst5ff9_ proc near
 ;
     mov     bl, 90
-    mov     byte ptr CS:[Goober_::dest_write], BL
+    mov     byte ptr CS:[dest_write], BL
     mov     bl, 90
-    mov     byte ptr CS:[Goober_::dest_write + 1], BL
+    mov     byte ptr CS:[dest_write + 1], BL
     Ret
 DelInst5ff9_ endp
 ;
@@ -45,7 +45,7 @@ bx_load:
 dest_write:
     add     byte ptr [bx + si], dl
     mov     al, 0
-    mov     cs:[dest_write], ax
+    mov     word ptr cs:[dest_write], ax
     mov     cx, 28
     XOR     ax, ax
     pop     bx
@@ -55,7 +55,7 @@ or_loop:
     add     si, 2
     loop    or_loop
     mov     ax, 1000
-    mov     cs:[dest_write], ax
+    mov     word ptr cs:[dest_write], ax
     mov     ax, 0a5a5
     or      ax, ax
     jz      jmp_return_zero
@@ -63,7 +63,7 @@ or_loop:
     ret
 jmp_return_zero:
     mov     ax, -1
-    jmp     isDos210_::return_zero
+    jmp     return_zero
 Goober_ endp
 ;
 isDos210_ proc near
@@ -74,7 +74,7 @@ isDos210_ proc near
     mov     ax,gt_default_drv   ;get current default drive
     int     21
     mov     byte ptr [_default_drive], AL
-    CALL    DelInst5ff9
+    CALL    DelInst5ff9_
     mov     ax, gt_oem_os_version
     int     21
     CMP     AL, 2               ;is dos 2.?
