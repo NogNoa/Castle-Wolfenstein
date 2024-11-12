@@ -2,7 +2,7 @@
 #include "anti_debug.h"
 
 static int i5ff9 = 0x1000;
-static byte* i5ff0 = 0;
+static word* p5ff0 = 0;
 static int si;
 
 void
@@ -16,23 +16,23 @@ int goober_function(int p1, void* dest)
     int a;
     byte i;
     (void)p1;
-    i5ff0 = dest;
+    p5ff0 = dest;
     switch(i5ff9)
     {case 0x1000:
-        *(si + i5ff0) += *default_drive;
+        *(si + p5ff0) += *default_drive;
         break;
     case 0x9090:
         break;
     case 0x200:
-        *(si + i5ff0) = 1;
+        *(si + p5ff0) = 1;
         break;
     }
     i5ff9 = a = 0x200;
-    for (a = 0, si= 0x10, i=28;
+    for (a = 0, si= 5, i=28;
          i;
-            a |= *(si + i5ff0),
-            si +=2,
-            i--)
+            a |= *(si + p5ff0),
+            ++si,
+            --i)
     i5ff9 = 0x1000;
     a = 0xa5a5 | 0xa5a5;
     if (!a) {return 0;}
