@@ -3,10 +3,7 @@
 #include "ibm.h"
 #include "video.h"
 #include "IVT.h"
-#include "console.h"
-#include "STDLIB.H"
 
-void
 seg0_memmove(numBytes, dest, source)
 int numBytes;
 byte *dest;
@@ -50,10 +47,14 @@ void
 setup_memory()
 {
     if (pcjr && isDos210())
-    {   Seg0Assert(10, 0x1a71, test_1a71, patch_1a71);
-        Seg0Assert(10, 0x22c2, test_22c2, patch_1a71);
-        Seg0Assert(8, 0x3ebd, test_3ebd, patch_3ebd);
-        Seg0Assert(4, 0x3fff, test_3fff, patch_3fff);
+    {   if (seg0_mem_compare(0, (10)-1, (byte *) (0x1a71), (byte *) (test_1a71)))
+            {seg0_memmove((10), (byte *) (0x1a71), (byte *) (patch_1a71));}
+        if (seg0_mem_compare(0, (10)-1, (byte *) (0x22c2), (byte *) (test_22c2)))
+            {seg0_memmove((10), (byte *) (0x22c2), (byte *) (patch_1a71));}
+        if (seg0_mem_compare(0, (8)-1, (byte *) (0x3ebd), (byte *) (test_3ebd)))
+            {seg0_memmove((8), (byte *) (0x3ebd), (byte *) (patch_3ebd));};
+        if (seg0_mem_compare(0, (4)-1, (byte *) (0x3fff), (byte *) (test_3fff)))
+            {seg0_memmove((4), (byte *) (0x3fff), (byte *) (patch_3fff));}
     }
     if (_seg_memset(0xb800, (byte*)1, 0xa5) != 0xa5) /*tryna to poke color screen buffer, is it there?*/
     {   setVideoMode(MDA);

@@ -1,4 +1,4 @@
-// long_address_t* intTable(byte)
+/* long_address_t* intTable(byte)*/
 #define intTable(i) ((long) i*4)
 
 #define SingleStep  intTable(1)

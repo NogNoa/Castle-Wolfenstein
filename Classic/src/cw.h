@@ -6,11 +6,11 @@ typedef unsigned int uint;
 typedef unsigned int word;
 
 typedef char bool;
-enum {false, true};
+#define false 0
+#define true 1
 
 #ifndef LATTICE
-typedef unsigned char byte;
-int sum(int *list, int len);
+typedef char byte;
 #endif
 
 #ifndef NULL

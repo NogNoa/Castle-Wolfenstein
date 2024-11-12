@@ -1,10 +1,9 @@
-#define SET_CURSOR_POSITION 0x200
-#define PXL_CLR_LO 4
+#include "cw.h"
+#include "doscall.h"
+#include "video.h"
 
 int sum_5fd6;
 int arr_5fd6[36];
-int setVideoMode();
-int BiosVideo();
 
 int main()
 {
