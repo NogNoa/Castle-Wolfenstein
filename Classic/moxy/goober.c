@@ -1,5 +1,6 @@
 #include "cw.h"
 #include "anti_debug.h"
+#include "IVT.h"
 int OnStack(int);
 
 bool build_func_on_stack(int arg)
@@ -50,4 +51,22 @@ int goober_function(int p1, void* dest)
     a = 0xa5a5 | 0xa5a5;
     if (!a) {return 0;}
     else    {return a;}
+}
+
+int check_for_debugger()
+{
+    if (SegMemGet(IntBreakpoint+1) != 0xcd ||
+        SegMemGet(SingleStep+1) != 0x13)
+        {return _exit(-1), -1;} /*doesn't return*/
+    else
+    {   isDos210();
+        return goober_function(0x26, 0x2bd); 
+        /*si = 0x40
+        0x2bd is the address of build_func_on_stack + 1f
+        not clear how to represent that or even reliably
+        get the value in c.
+        both check_for_debugger and build_func_on_stack 
+        bear the marks of mcc 1.04
+        */
+    }
 }
