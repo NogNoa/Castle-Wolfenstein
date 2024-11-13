@@ -1,25 +1,30 @@
 #include "cw.h"
 #include "IVT.h"
 #include "memory.h"
-#include "STDLIB.H"
 #include "ibm.h"
 
 long d7e = IntBreakpoint;
 byte* default_drive = 0;
-int goober_function(int p1, void* dest, register int si);
+/*int goober_function(int p1, void* dest, register int si);*/
 
 int inhibitInterrupts()
 {
     if (WSegMem_Get(d7e) != 0x13cd) {return -1;}
-    LSeg_Mem_Set(CtrlBreak, 0x100003a0l);
-    LSeg_Mem_Set(PrntScrn,  0x100003a0l);
+    (((SegMemSet((long) CtrlBreak, 0x100003a0l)),
+      (SegMemSet((long) CtrlBreak+1, 0x100003a0l >> 8))),
+     ((SegMemSet((long) CtrlBreak+2, 0x100003a0l >> 0x10)),
+      (SegMemSet((long) CtrlBreak+3, 0x100003a0l >> 0x18))));
+    (((SegMemSet((long) PrntScrn, 0x100003a0l)),
+      (SegMemSet((long) PrntScrn+1, 0x100003a0l >> 8))),
+     ((SegMemSet((long) PrntScrn+2, 0x100003a0l >> 0x10)),
+      (SegMemSet((long) PrntScrn+3, 0x100003a0l >> 0x18))));
     return 0;
 }
 
 static int d2ae, d29c;
 bool pcjr;
 
-void isPcJr()
+isPcJr()
 {
   SegMemSet(SingleStep+1, 0x34);
   SegMemSet(SingleStep+3, 0xff);
@@ -47,9 +52,9 @@ int check_for_debugger()
     }
 }
 
-int OnStack(int);
+int OnStack();
 
-bool build_func_on_stack(int arg)
+bool build_func_on_stack(arg)
 {
   register int *bp;
   OnStack(arg);
