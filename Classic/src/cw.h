@@ -10,8 +10,9 @@ enum {false, true};
 
 #ifndef LATTICE
 typedef unsigned char byte;
-int sum(int *list, int len);
 #endif
+
+int sum(int *list, int len);
 
 #ifndef NULL
 #define NULL 0

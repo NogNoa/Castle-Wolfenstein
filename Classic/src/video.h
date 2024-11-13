@@ -1,6 +1,6 @@
 #define SET_CURSOR_POSITION 0x200
 
-int RowColl(/* byte row, byte coll*/);
+/* int RowColl(byte row, byte coll);*/
 #define RowColl(row, coll) (((row) - 1) << 8 | ((coll) - 1))
 
 enum VIDEO_MODES {TXT_GREY_WD, TXT_CLR_WD, TXT_GREY_THN, TXT_CLR_THN, 
