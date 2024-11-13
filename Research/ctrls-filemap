@@ -1,0 +1,9 @@
+.radix 16
+name:                       place   length  meaning
+keyboard-horizontal-flip:   0       1       {0: move= left, shoot=right; 1: opposite}
+joystick-sagital-flip:      1       1       {0:shoot=front,   aim= back; 1: opposite}
+rgb-monitor:                3       1       {1: RGB-monitor; 0: not; 0x59: undefined}
+                            4       b
+                            f       b
+                            1a      b
+                            25      b
