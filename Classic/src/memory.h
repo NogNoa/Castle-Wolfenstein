@@ -2,9 +2,9 @@
 
 byte _seg_memset(/*word, byte*, byte*/);
 byte _seg_memget(/*word, byte**/);
-bool seg0_mem_compare(/*int start, int limit, byte *source, byte *reference*/);
+bool seg0_compare(/*int start, int limit, byte *source, byte *reference*/);
 /*
-void seg0_memmove(int numBytes, byte *dest, byte *source);
+void seg0_move(int numBytes, byte *dest, byte *source);
 int check_for_debugger(void);
 void setup_memory(void);
 */

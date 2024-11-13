@@ -4,7 +4,7 @@
 #include "video.h"
 #include "IVT.h"
 
-seg0_memmove(numBytes, dest, source)
+seg0_move(numBytes, dest, source)
 int numBytes;
 byte *dest;
 byte *source;
@@ -17,7 +17,7 @@ byte *source;
 }
 
 
-bool seg0_mem_compare(start,limit,source,reference)
+bool seg0_compare(start,limit,source,reference)
 int start, limit;
 byte *source;
 byte *reference;
@@ -28,7 +28,7 @@ byte *reference;
     for (similar = 0, i = similar + start;
         i <= limit;
         ++similar, ++i)
-    {   val = SegMemGet((long)source + i); //from segment 0
+    {   val = SegMemGet((long)source + i); /*from segment 0*/
         if (val != reference[i]) {return 0;}
     }
     return limit < similar;
@@ -47,14 +47,14 @@ byte patch_3fff[4] = "\x8c\xc5\x8e\xd5";
 setup_memory()
 {
     if (pcjr && isDos210())
-    {   if (seg0_mem_compare(0, (10)-1, (byte *) (0x1a71), (byte *) (test_1a71)))
-            {seg0_memmove((10), (byte *) (0x1a71), (byte *) (patch_1a71));}
-        if (seg0_mem_compare(0, (10)-1, (byte *) (0x22c2), (byte *) (test_22c2)))
-            {seg0_memmove((10), (byte *) (0x22c2), (byte *) (patch_1a71));}
-        if (seg0_mem_compare(0, (8)-1, (byte *) (0x3ebd), (byte *) (test_3ebd)))
-            {seg0_memmove((8), (byte *) (0x3ebd), (byte *) (patch_3ebd));};
-        if (seg0_mem_compare(0, (4)-1, (byte *) (0x3fff), (byte *) (test_3fff)))
-            {seg0_memmove((4), (byte *) (0x3fff), (byte *) (patch_3fff));}
+    {   if (seg0_compare(0, (10)-1, (byte *) (0x1a71), (byte *) (test_1a71)))
+            {seg0_move((10), (byte *) (0x1a71), (byte *) (patch_1a71));}
+        if (seg0_compare(0, (10)-1, (byte *) (0x22c2), (byte *) (test_22c2)))
+            {seg0_move((10), (byte *) (0x22c2), (byte *) (patch_1a71));}
+        if (seg0_compare(0, (8)-1, (byte *) (0x3ebd), (byte *) (test_3ebd)))
+            {seg0_move((8), (byte *) (0x3ebd), (byte *) (patch_3ebd));};
+        if (seg0_compare(0, (4)-1, (byte *) (0x3fff), (byte *) (test_3fff)))
+            {seg0_move((4), (byte *) (0x3fff), (byte *) (patch_3fff));}
     }
     if (_seg_memset(0xb800, (byte*)1, 0xa5) != 0xa5) /*tryna to poke color screen buffer, is it there?*/
     {   setVideoMode(MDA);
