@@ -5,7 +5,7 @@
 int sum_5fd6;
 int arr_5fd6[36];
 
-int main()
+main()
 {
     setVideoMode(PXL_CLR_LO);
     BiosVideo(SET_CURSOR_POSITION, 0, 0, RowColl(2,2));
