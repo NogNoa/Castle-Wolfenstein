@@ -8,8 +8,8 @@ seg0_move(numBytes, dest, source)
 int numBytes;
 byte *dest;
 byte *source;
-{   byte v;
-    int i;
+{   int i;
+    byte v;
     for (i = 0; i <numBytes; i = i + 1) {
         v = source[i];
         _seg_memset(0, dest + i, v);
