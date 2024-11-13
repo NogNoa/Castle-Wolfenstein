@@ -23,15 +23,15 @@ byte *source;
 byte *reference;
 {
     byte val;
-    int similar, i;
+    int i;
   
-    for (similar = 0, i = similar + start;
+    for (i = start;
         i <= limit;
-        ++similar, ++i)
+        ++i)
     {   val = SegMemGet((long)source + i); /*from segment 0*/
         if (val != reference[i]) {return 0;}
     }
-    return limit < similar;
+    return limit < i-start;
 }
 
 
