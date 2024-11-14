@@ -1,0 +1,55 @@
+readm.doc:
+    put dos 2.1 boot diskette (disk1) in drive A:
+    put backup disk (bk) in drive B:
+        format /s B:
+        diskcopy A: B:
+    put supplemental dos diskette (disk2) in drive A:
+        COPY DEBUG.COM B:
+    put game diskette (cw) in drive A:
+        COPY FIXIT.BAT B:
+        COPY INP*. B:
+    move bk to drive A:
+        a:fixit
+
+debug<inp1:
+    l 100 0 5 1     load a:5..6 to ds:100
+    e 12b           enter 20 to ds:12b
+    20              
+    w 100 0 5 1     write ds:100 to a:5..6
+    q               quit debug
+
+debug<inp2 ibmdos.com:
+    a 3ac               assemble at cs:3ac
+    cs:	mov	ss,[02a8]
+    cs:	mov	sp,[02a6]
+
+    a cd1
+    cs:	mov	ss,[02d3]
+    cs:	mov	sp,[02d1]
+
+    a 1522
+    cs:	mov	ss,[02d3]
+    cs:	mov	sp,[02d1]
+
+    a 311d
+    mov	ss,[02d3]
+    mov	sp,[02d1]
+
+    a 325f
+    mov	bp,es
+    mov	ss,bp
+
+    a 409b
+    mov	ax,cs
+    mov	ss,ax
+    mov	sp,4235
+
+    w           write changes to ibmdos.com
+    q
+
+debug<inp3:
+    l 100 0 5 1
+    e 12b
+    27
+    w 100 0 5 1
+    q
