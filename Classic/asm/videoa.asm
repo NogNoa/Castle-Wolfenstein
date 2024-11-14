@@ -4,10 +4,10 @@
 ;
 PGROUP  GROUP   PROG
 PROG    SEGMENT BYTE PUBLIC 'PROG'
-        PUBLIC  setVideoMode_, BiosVideo_
+        PUBLIC  setVideoMode, BiosVideo
         ASSUME  CS:PGROUP
 ;
-setVideoMode_ proc near
+setVideoMode proc near
 ;
 ;   bp.4    mode_p  byte
 ;   ret     mode flag or -1 on failure  int
@@ -26,10 +26,10 @@ epilog:
 invalid_mode:
     MOV     AX, -1
     JMP     epilog
-setVideoMode_    endp
+setVideoMode    endp
 ;
 ;
-BiosVideo_ proc near
+BiosVideo proc near
 ;   
 ;   arguments self-evident. no return
 ;
@@ -44,6 +44,6 @@ BiosVideo_ proc near
     POP          DS
     POP          BP
     RET
-BiosVideo_   endp
+BiosVideo   endp
 PROG ends
 end

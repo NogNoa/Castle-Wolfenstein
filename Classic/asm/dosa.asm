@@ -6,18 +6,18 @@
 ;
 PGROUP  GROUP   PROG
 PROG    SEGMENT BYTE PUBLIC 'PROG'
-        PUBLIC  isDos210_
+        PUBLIC  isDos210
         ASSUME  CS:PGROUP
-    extrn   del_inst_5ff9_:near
-    extrn   _default_drive:near
-isDos210_ proc near
+    extrn   del_inst_5ff9:near
+    extrn   default_drive:near
+isDos210 proc near
 ;
 ;   ret 1- success 0- fail  bool
 ;
     push    bp
     mov     ax,gt_default_drv   ;get current default drive
     int     21
-    mov     byte ptr [_default_drive], AL
+    mov     byte ptr [default_drive], AL
     CALL    del_inst_5ff9_
     mov     ax, gt_oem_os_version
     int     21
@@ -32,6 +32,6 @@ return_zero:
     mov     ax, 0
     POP     BP
     RET
-isDos210_ endp
+isDos210 endp
 PROG ends
 end

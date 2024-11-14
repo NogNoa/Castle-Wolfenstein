@@ -4,11 +4,11 @@
 ;
 PGROUP  GROUP   PROG
 PROG    SEGMENT BYTE PUBLIC 'PROG'
-        PUBLIC  OnStack_
+        PUBLIC  OnStack
         ASSUME  CS:PGROUP
-    extrn   _default_drive:near
+    extrn   default_drive:near
 ;
-OnStack_ proc near
+OnStack proc near
 ;
 ;   bp.4    arg1    word
 ;
@@ -16,11 +16,11 @@ OnStack_ proc near
     mov     bx, 7c62
     mov     cl, 14
     mov     ch, [BP + 4]
-    mov     dx, [_default_drive]
+    mov     dx, [default_drive]
     nop  
     nop  
     ret
-OnStack_ endp
+OnStack endp
 
 PROG ends
 end
