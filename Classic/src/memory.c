@@ -47,7 +47,7 @@ byte test_3fff[4]  = "\x8c\xc4\x8e\xd4";
 byte patch_3fff[4] = "\x8c\xc5\x8e\xd5";
 
 void
-setup_memory()
+fixit()
 {
     if (pcjr && isDos210())
     {   Seg0Assert(10, 0x1a71, test_1a71, patch_1a71);

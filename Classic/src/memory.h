@@ -5,7 +5,7 @@ byte _seg_memget(word, byte*);
 bool seg0_mem_compare(int start, int limit, byte *source, byte *reference);
 void seg0_memmove(int numBytes, byte *dest, byte *source);
 int check_for_debugger(void);
-void setup_memory(void);
+void fixit(void);
 
 #define SegMemSet(A, b)    (_seg_memset((int) ((A) >> 0x10), (char *) (A), (byte) (b)))
 #define WSegMem_Set(A, w)  {(SegMemSet((long) A, w));   (SegMemSet((long) A+1, w >> 8));}
