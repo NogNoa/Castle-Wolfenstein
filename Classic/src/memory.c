@@ -36,15 +36,23 @@ byte *source, *reference;
     return limit < similar;
 }
 
+#define SP2D1 "\x8b\x26\xd1\2"
+#define SS2d3 "\x8e\x16\xd3\2"
 
-
-byte test_1a71[10]  = "\x2e\x8b\x26\xd1\2\x2e\x8e\x16\xd3\2";
-byte patch_1a71[10] = "\x2e\x8e\x16\xd3\2\x2e\x8b\x26\xd1\2";
-byte test_22c2[10]  = "\x36\x8b\x26\xd1\2\x36\x8e\x16\xd3\2";
-byte test_3ebd[8]  = "\x8b\x26\xd1\2\x8e\x16\xd3\2";
-byte patch_3ebd[8] = "\x8e\x16\xd3\2\x8b\x26\xd1\2";
+byte test_1a71[10]  = "\x2e" SP2D1 "\x2e" SS2d3; 
+/*mov sp, word ptr cs:[0x2d1]   mov ss, word ptr cs:[0x2d3]*/
+byte patch_1a71[10] = "\x2e" SS2d3 "\x2e" SP2D1;
+/*mov ss, word ptr cs:[0x2d3]   mov sp, word ptr cs:[0x2d1]*/
+byte test_22c2[10]  = "\x36" SP2D1 "\x36" SS2d3;
+/*mov sp, word ptr ss:[0x2d1]   mov ss, word ptr ss:[0x2d3]*/
+byte test_3ebd[8]  = SP2D1 SS2d3;
+/*mov sp, word ptr [0x2d1]  mov ss, word ptr [0x2d3]*/
+byte patch_3ebd[8] = SS2d3 SP2D1;
+/*mov ss, word ptr [0x2d3]  mov sp, word ptr [0x2d1]*/
 byte test_3fff[4]  = "\x8c\xc4\x8e\xd4";
+/*mov sp, es    mov ss, sp*/
 byte patch_3fff[4] = "\x8c\xc5\x8e\xd5";
+/*mov bp, es    mov ss, bp*/
 
 void
 fixit()
