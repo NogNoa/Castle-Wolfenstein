@@ -6,7 +6,7 @@
 ;
 PGROUP  GROUP   PROG
 PROG    SEGMENT BYTE PUBLIC 'PROG'
-        PUBLIC  Goober_ isDos210_
+        PUBLIC  Goober_, isDos210_
         ASSUME  CS:PGROUP
         extrn   _default_drive:near
 ;

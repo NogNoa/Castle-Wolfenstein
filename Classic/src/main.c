@@ -17,5 +17,5 @@ void main()
     sum_5fd6 = sum(arr_5fd6, 36);
     isPcJr();
     if (inhibitInterrupts() < 0) {_exit(-1);}
-    setup_memory();
+    fixit();
 }
