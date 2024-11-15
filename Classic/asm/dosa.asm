@@ -18,7 +18,7 @@ isDos210 proc near
     mov     ax,gt_default_drv   ;get current default drive
     int     21
     mov     byte ptr [default_drive], AL
-    CALL    del_inst_5ff9_
+    CALL    del_inst_5ff9
     mov     ax, gt_oem_os_version
     int     21
     CMP     AL, 2               ;is dos 2.?

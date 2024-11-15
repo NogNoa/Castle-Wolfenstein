@@ -1,21 +1,21 @@
 #include "cw.h"
-#include "anti_debug.h"
+extern byte* default_drive;
 
 static int i5ff9 = 0x1000;
 static byte* i5ff0 = 0;
 static int si;
 
-void
-del_inst_5ff9(void)
+
+del_inst_5ff9()
 {
     i5ff9 = 0x9090;
 }
 
-int goober_function(int p1, void* dest)
+int goober_function(p1,dest)
+/*(void)p1*/ char* dest;
 {
     int a;
     byte i;
-    (void)p1;
     i5ff0 = dest;
     switch(i5ff9)
     {case 0x1000:

@@ -12,7 +12,7 @@ OnStack proc near
 ;
 ;   bp.4    arg1    word
 ;
-    mov     ax, 0x201
+    mov     ax, 201
     mov     bx, 7c62
     mov     cl, 14
     mov     ch, [BP + 4]

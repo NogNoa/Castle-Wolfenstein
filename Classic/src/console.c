@@ -1,11 +1,8 @@
 #include "cw.h"
 #include "video.h"
-#include "conio.h"
-#include "anti_debug.h"
 
 extern bool pcjr; 
 
-void
 put_2_strings(line0, line1)
 char *line0, *line1;
 {   
