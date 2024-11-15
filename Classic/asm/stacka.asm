@@ -4,7 +4,7 @@
 ;
 PGROUP  GROUP   PROG
 PROG    SEGMENT BYTE PUBLIC 'PROG'
-        PUBLIC  BuildFuncOnStuck_
+        PUBLIC  BuildFuncOnStuck_, _orrery
         ASSUME  CS:PGROUP
     extrn   _default_drive:near
 ;
@@ -54,7 +54,7 @@ BuildFuncOnStuck_ proc near
     MOV     word ptr [BP + 8],14b9
     MOV     BX,word ptr [BP + 16]
     SUB     BX,4600
-orrery:
+_orrery:
     MOV     CL, byte ptr [_default_drive]
     XOR     CH,CH
     MOV     word ptr [bp + 0e], 9090

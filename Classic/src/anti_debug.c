@@ -36,6 +36,8 @@ void isPcJr()
   SegMemSet(IntBreakpoint+3, 0x13);
 }
 
+extern void *orrery;
+
 int check_for_debugger()
 {
     if (SegMemGet(IntBreakpoint+1) != 0xcd ||
@@ -43,13 +45,7 @@ int check_for_debugger()
         {return _exit(-1), -1;} /*doesn't return*/
     else
     {   isDos210();
-        return Goober(0x26, 0x2bd); 
-        /*si = 0x40
-        0x2bd is the address of build_func_on_stack + 1f
-        not clear how to represent that or even reliably
-        get the value in c.
-        both check_for_debugger and build_func_on_stack 
-        bear the marks of mcc 1.04
-        */
+        return Goober(0x26, orrery); 
+        /*si = 0x40*/
     }
 }
