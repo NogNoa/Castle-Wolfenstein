@@ -1,7 +1,7 @@
 .radix  16
 PGROUP  GROUP   PROG
 PROG    SEGMENT BYTE PUBLIC 'PROG'
-        PUBLIC  _seg_memset, _seg_memget
+        PUBLIC  SegmSt, SegmGt
         ASSUME  CS:PGROUP
 aseg0_memmove proc near
 ;
@@ -29,7 +29,7 @@ for_numBytes:
     PUSH         CX
     XOR          AX,AX
     PUSH         AX
-    CALL         _seg_memset
+    CALL         SegmSt
     MOV          SP,BP
     INC          word ptr [BP + 4]
     JMP          for_numBytes
@@ -39,7 +39,7 @@ return:
     ret
 aseg0_memmove endp
 
-_seg_memset  proc near
+SegmSt  proc near
 ;
 ;   bp.4    segm    word
 ;   bp.6    index   &byte
@@ -59,9 +59,9 @@ _seg_memset  proc near
     MOV          ES,BX
     POP          BP
     RET
-_seg_memset endp
+SegmSt endp
 ;
-_seg_memget proc near
+SegmGt proc near
 ;
 ;   bp.4    segment word
 ;   bp.6    index   &byte
@@ -78,6 +78,6 @@ _seg_memget proc near
     PUSH         DS
     POP          ES     ;ES := DS
     RET
-_seg_memget endp
+SegmGt endp
 PROG ends
 end

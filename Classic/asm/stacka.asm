@@ -6,7 +6,7 @@ PGROUP  GROUP   PROG
 PROG    SEGMENT BYTE PUBLIC 'PROG'
         PUBLIC  OnStack
         ASSUME  CS:PGROUP
-    extrn   default_drive:near
+    extrn   default_:near
 ;
 OnStack proc near
 ;
@@ -16,7 +16,7 @@ OnStack proc near
     mov     bx, 7c62
     mov     cl, 14
     mov     ch, [BP + 4]
-    mov     dx, [default_drive]
+    mov     dx, [default_]
     nop  
     nop  
     ret

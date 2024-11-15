@@ -28,7 +28,7 @@ isPcJr()
 {
   SegMemSet(SingleStep+1, 0x34);
   SegMemSet(SingleStep+3, 0xff);
-  pcjr = (_seg_memget(0xf000, (char *)0xffff) == 0xfd); /* from the PC Jr BIOS*/
+  pcjr = (SegmGt(0xf000, (char *)0xffff) == 0xfd); /* from the PC Jr BIOS*/
   if (pcjr)
   { d2ae = 3300;
     d29c = 600;
