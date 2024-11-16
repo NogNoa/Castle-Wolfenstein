@@ -1,1 +1,0 @@
-#define SET_CURSOR_POSITION 0x200
