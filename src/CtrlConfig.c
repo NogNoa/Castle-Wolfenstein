@@ -5,8 +5,8 @@
 #include "console.h"
 #include "anti_debug.h"
 
-bool b4b39, b4b3a, affirmation;
-byte b2ba, b4ac3[0xb], b4ace[0xb], b4ad9[0xb], b4ae4[0xb];
+bool horizontal, vertical;
+byte b2ba, RGB_monitor, b4ac3[0xb], b4ace[0xb], b4ad9[0xb], b4ae4[0xb];
 
 int ctrls_read(int ctrls, string buffer, long offset, int length)
 {
@@ -43,10 +43,10 @@ void ctrls_load_r()
         put_2_strings("Cannot open control file", "");
         _exit(-1);
     }
-    ctrls_read(fd, &b4b39, 0, 1);
-    ctrls_read(fd, &b4b3a, 1, 1);
+    ctrls_read(fd, &horizontal, 0, 1);
+    ctrls_read(fd, &vertical, 1, 1);
     ctrls_read(fd, &b2ba, 2, 1);
-    ctrls_read(fd, &affirmation, 3, 1);
+    ctrls_read(fd, &RGB_monitor, 3, 1);
     ctrls_read(fd, b4ac3, 4, 0xb);
     ctrls_read(fd, b4ace, 0xf, 0xb);
     ctrls_read(fd, b4ad9, 0x1a, 0xb);

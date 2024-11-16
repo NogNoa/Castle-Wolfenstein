@@ -1,13 +1,16 @@
+#include "STDLIB.H"
 #include "cw.h"
 #include "doscall.h"
 #include "video.h"
 #include "conio.h"
 #include "anti_debug.h"
 #include "memory.h"
-#include "STDLIB.H"
+#include "CtrlConfig.h"
+#include "config.h"
 
 int sum_goober = 0x18c9;
 extern int Goober_[36];
+extern byte RGB_monitor;
 
 void main()
 {
@@ -18,4 +21,7 @@ void main()
     isPcJr();
     if (inhibitInterrupts() < 0) {_exit(-1);}
     fixit();
+    ctrls_load_r();
+    if (RGB_monitor == 'Y')
+        {select_monitor();}
 }
