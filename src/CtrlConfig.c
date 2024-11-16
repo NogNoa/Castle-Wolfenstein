@@ -21,7 +21,20 @@ int fd; byte *buf; long offset; int nbytes;
     return length;
 }
 
-void ctrls_load()
+int ctrls_write(int ctrls, string buffer, long offset, int length)
+{
+    int nbytes;
+    lseek(ctrls, offset, 0); /*start+ offset*/
+    nbytes = write(ctrls, buffer, length);
+    if (write(ctrls, buffer, length) != length)
+    {   cputs("Error writing control file!");
+        _exit(-1);
+    }
+    return nbytes;
+}
+
+
+void ctrls_load_r()
 {
     int fd;
     if (check_for_debugger()) {_exit(-1);}

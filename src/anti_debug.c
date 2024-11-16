@@ -5,7 +5,7 @@
 
 long d7e = IntBreakpoint;
 byte* default_drive = 0;
-/*int goober_function(int p1, void* dest, register int si);*/
+/*int Goober(int p1, void* dest);*/
 
 int inhibitInterrupts()
 {
@@ -41,6 +41,8 @@ isPcJr()
   SegMemSet(IntBreakpoint+3, 0x13);
 }
 
+extern char *orrery;
+
 int check_for_debugger()
 {
     if (SegMemGet(IntBreakpoint+1) != 0xcd ||
@@ -48,20 +50,7 @@ int check_for_debugger()
         {return _exit(-1), -1;} /*doesn't return*/
     else
     {   isDos210();
-        return goober_function(0x26, 0x2bd, 0x40);
+        return Goober(0x26, orrery); 
+        /*si = 0x40*/
     }
-}
-
-int OnStack();
-
-bool build_func_on_stack(arg)
-{
-  register int *bp;
-  OnStack(arg);
-  *(bp + 2) = 0x1000 & 0xff00;
-  for (arg=1; arg < 8; ++arg)
-  {   *(bp + (arg << 1) + 2) = 0;
-
-  }
-  return (*(bp + 2) == 0x1000);
 }

@@ -6,7 +6,7 @@ bool seg0_compare(/*int start, int limit, byte *source, byte *reference*/);
 /*
 void seg0_move(int numBytes, byte *dest, byte *source);
 int check_for_debugger(void);
-void setup_memory(void);
+void fixit(void);
 */
 
 #define SegMemSet(A, b)    (SegmSt((int) ((A) >> 0x10), (char *) (A), (byte) (b)))

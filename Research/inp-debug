@@ -1,0 +1,63 @@
+readm.doc:
+    put dos 2.1 boot diskette (disk1) in drive A:
+    put backup disk (bk) in drive B:
+        format /s B:
+        diskcopy A: B:
+    put supplemental dos diskette (disk2) in drive A:
+        COPY DEBUG.COM B:
+    put game diskette (cw) in drive A:
+        COPY FIXIT.BAT B:
+        COPY INP*. B:
+    move bk to drive A:
+        a:fixit
+
+debug<inp1:
+    l 100 0 5 1     load a:5..6 to ds:100
+    e 12b           enter 20 to ds:12b
+    20              
+    w 100 0 5 1     write ds:100 to a:5..6
+    q               quit debug
+
+in the directory entry of "imbdos  com" 20 replaces 27
+make the file writeable visible and non-system
+
+debug<inp2 ibmdos.com:
+                        ibmdos is presumebly loaded at cs:100, 
+                        so addresses are file's offset + 100
+    a 3ac               assemble at cs:3ac
+    cs:	mov	ss,[02a8]   instead of          cs: mov sp, [02a6] 
+    cs:	mov	sp,[02a6]   reverse order       cs: mov ss, [02a8]
+
+    a cd1
+    cs:	mov	ss,[02d3]                       cs:	mov	sp,[02d1]
+    cs:	mov	sp,[02d1]                       cs:	mov	ss,[02d3]
+
+    a 1522
+    cs:	mov	ss,[02d3]   revers and switch   ss:	mov	sp,[02d1]
+    cs:	mov	sp,[02d1]   to cs not ss        ss:	mov	ss,[02d3]               
+
+    a 311d
+    mov	ss,[02d3]                         (ds:) mov sp,[02d1]
+    mov	sp,[02d1]                         (ds:) mov ss,[02d3]
+
+    a 325f
+    mov	bp,es           use bp as temp      mov sp,es
+    mov	ss,bp           not sp              mov ss,sp
+
+    a 409b
+    mov	ax,cs           move sp's change    mov sp,4235
+    mov	ss,ax           to before ss's      mov ax,cs
+    mov	sp,4235                             mov ss,ax
+
+    w           write changes to ibmdos.com
+    q
+
+debug<inp3:
+    l 100 0 5 1
+    e 12b
+    27
+    w 100 0 5 1
+    q
+returns imbdos to it's previous state
+
+the function in the game at address cs:ba does the same patch in memory.
