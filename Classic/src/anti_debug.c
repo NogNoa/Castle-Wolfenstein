@@ -6,7 +6,7 @@
 
 long d7e = IntBreakpoint;
 byte* default_drive = 0;
-int Goober(int p1, void* dest);
+int _Goober(int p1, void* dest);
 
 int inhibitInterrupts()
 {
@@ -45,7 +45,7 @@ int check_for_debugger()
         {return _exit(-1), -1;} /*doesn't return*/
     else
     {   isDos210();
-        return Goober(0x26, orrery); 
+        return _Goober(0x26, orrery); 
         /*si = 0x40*/
     }
 }

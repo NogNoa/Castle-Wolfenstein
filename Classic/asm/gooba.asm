@@ -6,7 +6,7 @@
 ;
 PGROUP  GROUP   PROG
 PROG    SEGMENT BYTE PUBLIC 'PROG'
-        PUBLIC  Goober_, isDos210_
+        PUBLIC  _Goober_, isDos210_
         ASSUME  CS:PGROUP
         extrn   _default_drive:near
 ;
@@ -19,7 +19,7 @@ DelInst5ff9_ proc near
     Ret
 DelInst5ff9_ endp
 ;
-Goober_ proc near
+_Goober_ proc near
 ;
 ;   bp.4    p1      void
 ;   bp.6    dest    &void
@@ -64,7 +64,7 @@ or_loop:
 jmp_return_zero:
     mov     ax, -1
     jmp     return_zero
-Goober_ endp
+_Goober_ endp
 ;
 isDos210_ proc near
 ;

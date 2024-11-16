@@ -32,13 +32,13 @@ void write_to_file(string file_name)
     close(fildsc);
 }
 
-int Goober(int p1, void* dest);
+int _Goober(int p1, void* dest);
 
 void load_file(string file_name, void *dest, int length)
 {
     int fildsc;
     isDos210();
-    if (Goober(0x23, dest) > 0) {_exit(-1);}
+    if (_Goober(0x23, dest) > 0) {_exit(-1);}
     fildsc = checked_open(file_name, 0x8000);
     if (read(fildsc, dest, length) < 0)
     {   put_2_strings("Error reading ", file_name);
