@@ -1,1 +1,0 @@
-void cputs(char *s);

@@ -1,19 +1,19 @@
 .radix  16
 ;
 ;   equates
-    gt_default_drv      equ 1900
+    gt_default_drv     equ 1900
     gt_oem_os_version  equ 3000
 ;
 PGROUP  GROUP   PROG
 PROG    SEGMENT BYTE PUBLIC 'PROG'
         PUBLIC  Goober, isDos210
         ASSUME  CS:PGROUP
-        extrn   _default_drive:near
+        extrn   default_:near
 ;
 DelInst5ff9 proc near
 ;
     mov     bl, 90
-    mov     byte ptr CS:[dest_write], BL
+    mov     byte ptr CS:[Goober:dest_write], BL
     mov     bl, 90
     mov     byte ptr CS:[dest_write + 1], BL
     Ret
@@ -63,7 +63,7 @@ or_loop:
     ret
 jmp_return_zero:
     mov     ax, -1
-    jmp     return_zero
+    jmp     isDos210:return_zero
 Goober endp
 ;
 isDos210 proc near

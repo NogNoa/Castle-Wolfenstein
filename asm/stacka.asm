@@ -55,7 +55,7 @@ BuildFuncOnStuck proc near
     MOV     BX,word ptr [BP + 16]
     SUB     BX,4600
 orrery:
-    MOV     CL, byte ptr [_default_drive]
+    MOV     CL, byte ptr [default_]
     XOR     CH,CH
     MOV     word ptr [bp + 0e], 9090
     MOV     word ptr [bp + 10],  0cb
