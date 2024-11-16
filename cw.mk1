@@ -1,0 +1,104 @@
+!define BLANK ""
+"D:\Projects\Code\C\Castle Wolfenstein\gooba.obj" : "D:\Projects\Code\C\Cast&
+le Wolfenstein\asm\gooba.asm" .AUTODEPEND
+ @D:
+ cd "D:\Projects\Code\C\Castle Wolfenstein"
+ *wasm asm\gooba.asm -ms -d1 -w4 -e25 -zq
+
+"D:\Projects\Code\C\Castle Wolfenstein\memorya.obj" : "D:\Projects\Code\C\Ca&
+stle Wolfenstein\asm\memorya.asm" .AUTODEPEND
+ @D:
+ cd "D:\Projects\Code\C\Castle Wolfenstein"
+ *wasm asm\memorya.asm -ms -d1 -w4 -e25 -zq
+
+"D:\Projects\Code\C\Castle Wolfenstein\stacka.obj" : "D:\Projects\Code\C\Cas&
+tle Wolfenstein\asm\stacka.asm" .AUTODEPEND
+ @D:
+ cd "D:\Projects\Code\C\Castle Wolfenstein"
+ *wasm asm\stacka.asm -ms -d1 -w4 -e25 -zq
+
+"D:\Projects\Code\C\Castle Wolfenstein\videoa.obj" : "D:\Projects\Code\C\Cas&
+tle Wolfenstein\asm\videoa.asm" .AUTODEPEND
+ @D:
+ cd "D:\Projects\Code\C\Castle Wolfenstein"
+ *wasm asm\videoa.asm -ms -d1 -w4 -e25 -zq
+
+"D:\Projects\Code\C\Castle Wolfenstein\anti_debug.obj" : "D:\Projects\Code\C&
+\Castle Wolfenstein\src\anti_debug.c" .AUTODEPEND
+ @D:
+ cd "D:\Projects\Code\C\Castle Wolfenstein"
+ *wcc src\anti_debug.c -w4 -e25 -zq -od -of -d2 -zdp -zfp -zgp -bt=dos -fo=.&
+obj -ms
+
+"D:\Projects\Code\C\Castle Wolfenstein\console.obj" : "D:\Projects\Code\C\Ca&
+stle Wolfenstein\src\console.c" .AUTODEPEND
+ @D:
+ cd "D:\Projects\Code\C\Castle Wolfenstein"
+ *wcc src\console.c -w4 -e25 -zq -od -of -d2 -zdp -zfp -zgp -bt=dos -fo=.obj&
+ -ms
+
+"D:\Projects\Code\C\Castle Wolfenstein\CtrlConfig.obj" : "D:\Projects\Code\C&
+\Castle Wolfenstein\src\CtrlConfig.c" .AUTODEPEND
+ @D:
+ cd "D:\Projects\Code\C\Castle Wolfenstein"
+ *wcc src\CtrlConfig.c -w4 -e25 -zq -od -of -d2 -zdp -zfp -zgp -bt=dos -fo=.&
+obj -ms
+
+"D:\Projects\Code\C\Castle Wolfenstein\game_files.obj" : "D:\Projects\Code\C&
+\Castle Wolfenstein\src\game_files.c" .AUTODEPEND
+ @D:
+ cd "D:\Projects\Code\C\Castle Wolfenstein"
+ *wcc src\game_files.c -w4 -e25 -zq -od -of -d2 -zdp -zfp -zgp -bt=dos -fo=.&
+obj -ms
+
+"D:\Projects\Code\C\Castle Wolfenstein\helper.obj" : "D:\Projects\Code\C\Cas&
+tle Wolfenstein\src\helper.c" .AUTODEPEND
+ @D:
+ cd "D:\Projects\Code\C\Castle Wolfenstein"
+ *wcc src\helper.c -w4 -e25 -zq -od -of -d2 -zdp -zfp -zgp -bt=dos -fo=.obj &
+-ms
+
+"D:\Projects\Code\C\Castle Wolfenstein\main.obj" : "D:\Projects\Code\C\Castl&
+e Wolfenstein\src\main.c" .AUTODEPEND
+ @D:
+ cd "D:\Projects\Code\C\Castle Wolfenstein"
+ *wcc src\main.c -w4 -e25 -zq -od -of -d2 -zdp -zfp -zgp -bt=dos -fo=.obj -m&
+s
+
+"D:\Projects\Code\C\Castle Wolfenstein\memory.obj" : "D:\Projects\Code\C\Cas&
+tle Wolfenstein\src\memory.c" .AUTODEPEND
+ @D:
+ cd "D:\Projects\Code\C\Castle Wolfenstein"
+ *wcc src\memory.c -w4 -e25 -zq -od -of -d2 -zdp -zfp -zgp -bt=dos -fo=.obj &
+-ms
+
+"D:\Projects\Code\C\Castle Wolfenstein\rank.obj" : "D:\Projects\Code\C\Castl&
+e Wolfenstein\src\rank.c" .AUTODEPEND
+ @D:
+ cd "D:\Projects\Code\C\Castle Wolfenstein"
+ *wcc src\rank.c -w4 -e25 -zq -od -of -d2 -zdp -zfp -zgp -bt=dos -fo=.obj -m&
+s
+
+"D:\Projects\Code\C\Castle Wolfenstein\cw.exe" : "D:\Projects\Code\C\Castle &
+Wolfenstein\gooba.obj" "D:\Projects\Code\C\Castle Wolfenstein\memorya.obj" "&
+D:\Projects\Code\C\Castle Wolfenstein\stacka.obj" "D:\Projects\Code\C\Castle&
+ Wolfenstein\videoa.obj" "D:\Projects\Code\C\Castle Wolfenstein\anti_debug.o&
+bj" "D:\Projects\Code\C\Castle Wolfenstein\console.obj" "D:\Projects\Code\C\&
+Castle Wolfenstein\CtrlConfig.obj" "D:\Projects\Code\C\Castle Wolfenstein\ga&
+me_files.obj" "D:\Projects\Code\C\Castle Wolfenstein\helper.obj" "D:\Project&
+s\Code\C\Castle Wolfenstein\main.obj" "D:\Projects\Code\C\Castle Wolfenstein&
+\memory.obj" "D:\Projects\Code\C\Castle Wolfenstein\rank.obj" "D:\Projects\C&
+ode\C\Castle Wolfenstein\src\anti_debug.h" "D:\Projects\Code\C\Castle Wolfen&
+stein\src\cw.h" "D:\Projects\Code\C\Castle Wolfenstein\src\DOS.H" "D:\Projec&
+ts\Code\C\Castle Wolfenstein\src\doscall.h" "D:\Projects\Code\C\Castle Wolfe&
+nstein\src\FCNTL.H" "D:\Projects\Code\C\Castle Wolfenstein\src\ibm.h" "D:\Pr&
+ojects\Code\C\Castle Wolfenstein\src\IVT.h" "D:\Projects\Code\C\Castle Wolfe&
+nstein\src\video.h" .AUTODEPEND
+ @D:
+ cd "D:\Projects\Code\C\Castle Wolfenstein"
+ @%write cw.lk1 FIL gooba.obj,memorya.obj,stacka.obj,videoa.obj,anti_debug.o&
+bj,console.obj,CtrlConfig.obj,game_files.obj,helper.obj,main.obj,memory.obj,&
+rank.obj
+ @%append cw.lk1 
+ *wlink name cw d all sys dos op m op maxe=25 op q op symf op el @cw.lk1
+
