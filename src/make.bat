@@ -18,12 +18,14 @@ rem mc2 CtrlCo~1
 del gooba.OBJ  
 del memorya.OBJ
 del stacka.OBJ
-del videoa.OBJ
+del videa.OBJ
+del Stroka.obj
 cd ..\asm
-d:ml gooba.asm  memorya.asm  stacka.asm  videoa.asm
+d:ml gooba.asm  memorya.asm  stacka.asm  videa.asm Stroka.asm
 rename gooba.OBJ ..\src\gooba.OBJ  
 rename memorya.OBJ ..\src\memorya.OBJ
 rename stacka.OBJ ..\src\stacka.OBJ
-rename videoa.OBJ ..\src\videoa.OBJ
+rename videa.OBJ ..\src\videa.OBJ
+rename Stroka.OBJ ..\src\Stroka.OBJ
 cd ..\src
-b:link gooba.OBJ ANTI_D~1.OBJ  MAIN.OBJ  MEMORY.OBJ   VIDEOA.OBJ CONSOLE.OBJ HELPER.OBJ MEMORYA.OBJ STACKA.OBJ b:c.obj, cw, cw, mc
+b:link gooba.OBJ ANTI_D~1.OBJ  MAIN.OBJ  MEMORY.OBJ Stroka.OBJ videa.OBJ CONSOLE.OBJ HELPER.OBJ MEMORYA.OBJ STACKA.OBJ b:c.obj,, cw, cw, mc
