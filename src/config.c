@@ -1,14 +1,12 @@
 #include "cw.h"
 #include "video.h"
-#include "conio.h"
-#include "CtrlConfig.h"
 
 extern byte RGB_monitor;
 
-void print_to_position(byte column, byte row, string massage);
 
-void keyboard_config(void) {}
-void select_monitor(void) 
+keyboard_config(void) {}
+
+select_monitor() 
 {
   byte oldRGB;
   char key;
@@ -51,7 +49,9 @@ void select_monitor(void)
   return;
 }
 
-void print_to_position(byte column, byte row, string massage) 
+print_to_position(column, row, massage) 
+byte column, row;
+string massage;
 {
     BiosVideo(SET_CURSOR_POSITION, 0, 0, (int)row << 8 | column);
     cputs(massage);

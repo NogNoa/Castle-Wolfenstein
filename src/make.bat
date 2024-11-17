@@ -2,18 +2,20 @@ mc1 anti_D~1 > ..\anti_D~1.err
 mc1 console > ..\console.err 
 rem mc1 game_f~1
 mc1 helper > ..\helper.err 
+mc1 config > ..\config.err 
 mc1 memory > ..\memory.err 
 mc1 main > ..\main.err 
 rem mc1 rank 
-rem mc1 CtrlCo~1
+mc1 CtrlCo~1 > ..\CtrlCo~1.err
 mc2 anti_D~1 
 mc2 console 
 rem mc1 game_f~1
 mc2 helper 
+mc2 config 
 mc2 memory 
 mc2 main 
 rem mc2 rank 
-rem mc2 CtrlCo~1
+mc2 CtrlCo~1
 
 del gooba.OBJ  
 del memorya.OBJ
@@ -28,4 +30,4 @@ rename stacka.OBJ ..\src\stacka.OBJ
 rename videa.OBJ ..\src\videa.OBJ
 rename Stroka.OBJ ..\src\Stroka.OBJ
 cd ..\src
-b:link gooba.OBJ ANTI_D~1.OBJ  MAIN.OBJ  MEMORY.OBJ Stroka.OBJ videa.OBJ CONSOLE.OBJ HELPER.OBJ MEMORYA.OBJ STACKA.OBJ b:c.obj,, cw, cw, mc
+b:link CTRLCO~1.OBJ  gooba.OBJ ANTI_D~1.OBJ  MAIN.OBJ config.obj MEMORY.OBJ Stroka.OBJ videa.OBJ CONSOLE.OBJ HELPER.OBJ MEMORYA.OBJ STACKA.OBJ b:c.obj, cw.exe, cw.map, b:mc.lib

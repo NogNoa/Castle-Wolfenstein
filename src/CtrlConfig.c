@@ -1,9 +1,6 @@
 #include "cw.h"
 #include "FCNTL.H"
-#include "STDLIB.H"
 #include "memory.h"
-#include "console.h"
-#include "anti_debug.h"
 
 bool horizontal, vertical;
 byte b2ba, RGB_monitor, b4ac3[0xb], b4ace[0xb], b4ad9[0xb], b4ae4[0xb];
@@ -21,7 +18,10 @@ int fd; byte *buf; long offset; int nbytes;
     return length;
 }
 
-int ctrls_write(int ctrls, string buffer, long offset, int length)
+int ctrls_write(ctrls, buffer, offset, length)
+int ctrls, length;
+string buffer;
+long offset;
 {
     int nbytes;
     lseek(ctrls, offset, 0); /*start+ offset*/
@@ -34,7 +34,7 @@ int ctrls_write(int ctrls, string buffer, long offset, int length)
 }
 
 
-void ctrls_load_r()
+ctrls_load_r()
 {
     int fd;
     if (check_for_debugger()) {_exit(-1);}
