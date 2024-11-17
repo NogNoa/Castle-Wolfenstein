@@ -4,6 +4,7 @@
 
 int sum_goober = 0x18c9;
 extern int Goober[36];
+extern byte RGB_monitor;
 
 main()
 {
@@ -14,4 +15,7 @@ main()
     isPcJr();
     if (inhibitInterrupts() < 0) {_exit(-1);}
     fixit();
+    ctrls_load_r();
+    if (RGB_monitor == 'Y')
+        {select_monitor();}
 }
