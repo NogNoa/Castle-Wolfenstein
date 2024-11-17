@@ -13,7 +13,7 @@ PROG    SEGMENT BYTE PUBLIC 'PROG'
 DelInst5ff9 proc near
 ;
     mov     bl, 90
-    mov     byte ptr CS:[Goober:dest_write], BL
+    mov     byte ptr CS:[dest_write], BL
     mov     bl, 90
     mov     byte ptr CS:[dest_write + 1], BL
     Ret
@@ -42,7 +42,7 @@ bx_load:
     push    bx
     mov     dl, byte ptr [default_]
     mov     dh, 0
-dest_write:
+dest_write label word
     add     byte ptr [bx + si], dl
     mov     al, 0
     mov     word ptr cs:[dest_write], ax
@@ -63,7 +63,7 @@ or_loop:
     ret
 jmp_return_zero:
     mov     ax, -1
-    jmp     isDos210:return_zero
+    jmp     return_zero
 Goober endp
 ;
 isDos210 proc near
@@ -78,13 +78,14 @@ isDos210 proc near
     mov     ax, gt_oem_os_version
     int     21
     CMP     AL, 2               ;is dos 2.?
-    jnz     return_zero
+    jnz     return_zero_near
     CMP     AH, 0a              ; is dos ?.10?
-    jnz     return_zero
+    jnz     return_zero_near
     mov     ax, 1
     pop     BP
     ret
-return_zero:
+return_zero label word
+return_zero_near:
     mov     ax, 0
     POP     BP
     RET

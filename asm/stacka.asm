@@ -54,7 +54,7 @@ BuildFuncOnStuck proc near
     MOV     word ptr [BP + 8],14b9
     MOV     BX,word ptr [BP + 16]
     SUB     BX,4600
-orrery:
+orrery label word
     MOV     CL, byte ptr [default_]
     XOR     CH,CH
     MOV     word ptr [bp + 0e], 9090

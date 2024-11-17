@@ -7,4 +7,11 @@
 *.o
 *.err
 
+cw.tgt
+cw.wpj
+cw.sym
+cw.mk1
+cw.mk
+cw.lk1
+
 dosbox/HD/
