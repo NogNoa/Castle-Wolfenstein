@@ -1,4 +1,4 @@
-mc1 anti_D~1 > ..\ anti_D~1.err
+mc1 anti_D~1 > ..\anti_D~1.err
 mc1 console > ..\console.err 
 rem mc1 game_f~1
 mc1 helper > ..\helper.err 
@@ -15,6 +15,10 @@ mc2 main
 rem mc2 rank 
 rem mc2 CtrlCo~1
 
+del gooba.OBJ  
+del memorya.OBJ
+del stacka.OBJ
+del videoa.OBJ
 cd ..\asm
 d:ml gooba.asm  memorya.asm  stacka.asm  videoa.asm
 rename gooba.OBJ ..\src\gooba.OBJ  
@@ -22,4 +26,4 @@ rename memorya.OBJ ..\src\memorya.OBJ
 rename stacka.OBJ ..\src\stacka.OBJ
 rename videoa.OBJ ..\src\videoa.OBJ
 cd ..\src
-b:link gooba.OBJ ANTI_D~1.OBJ  MAIN.OBJ  MEMORY.OBJ   VIDEOA.OBJ CONSOLE.OBJ HELPER.OBJ MEMORYA.OBJ STACKA.OBJ b:c.obj
+b:link gooba.OBJ ANTI_D~1.OBJ  MAIN.OBJ  MEMORY.OBJ   VIDEOA.OBJ CONSOLE.OBJ HELPER.OBJ MEMORYA.OBJ STACKA.OBJ b:c.obj, cw, cw, mc
