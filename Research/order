@@ -1,0 +1,77 @@
+code:
+0       [c.obj]
+82      seg0_memmove  
+        fixit
+        seg0_memcmpr
+asm     build_func_on_stack
+c       check_for_debugger
+        inhibit_brk_prnt_scrn
+        empty_interrupt
+        fun_speaker_3a1
+        fun_speaker_3d4
+        file_to_screen
+        draw_field0
+51c
+640     main
+9f0
+a21     start_menu
+        reverse_control
+c1d
+da7     read_to_small_buffer
+        write_to_file
+        rank_print
+ec8
+fe3     rank_calculate
+1055
+129d    put_2_strings
+12dd
+13ad    load_file
+        lack_of joystick
+        nope
+        fun_1464
+c       is_Junior
+1585
+5a71 c  keyboard_config
+        select_monitor
+        print_to_position
+        ctrls_load_r
+        ctrls_read
+        ctrls_load_w
+        ctrls_write
+asm     goober_function
+        fun_6027
+        is_keystroke
+        get_stroke
+        Set_video_mode
+        seg_memget
+        seg_memset
+        BIOS_Video
+        redirect_sys_font
+        is_dos_2_10
+        del_inst_5ff9
+        call_stack
+6157
+62bc    identify_key
+63fe
+68c2    joystick_config
+        look_for_joystick
+        fun_6ecc
+        trampoline
+        speaker_617d
+        thunk_sum_func
+6fb9
+7031    speak_99
+        stop_sound
+        make_sound
+        sum_func
+7087
+7143    sleep_squared
+7151    
+7d89    [mc.lib]
+
+Data:
+        [c.obj]
+        fixit
+        inhibit_brk_prnt_scrn
+        ...
+        read_to_small_buffer/write_to_file
