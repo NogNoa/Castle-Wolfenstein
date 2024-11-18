@@ -4,7 +4,7 @@
 ;
 PGROUP  GROUP   PROG
 PROG    SEGMENT BYTE PUBLIC 'PROG'
-        PUBLIC  BuildFuncOnStuck_, _orrery
+        PUBLIC  CallStack_, _orrery
         ASSUME  CS:PGROUP
     extrn   _default_drive:near
 ;
@@ -22,7 +22,7 @@ OnStack proc far
     ret
 OnStack endp
 ;
-CallStack proc near
+CallStack_ proc near
 ;
 ;   bp.6    old_bp    void*
 ;   bp.-4   OnStack   function
@@ -39,9 +39,9 @@ CallStack proc near
     add     sp, 0a
     POP     bp
     ret
-CallStack endp
+CallStack_ endp
 ;
-BuildFuncOnStuck_ proc near
+BuildFuncOnStuck proc near
 ;
 ;   bp.16    arg    word
 ;
@@ -62,7 +62,7 @@ _orrery:
     MOV     word ptr [bp + 6], AX
     MOV     word ptr [bp + 0c], cx
     MOV     word ptr [bp + 0a], BX
-    call    CallStack
+    call    CallStack_
     mov     AX, 1000
     and     ax, 0ff00
     mov     word ptr [bp + 16], 1
@@ -88,7 +88,7 @@ ret_1:
     add     sp, 12
     POP     bp
     ret
-BuildFuncOnStuck_ endp   
+BuildFuncOnStuck endp   
 
 PROG ends
 end
