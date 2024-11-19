@@ -16,26 +16,6 @@ byte *source;
     }
 }
 
-
-bool seg0_compare(start,limit,source,reference)
-int start, limit;
-byte *source;
-byte *reference;
-{
-    byte val;
-    int i;
-  
-    for (i = start;
-        i <= limit;
-        ++i)
-    {   val = SegMemGet((long)source + i); /*from segment 0*/
-        if (val != reference[i]) {return 0;}
-    }
-    return limit < i-start;
-}
-
-
-
 byte test_1a71[10]  = "\x2e\x8b\x26\xd1\2\x2e\x8e\x16\xd3\2";
 byte patch_1a71[10] = "\x2e\x8e\x16\xd3\2\x2e\x8b\x26\xd1\2";
 byte test_22c2[10]  = "\x36\x8b\x26\xd1\2\x36\x8e\x16\xd3\2";
@@ -69,4 +49,71 @@ fixit()
     SegMemSet(IntBreakpoint+3, 0x13);
 }
 
+bool seg0_compare(start,limit,source,reference)
+int start, limit;
+byte *source;
+byte *reference;
+{
+    byte val;
+    int i;
+  
+    for (i = start;
+        i <= limit;
+        ++i)
+    {   val = SegMemGet((long)source + i); /*from segment 0*/
+        if (val != reference[i]) {return 0;}
+    }
+    return limit < i-start;
+}
 
+extern byte* dflt_drv;
+
+bool build_func_on_stack(arg)
+{
+  int fnstk[8];
+  fnstk[0] = 0x1b8;
+  fnstk[1] = 0xbb02;
+  fnstk[2] = 0x7c62;
+  fnstk[3] = 0x1b8;
+  fnstk[4] = arg + 0xba00;
+  fnstk[5] = *dflt_drv;
+  fnstk[6] = 0x9090;
+  fnstk[7] = 0xcb;
+  CallStack();
+  fnstk[0] = 0x1000;
+  for (arg=1; arg < 8; ++arg)
+  {     fnstk[arg] = 0;
+
+  }
+  return (fnstk[0] == 0x1000);
+}
+
+extern char *orrery;
+
+int check_for_debugger()
+{
+    if (SegMemGet(IntBreakpoint+1) != 0xcd ||
+        SegMemGet(SingleStep+1) != 0x13)
+        {return _exit(-1), -1;} /*doesn't return*/
+    else
+    {   isDos210();
+        return Goober(0x26, orrery); 
+        /*si = 0x40*/
+    }
+}
+
+long int_frust_p = IntBreakpoint;
+
+int inhibitInterrupts()
+{
+    if (WSegMem_Get(int_frust_p) != 0x13cd) {return -1;}
+    (((SegMemSet((long) CtrlBreak, 0x100003a0l)),
+      (SegMemSet((long) CtrlBreak+1, 0x100003a0l >> 8))),
+     ((SegMemSet((long) CtrlBreak+2, 0x100003a0l >> 0x10)),
+      (SegMemSet((long) CtrlBreak+3, 0x100003a0l >> 0x18))));
+    (((SegMemSet((long) PrntScrn, 0x100003a0l)),
+      (SegMemSet((long) PrntScrn+1, 0x100003a0l >> 8))),
+     ((SegMemSet((long) PrntScrn+2, 0x100003a0l >> 0x10)),
+      (SegMemSet((long) PrntScrn+3, 0x100003a0l >> 0x18))));
+    return 0;
+}
