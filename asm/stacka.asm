@@ -6,7 +6,7 @@ PGROUP  GROUP   PROG
 PROG    SEGMENT BYTE PUBLIC 'PROG'
         PUBLIC  CallStack, orrery
         ASSUME  CS:PGROUP
-    extrn   default_:far
+    extrn   dflt_drv:far
 ;
 OnStack proc far
 ;
@@ -16,7 +16,7 @@ OnStack proc far
     mov     bx, 7c62
     mov     cl, 14
     mov     ch, [BP + 4]
-    mov     dx, [default_]
+    mov     dx, [dflt_drv]
     nop  
     nop  
     ret
@@ -55,7 +55,7 @@ BuildFuncOnStuck proc near
     MOV     BX,word ptr [BP + 16]
     SUB     BX,4600
 orrery label word
-    MOV     CL, byte ptr [default_]
+    MOV     CL, byte ptr [dflt_drv]
     XOR     CH,CH
     MOV     word ptr [bp + 0e], 9090
     MOV     word ptr [bp + 10],  0cb

@@ -4,7 +4,7 @@
 #include "ibm.h"
 
 long d7e = IntBreakpoint;
-byte* default_drive = 0;
+byte* dflt_drv = 0;
 /*int Goober(int p1, void* dest);*/
 
 int inhibitInterrupts()
@@ -65,7 +65,7 @@ bool build_func_on_stack(int arg)
   fnstk[2] = 0x7c62;
   fnstk[3] = 0x1b8;
   fnstk[4] = arg + 0xba00;
-  fnstk[5] = *default_drive;
+  fnstk[5] = *dflt_drv;
   fnstk[6] = 0x9090;
   fnstk[7] = 0xcb;
   CallStack();
