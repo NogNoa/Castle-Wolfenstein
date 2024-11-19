@@ -6,6 +6,7 @@ int sum_goober = 0x18c9;
 extern int Goober[36];
 extern byte RGB_monitor;
 
+
 main()
 {
     setVideoMode(PXL_CLR_LO);
@@ -19,3 +20,13 @@ main()
     if (RGB_monitor == 'Y')
         {select_monitor();}
 }
+
+int sum(list,len)
+int *list;
+{
+    int back;
+    back = 0;
+    for (;len > 0; --len, ++list) {back += *list;}
+    return back;
+}
+

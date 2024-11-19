@@ -11,15 +11,11 @@ Program entry point at 0000:000E
 Unresolved Externals:
 
 
-Is_Keyst in file(s): 
+GetStrok in file(s): 
          CONFIG.OBJ(C)
-get_stro in file(s): 
-         CONFIG.OBJ(C)
-dflt_drv in file(s): 
-         STACKA.OBJ(stacka.asm) GOOBA.OBJ(gooba.asm) MEMORY.OBJ(C)
 SegMemSe in file(s): 
          CONFIG.OBJ(C)
 CallStac in file(s): 
          MEMORY.OBJ(C)
-          PROG
- 0000EH 022BBH 22AEH
+IsKeystr in file(s): 
+         CONFIG.OBJ(C)
