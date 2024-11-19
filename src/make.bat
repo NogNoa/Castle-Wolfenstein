@@ -22,4 +22,4 @@ rename stacka.OBJ ..\src\stacka.OBJ
 rename videa.OBJ ..\src\videa.OBJ
 rename Stroka.OBJ ..\src\Stroka.OBJ
 cd ..\src
-b:link b:c MEMORY gooba MAIN config Stroka videa MEMORYA STACKA,cw,cw,b:mc
+b:link b:c MEMORY MAIN config gooba Stroka videa MEMORYA STACKA,cw,cw,b:mc
