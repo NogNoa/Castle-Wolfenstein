@@ -88,7 +88,7 @@ bool build_func_on_stack(arg)
   return (fnstk[0] == 0x1000);
 }
 
-extern char *orrery;
+#define ORRERY (&build_func_on_stack + 0x1F)
 
 int check_for_debugger()
 {
@@ -97,7 +97,7 @@ int check_for_debugger()
         {return _exit(-1), -1;} /*doesn't return*/
     else
     {   isDos210();
-        return Goober(0x26, orrery); 
+        return Goober(0x26, (ORRERY));
         /*si = 0x40*/
     }
 }

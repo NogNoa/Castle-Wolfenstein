@@ -4,7 +4,7 @@
 ;
 PGROUP  GROUP   PROG
 PROG    SEGMENT BYTE PUBLIC 'PROG'
-        PUBLIC  CallStck, orrery
+        PUBLIC  CallStck
         ASSUME  CS:PGROUP
     extrn   dflt_drv:far
 ;
