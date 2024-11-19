@@ -1,6 +1,4 @@
 #include "cw.h"
-#include "console.h"
-#include "STDLIB.H"
 #include "FCNTL.H"
 #include "ibm.h"
 
@@ -8,7 +6,9 @@ byte prewrite_buffer[0x100];
 char file_buffer[0x3ff4];
 char* ptr_file_buffer = file_buffer;
 
-inline int checked_open(string fn, int flags)
+int checked_open(fn, flags)
+string fn;
+int flags;
 {   int fildsc;
     fildsc = open(fn, flags);
     if (fildsc < 0) 
@@ -18,7 +18,8 @@ inline int checked_open(string fn, int flags)
     return fildsc;
 }
 
-void write_to_file(string file_name)
+write_to_file(file_name)
+string file_name;
 {
     int fildsc, i;
     ptr_file_buffer = file_buffer;
@@ -32,9 +33,10 @@ void write_to_file(string file_name)
     close(fildsc);
 }
 
-int Goober(int p1, void* dest);
-
-void load_file(string file_name, void *dest, int length)
+load_file(file_name,dest, length)
+string file_name;
+byte *dest;
+int length;
 {
     int fildsc;
     isDos210();
