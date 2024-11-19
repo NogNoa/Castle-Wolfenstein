@@ -4,11 +4,11 @@
 ;
 PGROUP  GROUP   PROG
 PROG    SEGMENT BYTE PUBLIC 'PROG'
-        PUBLIC  BuildFuncOnStuck, orrery
+        PUBLIC  CallStack, orrery
         ASSUME  CS:PGROUP
-    extrn   default_:near
+    extrn   default_:far
 ;
-OnStack proc near
+OnStack proc far
 ;
 ;   bp.4    arg1    word
 ;
@@ -62,7 +62,7 @@ orrery label word
     MOV     word ptr [bp + 6], AX
     MOV     word ptr [bp + 0c], cx
     MOV     word ptr [bp + 0a], BX
-    call    CallStack
+    call    CallStack_
     mov     AX, 1000
     and     ax, 0ff00
     mov     word ptr [bp + 16], 1
