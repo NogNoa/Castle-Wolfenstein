@@ -57,7 +57,7 @@ int check_for_debugger()
 
 int CallStack();
 
-bool build_func_on_stack(int arg)
+bool build_func_on_stack(arg)
 {
   int fnstk[8];
   fnstk[0] = 0x1b8;

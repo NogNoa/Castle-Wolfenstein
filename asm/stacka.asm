@@ -62,7 +62,7 @@ orrery label word
     MOV     word ptr [bp + 6], AX
     MOV     word ptr [bp + 0c], cx
     MOV     word ptr [bp + 0a], BX
-    call    CallStack_
+    call    CallStack
     mov     AX, 1000
     and     ax, 0ff00
     mov     word ptr [bp + 16], 1
