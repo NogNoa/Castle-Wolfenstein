@@ -47,9 +47,8 @@ fixit()
     }
     SegmSt(CGA_Space, (byte*) 1, 0);
     SegMemSet(SingleStep+1, 0x34);
-    p = SegMemGet(DetectedHardware)
     SegMemSet(SingleStep+3, 0xff);
-    SegMemSet(DetectedHardware, p & 0xcf | 0x10);
+    SegMemSet(DetectedHardware, SegMemGet(DetectedHardware) & 0xcf | 0x10);
     SegMemSet(IntBreakpoint+1, 0xcd);
     SegMemSet(IntBreakpoint+3, 0x13);
 }

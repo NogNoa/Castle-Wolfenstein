@@ -2,6 +2,7 @@
 #include "video.h"
 #include "IVT.h"
 #include "FCNTL.H"
+#include "memory.h"
 
 static int d2ae, d29c;
 bool pcjr;
@@ -19,8 +20,8 @@ char *line0, *line1;
 
 isPcJr()
 {
-  SegmSt(SingleStep+1, 0x34);
-  SegmSt(SingleStep+3, 0xff);
+  SegMemSet(SingleStep+1, 0x34);
+  SegMemSet(SingleStep+3, 0xff);
   pcjr = (SegmGt(0xf000, (char *)0xffff) == 0xfd); /* from the PC Jr BIOS*/
   if (pcjr)
   { d2ae = 3300;
@@ -30,8 +31,8 @@ isPcJr()
   { d2ae = 900;
     d29c = 200;
   }
-  SegmSt(IntBreakpoint+1, 0xcd);
-  SegmSt(IntBreakpoint+3, 0x13);
+  SegMemSet(IntBreakpoint+1, 0xcd);
+  SegMemSet(IntBreakpoint+3, 0x13);
 }
 
 extern byte RGB_monitor;
@@ -122,6 +123,7 @@ int fd; byte *buf; long offset; int nbytes;
     length = read(fd, buf, nbytes);
     if (length != nbytes)
     {   put_2_strings("Error reading control file!", "");
+        printf("%x",offset);
         _exit(-1);
     }
     return length;

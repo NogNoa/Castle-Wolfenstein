@@ -5,7 +5,8 @@
 int sum_goober = 0x18c9;
 extern int Goober[36];
 extern byte RGB_monitor;
-
+extern char file_buffer[0x3ff4];
+extern char* ptr_file_buffer;
 
 main()
 {
@@ -19,6 +20,8 @@ main()
     ctrls_load_r();
     if (RGB_monitor == 'Y')
         {select_monitor();}
+    /*ptr_file_buffer = file_buffer;
+    file_to_screen(0);*/
 }
 
 int sum(list,len)
