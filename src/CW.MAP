@@ -7,15 +7,3 @@
  02950H 02A4FH 0100H  STACK                  DATA
 
 Program entry point at 0000:000E
-
-Unresolved Externals:
-
-
-GetStrok in file(s): 
-         CONFIG.OBJ(C)
-SegMemSe in file(s): 
-         CONFIG.OBJ(C)
-CallStac in file(s): 
-         MEMORY.OBJ(C)
-IsKeystr in file(s): 
-         CONFIG.OBJ(C)

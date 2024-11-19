@@ -79,7 +79,7 @@ bool build_func_on_stack(arg)
   fnstk[5] = *dflt_drv;
   fnstk[6] = 0x9090;
   fnstk[7] = 0xcb;
-  CallStack();
+  CallStck();
   fnstk[0] = 0x1000;
   for (arg=1; arg < 8; ++arg)
   {     fnstk[arg] = 0;

@@ -4,7 +4,7 @@
 ;
 PGROUP  GROUP   PROG
 PROG    SEGMENT BYTE PUBLIC 'PROG'
-        PUBLIC  CallStack, orrery
+        PUBLIC  CallStck, orrery
         ASSUME  CS:PGROUP
     extrn   dflt_drv:far
 ;
@@ -22,7 +22,7 @@ OnStack proc far
     ret
 OnStack endp
 ;
-CallStack proc near
+CallStck proc near
 ;
 ;   bp.6    old_bp    void*
 ;   bp.-4   OnStack   function
@@ -39,7 +39,7 @@ CallStack proc near
     add     sp, 0a
     POP     bp
     ret
-CallStack endp
+CallStck endp
 ;
 BuildFuncOnStuck proc near
 ;
@@ -62,7 +62,7 @@ orrery label word
     MOV     word ptr [bp + 6], AX
     MOV     word ptr [bp + 0c], cx
     MOV     word ptr [bp + 0a], BX
-    call    CallStack
+    call    CallStck
     mov     AX, 1000
     and     ax, 0ff00
     mov     word ptr [bp + 16], 1

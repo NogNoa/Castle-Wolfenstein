@@ -13,10 +13,10 @@ data	segment	byte public 'data'
 data ENDS
 PGROUP  GROUP   PROG
 PROG    SEGMENT BYTE PUBLIC 'PROG'
-        PUBLIC  IsKeystroke, GetStroke            
+        PUBLIC  IsKStrok, GetStrok           
         ASSUME  CS:PGROUP                
 ;
-IsKeystroke proc near
+IsKStrok proc near
 ;calls hard-coded function                           
 ;BDOS_CKS 11                                         
 ;
@@ -32,9 +32,9 @@ no_stoke:
         MOV          AX,0
         POP          BP
         RET
-IsKeystroke endp
+IsKStrok endp
 ;
-GetStroke proc near
+GetStrok proc near
         assume DS:data
 ;
 ; return either scan code or ascii
@@ -56,7 +56,7 @@ get_stroke_final:
         XOR          AH,AH                              ;zero out AH                                                                                                so AX = AL
         POP          BP
         RET
-GetStroke endp
+GetStrok endp
 prog ends
 ;
 end
