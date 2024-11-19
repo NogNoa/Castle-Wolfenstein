@@ -57,8 +57,8 @@ select_monitor()
   print_to_position(0, 16,"a Non-RGB monitor hookup.");
   key = '\0';
   while ((key != '\e' && (key != ' '))) {
-    if (Is_Keystroke() != 0) {
-      key = get_stroke();
+    if (IsKeystroke() != 0) {
+      key = GetStroke();
     }
   }
   RGB_monitor = key == '\e';

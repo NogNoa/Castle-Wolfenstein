@@ -6,7 +6,7 @@
 ;
 DGROUP  GROUP   DATA
 data	segment	byte public 'data'
-        public Key_scan_code, Is_Extended_Code
+        public Key_scan_code, Is_Extended_Code, dflt_drv
         dflt_drv db 0
         Key_scan_code db  0
         Is_Extended_Code db 0

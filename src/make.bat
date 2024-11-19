@@ -28,4 +28,4 @@ rename stacka.OBJ ..\src\stacka.OBJ
 rename videa.OBJ ..\src\videa.OBJ
 rename Stroka.OBJ ..\src\Stroka.OBJ
 cd ..\src
-b:link b:c.obj MEMORY.OBJ CTRLCO~1.OBJ gooba.OBJ MAIN.OBJ config.obj Stroka.OBJ videa.OBJ CONSOLE.OBJ HELPER.OBJ MEMORYA.OBJ STACKA.OBJ , cw.exe, cw.map, b:mc.lib
+b:link b:c CTRLCO~1 gooba MAIN config Stroka videa CONSOLE MEMORYA HELPER MEMORY STACKA,cw,cw,b:mc
