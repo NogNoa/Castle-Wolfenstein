@@ -23,3 +23,4 @@
 /* int setVideoMode(char mode_p);
 void BiosVideo(int A, int B, int C, int D);*/
 
+#define DISPLAY_BUFFER 0xb800
