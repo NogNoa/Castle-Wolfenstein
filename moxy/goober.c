@@ -1,5 +1,6 @@
 #include "../src/cw.h"
 #include "../src/video.h"
+#include "../src/memory.h"
 
 extern byte* default_drive;
 
@@ -18,11 +19,12 @@ extern word* gfx_file_pointer;
 void draw_lower_middle(void)
 {
     word* dest=0x1424;
-    for (int j=0; (dest+j)<0x1745;j+=0x25)
-        for (int i=0;i<0x10;++i)
-        {   WSegMem_Set(long_ptr(DISPLAY_BUFFER, dest + i + j),
+    int i, j;
+    for (j=0; (word)dest+j <0x1745; j+=0x50)
+        for (i=0;i<0x10;++i)
+        {   WSegMem_Set(long_ptr(DISPLAY_BUFFER, (word)(dest + i) + j),
                         *(gfx_file_pointer + i));
-            WSegMem_Set(long_ptr(DISPLAY_BUFFER, dest + i + 0x1000),
+            WSegMem_Set(long_ptr(DISPLAY_BUFFER, (word)(dest + i) + 0x2000),
                         *(gfx_file_pointer + i + 0x10));
         }
 }

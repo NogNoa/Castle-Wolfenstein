@@ -25,7 +25,8 @@ fe3     rank_calculate
 1055
 129d    put_2_strings
 12dd
-13ad    load_file
+1338    f1338
+        load_file
         lack_of joystick
         nope
         fun_1464
