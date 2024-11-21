@@ -1,4 +1,5 @@
 #include "../src/cw.h"
+#include "../src/video.h"
 
 extern byte* default_drive;
 
@@ -10,6 +11,20 @@ void
 del_inst_5ff9(void)
 {
     i5ff9 = 0x9090;
+}
+
+extern word* gfx_file_pointer;
+
+void draw_lower_middle(void)
+{
+    word* dest=0x1424;
+    for (int j=0; (dest+j)<0x1745;j+=0x25)
+        for (int i=0;i<0x10;++i)
+        {   WSegMem_Set(long_ptr(DISPLAY_BUFFER, dest + i + j),
+                        *(gfx_file_pointer + i));
+            WSegMem_Set(long_ptr(DISPLAY_BUFFER, dest + i + 0x1000),
+                        *(gfx_file_pointer + i + 0x10));
+        }
 }
 
 int goober_function(int p1, void* dest)

@@ -11,3 +11,4 @@ enum VIDEO_MODES {TXT_GREY_WD, TXT_CLR_WD, TXT_GREY_THN, TXT_CLR_THN,
 int setVideoMode(char mode_p);
 void BiosVideo(int A, int B, int C, int D);
 
+#define DISPLAY_BUFFER 0xb800
