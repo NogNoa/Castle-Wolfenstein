@@ -20,7 +20,7 @@ main()
     ctrls_load_r();
     if (RGB_monitor == 'Y')
         {select_monitor();}
-    /*ptr_file_buffer = file_buffer;
+    ptr_file_buffer = file_buffer;
     file_to_screen(0);*/
 }
 

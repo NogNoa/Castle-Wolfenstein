@@ -111,13 +111,48 @@ long int_frust_p = IntBreakpoint;
 int inhibitInterrupts()
 {
     if (WSegMem_Get(int_frust_p) != 0x13cd) {return -1;}
-    (((SegMemSet((long) CtrlBreak, 0x100003a0l)),
-      (SegMemSet((long) CtrlBreak+1, 0x100003a0l >> 8))),
-     ((SegMemSet((long) CtrlBreak+2, 0x100003a0l >> 0x10)),
-      (SegMemSet((long) CtrlBreak+3, 0x100003a0l >> 0x18))));
-    (((SegMemSet((long) PrntScrn, 0x100003a0l)),
-      (SegMemSet((long) PrntScrn+1, 0x100003a0l >> 8))),
-     ((SegMemSet((long) PrntScrn+2, 0x100003a0l >> 0x10)),
-      (SegMemSet((long) PrntScrn+3, 0x100003a0l >> 0x18))));
+    (((SegMemSet(CtrlBreak, 0x100003a0l)),
+      (SegMemSet(CtrlBreak+1, 0x100003a0l >> 8))),
+     ((SegMemSet(CtrlBreak+2, 0x100003a0l >> 0x10)),
+      (SegMemSet(CtrlBreak+3, 0x100003a0l >> 0x18))));
+    (((SegMemSet(PrntScrn, 0x100003a0l)),
+      (SegMemSet(PrntScrn+1, 0x100003a0l >> 8))),
+     ((SegMemSet(PrntScrn+2, 0x100003a0l >> 0x10)),
+      (SegMemSet(PrntScrn+3, 0x100003a0l >> 0x18))));
     return 0;
+}
+
+extern char file_buffer[0x3ff4];
+char* gfx_file_pointer;
+extern bool pcjr;
+extern byte RGB_monitor;
+
+draw_lower_middle();
+draw_field0();
+
+file_to_screen(file_chc)
+{
+    SegMemSet(SingleStep+1, 0x34);
+    SegMemSet(SingleStep+3, 0xff);
+    switch(file_chc)
+    {case 2:
+        gfx_file_pointer = file_buffer;
+        load_file("demomesg", file_buffer, 0x4b0);
+        draw_lower_middle();
+        break;
+    case 1:
+        gfx_file_pointer = file_buffer;
+        load_file("presser", file_buffer, 0x4b0);
+        draw_lower_middle();
+        break;
+    case 0:
+        gfx_file_pointer = file_buffer;
+        load_file("titlepix", file_buffer, 0x4000);
+        BiosVideo(SET_VIDEO_MODE | ((pcjr) ? JR_TINY : PXL_CLR_LO), 0, 0, 0);
+        if (RGB_monitor && !pcjr) {BiosVideo(SET_BACKGROUND, CGA_BLUE, 0, 0)}
+        draw_field0(file_buffer);
+        break;
+    }
+    SegMemSet(IntBreakpoint+1, 0xcd);
+    SegMemSet(IntBreakpoint+3, 0x13);
 }

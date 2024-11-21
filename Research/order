@@ -39,7 +39,7 @@ c       is_Junior
         ctrls_load_w
         ctrls_write
 asm     goober_function
-        fun_6027
+c       draw_lower_middle
         is_keystroke
         get_stroke
         Set_video_mode
