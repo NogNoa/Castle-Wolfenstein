@@ -9,17 +9,9 @@ mc2 memory
 mc2 main 
 rem mc2 rank 
 
-del gooba.OBJ  
-del memorya.OBJ
-del stacka.OBJ
-del videa.OBJ
-del Stroka.obj
+del cwa.OBJ
 cd ..\asm
-d:ml gooba.asm  memorya.asm  stacka.asm  videa.asm Stroka.asm
-rename gooba.OBJ ..\src\gooba.OBJ  
-rename memorya.OBJ ..\src\memorya.OBJ
-rename stacka.OBJ ..\src\stacka.OBJ
-rename videa.OBJ ..\src\videa.OBJ
-rename Stroka.OBJ ..\src\Stroka.OBJ
+d:ml cwa.asm
+rename cwa.OBJ ..\src\cwa.OBJ  
 cd ..\src
-b:link b:c MEMORY MAIN config game_f~1 gooba Stroka videa MEMORYA STACKA,cw,cw,b:mc
+b:link b:c MEMORY MAIN config game_f~1 cwa,cw,cw,b:mc
