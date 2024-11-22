@@ -10,8 +10,11 @@ mc2 main
 rem mc2 rank 
 
 del cwa.OBJ
+del drawa.OBJ
 cd ..\asm
 d:ml cwa.asm
-rename cwa.OBJ ..\src\cwa.OBJ  
+d:ml drawa.asm
+rename cwa.OBJ ..\src\cwa.OBJ
+rename drawa.OBJ ..\src\drawa.OBJ
 cd ..\src
-b:link b:c MEMORY MAIN config game_f~1 cwa,cw,cw,b:mc
+b:link b:c MEMORY drawa MAIN config game_f~1 cwa,cw,cw,b:mc

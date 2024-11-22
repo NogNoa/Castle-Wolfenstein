@@ -2,8 +2,8 @@
 
  Start  Stop   Length  Name                   Class
  00000H 0000DH 000EH  BASE                   PROG
- 0000EH 0319EH 3191H  PROG                   PROG
- 031A0H 07987H 47E8H  DATA                   DATA
- 07990H 07A8FH 0100H  STACK                  DATA
+ 0000EH 031AEH 31A1H  PROG                   PROG
+ 031B0H 07995H 47E6H  DATA                   DATA
+ 079A0H 07A9FH 0100H  STACK                  DATA
 
 Program entry point at 0000:000E

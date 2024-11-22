@@ -1,21 +1,26 @@
 .radix  16
 ;
 ;   equates
-    gt_dflt_drv     equ 1900
-    gt_oem_os_version  equ 3000
-    check_for_keystroke equ 0100
-    Get_keystroke       equ 0000
+    Get_keystroke       equ  0000
+    check_for_keystroke equ  0100
+    gt_dflt_drv         equ  1900
+    gt_oem_os_version   equ  3000
+;
+    FIELD_SZ            equ  2000
+    DISPLAY_BUFFER      equ 0b800
 ;
 DGROUP  GROUP   DATA
+;
 data	segment	byte public 'data'
-        public Key_scan_code, Is_Extended_Code, dflt_drv
+        public Key_scan_code, Is_Extended_Code, dflt_drv, GfxFileP
         dflt_drv db 0
         Key_scan_code db  0
         Is_Extended_Code db 0
+        GfxFileP db 0
 data ENDS
 PGROUP  GROUP   PROG
 PROG    SEGMENT BYTE PUBLIC 'PROG'
-        PUBLIC  Goober, isDos210, SegmSt, SegmGt, CallStck, IsKStrok, GetStrok, setVideo, BiosVide 
+        PUBLIC  Goober, isDos210, SegmSt, SegmGt, CallStck, IsKStrok, GetStrok, setVideo, BiosVide, DrwLwMdl
         ASSUME  CS:PGROUP, DS:DGROUP
 Goober proc near
 ;
@@ -63,6 +68,34 @@ jmp_return_zero:
     mov     ax, -1
     jmp     return_zero
 Goober endp
+;
+DrwLwMdl proc near
+    push  bp
+    push  es
+    cld   
+    mov   ax, DISPLAY_BUFFER
+    mov   es, ax
+    mov   bp, 1424
+    mov   si, word ptr [GfxFileP]
+whle1745:
+    mov   di, bp
+    mov   cx, 10
+fr10fld0:
+    movsw word ptr es:[di], word ptr [si]
+    loop  fr10fld0
+    mov   di, bp
+    add   di, FIELD_SZ
+    mov   cx, 10
+fr10fld1:
+    movsw word ptr es:[di], word ptr [si]
+    loop  fr10fld1
+    add   bp, 50
+    cmp   bp, 1745
+    jc    whle1745
+    pop   es
+    pop   bp
+    ret   
+DrwLwMdl endp
 ;
 IsKStrok proc near
 ;calls hard-coded function                           
