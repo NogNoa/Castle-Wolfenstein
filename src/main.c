@@ -21,7 +21,7 @@ main()
     if (RGB_monitor == 'Y')
         {select_monitor();}
     ptr_file_buffer = file_buffer;
-    file_to_screen(0);*/
+    file_to_screen(0);/**/
 }
 
 int sum(list,len)

@@ -127,8 +127,7 @@ char* gfx_file_pointer;
 extern bool pcjr;
 extern byte RGB_monitor;
 
-draw_lower_middle();
-draw_field0();
+draw_lower_middle(){}
 
 file_to_screen(file_chc)
 {
@@ -149,10 +148,21 @@ file_to_screen(file_chc)
         gfx_file_pointer = file_buffer;
         load_file("titlepix", file_buffer, 0x4000);
         BiosVideo(SET_VIDEO_MODE | ((pcjr) ? JR_TINY : PXL_CLR_LO), 0, 0, 0);
-        if (RGB_monitor && !pcjr) {BiosVideo(SET_BACKGROUND, CGA_BLUE, 0, 0)}
+        if (RGB_monitor && !pcjr) {BiosVideo(SET_BACKGROUND, CGA_BLUE, 0, 0);}
         draw_field0(file_buffer);
         break;
     }
     SegMemSet(IntBreakpoint+1, 0xcd);
     SegMemSet(IntBreakpoint+3, 0x13);
+}
+
+#define FIELD_SZ 0x2000
+
+draw_field0(src)
+byte* src;
+{   
+    int i;
+    for (i=0;i<FIELD_SZ;++i, ++src)
+    {   SegmSt(DISPLAY_BUFFER, i, *src);
+    }
 }
