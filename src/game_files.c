@@ -1,6 +1,4 @@
 #include "cw.h"
-#include "FCNTL.H"
-#include "ibm.h"
 
 byte prewrite_buffer[0x100];
 char file_buffer[0x3ff4];
