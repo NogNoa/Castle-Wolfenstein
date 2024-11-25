@@ -1,6 +1,7 @@
 #include "cw.h"
 #include "doscall.h"
 #include "video.h"
+#include "IVT.h"
 
 int sum_goober = 0x18c9;
 extern int Goober[36];
@@ -21,7 +22,12 @@ main()
     if (RGB_monitor == 'Y')
         {select_monitor();}
     ptr_file_buffer = file_buffer;
-    file_to_screen(0);/**/
+    file_to_screen(0);
+    read_to_small_buffer("castle");
+    SegMemSet(Breakpoint + 1,~(byte)0x32);
+    SegMemSet(Breakpoint + 3,0xfc-0xe9);
+    load_file("vocab",wolf_vocab, 0x2bd0)
+    /**/
 }
 
 int sum(list,len)

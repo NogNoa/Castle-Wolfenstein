@@ -31,8 +31,8 @@ isPcJr()
   { d2ae = 900;
     d29c = 200;
   }
-  SegMemSet(IntBreakpoint+1, 0xcd);
-  SegMemSet(IntBreakpoint+3, 0x13);
+  SegMemSet(Breakpoint+1, 0xcd);
+  SegMemSet(Breakpoint+3, 0x13);
 }
 
 extern byte RGB_monitor;

@@ -24,9 +24,9 @@ ec8
 fe3         rank_calculate
 1055
 129d        put_2_strings
-12dd
-1338   c    f1338
-            load_file
+            demo_12dd
+       asm  f1338
+       c    load_file
             lack_of joystick
             nope
             fun_1464

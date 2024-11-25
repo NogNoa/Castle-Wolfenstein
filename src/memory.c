@@ -49,8 +49,8 @@ fixit()
     SegMemSet(SingleStep+1, 0x34);
     SegMemSet(SingleStep+3, 0xff);
     SegMemSet(DetectedHardware, SegMemGet(DetectedHardware) & 0xcf | 0x10);
-    SegMemSet(IntBreakpoint+1, 0xcd);
-    SegMemSet(IntBreakpoint+3, 0x13);
+    SegMemSet(Breakpoint+1, 0xcd);
+    SegMemSet(Breakpoint+3, 0x13);
 }
 
 bool seg0_compare(start,limit,source,reference)
@@ -96,7 +96,7 @@ bool build_func_on_stack(arg)
 
 int check_for_debugger()
 {
-    if (SegMemGet(IntBreakpoint+1) != 0xcd ||
+    if (SegMemGet(Breakpoint+1) != 0xcd ||
         SegMemGet(SingleStep+1) != 0x13)
         {return _exit(-1), -1;} /*doesn't return*/
     else
@@ -106,7 +106,7 @@ int check_for_debugger()
     }
 }
 
-long int_frust_p = IntBreakpoint;
+long int_frust_p = Breakpoint;
 
 int inhibitInterrupts()
 {
@@ -150,6 +150,6 @@ file_to_screen(file_chc)
         DrawFld0(file_buffer);
         break;
     }
-    SegMemSet(IntBreakpoint+1, 0xcd);
-    SegMemSet(IntBreakpoint+3, 0x13);
+    SegMemSet(Breakpoint+1, 0xcd);
+    SegMemSet(Breakpoint+3, 0x13);
 }
