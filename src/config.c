@@ -20,16 +20,19 @@ char *line0, *line1;
 
 isPcJr()
 {
+  byte bios_pattern;
   SegMemSet(SingleStep+1, 0x34);
   SegMemSet(SingleStep+3, 0xff);
-  pcjr = (SegmGt(0xf000, (char *)0xffff) == 0xfd); /* from the PC Jr BIOS*/
-  if (pcjr)
-  { d2ae = 3300;
-    d29c = 600;
+  bios_pattern = SegmGt(0xf000, (char *)0xffff); /* from the PC Jr BIOS*/
+  if (bios_pattern == 0xfd)
+  { pcjr = 1;
+    d2ae = 900;
+    d29c = 200;
   }
   else
-  { d2ae = 900;
-    d29c = 200;
+  { pcjr = 0;
+    d2ae = 3300;
+    d29c = 600;
   }
   SegMemSet(Breakpoint+1, 0xcd);
   SegMemSet(Breakpoint+3, 0x13);

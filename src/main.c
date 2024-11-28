@@ -23,11 +23,11 @@ main()
         {select_monitor();}
     ptr_file_buffer = file_buffer;
     file_to_screen(0);
-    read_to_small_buffer("castle");
+    /*read_to_small_buffer("castle");
     SegMemSet(Breakpoint + 1,~(byte)0x32);
     SegMemSet(Breakpoint + 3,0xfc-0xe9);
     load_file("vocab",wolf_vocab, 0x2bd0)
-    /**/
+    */
 }
 
 int sum(list,len)
