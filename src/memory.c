@@ -106,7 +106,7 @@ int check_for_debugger()
     }
 }
 
-long int_frust_p = Breakpoint;
+static long int_frust_p = Breakpoint;
 
 int inhibitInterrupts()
 {
@@ -153,3 +153,4 @@ file_to_screen(file_chc)
     SegMemSet(Breakpoint+1, 0xcd);
     SegMemSet(Breakpoint+3, 0x13);
 }
+

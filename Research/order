@@ -1,18 +1,18 @@
 code:
 0           [c.obj]
-82          seg0_memmove  
+82       c  seg0_memmove  
             fixit
             seg0_memcmpr
             build_func_on_stack
             check_for_debugger
-            inhibit_brk_prnt_scrn
+       asm  inhibit_brk_prnt_scrn
             empty_interrupt
-            fun_speaker_3a1
-            fun_speaker_3d4
-            file_to_screen
-     asm    draw_field0
+     dnknw  fun_speaker_3a1
+       asm  fun_speaker_3d4
+         c  file_to_screen
+       asm  draw_field0
 51c
-640         main
+640      c  main
 9f0
 a21         start_menu
             reverse_control

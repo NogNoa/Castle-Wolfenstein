@@ -16,7 +16,7 @@ void fixit(void);
 #define LSeg_Mem_Set(A, l) ((WSegMem_Set(A, l)), (WSegMem_Set(A+2, l >> 0x10)))
 
 #define SegMemGet(A)       (SegmGt((int) ((A) >> 0x10), (char *) (A)))
-#define WSegMem_Get(A)  ((SegMemGet((long)A)) + (SegMemGet((long) A+1)) * 0x100)
-#define LSeg_Mem_Get(A) ((WSegMem_Get(A)) + (WSegMem_Get(A+2)) * 0x10000)
+#define WSegMem_Get(A)  ((SegMemGet((long)A)) | (SegMemGet((long) A+1)) << 8)
+#define LSeg_Mem_Get(A) ((WSegMem_Get(A)) | (WSegMem_Get(A+2)) << 0x10)
 
 

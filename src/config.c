@@ -4,7 +4,7 @@
 #include "FCNTL.H"
 #include "memory.h"
 
-static int d2ae, d29c;
+int d2ae, d29c;
 bool pcjr;
 
 put_2_strings(line0, line1)
