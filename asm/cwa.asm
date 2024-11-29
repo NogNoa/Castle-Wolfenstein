@@ -160,6 +160,25 @@ invalid_mode:
     JMP     epilog
 setVideo    endp
 ;
+SegmGt proc near
+;
+;   bp.4    segment word
+;   bp.6    index   &byte
+;   ret     value   byte
+;
+    push         BP
+    MOV          BP,SP
+    MOV          SI,word ptr [BP + 4]
+    MOV          ES,SI  ;ES := segment
+    MOV          BX,word ptr [BP + 6]
+    MOV          AL,byte ptr ES:[BX]
+    MOV          AH, 0
+    POP          BP
+    PUSH         DS
+    POP          ES     ;ES := DS
+    RET
+SegmGt endp
+;
 SegmSt  proc near
 ;
 ;   bp.4    segm    word
@@ -181,25 +200,6 @@ SegmSt  proc near
     POP          BP
     RET
 SegmSt endp
-;
-SegmGt proc near
-;
-;   bp.4    segment word
-;   bp.6    index   &byte
-;   ret     value   byte
-;
-    push         BP
-    MOV          BP,SP
-    MOV          SI,word ptr [BP + 4]
-    MOV          ES,SI  ;ES := segment
-    MOV          BX,word ptr [BP + 6]
-    MOV          AL,byte ptr ES:[BX]
-    MOV          AH, 0
-    POP          BP
-    PUSH         DS
-    POP          ES     ;ES := DS
-    RET
-SegmGt endp
 ;
 BiosVide proc near
 ;   

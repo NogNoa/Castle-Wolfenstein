@@ -106,11 +106,15 @@ int check_for_debugger()
     }
 }
 
-static long int_frust_p = Breakpoint;
+static int int_frust_p[2] = {Breakpoint, Breakpoint >> 0x10};
 
 int inhibitInterrupts()
 {
-    if (WSegMem_Get(int_frust_p) != 0x13cd) {return -1;}
+    if (SegmGt((int) int_frust_p[1],
+                        (char *) (int_frust_p[0])) |
+         SegmGt((int) int_frust_p[1],
+                  (char *) (int_frust_p[0] + 1)) << 8)
+        {return -1;}
     (((SegMemSet(CtrlBreak, 0x100003a0l)),
       (SegMemSet(CtrlBreak+1, 0x100003a0l >> 8))),
      ((SegMemSet(CtrlBreak+2, 0x100003a0l >> 0x10)),

@@ -16,7 +16,7 @@ main()
     cputs("072684");
     sum_goober = sum(Goober, 36);
     isPcJr();
-    if (inhibitInterrupts() < 0) {_exit(-1);}
+    if (IhbtIntr() < 0) {_exit(-1);}
     fixit();
     ctrls_load_r();
     if (RGB_monitor == 'Y')
