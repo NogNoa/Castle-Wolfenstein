@@ -9,7 +9,7 @@
 DGROUP  GROUP   DATA
 ;
 data	segment	byte public 'data'
-        int_frust_p dd 0000000d
+        int_frust dw 000d
 data ENDS
 PGROUP  GROUP   PROG
 PROG    SEGMENT BYTE PUBLIC 'PROG'
@@ -18,7 +18,7 @@ PROG    SEGMENT BYTE PUBLIC 'PROG'
 IhbtIntr proc near
     PUSH         ES
     CLI
-    LES          BX,int_frust_p
+    LES          BX,int_frust
     CMP          byte ptr ES:[BX],0cd
     JNZ          frustration_failure
     ADD          BX,2
@@ -27,15 +27,15 @@ IhbtIntr proc near
     MOV          DI,control_break_handler
     MOV          AX,EmptIntr
     CLD
-    STOSW        ES:DI
+    STOSW        ES:[DI]
     MOV          AX,CS
-    STOSW        ES:DI
+    STOSW        ES:[DI]
     MOV          DI,print_screen_handler
     MOV          AX,EmptIntr
     CLD
-    STOSW        ES:DI
+    STOSW        ES:[DI]
     MOV          AX,CS
-    STOSW        ES:DI
+    STOSW        ES:[DI]
     MOV          AX,0
 epilog: 
     STI
