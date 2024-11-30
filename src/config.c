@@ -22,15 +22,14 @@ isPcJr()
 {
   byte bios_pattern;
   SegMemSet(SingleStep+1, 0x34);
-  SegMemSet(SingleStep+3, 0xff);
-  bios_pattern = SegmGt(0xf000, (char *)0xffff); /* from the PC Jr BIOS*/
-  if (bios_pattern == 0xfd)
-  { pcjr = 1;
+  SegMemSet(SingleStep+3, 0xff); 
+  if (SegmGt(0xf000, (char *)0xffff) == 0xfd) /* from the PC Jr BIOS*/
+  { pcjr = true;
     d2ae = 900;
     d29c = 200;
   }
   else
-  { pcjr = 0;
+  { pcjr = false;
     d2ae = 3300;
     d29c = 600;
   }

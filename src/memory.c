@@ -106,26 +106,6 @@ int check_for_debugger()
     }
 }
 
-static int int_frust_p[2] = {Breakpoint, Breakpoint >> 0x10};
-
-int inhibitInterrupts()
-{
-    if (SegmGt((int) int_frust_p[1],
-                        (char *) (int_frust_p[0])) |
-         SegmGt((int) int_frust_p[1],
-                  (char *) (int_frust_p[0] + 1)) << 8)
-        {return -1;}
-    (((SegMemSet(CtrlBreak, 0x100003a0l)),
-      (SegMemSet(CtrlBreak+1, 0x100003a0l >> 8))),
-     ((SegMemSet(CtrlBreak+2, 0x100003a0l >> 0x10)),
-      (SegMemSet(CtrlBreak+3, 0x100003a0l >> 0x18))));
-    (((SegMemSet(PrntScrn, 0x100003a0l)),
-      (SegMemSet(PrntScrn+1, 0x100003a0l >> 8))),
-     ((SegMemSet(PrntScrn+2, 0x100003a0l >> 0x10)),
-      (SegMemSet(PrntScrn+3, 0x100003a0l >> 0x18))));
-    return 0;
-}
-
 extern char file_buffer[0x3ff4];
 extern char* GfxFileP;
 extern bool pcjr;
