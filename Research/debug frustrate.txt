@@ -19,6 +19,11 @@ and of int 03 is 307:80a
 the whole first paragraph is
 01 15 bf 00-11 08 07 03*c3 e2 00 f0-0a 08 07 03
 
+{
+  on an xt running the syntetic exe the first paragraph is
+  72 30 e3 00-ed 08 06 06*c3 e2 00 f0-e6 08 06 06
+}
+
 the first anti_debug function replace 
 int 01 to ff4c:3411
 int 03 to 134c:cd0a

@@ -9,16 +9,17 @@
 DGROUP  GROUP   DATA
 ;
 data	segment	byte public 'data'
-        int_frust dw 000d
+        int_frust dw 000d, 0000
 data ENDS
 PGROUP  GROUP   PROG
-PROG    SEGMENT BYTE PUBLIC 'PROG'
+PROG    SEGMENT BYTE PUBLIC 'PROG' 
         PUBLIC  DrawFld0, IhbtIntr
-        ASSUME  CS:PGROUP
+        ASSUME  CS:PGROUP, DS:data
 IhbtIntr proc near
+    PUSH         BP
     PUSH         ES
     CLI
-    LES          BX,int_frust
+    LES          BX,dword ptr int_frust 
     CMP          byte ptr ES:[BX],0cd
     JNZ          frustration_failure
     ADD          BX,2
