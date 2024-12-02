@@ -11,14 +11,22 @@ extern char* ptr_file_buffer;
 
 main()
 {
+    int inbtintr;
     setVideoMode(PXL_CLR_LO);
     BiosVideo(SET_CURSOR_POSITION, 0, 0, RowColl(2,2));
     cputs("072684");
     sum_goober = sum(Goober, 36);
     isPcJr();
-    if (IhbtIntr() < 0) {_exit(-1);}
+    puts("\nisPcJR\n");
+    inbtintr = IhbtIntr();
+    if (inbtintr) 
+    {   printf("%x\n", inbtintr);
+        _exit(-1);}
+    puts("IhbtIntr\n");
     fixit();
+    puts("fixit\n");
     ctrls_load_r();
+    puts("ctrls_load_r\n"); 
     if (RGB_monitor == 'Y')
         {select_monitor();}
     ptr_file_buffer = file_buffer;

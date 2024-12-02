@@ -96,11 +96,16 @@ bool build_func_on_stack(arg)
 
 int check_for_debugger()
 {
-    if (SegMemGet(Breakpoint+1) != 0xcd ||
-        SegMemGet(SingleStep+1) != 0x13)
-        {return _exit(-1), -1;} /*doesn't return*/
+    int brkpnt, snglstp;
+    brkpnt = SegMemGet(Breakpoint+1);
+    snglstp = SegMemGet(SingBreakpointleStep+1);
+    if (brkpnt != 0xcd || snglstp != 0x13)
+        {   printf("%x%x\n", snglstp, brkpnt);
+            return _exit(-1), -1; /*doesn't return*/
+        } 
     else
-    {   isDos210();
+    {   puts("check_for_debugger107");
+        isDos210();
         return Goober(0x26, (ORRERY));
         /*si = 0x40*/
     }

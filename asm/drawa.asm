@@ -44,7 +44,7 @@ epilog:
     POP          BP
     RET
 frustration_failure:
-    MOV          AX,-1
+    MOV          AX,ES:[BX]
     JMP          epilog
 IhbtIntr endp
 ;

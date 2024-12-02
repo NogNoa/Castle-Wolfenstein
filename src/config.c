@@ -99,13 +99,16 @@ byte b2ba, RGB_monitor, b4ac3[0xb], b4ace[0xb], b4ad9[0xb], b4ae4[0xb];
 ctrls_load_r()
 {
     int fd;
+    cputs("ctrls_load_r102\n");
     if (check_for_debugger()) {_exit(-1);}
     fd = open("ctrls", O_RAW); /* doesn't use drive letter*/
+    cputs("ctrls_load_r105\n");
     if (fd < 0) 
     {
         put_2_strings("Cannot open control file", "");
         _exit(-1);
     }
+    cputs("ctrls_load_r111\n");
     ctrls_read(fd, &horizontal, 0, 1);
     ctrls_read(fd, &vertical, 1, 1);
     ctrls_read(fd, &b2ba, 2, 1);
