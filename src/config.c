@@ -109,14 +109,14 @@ ctrls_load_r()
         _exit(-1);
     }
     cputs("ctrls_load_r111\n");
-    ctrls_read(fd, &horizontal, 0, 1);
-    ctrls_read(fd, &vertical, 1, 1);
-    ctrls_read(fd, &b2ba, 2, 1);
-    ctrls_read(fd, &RGB_monitor, 3, 1);
-    ctrls_read(fd, b4ac3, 4, 0xb);
-    ctrls_read(fd, b4ace, 0xf, 0xb);
-    ctrls_read(fd, b4ad9, 0x1a, 0xb);
-    ctrls_read(fd, b4ae4, 0x25, 0xb);
+    ctrls_read(fd, &horizontal, 0l, 1);
+    ctrls_read(fd, &vertical, 1l, 1);
+    ctrls_read(fd, &b2ba, 2l, 1);
+    ctrls_read(fd, &RGB_monitor, 3l, 1);
+    ctrls_read(fd, b4ac3, 4l, 0xb);
+    ctrls_read(fd, b4ace, 0xfl, 0xb);
+    ctrls_read(fd, b4ad9, 0x1al, 0xb);
+    ctrls_read(fd, b4ae4, 0x25l, 0xb);
     close(fd);
 }
 
