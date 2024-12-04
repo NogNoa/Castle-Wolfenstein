@@ -4,6 +4,8 @@ byte prewrite_buffer[0x100];
 char file_buffer[0x3ff4];
 char* ptr_file_buffer = file_buffer;
 
+#define PG_SZ 0x100
+
 int checked_open(fn, flags)
 string fn;
 int flags;
@@ -14,6 +16,19 @@ int flags;
         _exit(-1);
     }
     return fildsc;
+}
+
+char pg_a[PG_SZ];
+char pg_b[PG_SZ];
+
+p_ld_pg_b(filename, length)
+string filename;
+{   
+    int i;
+    load_file(filename, file_buffer, length);
+    for (i=0; i < PG_SZ; ++i)
+    {   pg_b[i] = ptr_file_buffer[i];
+    }
 }
 
 write_to_file(file_name)

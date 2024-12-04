@@ -2,12 +2,14 @@
 #include "doscall.h"
 #include "video.h"
 #include "IVT.h"
+#include "memory.h"
 
 int sum_goober = 0x18c9;
 extern int Goober[36];
 extern byte RGB_monitor;
 extern char file_buffer[0x3ff4];
 extern char* ptr_file_buffer;
+byte wolf_vocab[11216];
 
 main()
 {
@@ -26,11 +28,11 @@ main()
         {select_monitor();}
     ptr_file_buffer = file_buffer;
     file_to_screen(0);
-    /*read_to_small_buffer("castle");
+    p_ld_pg_b("castle", 0x100);
     SegMemSet(Breakpoint + 1,~(byte)0x32);
     SegMemSet(Breakpoint + 3,0xfc-0xe9);
-    load_file("vocab",wolf_vocab, 0x2bd0)
-    */
+    load_file("vocab",wolf_vocab, 0x2bd0);
+    /**/
 }
 
 int sum(list,len)
