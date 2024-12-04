@@ -101,8 +101,8 @@ ctrls_load_r()
     int fd;
     cputs("ctrls_load_r102\n");
     if (check_for_debugger()) {_exit(-1);}
+    cputs("ctrls_load_r104\n");
     fd = open("ctrls", O_RAW); /* doesn't use drive letter*/
-    cputs("ctrls_load_r105\n");
     if (fd < 0) 
     {
         put_2_strings("Cannot open control file", "");

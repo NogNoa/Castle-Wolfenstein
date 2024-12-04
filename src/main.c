@@ -17,16 +17,11 @@ main()
     cputs("072684");
     sum_goober = sum(Goober, 36);
     isPcJr();
-    puts("\nisPcJR\n");
-    inbtintr = IhbtIntr();
-    if (inbtintr) 
-    {   printf("%x\n", inbtintr);
-        _exit(-1);}
-    puts("IhbtIntr\n");
+    if (IhbtIntr() < 0) {_exit(-1);}
     fixit();
-    puts("fixit\n");
+    puts("\nfixit\n");
     ctrls_load_r();
-    puts("ctrls_load_r\n"); 
+    puts("ctrls_load_r\n");
     if (RGB_monitor == 'Y')
         {select_monitor();}
     ptr_file_buffer = file_buffer;
