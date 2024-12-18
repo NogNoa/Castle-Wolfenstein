@@ -1,6 +1,7 @@
 .radix  16
 ;
 ;   equates
+    GFX_8by8_Font       equ  007c
     Get_keystroke       equ  0000
     check_for_keystroke equ  0100
     gt_dflt_drv         equ  1900
@@ -20,7 +21,7 @@ data	segment	byte public 'data'
 data ENDS
 PGROUP  GROUP   PROG
 PROG    SEGMENT BYTE PUBLIC 'PROG'
-        PUBLIC  Goober, isDos210, SegmSt, SegmGt, CallStck, IsKStrok, GetStrok, setVideo, BiosVide, DrwLwMdl
+        PUBLIC  Goober, isDos210, SegmSt, SegmGt, CallStck, IsKStrok, GetStrok, setVideo, BiosVide, DrwLwMdl, RdSysFnt
         ASSUME  CS:PGROUP, DS:DGROUP
 Goober proc near
 ;
@@ -217,6 +218,26 @@ BiosVide proc near
     POP          BP
     RET
 BiosVide   endp
+;
+RdSysFnt proc near ; Redirect System Font
+;
+;   bp.4    font_pointer    &byte
+;
+    push    BP
+    mov     bp, sp
+    mov     ax, word ptr [BP+4]
+    mov     si, 0
+    mov     es, si
+    mov     bx, GFX_8by8_Font+2
+    mov     word ptr es:[bx], ds
+    mov     bx, GFX_8by8_Font
+    mov     word ptr es:[bx], ax
+    mov     ax, 0
+    mov     bx, ds
+    mov     es, bx
+    pop     bp
+    ret
+RdSysFnt endp
 ;
 isDos210 proc near
 ;

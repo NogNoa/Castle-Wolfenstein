@@ -133,7 +133,7 @@ file_to_screen(file_chc)
     case 0:
         GfxFileP = file_buffer;
         load_file("titlepix", file_buffer, 0x4000);
-        BiosVideo(SET_VIDEO_MODE | ((pcjr) ? JR_TINY : PXL_CLR_LO), 0, 0, 0);
+        BiosVideo(SET_VIDEO_MODE | ((pcjr) ? JR_TINY : PxlClrLo), 0, 0, 0);
         if (RGB_monitor && !pcjr) {BiosVideo(SET_BACKGROUND, CGA_BLUE, 0, 0);}
         DrawFld0(file_buffer);
         break;

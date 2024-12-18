@@ -10,8 +10,8 @@ bool pcjr;
 put_2_strings(line0, line1)
 char *line0, *line1;
 {   
-    if (pcjr) {setVideoMode(TXT_GREY_WD);}
-    else {setVideoMode(TXT_GREY_THN);}
+    if (pcjr) {setVideoMode(TxtGreyWd);}
+    else {setVideoMode(TxtGreyThn);}
     BiosVideo(SET_CURSOR_POSITION, 0, 0, RowColl(4,1));
     cputs(line0);
     cputs(line1);
@@ -94,7 +94,7 @@ string massage;
 }
 
 bool horizontal, vertical;
-byte b2ba, RGB_monitor, b4ac3[0xb], b4ace[0xb], b4ad9[0xb], b4ae4[0xb];
+byte b2ba, b4ac3[0xb], b4ace[0xb], b4ad9[0xb], b4ae4[0xb];
 
 ctrls_load_r()
 {

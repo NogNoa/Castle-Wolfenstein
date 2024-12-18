@@ -7,11 +7,11 @@
 
 
 /*video modes*/
-#define TXT_GREY_WD  0
-#define TXT_CLR_WD   1
-#define TXT_GREY_THN 2
+#define TxtGreyWd  0
+#define TxtClrWd   1
+#define TxtGreyThn 2
 #define TXT_CLR_THN  3
-#define PXL_CLR_LO   4
+#define PxlClrLo   4
 #define PXL_GREY_HI  5
 #define PXL_MONO_HI  6
 #define MDA          7

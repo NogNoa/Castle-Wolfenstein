@@ -21,16 +21,14 @@ byte wolf_font[CHR_FSIZE];
 main()
 {
     int inbtintr;
-    setVideoMode(PXL_CLR_LO);
+    setVideoMode(PxlClrLo);
     BiosVideo(SET_CURSOR_POSITION, 0, 0, RowColl(2,2));
     cputs("072684");
     sum_goober = sum(Goober, 36);
     isPcJr();
     if (IhbtIntr() < 0) {_exit(-1);}
     fixit();
-    puts("\nfixit\n");
     ctrls_load_r();
-    puts("ctrls_load_r\n");
     if (RGB_monitor == 'Y')
         {select_monitor();}
     ptr_file_buffer = file_buffer;
@@ -39,10 +37,12 @@ main()
     SegMemSet(Breakpoint + 1,~(byte)0x32);
     SegMemSet(Breakpoint + 3,0xfc-0xe9);
     load_file("vocab",wolf_vocab, VOCAB_FSIZE);
-    b77e = {0, 0, 0};
+    b77e[0] = b77e[1] = b77e[2] = 0;
     if (sum(Goober, 36) != sum_goober + wolf_vocab) {_exit(-1);}
     load_file("wolf.chr", wolf_font, CHR_FSIZE);
     if (sum(Goober, 36) != sum_goober + wolf_font) {_exit(-1);}
+    RdSysFnt(wolf_font);
+    file_to_screen(1);
     /**/
 }
 
