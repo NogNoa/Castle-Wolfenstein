@@ -72,9 +72,23 @@ cw.exe[3e2] to EB 14 90    JMP cs:1f8 NOP
 
 cw.exe[410] to BE 00 00  EB 19 90    MOV SI,0  JMP cs:22e NOP
 
+(skipped memset clears SI)
+
 function at cs:313 again
 chceks 0:d for cd.
 checks 0:f for 0x13
 
 rewrite
 cx.exe[519] to EB 29 90 JMP cs:344 NOP  
+
+function at cs:3f2
+int 01 to ff??:34??
+int 03 to 13??:cd??
+
+rewrite
+cw.exe[5f8] to EB 1e 90    JMP cs:408 NOP
+cw.exe[6de] to EB 1e 90    JMP cs:1f8 NOP
+
+main (function at cs:640)
+
+cw.exe[8ba] to EB 42 90   JMP cs:6f2 NOP

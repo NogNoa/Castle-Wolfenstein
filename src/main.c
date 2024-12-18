@@ -4,12 +4,19 @@
 #include "IVT.h"
 #include "memory.h"
 
+#define VOCAB_FSIZE 0x2bd0
+#define CHR_FSIZE 0x400
+
 int sum_goober = 0x18c9;
 extern int Goober[36];
-extern byte RGB_monitor;
 extern char file_buffer[0x3ff4];
 extern char* ptr_file_buffer;
-byte wolf_vocab[11216];
+byte RGB_monitor;
+bool make_sound;
+byte wolf_vocab[VOCAB_FSIZE];
+byte b77e[3];
+
+byte wolf_font[CHR_FSIZE];
 
 main()
 {
@@ -31,7 +38,11 @@ main()
     p_ld_pg_b("castle", 0x100);
     SegMemSet(Breakpoint + 1,~(byte)0x32);
     SegMemSet(Breakpoint + 3,0xfc-0xe9);
-    load_file("vocab",wolf_vocab, 0x2bd0);
+    load_file("vocab",wolf_vocab, VOCAB_FSIZE);
+    b77e = {0, 0, 0};
+    if (sum(Goober, 36) != sum_goober + wolf_vocab) {_exit(-1);}
+    load_file("wolf.chr", wolf_font, CHR_FSIZE);
+    if (sum(Goober, 36) != sum_goober + wolf_font) {_exit(-1);}
     /**/
 }
 

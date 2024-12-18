@@ -1,0 +1,9 @@
+*9ade
+initial value is 0x18c9
+after first sum_func it's 9022
+second sum_func returns db5f
+9022 + 4b3d = db5f
+
+4b3d happened to be wolf vocab's address
+it's not a coincidence, load_file adds the destination into the 
+object code of goober by running it.
