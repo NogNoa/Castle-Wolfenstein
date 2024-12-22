@@ -1,3 +1,4 @@
+#Extentions
 *.bak
 *.exe*
 *.out
@@ -8,6 +9,7 @@
 *.o
 *.err
 
+#Watcom
 cw.tgt
 cw.wpj
 cw.sym
@@ -15,13 +17,21 @@ cw.mk1
 cw.mk
 cw.lk1
 
+#Folders
 dosbox/HD/
 .vs/
 visual studio/
 .vscode/
-TITLEPIX
-CTRLS
-castle
-PRESSER
-VOCAB
-WOLF.CHR
+
+#Game Files
+src/CTRLS
+src/TITLEPIX
+src/CASTLE
+src/PRESSER
+src/VOCAB
+src/WOLF.CHR
+src/BACKUP
+src/DEMOFILE
+src/SEKTOR
+src/DEMODATA
+
