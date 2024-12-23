@@ -53,16 +53,15 @@ bool wait_to_return()
 {
     long limit, li;
     if (error_encountered) {return 1;}
-    if (pcjr) {limit = 56000;}
-    else {limit = 0x1d0d8l;}
-    li = 0;
-    while (li++ < limit) 
+    if (!pcjr) {limit = 119000l;}
+    else {limit = 56000l;}
+    for (li=0;li <= limit;++li)
     {   if (IsKStrok())
         {   if (GetStrok() == '\r')
-                {return 0;}
+                {return false;}
         }
     }
-    return 1;
+    return true;
 }
 
 load_file(file_name,dest, length)
