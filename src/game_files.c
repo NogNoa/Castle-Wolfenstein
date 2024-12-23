@@ -46,6 +46,25 @@ string file_name;
     close(fildsc);
 }
 
+word error_encountered;
+extern bool pcjr;
+
+bool wait_to_return()
+{
+    long limit, li;
+    if (error_encountered) {return 1;}
+    if (pcjr) {limit = 56000;}
+    else {limit = 0x1d0d8l;}
+    li = 0;
+    while (li++ < limit) 
+    {   if (IsKStrok())
+        {   if (GetStrok() == '\r')
+                {return 0;}
+        }
+    }
+    return 1;
+}
+
 load_file(file_name,dest, length)
 string file_name;
 byte *dest;

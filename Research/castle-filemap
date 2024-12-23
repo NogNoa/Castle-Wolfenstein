@@ -1,0 +1,9 @@
+The function as CS:0da7 load_page_b_w/_ptr load either of: castle, sektor, backup, demofile.
+They are all in the same format
+the first 40 bytes are always identical, 100 bytes are identical up to few variables
+
+hence file_page_b always refer to a page of the same format
+I'll call it castle_page and the function load_castle_page_w/_ptr
+
+
+048: number of granades.

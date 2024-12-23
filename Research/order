@@ -24,7 +24,7 @@ ec8
 fe3         rank_calculate
 1055
 129d        put_2_strings
-            demo_12dd
+            load_demo
             wait_to_return
             load_file
             lack_of joystick

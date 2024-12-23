@@ -31,6 +31,7 @@ main()
     ctrls_load_r();
     if (RGB_monitor == 'Y')
         {select_monitor();}
+    outer_loop:
     ptr_file_buffer = file_buffer;
     file_to_screen(0);
     p_ld_pg_b("castle", 0x100);
@@ -43,6 +44,8 @@ main()
     if (sum(Goober, 36) != sum_goober + wolf_font) {_exit(-1);}
     RdSysFnt(wolf_font);
     file_to_screen(1);
+    if (wait_to_return())
+        {/*load_demo();*/}
     /**/
 }
 
