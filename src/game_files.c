@@ -54,16 +54,16 @@ int pagenumb;
     int i;
     if ((0 < pagenumb) && (pagenumb < 0x3d))
     {   pagenumb <<= 8;
-        for (i=0; i < 0x100; ++i, ++pagenumb)
-            {pg_a[i] = file_buffer[pagenumb];}
+        for (i=0; i < 0x100; ++i)
+            {pg_a[i] = file_buffer[pagenumb++];}
         return 0;
     }
     else {return -1;}
 }
 
-word dmodt_offset, w29a;
-bool b7716 = false;
-word gfx_fp;
+word dmodt_offset, ind29a;
+bool isDemo = false;
+byte* gfx_fp;
 byte dmodt_buffer[DEMODT_FSIZE];
 extern bool horizontal;
 
@@ -72,13 +72,12 @@ load_demo()
     word l4;
     file_to_screen(2);
     ld_castle_page_w_ptr("demofile", CASTLE_FSIZE);
-    load_file("demofata", dmodt_buffer, DEMODT_FSIZE);
-    b7716 = true;
+    load_file("demodata", dmodt_buffer, DEMODT_FSIZE);
+    isDemo = true;
     horizontal = false;
-    l4 = 0x7c62;
     dmodt_offset = 0;
-    w29a = 0;
-    gfx_fp = l4 + 0x3e8;
+    ind29a = 0;
+    gfx_fp = dmodt_buffer + 0x3e8;
     load_page_a(1);
 }
 
