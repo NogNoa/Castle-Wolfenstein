@@ -3,6 +3,7 @@
 #include "ibm.h"
 #include "video.h"
 #include "IVT.h"
+#include "files.h"
 
 seg0_move(numBytes, dest, source)
 int numBytes;
@@ -110,8 +111,6 @@ int check_for_debugger()
     }
 }
 
-extern char file_buffer[0x3ff4];
-extern char* GfxFileP;
 extern bool pcjr;
 extern byte RGB_monitor;
 
@@ -121,18 +120,18 @@ file_to_screen(file_chc)
     SegMemSet(SingleStep+3, 0xff);
     switch(file_chc)
     {case 2:
-        GfxFileP = file_buffer;
-        load_file("demomesg", file_buffer, 0x4b0);
+        gfx_fp = file_buffer;
+        load_file("demomesg", file_buffer, MSG_FSIZE);
         DrwLwMdl();
         break;
     case 1:
-        GfxFileP = file_buffer;
-        load_file("presser", file_buffer, 0x4b0);
+        gfx_fp = file_buffer;
+        load_file("presser", file_buffer, MSG_FSIZE);
         DrwLwMdl();
         break;
     case 0:
-        GfxFileP = file_buffer;
-        load_file("titlepix", file_buffer, 0x4000);
+        gfx_fp = file_buffer;
+        load_file("titlepix", file_buffer, PIX_FSIZE);
         BiosVideo(SET_VIDEO_MODE | ((pcjr) ? JR_TINY : PxlClrLo), 0, 0, 0);
         if (RGB_monitor && !pcjr) {BiosVideo(SET_BACKGROUND, CGA_BLUE, 0, 0);}
         DrawFld0(file_buffer);
