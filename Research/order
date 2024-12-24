@@ -17,10 +17,12 @@ code:
 a21         start_menu
             reverse_control
 c1d
-da7         read_to_small_buffer
+da7         ld_castle_page_w_ptr
             write_to_file
             rank_print
-ec8
+ec8         load_page_a
+f21         fun_f21
+f71         fun_f71
 fe3         rank_calculate
 1055
 129d        put_2_strings

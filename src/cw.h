@@ -4,6 +4,7 @@
 typedef char * string;
 typedef unsigned int uint;
 typedef unsigned int word;
+typedef int signed_error;
 
 typedef char bool;
 #define false 0

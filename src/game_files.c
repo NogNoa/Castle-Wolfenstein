@@ -21,15 +21,15 @@ int flags;
 }
 
 char pg_a[PG_SZ];
-char pg_b[PG_SZ];
+char castl_pg[PG_SZ];
 
-p_ld_pg_b(filename, length)
+ld_castle_page_w_ptr(filename, length)
 string filename;
 {   
     int i;
     load_file(filename, file_buffer, length);
     for (i=0; i < PG_SZ; ++i)
-    {   pg_b[i] = ptr_file_buffer[i];
+    {   castl_pg[i] = ptr_file_buffer[i];
     }
 }
 
@@ -48,6 +48,18 @@ string file_name;
     close(fildsc);
 }
 
+signed_error load_page_a(pagenumb)
+int pagenumb;
+{
+    int i;
+    if ((0 < pagenumb) && (pagenumb < 0x3d))
+    {   pagenumb <<= 8;
+        for (i=0; i < 0x100; ++i, ++pagenumb)
+            {pg_a[i] = file_buffer[pagenumb];}
+        return 0;
+    }
+    else {return -1;}
+}
 
 word dmodt_offset, w29a;
 bool b7716 = false;
@@ -59,7 +71,7 @@ load_demo()
 {
     word l4;
     file_to_screen(2);
-    load_castle_page_w_ptr("demofile", CASTLE_FSIZE);
+    ld_castle_page_w_ptr("demofile", CASTLE_FSIZE);
     load_file("demofata", dmodt_buffer, DEMODT_FSIZE);
     b7716 = true;
     horizontal = false;
