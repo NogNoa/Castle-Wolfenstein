@@ -2,3 +2,4 @@ seg0_move
 setVideoMode_
 BiosVideo_
 put_2_strings
+wait_to_return

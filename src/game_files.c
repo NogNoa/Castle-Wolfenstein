@@ -1,4 +1,6 @@
 #include "cw.h"
+#include "files.h"
+
 
 byte prewrite_buffer[0x100];
 char file_buffer[0x3ff4];
@@ -44,6 +46,28 @@ string file_name;
         _exit(-1);
     }
     close(fildsc);
+}
+
+
+word dmodt_offset, w29a;
+bool b7716 = false;
+word gfx_fp;
+byte dmodt_buffer[DEMODT_FSIZE];
+extern bool horizontal;
+
+load_demo()
+{
+    word l4;
+    file_to_screen(2);
+    load_castle_page_w_ptr("demofile", CASTLE_FSIZE);
+    load_file("demofata", dmodt_buffer, DEMODT_FSIZE);
+    b7716 = true;
+    horizontal = false;
+    l4 = 0x7c62;
+    dmodt_offset = 0;
+    w29a = 0;
+    gfx_fp = l4 + 0x3e8;
+    load_page_a(1);
 }
 
 word error_encountered;

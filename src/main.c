@@ -3,14 +3,10 @@
 #include "video.h"
 #include "IVT.h"
 #include "memory.h"
-
-#define VOCAB_FSIZE 0x2bd0
-#define CHR_FSIZE 0x400
+#include "files.h"
 
 int sum_goober = 0x18c9;
 extern int Goober[36];
-extern char file_buffer[0x3ff4];
-extern char* ptr_file_buffer;
 byte RGB_monitor;
 bool make_sound;
 byte wolf_vocab[VOCAB_FSIZE];
@@ -45,7 +41,7 @@ main()
     RdSysFnt(wolf_font);
     file_to_screen(1);
     if (wait_to_return())
-        {/*load_demo();*/}
+        {load_demo();}
     /**/
 }
 
