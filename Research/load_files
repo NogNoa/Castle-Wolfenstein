@@ -1,0 +1,15 @@
+.radix 16
+
+load_file (CS:13ad) move file by name to a buffer by pointer
+vocab, demodata and wolf.chr each have their own special buffer
+the rest are loaded to file_buffer (DS:2bd) size 3FF4
+the biggest file loaded there is graphic file titlepix at 4000 bytes 
+other files loaded there are the castle files at 3FF4 bytes: BACKUP CASTLE DEMOFILE SEKTOR. 
+and the much smaller text-mode graphic files DEMOMESG and PRESSER
+finally the graphic files ESCPIX1 and ESCPIX2 also at 4000 bytes are loaded to file buffer
+    at 1 page offset.
+so all in all the buffer has to have size of 4100. the graphics files either leave alone
+    the first or last page, and the castle files take 40 pages but leave 0C bytes unused
+    from their last page.
+on that note draw_field0 (CS:503) draw to screen from the start of page 0 the start of 
+    page 1 or from somewhere in page 0 of file_buffer. or from the start of wolf.chr's buffer

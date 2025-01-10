@@ -1,5 +1,5 @@
 /*	Lattice 8086 Compiler and Code Generator V2.15
-	Copyright (C) 1982 by Lattice, Inc.
+*	Copyright (C) 1982 by Lattice, Inc.
 */
 
 /**

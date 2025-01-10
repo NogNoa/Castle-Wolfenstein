@@ -16,7 +16,9 @@ code:
 9f0
 a21         start_menu
             reverse_control
-c1d
+c1d         resume_castle
+            new_castle
+            reload_castle
 da7         ld_castle_page_w_ptr
             write_to_file
             rank_print
