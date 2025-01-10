@@ -1,6 +1,6 @@
 #include "cw.h"
 #include "files.h"
-
+#include "video.h"
 
 byte prewrite_buffer[0x100];
 char file_buffer[0x3ff4];
@@ -18,6 +18,14 @@ int flags;
         _exit(-1);
     }
     return fildsc;
+}
+
+resume_castle(/*void*/)
+{
+    setVideoMode(PxlClrLo);
+    BiosVideo(SET_CURSOR_POSITION, 0, 0, RowColl(13,6));
+    cputs("Resuming where you left off...");
+    
 }
 
 char pg_a[PG_SZ];
