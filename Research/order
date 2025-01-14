@@ -27,6 +27,8 @@ f21         fun_f21
 f71         fun_f71
 fe3         rank_calculate
 1055
+11ba        castle_indexize
+11ec
 129d        put_2_strings
             load_demo
             wait_to_return

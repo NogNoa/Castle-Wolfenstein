@@ -11,5 +11,15 @@ finally the graphic files ESCPIX1 and ESCPIX2 also at 4000 bytes are loaded to f
 so all in all the buffer has to have size of 4100. the graphics files either leave alone
     the first or last page, and the castle files take 40 pages but leave 0C bytes unused
     from their last page.
-on that note draw_field0 (CS:503) draw to screen from the start of page 0 the start of 
-    page 1 or from somewhere in page 0 of file_buffer. or from the start of wolf.chr's buffer
+on that note draw_field0 (CS:503) draw to screen from the start of page 0,  
+    the start of page 1, or from somewhere in page 0 of file_buffer. Or from the start of wolf.chr's buffer
+main (CS:640) sets PTR_file_buffer (DS:46be) to point to file_buffer. This (2bd) is also the 
+    value it is initialized to from the executable.  save_castle (CS:de8) also set it to 
+    that value.
+Both save_castle and Load_castle_page_w/_ptr (CS:da7) access file_buffer thru PTR_file_buffer
+    (in save_castle case only after it sets it)
+save_castle saves from file_buffer to file with a name it was given. 
+    first it copy from castle page to page_0 of the file_buffer
+    then it writes 3FF4 bytes from the beginning of file_buffer to the
+    file it was given (between opening and closing off course)
+save_castle is only called with castle and backup

@@ -4,7 +4,22 @@
 #include "FCNTL.H"
 #include "memory.h"
 
-int d2ae, d29c;
+extern byte* file_buffer;
+
+/*void*/
+castle_indexize(/*void*/)
+{
+    int i;
+    byte * ax, si;
+
+    ax = file_buffer;
+    for (i=1; i < 0x40; ++i)
+    {   ax = i * 0x100;
+        si = file_buffer + ax;
+        si[0x50] = (byte) i;
+    }
+}
+
 bool pcjr;
 
 put_2_strings(line0, line1)
@@ -17,6 +32,7 @@ char *line0, *line1;
     cputs(line1);
 }
 
+int d2ae, d29c;
 
 isPcJr()
 {
