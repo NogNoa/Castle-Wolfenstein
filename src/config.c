@@ -10,14 +10,10 @@ extern byte* file_buffer;
 castle_indexize(/*void*/)
 {
     int i;
-    byte * ax, si;
+    byte * si;
 
-    ax = file_buffer;
     for (i=1; i < 0x40; ++i)
-    {   ax = i * 0x100;
-        si = file_buffer + ax;
-        si[0x50] = (byte) i;
-    }
+      {file_buffer[i * 0x100 + 0x50] = (byte) i;}
 }
 
 bool pcjr;

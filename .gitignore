@@ -24,14 +24,5 @@ visual studio/
 .vscode/
 
 #Game Files
-src/CTRLS
-src/TITLEPIX
-src/CASTLE
-src/PRESSER
-src/VOCAB
-src/WOLF.CHR
-src/BACKUP
-src/DEMOFILE
-src/SEKTOR
-src/DEMODATA
+bin/
 
