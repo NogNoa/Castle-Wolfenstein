@@ -77,15 +77,16 @@ extern bool horizontal;
 
 load_demo()
 {
-    word l4;
+    byte* gfx_buffer;
     file_to_screen(2);
     ld_castle_page_w_ptr("demofile", CASTLE_FSIZE);
     load_file("demodata", dmodt_buffer, DEMODT_FSIZE);
     isDemo = true;
     horizontal = false;
+    gfx_buffer = dmodt_buffer +  1000;
     dmodt_offset = 0;
     ind29a = 0;
-    gfx_fp = dmodt_buffer + 0x3e8;
+    gfx_fp = gfx_buffer;
     load_page_a(1);
 }
 

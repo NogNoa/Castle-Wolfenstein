@@ -2,7 +2,7 @@
 
 load_file (CS:13ad) move file by name to a buffer by pointer
 vocab, demodata and wolf.chr each have their own special buffer
-the rest are loaded to file_buffer (DS:2bd) size 3FF4
+the rest are loaded to file_buffer (DS:2bd) size 4100
 the biggest file loaded there is graphic file titlepix at 4000 bytes 
 other files loaded there are the castle files at 3FF4 bytes: BACKUP CASTLE DEMOFILE SEKTOR. 
 and the much smaller text-mode graphic files DEMOMESG and PRESSER
@@ -19,7 +19,21 @@ main (CS:640) sets PTR_file_buffer (DS:46be) to point to file_buffer. This (2bd)
 Both save_castle and Load_castle_page_w/_ptr (CS:da7) access file_buffer thru PTR_file_buffer
     (in save_castle case only after it sets it)
 save_castle saves from file_buffer to file with a name it was given. 
-    first it copy from castle page to page_0 of the file_buffer
+    first it copies from castle page to page_0 of the file_buffer
     then it writes 3FF4 bytes from the beginning of file_buffer to the
     file it was given (between opening and closing off course)
 save_castle is only called with castle and backup
+castle_page (DS:182) is copied to in load_castle_page_w/_ptr from the page PTR_file_buffer points to
+(until now seems to only be the 0th page of file_buffer)
+save castle does the opposite. copies a page from castle_page to where PTR_file_buffer is pointing.
+Load_castle_page_w/_ptr always load castle_page with the page pointed to by PTR_file_buffer, 
+    which for now seem to always be page 0
+
+load_demo (CS:12dd) load demofile into file_buffer and load page 1 into file_page_a (DS:82)
+
+the function load_page_a (CS:ec8) load a single page in range 0..3d 
+    from file_buffer to file_page_a
+in function resume_castle (cs:c1d) load_page_a is called with castle_page[0x40] to load a page from "castle"
+    page_a is not reffered to in this function
+in function new_castle (CS:cb5) load_page_a is asked to load page 1 from "sektor"
+in function reload_castle () load_page_a is asked to load page 1 from either "castle" or "backup"

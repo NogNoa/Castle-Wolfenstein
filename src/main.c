@@ -13,6 +13,7 @@ byte wolf_vocab[VOCAB_FSIZE];
 byte b77e[3];
 
 byte wolf_font[CHR_FSIZE];
+bool b236 = false;
 
 main()
 {
@@ -42,6 +43,11 @@ main()
     file_to_screen(1);
     if (wait_to_return())
         {load_demo();}
+    b236 = false;
+    int l1a = 0x8000;
+    int l18 = 0x8002;
+    void *lpage_a = pg_a;
+    void *lcastle_pg = castl_pg;
     /**/
 }
 

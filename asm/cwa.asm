@@ -70,7 +70,7 @@ jmp_return_zero:
     jmp     return_zero
 Goober endp
 ;
-DrwLwMdl proc near
+DrwLwMdl proc near ;DrawLowMiddle
     push  bp
     push  es
     cld   
@@ -267,7 +267,7 @@ isDos210 endp
 DelInst5ff9 proc near
 ;
     mov     bl, 90
-    mov     byte ptr CS:[dest_write], BL
+    mov     byte ptr CS:[dest_write], BL    ; dest_write label in the Goober Procedure
     mov     bl, 90
     mov     byte ptr CS:[dest_write + 1], BL
     Ret

@@ -6,12 +6,15 @@ code:
             build_func_on_stack
             check_for_debugger
        asm  inhibit_brk_prnt_scrn
-            empty_interrupt
-     dnknw  fun_speaker_3a1
+       asm  empty_interrupt
+       asm  fun_speaker_3a1
        asm  fun_speaker_3d4
          c  file_to_screen
        asm  draw_field0
-51c
+         c  pallete_2
+         c  FUND_1000_05af
+            FUND_1000_0555
+            FUN_1000_0610
 640      c  main
 9f0
 a21         start_menu
@@ -23,8 +26,8 @@ da7         ld_castle_page_w_ptr
             write_to_file
             rank_print
 ec8         load_page_a
-f21         fun_f21
-f71         fun_f71
+f21         save_page_a
+f71         switch_page_a
 fe3         rank_calculate
 1055
 11ba        castle_indexize
@@ -58,7 +61,7 @@ fe3         rank_calculate
             del_inst_5ff9
             call_stack
 6157    
-62bc        identify_key
+62bc     c  identify_key
 63fe    
 68c2        joystick_config
             look_for_joystick

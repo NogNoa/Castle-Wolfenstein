@@ -1,4 +1,4 @@
-The function as CS:0da7 load_page_b_w/_ptr load either of: castle, sektor, backup, demofile.
+The function at CS:0da7 load_page_b_w/_ptr load either of: castle, sektor, backup, demofile.
 They are all in the same format
 the first 40 bytes are always identical, 100 bytes are identical up to few variables
 
@@ -7,8 +7,11 @@ I'll call it castle_page and the function load_castle_page_w/_ptr
 
 size is 3FF4
 
-040:
+040: page_a ordinal
+043: error_id - 40
 048: number of granades.
+04d: ?
+051: ?
 06c: ?
 06d: rank_index_16
 06f: save status: 
