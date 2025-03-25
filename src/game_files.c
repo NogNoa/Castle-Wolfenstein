@@ -2,11 +2,9 @@
 #include "files.h"
 #include "video.h"
 
-byte prewrite_buffer[0x100];
+byte prewrite_buffer[PAGE_SZ];
 char file_buffer[0x3ff4];
 char* ptr_file_buffer = file_buffer;
-
-#define PG_SZ 0x100
 
 int checked_open(fn, flags)
 string fn;
@@ -46,7 +44,7 @@ string file_name;
 {
     int fildsc, i;
     ptr_file_buffer = file_buffer;
-    for (i=0; i < 0x100; ++i) 
+    for (i=0; i < PAGE_SZ; ++i) 
         {ptr_file_buffer[i] = prewrite_buffer[i];}
     fildsc = checked_open(file_name, 0x8001);
     if (write(fildsc, file_buffer, 0x3ff4) < 0)
@@ -62,7 +60,7 @@ int pagenumb;
     int i;
     if ((0 < pagenumb) && (pagenumb < 0x3d))
     {   pagenumb <<= 8;
-        for (i=0; i < 0x100; ++i)
+        for (i=0; i < PAGE_SZ; ++i)
             {pg_a[i] = file_buffer[pagenumb++];}
         return 0;
     }
