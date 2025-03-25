@@ -1,7 +1,7 @@
 #include "cw.h"          
 #include "video.h"       
-#include "IVT.h"         // Interrupt Vector Table-related Macros
-#include "FCNTL.H"       // File control operations
+#include "IVT.h"         /* Interrupt Vector Table-related Macros */
+#include "FCNTL.H"       /* File control operations */
 #include "memory.h"
 
 extern byte* file_buffer;
@@ -22,21 +22,21 @@ bool pcjr;
 
 /*
  * Function: put_2_strings
- * Purpose: Displays two strings on the screen at a lines 4 and 5
+ * Purpose: Displays two strings on the screen at lines 4 and 5
  * Parameters: line4, line5
  */
 void put_2_strings(char *line4, char *line5) {
     if (pcjr) {
-        setVideoMode(TxtGreyWd); // Set wide text mode for PCjr
+        setVideoMode(TxtGreyWd); /* Set wide text mode for PCjr */
     } else {
-        setVideoMode(TxtGreyThn); // Set thin text mode for other systems
+        setVideoMode(TxtGreyThn); /* Set thin text mode for other systems */
     }
-    BiosVideo(SET_CURSOR_POSITION, 0, 0, RowColl(4, 1)); // Position cursor
-    cputs(line4); // Print first string
-    cputs(line5); // Print second string
+    BiosVideo(SET_CURSOR_POSITION, 0, 0, RowColl(4, 1)); /* Position cursor */
+    cputs(line4); /* Print first string */
+    cputs(line5); /* Print second string */
 }
 
-int d2ae, d29c; // Timing-related variables
+int d2ae, d29c; /* Timing-related variables */
 
 /*
  * Function: isPcJr
@@ -46,13 +46,13 @@ void isPcJr(void) {
     byte bios_pattern;
     SegMemSet(SingleStep + 1, 0x34);
     SegMemSet(SingleStep + 3, 0xff);
-    if (SegmGt(0xf000, (char *)0xffff) == 0xfd) { // Check PCjr BIOS signature
+    if (SegmGt(0xf000, (char *)0xffff) == 0xfd) { /* Check PCjr BIOS signature */
         pcjr = true;
-        d2ae = 900;  // Set PCjr-specific timing
+        d2ae = 900;  /* Set PCjr-specific timing */
         d29c = 200;
     } else {
         pcjr = false;
-        d2ae = 3300; // Set non-PCjr timing
+        d2ae = 3300; /* Set non-PCjr timing */
         d29c = 600;
     }
     SegMemSet(Breakpoint + 1, 0xcd); 
@@ -61,19 +61,24 @@ void isPcJr(void) {
 
 extern byte RGB_monitor;
 
+/*
+ * Function: keyboard_config
+ * Purpose: Placeholder for keyboard configuration (currently empty).
+ */
 void keyboard_config(void) {}
 
 /*
- * Function: select_monitor (RGB or Non-RGB).
+ * Function: select_monitor
+ * Purpose: Allows the user to configure the monitor type (RGB or Non-RGB).
  */
 void select_monitor(void) {
     byte oldRGB;
     char key;
-    oldRGB = RGB_monitor; // Save current monitor type
+    oldRGB = RGB_monitor; /* Save current monitor type */
     if (RGB_monitor == 'Y') {
-        RGB_monitor = 0;
+        RGB_monitor = 0; /* Default to Non-RGB */
     }
-    setVideoMode(4); // Set video mode for configuration screen
+    setVideoMode(4); /* Set video mode for configuration screen */
     print_to_position(0, 1, "The two ways in which your monitor may");
     print_to_position(0, 2, "be connected to your computer are either");
     print_to_position(0, 3, "as an RGB or a Non-RGB monitor.");
@@ -93,13 +98,13 @@ void select_monitor(void) {
     print_to_position(0, 15, "Press the space bar if you are using");
     print_to_position(0, 16, "a Non-RGB monitor hookup.");
     key = '\0';
-    while ((key != '\e' && (key != ' '))) { // Wait for user input
+    while ((key != '\e' && (key != ' '))) { /* Wait for user input */
         if (IsKStrok() != 0) {
             key = GetStrok();
         }
     }
-    RGB_monitor = key == '\e'; // Update monitor type based on input
-    if (RGB_monitor != oldRGB) { // Save changes if monitor type changed
+    RGB_monitor = key == '\e'; /* Update monitor type based on input */
+    if (RGB_monitor != oldRGB) { /* Save changes if monitor type changed */
         print_to_position(14, 22, "Saving data...");
         ctrls_load_w();
         print_to_position(14, 22, "\t\t ");
@@ -109,21 +114,19 @@ void select_monitor(void) {
 
 /*
  * Function: print_to_position
+ * Purpose: Prints a string to a specific position on the screen.
  * Parameters:
- *   - column
- *   - row
- *   - message
+ *   - column: Column position
+ *   - row: Row position
+ *   - message: String to print
  */
 void print_to_position(byte column, byte row, string message) {
-    BiosVideo(SET_CURSOR_POSITION, 0, 0, (int)row << 8 | column);
-    cputs(message);
+    BiosVideo(SET_CURSOR_POSITION, 0, 0, (int)row << 8 | column); /* Set cursor position */
+    cputs(message); /* Print the message */
 }
 
-bool horizontal, vertical;
-byte b2ba, b4ac3[0xb], b4ace[0xb], b4ad9[0xb], b4ae4[0xb];
-
-enum cntl_dev {DEV_undefined = -1, DEV_keyboard = 0, DEV_joystick = 1}
-cntl_dev controller;
+bool horizontal, vertical; /* Control flags */
+byte b2ba, b4ac3[0xb], b4ace[0xb], b4ad9[0xb], b4ae4[0xb]; /* Control data */
 
 /*
  * Function: ctrls_load_r
@@ -132,15 +135,15 @@ cntl_dev controller;
 void ctrls_load_r(void) {
     int fd;
     cputs("ctrls_load_r102\n");
-    if (check_for_debugger()) { _exit(-1); } // Exit if debugger detected
+    if (check_for_debugger()) { _exit(-1); } /* Exit if debugger detected */
     cputs("ctrls_load_r104\n");
-    fd = open("ctrls", O_RAW); // Open control file
+    fd = open("ctrls", O_RAW); /* Open control file */
     if (fd < 0) {
         put_2_strings("Cannot open control file", "");
         _exit(-1);
     }
     cputs("ctrls_load_r111\n");
-    ctrls_read(fd, &horizontal, 0l, 1); // Read control data
+    ctrls_read(fd, &horizontal, 0l, 1); /* Read control data */
     ctrls_read(fd, &vertical, 1l, 1);
     ctrls_read(fd, &b2ba, 2l, 1);
     ctrls_read(fd, &RGB_monitor, 3l, 1);
@@ -148,7 +151,7 @@ void ctrls_load_r(void) {
     ctrls_read(fd, b4ace, 0xfl, 0xb);
     ctrls_read(fd, b4ad9, 0x1al, 0xb);
     ctrls_read(fd, b4ae4, 0x25l, 0xb);
-    close(fd); // Close file
+    close(fd); /* Close file */
 }
 
 /*
@@ -163,8 +166,8 @@ void ctrls_load_r(void) {
  */
 int ctrls_read(int fd, byte *buf, long offset, int nbytes) {
     int length;
-    lseek(fd, offset, 0); // Seek to offset
-    length = read(fd, buf, nbytes); // Read data
+    lseek(fd, offset, 0); /* Seek to offset */
+    length = read(fd, buf, nbytes); /* Read data */
     if (length != nbytes) {
         put_2_strings("Error reading control file!", "");
         printf("%x", offset);
@@ -185,8 +188,8 @@ int ctrls_read(int fd, byte *buf, long offset, int nbytes) {
  */
 int ctrls_write(int ctrls, string buffer, long offset, int length) {
     int nbytes;
-    lseek(ctrls, offset, 0); // Seek to offset
-    nbytes = write(ctrls, buffer, length); // Write data
+    lseek(ctrls, offset, 0); /* Seek to offset */
+    nbytes = write(ctrls, buffer, length); /* Write data */
     if (write(ctrls, buffer, length) != length) {
         cputs("Error writing control file!");
         _exit(-1);
