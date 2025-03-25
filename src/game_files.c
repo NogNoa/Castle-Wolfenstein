@@ -26,16 +26,22 @@ resume_castle(/*void*/)
     
 }
 
-char pg_a[PG_SZ];
-char castl_pg[PG_SZ];
+char pg_a[PAGE_SZ];
+struct 
+{
+    byte prefix[0x60];
+    byte save_status;
+    byte suffix[PAGE_SZ-0x61]
+} castl_pg;
 
 ld_castle_page_w_ptr(filename, length)
 string filename;
 {   
     int i;
+    byte cstl[PAGE_SZ] = &castl_pg;
     load_file(filename, file_buffer, length);
-    for (i=0; i < PG_SZ; ++i)
-    {   castl_pg[i] = ptr_file_buffer[i];
+    for (i=0; i < PAGE_SZ; ++i)
+    {   cstl[i] = ptr_file_buffer[i];
     }
 }
 

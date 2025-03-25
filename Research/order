@@ -16,6 +16,7 @@ code:
             FUND_1000_0555
             FUN_1000_0610
 640      c  main
+         c is_cstle_stt
 9f0
 a21         start_menu
             reverse_control

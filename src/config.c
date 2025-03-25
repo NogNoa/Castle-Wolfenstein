@@ -122,6 +122,9 @@ void print_to_position(byte column, byte row, string message) {
 bool horizontal, vertical;
 byte b2ba, b4ac3[0xb], b4ace[0xb], b4ad9[0xb], b4ae4[0xb];
 
+enum cntl_dev {DEV_undefined = -1, DEV_keyboard = 0, DEV_joystick = 1}
+cntl_dev controller;
+
 /*
  * Function: ctrls_load_r
  * Purpose: Reads control configuration from the "ctrls" file.
