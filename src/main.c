@@ -4,6 +4,8 @@
 #include "IVT.h"
 #include "memory.h"
 #include "files.h"
+#include "config.h"
+#include "game_f~1.h"
 
 int sum_goober = 0x18c9;
 extern int Goober[36];
@@ -14,7 +16,6 @@ byte b77e[3];
 
 byte wolf_font[CHR_FSIZE];
 bool b236 = false;
-extern byte pg_a[], castl_pg[];
 
 main()
 {
@@ -49,18 +50,18 @@ main()
     l1a = 0x8000;
     l18 = 0x8002;
     lpage_a = pg_a;
-    lcastle_pg = castl_pg;
+    lcastle_pg = &castl_pg;
     /**/
 }
 
 uint save_status;
 uint rank_index_16;
 
-void is_cstle_stt_60
+is_cstle_stt_60()
 {   
-    save_status = (castle_pg.save_status == 0x60) ?
+    save_status = (castl_pg.save_status == 0x60) ?
                   0xff : 
-                  castle_pg.save_status;
+                  castl_pg.save_status;
     controller = DEV_undefined; 
     /*rank_index_16 = rank_calculate();*/
 }

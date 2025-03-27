@@ -3,6 +3,7 @@
 #include "IVT.h"
 #include "FCNTL.H"
 #include "memory.h"
+#include "config.h"
 
 extern byte* file_buffer;
 
@@ -107,6 +108,9 @@ string massage;
 
 bool horizontal, vertical;
 byte b2ba, b4ac3[0xb], b4ace[0xb], b4ad9[0xb], b4ae4[0xb];
+
+char controller;
+
 
 ctrls_load_r()
 {
