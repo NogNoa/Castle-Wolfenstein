@@ -53,6 +53,18 @@ main()
     /**/
 }
 
+uint save_status;
+uint rank_index_16;
+
+void is_cstle_stt_60
+{   
+    save_status = (castle_pg.save_status == 0x60) ?
+                  0xff : 
+                  castle_pg.save_status;
+    controller = DEV_undefined; 
+    /*rank_index_16 = rank_calculate();*/
+}
+
 int sum(list,len)
 int *list;
 {

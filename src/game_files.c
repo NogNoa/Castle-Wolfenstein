@@ -6,7 +6,6 @@ byte prewrite_buffer[PAGE_SZ];
 char file_buffer[0x3ff4];
 char* ptr_file_buffer = file_buffer;
 
-
 int checked_open(fn, flags)
 string fn;
 int flags;
@@ -28,15 +27,21 @@ resume_castle(/*void*/)
 }
 
 char pg_a[PAGE_SZ];
-char castl_pg[PAGE_SZ];
+struct 
+{
+    byte prefix[0x60];
+    byte save_status;
+    byte suffix[PAGE_SZ-0x61]
+} castl_pg;
 
 ld_castle_page_w_ptr(filename, length)
 string filename;
 {   
     int i;
+    byte cstl[PAGE_SZ] = &castl_pg;
     load_file(filename, file_buffer, length);
     for (i=0; i < PAGE_SZ; ++i)
-    {   castl_pg[i] = ptr_file_buffer[i];
+    {   cstl[i] = ptr_file_buffer[i];
     }
 }
 
