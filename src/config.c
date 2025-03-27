@@ -13,19 +13,19 @@ castle_indexize(/*void*/)
     byte * si;
 
     for (i=1; i < 0x40; ++i)
-      {file_buffer[i * 0x100 + 0x50] = (byte) i;}
+      {file_buffer[i * PAGE_SZ + 0x50] = (byte) i;}
 }
 
 bool pcjr;
 
-put_2_strings(line0, line1)
-char *line0, *line1;
+put_2_strings(line4, line5)
+char *line4, *line5;
 {   
     if (pcjr) {setVideoMode(TxtGreyWd);}
     else {setVideoMode(TxtGreyThn);}
     BiosVideo(SET_CURSOR_POSITION, 0, 0, RowColl(4,1));
-    cputs(line0);
-    cputs(line1);
+    cputs(line4);
+    cputs(line5);
 }
 
 int d2ae, d29c;

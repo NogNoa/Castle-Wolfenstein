@@ -33,7 +33,7 @@ main()
     outer_loop:
     ptr_file_buffer = file_buffer;
     file_to_screen(0);
-    ld_castle_page_w_ptr("castle", 0x100);
+    ld_castle_page_w_ptr("castle", PAGE_SZ);
     SegMemSet(Breakpoint + 1,~(byte)0x32);
     SegMemSet(Breakpoint + 3,0xfc-0xe9);
     load_file("vocab",wolf_vocab, VOCAB_FSIZE);

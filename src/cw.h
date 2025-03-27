@@ -10,6 +10,8 @@ typedef char bool;
 #define false 0
 #define true 1
 
+#define PAGE_SZ 0x100
+
 #ifndef LATTICE
 typedef char byte;
 #endif
