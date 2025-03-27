@@ -14,10 +14,12 @@ byte b77e[3];
 
 byte wolf_font[CHR_FSIZE];
 bool b236 = false;
+extern byte pg_a[], castl_pg[];
 
 main()
 {
-    int inbtintr;
+    int inbtintr, l1a, l18;
+    byte *lpage_a, *lcastle_pg;
     setVideoMode(PxlClrLo);
     BiosVideo(SET_CURSOR_POSITION, 0, 0, RowColl(2,2));
     cputs("072684");
@@ -44,10 +46,10 @@ main()
     if (wait_to_return())
         {load_demo();}
     b236 = false;
-    int l1a = 0x8000;
-    int l18 = 0x8002;
-    void *lpage_a = pg_a;
-    void *lcastle_pg = castl_pg;
+    l1a = 0x8000;
+    l18 = 0x8002;
+    lpage_a = pg_a;
+    lcastle_pg = castl_pg;
     /**/
 }
 

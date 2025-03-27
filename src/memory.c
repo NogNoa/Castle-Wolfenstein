@@ -17,14 +17,11 @@ byte *source;
     }
 }
 
-#define FIXIT_A "\x8b\x26\xd1\2"
-#define FIXIT_B "\x8e\x16\xd3\2"
-
-byte test_1a71[10]  = "\x2e" FIXIT_A "\x2e" FIXIT_B;
-byte patch_1a71[10] = "\x2e" FIXIT_B "\x2e" FIXIT_A;
-byte test_22c2[10]  = "\x36" FIXIT_A "\x36" FIXIT_B;
-byte test_3ebd[8]  = FIXIT_A FIXIT_B;
-byte patch_3ebd[8] = FIXIT_B FIXIT_A;
+byte test_1a71[10]  = "\x2e\x8b\x26\xd1\2\x2e\x8e\x16\xd3\2";
+byte patch_1a71[10] = "\x2e\x8e\x16\xd3\2\x2e\x8b\x26\xd1\2";
+byte test_22c2[10]  = "\x36\x8b\x26\xd1\2\x36\x8e\x16\xd3\2";
+byte test_3ebd[8]  = "\x8b\x26\xd1\2\x8e\x16\xd3\2";
+byte patch_3ebd[8] = "\x8e\x16\xd3\2\x8b\x26\xd1\2";
 byte test_3fff[4]  = "\x8c\xc4\x8e\xd4";
 byte patch_3fff[4] = "\x8c\xc5\x8e\xd5";
 
