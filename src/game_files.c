@@ -82,10 +82,13 @@ byte rank_calculate()
             {--castl_pg.rank_index;}
     }
     else
-    {   while(castl_pg.rank_var0 && 0xf0 > castl_pg.rank_index)
-        {   castl_pg.rank_index += 0x10;
-            
-        }
+    {   do
+        {   if (0xf0 > castl_pg.rank_index) {break;}
+            byte b = castl_pg.rank_var0;
+            castl_pg.rank_var0 = 0;
+            castl_pg.rank_index += 0x10;
+            byte temp = b;
+        } while (b)
 
     }
 }
