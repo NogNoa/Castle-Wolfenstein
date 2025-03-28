@@ -23,6 +23,9 @@ dosbox/HD/
 visual studio/
 .vscode/
 
+#App map
+src/CW.MAP
+
 #Game Files
 bin/
 

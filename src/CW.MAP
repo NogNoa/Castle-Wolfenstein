@@ -1,9 +1,0 @@
-
-
- Start  Stop   Length  Name                   Class
- 00000H 0000DH 000EH  BASE                   PROG
- 0000EH 03437H 342AH  PROG                   PROG
- 03438H 0C21BH 8DE4H  DATA                   DATA
- 0C220H 0C31FH 0100H  STACK                  DATA
-
-Program entry point at 0000:000E
