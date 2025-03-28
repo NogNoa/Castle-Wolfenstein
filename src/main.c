@@ -20,7 +20,8 @@ bool b236 = false;
 main()
 {
     int inbtintr, l1a, l18;
-    byte *lpage_a, *lcastle_pg;
+    byte *lpage_a;
+    struct cs_pg_t *lcastle_pg;
     setVideoMode(PxlClrLo);
     BiosVideo(SET_CURSOR_POSITION, 0, 0, RowColl(2,2));
     cputs("072684");

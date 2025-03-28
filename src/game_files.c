@@ -40,7 +40,7 @@ string filename;
 {   
     int i;
     byte *cstl;
-    cstl = &castl_pg;
+    cstl = (byte *) &castl_pg;
     load_file(filename, file_buffer, length);
     for (i=0; i < PAGE_SZ; ++i)
     {   cstl[i] = ptr_file_buffer[i];
@@ -73,6 +73,21 @@ int pagenumb;
         return 0;
     }
     else {return -1;}
+}
+
+byte rank_calculate()
+{   
+    if (castl_pg.save_status < 0x80) 
+    {   if (1 < castl_pg.save_status) 
+            {--castl_pg.rank_index;}
+    }
+    else
+    {   while(castl_pg.rank_var0 && 0xf0 > castl_pg.rank_index)
+        {   castl_pg.rank_index += 0x10;
+            
+        }
+
+    }
 }
 
 word dmodt_offset, ind29a;
