@@ -15,7 +15,7 @@ byte wolf_vocab[VOCAB_FSIZE];
 byte b77e[3];
 
 byte wolf_font[CHR_FSIZE];
-bool b236 = false;
+bool b284 = false;
 
 main()
 {
@@ -45,18 +45,23 @@ main()
     if (sum(Goober, 36) != sum_goober + wolf_font) {_exit(-1);}
     RdSysFnt(wolf_font);
     file_to_screen(1);
-    if (wait_to_return())
+    if (wait_to_return()) /* play demo if the return key isn't pressed in time*/
         {load_demo();}
-    b236 = false;
+    b284 = false;
     l1a = 0x8000;
     l18 = 0x8002;
     lpage_a = pg_a;
     lcastle_pg = &castl_pg;
+    is_cstle_stt_60();
+    if (!isDemo)
+        {   rank_print();
+
+        }
     /**/
 }
 
 byte save_status;
-byte rank_index_16;
+extern byte rank_index;
 
 is_cstle_stt_60()
 {   
@@ -64,7 +69,7 @@ is_cstle_stt_60()
                   0xff : 
                   castl_pg.save_status;
     controller = DEV_undefined; 
-    rank_index_16 = rank_calculate();
+    rank_index = rank_calculate();
 }
 
 int sum(list,len)

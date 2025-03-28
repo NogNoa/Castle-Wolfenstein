@@ -32,12 +32,4 @@ char rank_calculate(void)
   
   */
 
-char *rank_table[8];
-void Rank_print(char Rank_Index)
-{
-    setVideoMode(4);
-    BiosVideo(0x200,0,0,0x100);
-    cputs("Your Rank is ");
-    cputs(rank_table[(int)Rank_Index >> 5]);
-    return;
-}
+

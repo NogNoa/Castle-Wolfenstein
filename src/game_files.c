@@ -57,6 +57,17 @@ char* file_name;
     close(fildsc);
 }
 
+char *rank_table[8];
+byte rank_index;
+Rank_print()
+{
+    setVideoMode(PxlClrLo);
+    BiosVideo(SET_CURSOR_POSITION ,0, 0, RowColl(2,1));
+    cputs("Your Rank is ");
+    cputs(rank_table[rank_index >> 5]);
+    return;
+}
+
 signed_error load_page_a(pagenumb)
 int pagenumb;
 {

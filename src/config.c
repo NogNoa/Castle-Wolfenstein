@@ -63,7 +63,7 @@ select_monitor()
   if (RGB_monitor == 'Y') {
     RGB_monitor = 0;
   }
-  setVideoMode(4);
+  setVideoMode(PxlClrLo);
   print_to_position(0,1,"The two ways in which your monitor may");
   print_to_position(0,2,"be connected to your computer are either");
   print_to_position(0,3,"as an RGB or a Non-RGB monitor.");

@@ -10,3 +10,4 @@ struct cs_pg_t
 };
 extern byte pg_a[];
 extern struct cs_pg_t castl_pg;
+extern bool isDemo;
