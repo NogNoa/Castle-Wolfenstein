@@ -41,7 +41,7 @@ main()
     load_file("vocab",wolf_vocab, VOCAB_FSIZE);
     b77e[0] = b77e[1] = b77e[2] = 0;
     puts("sum goober wolf vocab");
-    printf("%x != %x", sum(Goober, 36), sum_goober + wolf_vocab);
+    printf("%x != %x", sum(Goober, 36), sum_goober + wolf_vocab); /*d521 != B6*/
     /* if ((goob0=) != (goob1 =)) {_exit(-1);}*/
     puts("load file wolf.chr");
     load_file("wolf.chr", wolf_font, CHR_FSIZE);

@@ -57,7 +57,16 @@ char* file_name;
     close(fildsc);
 }
 
-char *rank_table[8];
+char *rank_table[8] = {
+    "Private",
+    "Corporal",
+    "Sergeant",
+    "Lieutenant",
+    "Captain",
+    "Colonel",
+    "General",
+    "Field Marshal"
+};
 byte rank_index;
 Rank_print()
 {
@@ -90,16 +99,16 @@ byte rank_calculate()
     }
     else
     {   do
-        {   if (0xf0 <= castl_pg.rank_index) {break;}
+        {   if (RNK_FIELD_MARSHAL <= castl_pg.rank_index) {break;}
             castl_pg.rank_index += 0x10;
             cont = castl_pg.ris_rnk_twc;
             castl_pg.ris_rnk_twc = false;
         } while (cont);
-        if (0xf0 < castl_pg.rank_index) 
-            {castl_pg.rank_index = 0xf0;}
+        if (RNK_FIELD_MARSHAL < castl_pg.rank_index) 
+            {castl_pg.rank_index = RNK_FIELD_MARSHAL;}
     }
-    if (castl_pg.rank_index < 0x10)
-        {castl_pg.rank_index = 0x10;}
+    if (castl_pg.rank_index < RNK_PRIVATE)
+        {castl_pg.rank_index = RNK_PRIVATE;}
     return castl_pg.rank_index;
 }
 
