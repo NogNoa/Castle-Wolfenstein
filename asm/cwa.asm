@@ -32,13 +32,13 @@ Goober proc near
     mov     bp, sp
     mov     cx, word ptr [BP + 4]
     mov     ch, cl
-    mov     ch, 14
+    mov     cl, 14
     mov     al, 1
     mov     ah, 2
     mov     bx, word ptr [bp + 6]
     push    CS
     pop     ds
-    mov     word ptr [bx_load + 1], bx
+    mov     word ptr [bx_load + 1], bx ;this becomes cs:[bx_load + 1] (one additional byte)
     push    ES
     pop     DS
 bx_load:

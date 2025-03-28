@@ -19,7 +19,7 @@ bool b284 = false;
 
 main()
 {
-    int inbtintr, l1a, l18;
+    int inbtintr, l1a, l18, goob0, goob1;
     byte *lpage_a;
     struct cs_pg_t *lcastle_pg;
     setVideoMode(PxlClrLo);
@@ -40,11 +40,18 @@ main()
     SegMemSet(Breakpoint + 3,0xfc-0xe9);
     load_file("vocab",wolf_vocab, VOCAB_FSIZE);
     b77e[0] = b77e[1] = b77e[2] = 0;
-    if (sum(Goober, 36) != sum_goober + wolf_vocab) {_exit(-1);}
+    puts("sum goober wolf vocab");
+    printf("%x != %x", sum(Goober, 36), sum_goober + wolf_vocab);
+    /* if ((goob0=) != (goob1 =)) {_exit(-1);}*/
+    puts("load file wolf.chr");
     load_file("wolf.chr", wolf_font, CHR_FSIZE);
+    puts("sum goober wolf font");
     if (sum(Goober, 36) != sum_goober + wolf_font) {_exit(-1);}
+    puts("RdSysFnt");
     RdSysFnt(wolf_font);
+    puts("presser to screen");
     file_to_screen(1);
+    puts("wait_to_return");
     if (wait_to_return()) /* play demo if the return key isn't pressed in time*/
         {load_demo();}
     b284 = false;
