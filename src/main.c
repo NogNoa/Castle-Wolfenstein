@@ -55,8 +55,8 @@ main()
     /**/
 }
 
-uint save_status;
-uint rank_index_16;
+byte save_status;
+byte rank_index_16;
 
 is_cstle_stt_60()
 {   
@@ -64,7 +64,7 @@ is_cstle_stt_60()
                   0xff : 
                   castl_pg.save_status;
     controller = DEV_undefined; 
-    /*rank_index_16 = rank_calculate();*/
+    rank_index_16 = rank_calculate();
 }
 
 int sum(list,len)

@@ -12,8 +12,8 @@ size is 3FF4
 048: number of granades.
 04d: ?
 051: ?
-06c: ?
-06d: rank_index_16
+06c: if non-zero increment rank_index towards 0xf0 twich
+06d: rank_index
 06f: save status: 
     0 ok, resuming 
     1..80 error, loading from backup

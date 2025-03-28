@@ -1,6 +1,7 @@
 #include "cw.h"
 #include "files.h"
 #include "video.h"
+#include "game_f~1.h"
 
 byte prewrite_buffer[PAGE_SZ];
 char file_buffer[0x3ff4];
@@ -27,12 +28,6 @@ resume_castle(/*void*/)
 }
 
 char pg_a[PAGE_SZ];
-struct cs_pg_t
-{
-    byte prefix[0x60];
-    byte save_status;
-    byte suffix[PAGE_SZ-0x61];
-};
 struct cs_pg_t castl_pg;
 
 ld_castle_page_w_ptr(filename, length)
@@ -77,20 +72,24 @@ int pagenumb;
 
 byte rank_calculate()
 {   
+    bool cont;
     if (castl_pg.save_status < 0x80) 
     {   if (1 < castl_pg.save_status) 
             {--castl_pg.rank_index;}
     }
     else
     {   do
-        {   if (0xf0 > castl_pg.rank_index) {break;}
-            byte b = castl_pg.rank_var0;
-            castl_pg.rank_var0 = 0;
+        {   if (0xf0 <= castl_pg.rank_index) {break;}
             castl_pg.rank_index += 0x10;
-            byte temp = b;
-        } while (b)
-
+            cont = castl_pg.ris_rnk_twc;
+            castl_pg.ris_rnk_twc = false;
+        } while (cont);
+        if (0xf0 < castl_pg.rank_index) 
+            {castl_pg.rank_index = 0xf0;}
     }
+    if (castl_pg.rank_index < 0x10)
+        {castl_pg.rank_index = 0x10;}
+    return castl_pg.rank_index;
 }
 
 word dmodt_offset, ind29a;
