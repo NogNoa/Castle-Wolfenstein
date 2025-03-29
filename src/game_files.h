@@ -12,6 +12,6 @@ extern byte pg_a[];
 extern struct cs_pg_t castl_pg;
 extern bool isDemo;
 
-#define RNK_PRIVATE 0x10;
-#define RNK_COLONEL 0x80;
-#define RNK_FIELD_MARSHAL 0xf0;
+#define RNK_PRIVATE 0x10
+#define RNK_COLONEL 0x80
+#define RNK_FIELD_MARSHAL 0xf0
