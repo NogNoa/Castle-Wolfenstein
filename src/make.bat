@@ -12,8 +12,8 @@ rem mc2 rank
 del cwa.OBJ
 del drawa.OBJ
 cd ..\asm
-d:ml /c cwa.asm
-d:ml /c drawa.asm
+d:ml /c cwa.asm > ..\asm.err
+d:ml /c drawa.asm >> ..\asm.err
 rename cwa.OBJ ..\src\cwa.OBJ
 rename drawa.OBJ ..\src\drawa.OBJ
 cd ..\src
