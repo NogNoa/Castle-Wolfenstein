@@ -71,7 +71,7 @@ fe3         rank_calculate
             speaker_617d
             thunk_sum_func
 6fb9    
-7031        speak_99
+7031   asm  speak_99
             stop_sound
             make_sound
             sum_func

@@ -11,10 +11,13 @@ rem mc2 rank
 
 del cwa.OBJ
 del drawa.OBJ
+del sonara.OBJ
 cd ..\asm
 d:ml /c cwa.asm > ..\asm.err
 d:ml /c drawa.asm >> ..\asm.err
+d:ml /c sonara.asm >> ..\asm.err
 rename cwa.OBJ ..\src\cwa.OBJ
 rename drawa.OBJ ..\src\drawa.OBJ
+rename sonara.OBJ ..\src\sonara.OBJ
 cd ..\src
-b:link b:c MEMORY drawa MAIN config game_f~1 cwa,cw,cw,b:mc
+b:link b:c MEMORY drawa MAIN config game_f~1 cwa sonara,cw,cw,b:mc

@@ -26,9 +26,10 @@ main()
     BiosVideo(SET_CURSOR_POSITION, 0, 0, RowColl(2,2));
     cputs("072684");
     printf("\nsum_goober=%x goober at %x\n", sum_goober, Goober);
-    sum_goober = sum(Goober, 36);
+    sum_goober = Sum(Goober, 0x24);
     printf("\nsum_goober=%x goober at %x\n", sum_goober, Goober);
     /*sum_goober= 0x9022*/
+    /*synth sum_goober=7EAB*/
     isPcJr();
     if (IhbtIntr() < 0) {_exit(-1);}
     fixit();
@@ -41,15 +42,15 @@ main()
     ld_castle_page_w_ptr("castle", PAGE_SZ);
     SegMemSet(Breakpoint + 1,~(byte)0x32);
     SegMemSet(Breakpoint + 3,0xfc-0xe9);
-    load_file("vocab",wolf_vocab, VOCAB_FSIZE); /*originally wolf_vocab=0x4b3d*/
+    load_file("vocab",wolf_vocab, VOCAB_FSIZE); /*originally wolf_vocab=0x4b3d, synth wolf_vocab=a6*/
     printf("sum_goober=%x goober at %x wolf_vocab=%x\n", sum_goober, Goober, wolf_vocab);
     b77e[0] = b77e[1] = b77e[2] = 0;
-    printf("%x != %x\n", sum(Goober, 36), sum_goober + wolf_vocab); /*d521 != B6*/
+    printf("%x != %x\n", Sum(Goober, 0x24), sum_goober + wolf_vocab); /*7088 != 7f51*/
     /* if ((goob0=) != (goob1 =)) {_exit(-1);}*/
     puts("load file wolf.chr");
     load_file("wolf.chr", wolf_font, CHR_FSIZE);
     puts("sum goober wolf font");
-    if (sum(Goober, 36) != sum_goober + wolf_font) {_exit(-1);}
+    if (Sum(Goober, 36) != sum_goober + wolf_font) {_exit(-1);}
     puts("RdSysFnt");
     RdSysFnt(wolf_font);
     puts("presser to screen");
@@ -80,18 +81,5 @@ is_cstle_stt_60()
                   castl_pg.save_status;
     controller = DEV_undefined; 
     rank_index = rank_calculate();
-}
-
-int sum(list,len)
-int *list;
-{
-    int back;
-    back = 0;
-    printf("list at %x\n", list);
-    for (;len > 0; --len, ++list) 
-    {   back += *list;
-        printf("%x ",*list);
-    }
-    return back;
 }
 
