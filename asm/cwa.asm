@@ -38,7 +38,8 @@ Goober proc near
     mov     bx, word ptr [bp + 6]
     push    CS
     pop     ds
-    mov     word ptr [bx_load + 1], bx ;this becomes cs:[bx_load + 1] (one additional byte)
+    mov     word ptr [bx_load + 1], bx  ; this becomes cs:[bx_load + 1] 
+                                        ; (one additional byte)
     push    ES
     pop     DS
 bx_load:
@@ -67,7 +68,8 @@ or_loop:
     ret
 jmp_return_zero:
     mov     ax, -1
-    jmp     return_zero
+    jmp     return_zero ; this also assemble to jmp word ptr cs:[return zero]
+                        ; which is one byte more 
 Goober endp
 ;
 DrwLwMdl proc near ;DrawLowMiddle

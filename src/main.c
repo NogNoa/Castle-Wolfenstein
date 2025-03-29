@@ -26,6 +26,7 @@ main()
     BiosVideo(SET_CURSOR_POSITION, 0, 0, RowColl(2,2));
     cputs("072684");
     sum_goober = sum(Goober, 36);
+    /*sum_goober= 0x9022*/
     isPcJr();
     if (IhbtIntr() < 0) {_exit(-1);}
     fixit();
@@ -38,10 +39,10 @@ main()
     ld_castle_page_w_ptr("castle", PAGE_SZ);
     SegMemSet(Breakpoint + 1,~(byte)0x32);
     SegMemSet(Breakpoint + 3,0xfc-0xe9);
-    load_file("vocab",wolf_vocab, VOCAB_FSIZE);
+    load_file("vocab",wolf_vocab, VOCAB_FSIZE); /*originally wolf_vocab=0x4b3d*/
     b77e[0] = b77e[1] = b77e[2] = 0;
     puts("sum goober wolf vocab");
-    printf("%x != %x", sum(Goober, 36), sum_goober + wolf_vocab); /*d521 != B6*/
+    printf("%x != %x\n", sum(Goober, 36), sum_goober + wolf_vocab); /*d521 != B6*/
     /* if ((goob0=) != (goob1 =)) {_exit(-1);}*/
     puts("load file wolf.chr");
     load_file("wolf.chr", wolf_font, CHR_FSIZE);
