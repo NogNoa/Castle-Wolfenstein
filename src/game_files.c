@@ -156,16 +156,17 @@ string file_name;
 byte *dest;
 int length;
 {
-    int fildsc;
+    int fildsc, status;
     isDos210();
     if (Goober(0x23, dest) > 0) {_exit(-1);}
-    fildsc = checked_open(file_name, 0x8000);
-    if (read(fildsc, dest, length) < 0)
-    {   put_2_strings("Error reading ", file_name);
-        if (fildsc > -1) {close(fildsc);}
-        _exit(-1);
-    }
-    close(fildsc);
+    fildsc = status = checked_open(file_name, 0x8000);
+    if (-1 < read(fildsc, dest, length))
+    {   status = close(fildsc);
+        return status;    
+    }  
+    put_2_strings("Error reading ", file_name);
+    if (fildsc > -1) {close(fildsc);}
+    _exit(-1);
 }
 
 
