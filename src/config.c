@@ -115,16 +115,13 @@ char controller;
 ctrls_load_r()
 {
     int fd;
-    cputs("ctrls_load_r102\n");
     if (check_for_debugger()) {_exit(-1);}
-    cputs("ctrls_load_r104\n");
     fd = open("ctrls", O_RAW); /* doesn't use drive letter*/
     if (fd < 0) 
     {
         put_2_strings("Cannot open control file", "");
         _exit(-1);
     }
-    cputs("ctrls_load_r111\n");
     ctrls_read(fd, &horizontal, 0l, 1);
     ctrls_read(fd, &vertical, 1l, 1);
     ctrls_read(fd, &b2ba, 2l, 1);

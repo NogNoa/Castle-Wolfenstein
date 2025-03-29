@@ -104,7 +104,6 @@ int check_for_debugger()
     else
     {   isDos210();
         back = Goober(0x26, (ORRERY));
-        puts("check_for_debugger109\n");
         if (back > -1) {_exit(-1);}
         else {return 0;}
         /*si = 0x40*/
