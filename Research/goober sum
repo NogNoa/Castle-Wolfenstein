@@ -7,3 +7,32 @@ second sum_func returns db5f
 4b3d happened to be wolf vocab's address
 it's not a coincidence, load_file adds the destination into the 
 object code of goober by running it.
+
+sum func take a "list" and a "len". it is always given the address of Goober function
+and 24 (0d36) and sum up all the bytes there
+
+goober start at CS:5fd6 and 24 bytes later is 5ffa to the middle of "add byte ptr [BX + SI], DL"
+00 10
+
+when del_inst (CS:6130) is run both bytes are changed to 90 (nop) so that will be added to the sum. 
+
+another word 5ff0 is overwritten by goober itself. by it's second argument dest. this change "BX, 0" 
+to essentially write to BX what was already in it. BX is then pushed. 
+Therefore running Goober itself add dest to sum compared to running the sum on Goober as loaded.
+
+check for debugger runs goober with build_func_on_stack::ORRERY as dest
+
+main -> ctrls_load_r -> check_for_debugger
+
+load_file runs goober with dest, the address it want to write to.
+
+because load_file is run between ctrls_load_r and any sum check, 
+we can ignore build_func_on_stack::ORRERY in the current case.
+
+however check_for_debugger, fixit, and load file also optionnally run is_dos_2_10 which runs del_inst 
+
+goober itself restore 5ff9 5ffa to their original value 1000 by the time it finishes.
+
+on the synth exe goober is at e63
+55 8b ec 8b 4e 04 8a e9 b1 14 b0 01 b4 02 8b 5e 06 0e 1f 89 1e 3d d9 06 1f bb 00 00 53 8a 16 91 8a b6 00 00 10
+

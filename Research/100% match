@@ -3,3 +3,5 @@ setVideoMode_
 BiosVideo_
 put_2_strings
 wait_to_return
+is_dos_2_10
+del_inst_5ff9

@@ -28,6 +28,7 @@ main()
     printf("\nsum_goober=%x goober at %x\n", sum_goober, Goober);
     sum_goober = Sum(Goober, 0x24);
     printf("\nsum_goober=%x goober at %x\n", sum_goober, Goober);
+    printf("%x %x  %x %x\n", Goober[0xC], Goober[0xD], Goober[0x11], Goober[0x12]);
     /*sum_goober= 0x9022*/
     /*synth sum_goober=CEC3*/
     isPcJr();
@@ -44,6 +45,7 @@ main()
     SegMemSet(Breakpoint + 3,0xfc-0xe9);
     load_file("vocab",wolf_vocab, VOCAB_FSIZE); /*originally wolf_vocab=0x4b3d, synth wolf_vocab=a2*/
     printf("sum_goober=%x goober at %x wolf_vocab=%x\n", sum_goober, Goober, wolf_vocab);
+    printf("%x %x  %x %x\n", Goober[0xC], Goober[0xD], Goober[0x11], Goober[0x12]);
     b77e[0] = b77e[1] = b77e[2] = 0;
     printf("%x != %x\n", Sum(Goober, 0x24), sum_goober + wolf_vocab); /*C094 != CF65*/
     /* if ((goob0=) != (goob1 =)) {_exit(-1);}*/
