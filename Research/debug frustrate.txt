@@ -54,19 +54,21 @@ and to
 
 this memory is a single cf  IRET instruction, inhibiting those interupts
 
-rewrote
+rewrote is_junior
 cw.exe[170a] to EB 1C 90    JMP CS:1528 NOP
 cw.exe[1760] to EB 1C 90    JMP CS:157e NOP
+
+inhibit_brk_prnt_scrn
 cw.exe[56f] to EB 0D 90 90  JMP CS:37E NOP NOP
 
 oops caused a curroption of the string "Program cannot execute" 
 and was close to blame the anti temper
 
-function setup_memory at CS:00ba again set
+function fixit at CS:00ba again set
 int 01 to ff4c:3411
 int 03 to 134c:cd0a
 
-rewrite
+rewrite fixit
 cw.exe[3bd] to EB 0e 90    JMP cs:1cd NOP
 cw.exe[3e2] to EB 14 90    JMP cs:1f8 NOP
 
@@ -78,14 +80,14 @@ function at cs:313 again
 chceks 0:d for cd.
 checks 0:f for 0x13
 
-rewrite
+rewrite check_for_debugger
 cx.exe[519] to EB 29 90 JMP cs:344 NOP  
 
 function at cs:3f2
 int 01 to ff??:34??
 int 03 to 13??:cd??
 
-rewrite
+rewrite file_to_screen
 cw.exe[5f8] to EB 1e 90    JMP cs:408 NOP
 cw.exe[6de] to EB 1e 90    JMP cs:1f8 NOP
 

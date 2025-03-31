@@ -34,8 +34,10 @@ int d2ae, d29c;
 isPcJr()
 {
   byte bios_pattern;
+  #ifndef PRODEBUG
   SegMemSet(SingleStep+1, 0x34);
   SegMemSet(SingleStep+3, 0xff); 
+  #endif
   if (SegmGt(0xf000, (byte *)0xffff) == 0xfd) /* from the PC Jr BIOS*/
   { pcjr = true;
     d2ae = 900;
@@ -46,8 +48,10 @@ isPcJr()
     d2ae = 3300;
     d29c = 600;
   }
+  #ifndef PRODEBUG
   SegMemSet(Breakpoint+1, 0xcd);
   SegMemSet(Breakpoint+3, 0x13);
+  #endif
 }
 
 extern byte RGB_monitor;

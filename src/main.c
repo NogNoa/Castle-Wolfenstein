@@ -17,6 +17,11 @@ byte b77e[3];
 byte wolf_font[CHR_FSIZE];
 bool b284 = false;
 
+#ifdef PRODEBUG
+uint IhbtIntr();
+#endif
+
+
 main()
 {
     int inbtintr, l1a, l18, goob0, goob1;
@@ -41,8 +46,10 @@ main()
     ptr_file_buffer = file_buffer;
     /* file_to_screen(0);*/
     ld_castle_page_w_ptr("castle", PAGE_SZ);
+    #ifndef PRODEBUG
     SegMemSet(Breakpoint + 1,~(byte)0x32);
     SegMemSet(Breakpoint + 3,0xfc-0xe9);
+    #endif
     load_file("vocab",wolf_vocab, VOCAB_FSIZE); /*originally wolf_vocab=0x4b3d, synth wolf_vocab=a2*/
     printf("sum_goober=%x goober at %x wolf_vocab=%x\n", sum_goober, Goober, wolf_vocab);
     printf("%x %x  %x %x\n", Goober[0xC], Goober[0xD], Goober[0x11], Goober[0x12]);

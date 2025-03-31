@@ -20,4 +20,6 @@ typedef char byte;
 #define NULL 0
 #endif
 
+#define PRODEBUG
+
 #endif
