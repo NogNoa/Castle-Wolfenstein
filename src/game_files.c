@@ -5,7 +5,7 @@
 
 byte prewrite_buffer[PAGE_SZ];
 char file_buffer[0x3ff4];
-char* ptr_file_buffer = file_buffer;
+byte* ptr_file_buffer = file_buffer;
 
 int checked_open(fn, flags)
 string fn;
@@ -57,7 +57,7 @@ char* file_name;
     close(fildsc);
 }
 
-char *rank_table[8] = {
+string rank_table[8] = {
     "Private",
     "Corporal",
     "Sergeant",

@@ -6,5 +6,5 @@
 #define PIX_FSIZE 0x4000
 
 extern char file_buffer[0x3ff4];
-extern char* ptr_file_buffer;
-extern char* gfx_fp;
+extern byte* ptr_file_buffer;
+extern byte* gfx_fp;

@@ -20,7 +20,7 @@ castle_indexize(/*void*/)
 bool pcjr;
 
 put_2_strings(line4, line5)
-char *line4, *line5;
+string line4, *line5;
 {   
     if (pcjr) {setVideoMode(TxtGreyWd);}
     else {setVideoMode(TxtGreyThn);}
@@ -36,7 +36,7 @@ isPcJr()
   byte bios_pattern;
   SegMemSet(SingleStep+1, 0x34);
   SegMemSet(SingleStep+3, 0xff); 
-  if (SegmGt(0xf000, (char *)0xffff) == 0xfd) /* from the PC Jr BIOS*/
+  if (SegmGt(0xf000, (byte *)0xffff) == 0xfd) /* from the PC Jr BIOS*/
   { pcjr = true;
     d2ae = 900;
     d29c = 200;
