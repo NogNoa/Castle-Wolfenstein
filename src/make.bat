@@ -1,3 +1,4 @@
+del cw.exe
 mc1 game_f~1 > ..\game_f.err 
 mc1 config > ..\config.err 
 mc1 memory > ..\memory.err 

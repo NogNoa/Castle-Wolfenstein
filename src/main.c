@@ -12,7 +12,7 @@ extern int Goober[36];
 byte RGB_monitor;
 bool make_sound;
 byte wolf_vocab[VOCAB_FSIZE];
-byte b77e[3];
+byte b77e[3] = {0};
 
 byte wolf_font[CHR_FSIZE];
 bool b284 = false;
@@ -38,22 +38,28 @@ main()
     /*synth sum_goober=CEC3*/
     isPcJr();
     if (IhbtIntr() < 0) {_exit(-1);}
+    printf("summingg goober=%x\n", Sum(Goober, 0x24));
     fixit();
+    printf("summingg goober=%x\n", Sum(Goober, 0x24));
     ctrls_load_r();
+    printf("summingg goober=%x\n", Sum(Goober, 0x24));
     if (RGB_monitor == 'Y')
         {select_monitor();}
     outer_loop:
     ptr_file_buffer = file_buffer;
     /* file_to_screen(0);*/
     ld_castle_page_w_ptr("castle", PAGE_SZ);
-    #ifndef PRODEBUG
-    SegMemSet(Breakpoint + 1,~(byte)0x32);
-    SegMemSet(Breakpoint + 3,0xfc-0xe9);
-    #endif
+    /*SegMemSet(Breakpoint + 1,~(byte)0x32);
+    SegMemSet(Breakpoint + 3,0xfc-0xe9);*/
+    printf("summingg goober=%x\n", Sum(Goober, 0x24));
     load_file("vocab",wolf_vocab, VOCAB_FSIZE); /*originally wolf_vocab=0x4b3d, synth wolf_vocab=a2*/
-    printf("sum_goober=%x goober at %x wolf_vocab=%x\n", sum_goober, Goober, wolf_vocab);
-    printf("%x %x  %x %x\n", Goober[0xC], Goober[0xD], Goober[0x11], Goober[0x12]);
-    b77e[0] = b77e[1] = b77e[2] = 0;
+    /* somehow doesn't add dest to the value of the sum*/
+    printf("sum_goober=%x b77e at %x wolf_vocab=%x\n", sum_goober, b77e, wolf_vocab);
+    printf("summingg goober=%x\n", Sum(Goober, 0x24));
+    printf("%x %x  %x\n", b77e[0], b77e[1], b77e[2]);
+    printf("summingg goober=%x\n", Sum(Goober, 0x24));
+    /*b77e[0] = b77e[1] = b77e[2] = 0; /* somehow interfares in the value of the sum*/
+    printf("summingg goober=%x\n", Sum(Goober, 0x24));
     printf("%x != %x\n", Sum(Goober, 0x24), sum_goober + wolf_vocab); /*C094 != CF65*/
     /* if ((goob0=) != (goob1 =)) {_exit(-1);}*/
     puts("load file wolf.chr");

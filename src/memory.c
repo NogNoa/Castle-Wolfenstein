@@ -47,15 +47,15 @@ fixit()
         _exit(-1);
     }
     SegmSt(CGA_Space, (byte*) 1, 0);
-    #ifndef PRODEBUG
+    /*
     SegMemSet(SingleStep+1, 0x34);
     SegMemSet(SingleStep+3, 0xff);
-    #endif
+    */
     SegMemSet(DetectedHardware, SegMemGet(DetectedHardware) & 0xcf | 0x10);
-    #ifndef PRODEBUG
+    /*
     SegMemSet(Breakpoint+1, 0xcd);
     SegMemSet(Breakpoint+3, 0x13);
-    #endif
+    */
 }
 
 bool seg0_compare(start,limit,source,reference)
@@ -102,12 +102,12 @@ bool build_func_on_stack(arg)
 int check_for_debugger()
 {
     int back;
-    #ifndef PRODEBUG
+    /*
     if (SegMemGet(Breakpoint+1) != 0xcd || SegMemGet(Breakpoint+3) != 0x13)
-        {   _exit(-1); /*doesn't return*/
+        {   _exit(-1); //doesn't return
         }
     else
-    #endif
+    */
     {   isDos210();
         back = Goober(0x26, (ORRERY));
         if (back > -1) {_exit(-1);}
@@ -121,10 +121,10 @@ extern byte RGB_monitor;
 
 file_to_screen(file_chc)
 {
-    #ifndef PRODEBUG
+    /*
     SegMemSet(SingleStep+1, 0x34);
     SegMemSet(SingleStep+3, 0xff);
-    #endif
+    */
     switch(file_chc)
     {case 2:
         gfx_fp = file_buffer;
@@ -144,9 +144,9 @@ file_to_screen(file_chc)
         DrawFld0(file_buffer);
         break;
     }
-    #ifndef PRODEBUG
+    /*
     SegMemSet(Breakpoint+1, 0xcd);
     SegMemSet(Breakpoint+3, 0x13);
-    #endif
+    */
 }
 
