@@ -41,7 +41,7 @@ Goober proc near
     mov     word ptr ds:[bx_load + 1], bx
     push    ES
     pop     DS
-bx_load:
+bx_load label word
     mov     bx, 0
     push    bx
     mov     dl, byte ptr [dflt_drv]
