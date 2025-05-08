@@ -30,19 +30,15 @@ main()
     setVideoMode(PxlClrLo);
     BiosVideo(SET_CURSOR_POSITION, 0, 0, RowColl(2,2));
     cputs("072684");
-    printf("\nsum_goober=%x goober at %x\n", sum_goober, Goober);
+    printf("\nsum_goober=%x\n", sum_goober);
     sum_goober = Sum(Goober, 0x24);
-    printf("\nsum_goober=%x goober at %x\n", sum_goober, Goober);
     printf("%x %x  %x %x\n", Goober[0xC], Goober[0xD], Goober[0x11], Goober[0x12]);
     /*sum_goober= 0x9022*/
     /*synth sum_goober=CEC3*/
     isPcJr();
     if (IhbtIntr() < 0) {_exit(-1);}
-    printf("summingg goober=%x\n", Sum(Goober, 0x24));
     fixit();
-    printf("summingg goober=%x\n", Sum(Goober, 0x24));
     ctrls_load_r();
-    printf("summingg goober=%x\n", Sum(Goober, 0x24));
     if (RGB_monitor == 'Y')
         {select_monitor();}
     outer_loop:
@@ -54,12 +50,8 @@ main()
     printf("summingg goober=%x\n", Sum(Goober, 0x24));
     load_file("vocab",wolf_vocab, VOCAB_FSIZE); /*originally wolf_vocab=0x4b3d, synth wolf_vocab=a2*/
     /* somehow doesn't add dest to the value of the sum*/
-    printf("sum_goober=%x b77e at %x wolf_vocab=%x\n", sum_goober, b77e, wolf_vocab);
-    printf("summingg goober=%x\n", Sum(Goober, 0x24));
-    printf("%x %x  %x\n", b77e[0], b77e[1], b77e[2]);
-    printf("summingg goober=%x\n", Sum(Goober, 0x24));
-    /*b77e[0] = b77e[1] = b77e[2] = 0; /* somehow interfares in the value of the sum*/
-    printf("summingg goober=%x\n", Sum(Goober, 0x24));
+    /*b77e[0] = b77e[1] = b77e[2] = 0; /* somehow interfares in the value of the sum
+    printf("summing goober=%x\n", Sum(Goober, 0x24));*/
     printf("%x != %x\n", Sum(Goober, 0x24), sum_goober + wolf_vocab); /*C094 != CF65*/
     /* if ((goob0=) != (goob1 =)) {_exit(-1);}*/
     puts("load file wolf.chr");

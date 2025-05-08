@@ -38,7 +38,8 @@ Goober proc near
     mov     bx, word ptr [bp + 6]
     push    CS
     pop     ds
-    mov     word ptr ds:[bx_load + 1], bx
+    mov     word ptr [bx_load + 1], bx 
+    ;comipiles to mov word ptr cs:[0xe0e], bx; 2E 89 1E 0E 0E
     push    ES
     pop     DS
 bx_load label word
