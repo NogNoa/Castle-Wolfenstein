@@ -30,11 +30,7 @@ main()
     setVideoMode(PxlClrLo);
     BiosVideo(SET_CURSOR_POSITION, 0, 0, RowColl(2,2));
     cputs("072684");
-    printf("\nsum_goober=%x\n", sum_goober);
     sum_goober = Sum(Goober, 0x24);
-    printf("%x %x  %x %x\n", Goober[0xC], Goober[0xD], Goober[0x11], Goober[0x12]);
-    /*sum_goober= 0x9022*/
-    /*synth sum_goober=CEC3*/
     isPcJr();
     if (IhbtIntr() < 0) {_exit(-1);}
     fixit();
@@ -43,26 +39,15 @@ main()
         {select_monitor();}
     outer_loop:
     ptr_file_buffer = file_buffer;
-    /* file_to_screen(0);*/
+    file_to_screen(0);
     ld_castle_page_w_ptr("castle", PAGE_SZ);
-    /*SegMemSet(Breakpoint + 1,~(byte)0x32);
-    SegMemSet(Breakpoint + 3,0xfc-0xe9);*/
-    printf("summingg goober=%x\n", Sum(Goober, 0x24));
-    load_file("vocab",wolf_vocab, VOCAB_FSIZE); /*originally wolf_vocab=0x4b3d, synth wolf_vocab=a2*/
-    /* somehow doesn't add dest to the value of the sum*/
-    /*b77e[0] = b77e[1] = b77e[2] = 0; /* somehow interfares in the value of the sum
-    printf("summing goober=%x\n", Sum(Goober, 0x24));*/
-    printf("%x != %x\n", Sum(Goober, 0x24), sum_goober + wolf_vocab); /*C094 != CF65*/
-    /* if ((goob0=) != (goob1 =)) {_exit(-1);}*/
-    puts("load file wolf.chr");
+    SegMemSet(Breakpoint + 1,~(byte)0x32);
+    SegMemSet(Breakpoint + 3,0xfc-0xe9);
+    load_file("vocab",wolf_vocab, VOCAB_FSIZE);
     load_file("wolf.chr", wolf_font, CHR_FSIZE);
-    puts("sum goober wolf font");
     if (Sum(Goober, 36) != sum_goober + wolf_font) {_exit(-1);}
-    puts("RdSysFnt");
     RdSysFnt(wolf_font);
-    puts("presser to screen");
     file_to_screen(1);
-    puts("wait_to_return");
     if (wait_to_return()) /* play demo if the return key isn't pressed in time*/
         {load_demo();}
     b284 = false;
