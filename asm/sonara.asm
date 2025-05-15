@@ -1,13 +1,11 @@
 .radix  16
 ;
-DGROUP  GROUP   DATA
 data	segment	byte public 'data'
 ;
 data ENDS
-PGROUP  GROUP   PROG
 PROG    SEGMENT BYTE PUBLIC 'PROG'
         PUBLIC  Sum
-        ASSUME  CS:PGROUP, DS:DGROUP
+        ASSUME  CS:PROG, DS:data
 Sum proc near
 ;
 ;   bp.4    list    &int

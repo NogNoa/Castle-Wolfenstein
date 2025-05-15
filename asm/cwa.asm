@@ -10,8 +10,6 @@
     FIELD_SZ            equ  2000
     DISPLAY_BUFFER      equ 0b800
 ;
-DGROUP  GROUP   DATA
-;
 data	segment	byte public 'data'
         public Key_scan_code, Is_Extended_Code, dflt_drv, GfxFileP
         dflt_drv db 0
@@ -19,10 +17,9 @@ data	segment	byte public 'data'
         Is_Extended_Code db 0
         GfxFileP db 0
 data ENDS
-PGROUP  GROUP   PROG
 PROG    SEGMENT BYTE PUBLIC 'PROG'
         PUBLIC  Goober, isDos210, SegmSt, SegmGt, CallStck, IsKStrok, GetStrok, setVideo, BiosVide, DrwLwMdl, RdSysFnt
-        ASSUME  CS:PGROUP, ES:DGROUP
+        ASSUME  CS:PROG, ES:data
 Goober proc near
 ;
 ;   bp.4    p1      void
@@ -72,7 +69,7 @@ jmp_return_zero:
 Goober endp
 ;
         Assume nothing
-        Assume CS:PGROUP, DS:DGROUP
+        Assume CS:PROG, DS:data
 ;
 DrwLwMdl proc near ;DrawLowMiddle
     push  bp

@@ -143,6 +143,7 @@ file_to_screen(file_chc)
         if (RGB_monitor && !pcjr) {BiosVideo(SET_BACKGROUND, CGA_BLUE, 0, 0);}
         DrawFld0(file_buffer);
         break;
+    default: return;
     }
     /*
     SegMemSet(Breakpoint+1, 0xcd);

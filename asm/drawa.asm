@@ -6,15 +6,12 @@
     control_break_handler equ 6c
     print_screen_handler  equ 14
 ;
-DGROUP  GROUP   DATA
-;
 data	segment	byte public 'data'
         int_frust dw 000d, 0000
 data ENDS
-PGROUP  GROUP   PROG
 PROG    SEGMENT BYTE PUBLIC 'PROG' 
         PUBLIC  DrawFld0, IhbtIntr
-        ASSUME  CS:PGROUP, DS:data
+        ASSUME  CS:PROG, DS:data
 IhbtIntr proc near
     PUSH         BP
     PUSH         ES
