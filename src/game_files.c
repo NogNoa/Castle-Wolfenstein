@@ -114,7 +114,6 @@ byte rank_calculate()
 
 word dmodt_offset, ind29a;
 bool isDemo = false;
-byte* gfx_fp;
 byte dmodt_buffer[DEMODT_FSIZE];
 extern bool horizontal;
 
@@ -129,7 +128,7 @@ load_demo()
     gfx_buffer = dmodt_buffer +  1000;
     dmodt_offset = 0;
     ind29a = 0;
-    gfx_fp = gfx_buffer;
+    GfxFileP = gfx_buffer;
     load_page_a(1);
 }
 

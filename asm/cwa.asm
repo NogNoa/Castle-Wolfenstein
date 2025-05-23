@@ -76,6 +76,7 @@ DrwLwMdl proc near ;DrawLowMiddle
     push  es
     cld   
     mov   ax, DISPLAY_BUFFER
+    ; in mode 4 every byte represent 4 pixels
     mov   es, ax
     mov   bp, 1424
     mov   si, word ptr [GfxFileP]
@@ -83,15 +84,15 @@ whle1745:
     mov   di, bp
     mov   cx, 10
 fr10fld0:
-    movsw word ptr es:[di], word ptr [si]
+    movsw word ptr es:[di], word ptr [si] ;draw 10 word = 80 pixels at field 0
     loop  fr10fld0
     mov   di, bp
     add   di, FIELD_SZ
     mov   cx, 10
 fr10fld1:
-    movsw word ptr es:[di], word ptr [si]
+    movsw word ptr es:[di], word ptr [si] ;draw 80 pixels at field 1
     loop  fr10fld1
-    add   bp, 50
+    add   bp, 50    ; 50 bytes is 140 pixels or a line of 0d320
     cmp   bp, 1745
     jc    whle1745
     pop   es

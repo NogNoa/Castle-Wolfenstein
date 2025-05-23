@@ -7,4 +7,4 @@
 
 extern char file_buffer[0x3ff4];
 extern byte* ptr_file_buffer;
-extern byte* gfx_fp;
+extern byte* GfxFileP;
