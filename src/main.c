@@ -24,8 +24,9 @@ uint IhbtIntr();
 
 main()
 {
-    int inbtintr, l1a, l18, goob0, goob1;
+    int inbtintr, l1a, l18, goob0, goob1, stroke;
     byte *lpage_a;
+    bool cont;
     struct cs_pg_t *lcastle_pg;
     setVideoMode(PxlClrLo);
     BiosVideo(SET_CURSOR_POSITION, 0, 0, RowColl(2,2));
@@ -58,7 +59,21 @@ main()
     is_cstle_stt_60();
     if (!isDemo)
         {   rank_print();
-
+            BiosVideo(SET_CURSOR_POSITION, 0, 0, RowColl(9,8));
+            cputs("What controls do you want ?");
+            BiosVideo(SET_CURSOR_POSITION, 0, 0, RowColl(11,11));
+            cputs("Press: K for keyboard");
+            BiosVideo(SET_CURSOR_POSITION, 0, 0, RowColl(13,18));
+            cputs("J for joystick");
+            BiosVideo(SET_CURSOR_POSITION, 0, 0, RowColl(21,3));
+            cputs("Press Ctrl-N to start a new game");
+            BiosVideo(SET_CURSOR_POSITION, 0, 0, RowColl(22,3));
+            cputs("Press Ctrl-R to reverse controls");
+            BiosVideo(SET_CURSOR_POSITION, 0, 0, RowColl(23,3));
+            cputs("Press Ctrl-Q to select monitor type");
+            while (!IsKStrok());
+            cont = false;
+            stroke = GetStrok();
         }
     /**/
 }
