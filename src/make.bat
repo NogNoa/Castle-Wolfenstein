@@ -10,15 +10,13 @@ mc2 memory
 mc2 main 
 rem mc2 rank 
 
-del cwa.OBJ
-del drawa.OBJ
-del sonara.OBJ
 cd ..\asm
 d:ml /c cwa.asm > ..\asm.err
 d:ml /c drawa.asm >> ..\asm.err
 d:ml /c sonara.asm >> ..\asm.err
-rename cwa.OBJ ..\src\cwa.OBJ
-rename drawa.OBJ ..\src\drawa.OBJ
-rename sonara.OBJ ..\src\sonara.OBJ
+rename /f cwa.OBJ ..\src\cwa.OBJ
+rename /f drawa.OBJ ..\src\drawa.OBJ
+rename /f sonara.OBJ ..\src\sonara.OBJ
 cd ..\src
 b:link b:c MEMORY drawa MAIN config game_f~1 cwa sonara,cw,cw,b:mc
+rename /f cw.exe ..\bin\
