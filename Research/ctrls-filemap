@@ -2,8 +2,9 @@
 name:                       place   length  meaning
 keyboard-horizontal-flip:   0       1       {0: move= left, shoot=right; 1: opposite}
 joystick-sagital-flip:      1       1       {0:shoot=front,   aim= back; 1: opposite}
+                            2       1
 rgb-monitor:                3       1       {1: RGB-monitor; 0: not; 0x59: undefined}
-                            4       b
-                            f       b
-                            1a      b
-                            25      b
+LC+3L3RC3:                  4       b
+RC-3LC3:                    f       b
+UC+YCU3:                   1a       b
+YC-UC3:                    25       b

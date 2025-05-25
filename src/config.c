@@ -151,6 +151,25 @@ int fd; byte *buf; long offset; int nbytes;
     return length;
 }
 
+int ctrls_load_w()
+{
+  int fd;
+  fd = open("ctrls",O_RAW | O_WRONLY);
+  if (fd < 0)
+  { cputs("Cannot open control file");
+    exit(-1);
+  }
+    ctrls_write(fd, &horizontal, 0l, 1);
+    ctrls_write(fd, &vertical, 1l, 1);
+    ctrls_write(fd, &b2ba, 2l, 1);
+    ctrls_write(fd, &RGB_monitor, 3l, 1);
+    ctrls_write(fd, b4ac3, 4l, 0xb);
+    ctrls_write(fd, b4ace, 0xfl, 0xb);
+    ctrls_write(fd, b4ad9, 0x1al, 0xb);
+    ctrls_write(fd, b4ae4, 0x25l, 0xb);
+    close(fd);
+}
+
 int ctrls_write(ctrls, buffer, offset, length)
 int ctrls, length;
 string buffer;
