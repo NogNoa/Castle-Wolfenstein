@@ -19,6 +19,16 @@ int flags;
     return fildsc;
 }
 
+start_menu()
+{
+    ;
+}
+
+reverse_control()
+{
+    ;
+}
+
 resume_castle(/*void*/)
 {
     setVideoMode(PxlClrLo);

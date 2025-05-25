@@ -71,32 +71,33 @@ main()
             cputs("Press Ctrl-R to reverse controls");
             BiosVideo(SET_CURSOR_POSITION, 0, 0, RowColl(23,3));
             cputs("Press Ctrl-Q to select monitor type");
-            while (!IsKStrok());
-            cont = false;
-            stroke = GetStrok();
-            switch (stroke)
-            {
-            case (0x40^'N'):
-                start_menu();
-                break;
-            case (0x40^'R'):
-                reverse_control();
-                break;
-            case (0x40^'Q'):
-                select_monitor();
-                break;
-            case ('K'):
-            case ('k'):
-                controller = DEV_keyboard;
-                break;
-            case ('J'):
-            case ('j'):
-                controller = DEV_joystick;
-                break;
-            default:
-                break;
-            }
-            cont = true;
+            do {
+                while (!IsKStrok());
+                cont = false;
+                stroke = GetStrok();
+                switch (stroke)
+                {
+                case (0x40^'N'):
+                    start_menu();
+                    break;
+                case (0x40^'R'):
+                    reverse_control();
+                    break;
+                case (0x40^'Q'):
+                    select_monitor();
+                    break;
+                case ('K'):
+                case ('k'):
+                    controller = DEV_keyboard;
+                    break;
+                case ('J'):
+                case ('j'):
+                    controller = DEV_joystick;
+                    break;
+                default:
+                    cont = true;
+                }
+            } while (cont);
         }
     /**/
 }
