@@ -22,4 +22,7 @@ typedef char byte;
 
 #define PRODEBUG
 
+#define CTRL(c) (0x40^c)
+#define ESC (0x40^'[')
+
 #endif

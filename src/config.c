@@ -88,12 +88,12 @@ select_monitor()
   print_to_position(0, 15,"Press the space bar if you are using");
   print_to_position(0, 16,"a Non-RGB monitor hookup.");
   key = '\0';
-  while ((key != '\e' && (key != ' '))) {
+  while ((key != ESC && (key != ' '))) {
     if (IsKStrok() != 0) {
       key = GetStrok();
     }
   }
-  RGB_monitor = key == '\e';
+  RGB_monitor = key == ESC;
   if (RGB_monitor != oldRGB) {
     print_to_position(14, 22,"Saving data...");
     ctrls_load_w();

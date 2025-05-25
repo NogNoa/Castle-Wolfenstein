@@ -77,13 +77,13 @@ main()
                 stroke = GetStrok();
                 switch (stroke)
                 {
-                case (0x40^'N'):
+                case (CTRL('N')):
                     start_menu();
                     break;
-                case (0x40^'R'):
+                case (CTRL('R')):
                     reverse_control();
                     break;
-                case (0x40^'Q'):
+                case (CTRL('Q')):
                     select_monitor();
                     break;
                 case ('K'):
