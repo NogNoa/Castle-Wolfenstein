@@ -35,7 +35,7 @@ main()
     isPcJr();
     if (IhbtIntr() < 0) {_exit(-1);}
     fixit();
-    ctrls_load_r();
+    r_ctrls_load();
     if (RGB_monitor == 'Y')
         {select_monitor();}
     outer_loop:

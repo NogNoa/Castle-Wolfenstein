@@ -96,7 +96,7 @@ select_monitor()
   RGB_monitor = key == ESC;
   if (RGB_monitor != oldRGB) {
     print_to_position(14, 22,"Saving data...");
-    ctrls_load_w();
+    w_ctrls_load();
     print_to_position(14, 22,"\t\t ");
   }
   return;
@@ -116,7 +116,7 @@ byte b2ba, b4ac3[0xb], b4ace[0xb], b4ad9[0xb], b4ae4[0xb];
 char controller;
 
 
-ctrls_load_r()
+r_ctrls_load()
 {
     int fd;
     if (check_for_debugger()) {_exit(-1);}
@@ -151,7 +151,7 @@ int fd; byte *buf; long offset; int nbytes;
     return length;
 }
 
-int ctrls_load_w()
+int w_ctrls_load()
 {
   int fd;
   fd = open("ctrls",O_RAW | O_WRONLY);
