@@ -1,31 +1,33 @@
 #include "video.h"
 #include "conio.h"
 
-static char f1, ee;
-static char Rank_Index;
+struct cs_pg_t castl_pg;
 
 char rank_calculate(void)
 {
-  
-  if (f1 < 0x80) {
-    if (1 < f1) {
-      Rank_Index -= 1;
+  bool temp = castl_pg.ris_rnk_twc;
+  if (castl_pg.save_status < 0x80) {
+    if (1 < castl_pg.save_status) {
+      castl_pg.rank_index -= 1;
     }
   }
   else {
-    if (Rank_Index <= 0xf0) 
-    {   Rank_Index += 0x10;
-        if (ee && (Rank_Index <= 0xf0))
-            {Rank_Index += 0x10;}
+    if (castl_pg.rank_index <= 0xf0) 
+    {   castl_pg.rank_index += 0x10;
+        if (castl_pg.ris_rnk_twc && (castl_pg.rank_index <= 0xf0))
+            { castl_pg.ris_rnk_twc = temp;
+              castl_pg.rank_index += 0x10;
+              temp = false;
+            }
     }
-    if ((0xf0 < Rank_Index)) {
-      Rank_Index = 0xf0;
+    if ((0xf0 < castl_pg.rank_index)) {
+      castl_pg.rank_index = 0xf0;
     }
   }
-  if (Rank_Index < 0x10) {
-    Rank_Index = 0x10;
+  if (castl_pg.rank_index < 0x10) {
+    castl_pg.rank_index = 0x10;
   }
-  return Rank_Index;
+  return castl_pg.rank_index;
 }
   /*     100 > ur >=  f0
           00 > sr >= -10
