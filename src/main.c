@@ -24,7 +24,7 @@ uint IhbtIntr();
 
 main()
 {
-    int inbtintr, l1a, l18, goob0, goob1, stroke;
+    int inbtintr, l1a, l18, goob0, goob1, stroke, c;
     byte *lpage_a;
     bool cont;
     struct cs_pg_t *lcastle_pg;
@@ -48,6 +48,9 @@ main()
     load_file("wolf.chr", wolf_font, CHR_FSIZE);
     if (Sum(Goober, 36) != sum_goober + wolf_font) {_exit(-1);}
     RdSysFnt(wolf_font);
+    for (c=0x80;c<0x100;++c)
+    {   putch(c);
+    }
     file_to_screen(1);
     if (wait_to_return()) /* play demo if the return key isn't pressed in time*/
         {load_demo();}
