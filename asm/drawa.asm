@@ -10,7 +10,7 @@ data	segment	byte public 'data'
         int_frust dw 000d, 0000
 data ENDS
 PROG    SEGMENT BYTE PUBLIC 'PROG' 
-        PUBLIC  DrawFld0, IhbtIntr
+        PUBLIC  DrawCG, IhbtIntr
         ASSUME  CS:PROG, DS:data
 IhbtIntr proc near
     PUSH         BP
@@ -49,7 +49,7 @@ EmptIntr proc near
     IRET
 EmptIntr endp
 ;
-DrawFld0 proc near
+DrawCG proc near
 ;   
 ;   bp.4    src     &word
     push  bp
@@ -67,6 +67,6 @@ pixel_loop:
     pop   es
     pop   bp
     ret   
-DrawFld0 endp
+DrawCG endp
 PROG ends
 end

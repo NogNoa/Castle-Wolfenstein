@@ -18,7 +18,7 @@ data	segment	byte public 'data'
         GfxFileP db 0
 data ENDS
 PROG    SEGMENT BYTE PUBLIC 'PROG'
-        PUBLIC  Goober, isDos210, SegmSt, SegmGt, CallStck, IsKStrok, GetStrok, setVideo, BiosVide, DrwLwMdl, RdSysFnt
+        PUBLIC  Goober, isDos210, SegmSt, SegmGt, CallStck, IsKStrok, GetStrok, setVideo, BiosVide, DrwMSG, RdSysFnt
         ASSUME  CS:PROG, ES:data
 Goober proc near
 ;
@@ -71,7 +71,7 @@ Goober endp
         Assume nothing
         Assume CS:PROG, DS:data
 ;
-DrwLwMdl proc near ;DrawLowMiddle
+DrwMSG proc near ;DrawLowMiddle
     push  bp
     push  es
     cld   
@@ -98,7 +98,7 @@ fr10fld1:
     pop   es
     pop   bp
     ret   
-DrwLwMdl endp
+DrwMSG endp
 ;
 IsKStrok proc near
 ;calls hard-coded function                           
@@ -208,7 +208,7 @@ BiosVide proc near
 ;   
 ;   arguments self-evident. no return
 ;
-    PUSH    BP
+    PUSH         BP
     MOV          BP,SP
     PUSH         DS
     MOV          AX,word ptr [BP + 4]

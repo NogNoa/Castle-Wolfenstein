@@ -129,19 +129,19 @@ file_to_screen(file_chc)
     {case 2:
         GfxFileP = file_buffer;
         load_file("demomesg", file_buffer, MSG_FSIZE);
-        DrwLwMdl();
+        DrwMSG();
         break;
     case 1:
         GfxFileP = file_buffer;
         load_file("presser", file_buffer, MSG_FSIZE);
-        DrwLwMdl();
+        DrwMSG();
         break;
     case 0:
         GfxFileP = file_buffer;
         load_file("titlepix", file_buffer, PIX_FSIZE);
         BiosVideo(SET_VIDEO_MODE | ((pcjr) ? JR_TINY : PxlClrLo), 0, 0, 0);
         if (RGB_monitor && !pcjr) {BiosVideo(SET_BACKGROUND, CGA_BLUE, 0, 0);}
-        DrawFld0(file_buffer);
+        DrawCG(file_buffer);
         break;
     default: return;
     }
