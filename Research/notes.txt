@@ -5,3 +5,11 @@ puts(rank_table(0, 0..7)) =
 
 presser prints the text press enter to begin to 
 the 2nd quarter of the screen
+
+GFX_8by8_Font points to a table of bitmap characters.
+80 characters, extending ascii on codepoints 80-ff
+each charedter take 8 bytes.
+Overall the size is 1KB
+This is indeed the size of wolf.chr
+each byte represent 8 pixels with a 8bit pallete
+8 bytes are 40 pixels showing a 8x8 character
