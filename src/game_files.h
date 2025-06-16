@@ -9,7 +9,7 @@ struct cs_pg_t
     byte suffix[PAGE_SZ - 0x6e];
 };
 extern byte pg_a[];
-extern struct cs_pg_t castl_pg;
+extern struct cs_pg_t cstl_pg;
 extern bool isDemo;
 
 #define RNK_PRIVATE 0x10

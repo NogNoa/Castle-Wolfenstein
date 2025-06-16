@@ -21,7 +21,42 @@ int flags;
 
 start_menu()
 {
-    ;
+    bool nochoice;
+    char c;
+    rank_print();
+    BiosVideo(0x200,0,0,RowColl(7,1));
+    cputs("Press:");
+    BiosVideo(0x200,0,0,RowColl(9,6));
+    cputs("Ctrl-N To create a new");
+    BiosVideo(0x200,0,0,RowColl(10,13));
+    cputs("castle map only.");
+    BiosVideo(0x200,0,0,RowColl(11,13));
+    cputs("(Saving your rank)");
+    BiosVideo(0x200,0,0,RowColl(13,6));
+    cputs("Ctrl-R To create a new");
+    BiosVideo(0x200,0,0,RowColl(14,13));
+    cputs("castle map and");
+    BiosVideo(0x200,0,0,RowColl(15,13));
+    cputs("reset your rank to");
+    BiosVideo(0x200,0,0,RowColl(16,13));
+    cputs("Private.");
+    BiosVideo(0x200,0,0,RowColl(18,6));
+    cputs("ENTER to do nothing.");
+    do {
+        while (!IsKStrok());
+        nochoice = false;
+        c = GetStrok();
+        if (c == CTRL('R'))
+        {   rank_index = RNK_PRIVATE;
+            cstl_pg.save_status = 0xff;
+        }
+        else if (c == CTRL('N'))
+        {   cstl_pg.save_status = 0xff;
+
+        }
+        else if (c != '\r')
+            {nochoice = true;}
+    } while (nochoice);
 }
 
 reverse_control()
@@ -38,17 +73,17 @@ resume_castle(/*void*/)
 }
 
 char pg_a[PAGE_SZ];
-struct cs_pg_t castl_pg;
+struct cs_pg_t cstl_pg;
 
 ld_castle_page_w_ptr(filename, length)
 string filename;
 {   
     int i;
     byte *cstl;
-    cstl = (byte *) &castl_pg;
+    cstl = (byte *) &cstl_pg;
     load_file(filename, file_buffer, length);
     for (i=0; i < PAGE_SZ; ++i)
-    {   cstl[i] = ptr_file_buffer[i];
+    {   cstl_pg[i] = ptr_file_buffer[i];
     }
 }
 
@@ -84,6 +119,8 @@ Rank_print()
     BiosVideo(SET_CURSOR_POSITION ,0, 0, RowColl(2,1));
     cputs("Your Rank is ");
     cputs(rank_table[rank_index >> 5]);
+    printf("\n rank index: 0x%x\n shifted: %x\n rank: %s", 
+        rank_index, rank_index >> 5, rank_table[rank_index >> 5]);
     return;
 }
 
@@ -103,23 +140,26 @@ int pagenumb;
 byte rank_calculate()
 {   
     bool cont;
-    if (castl_pg.save_status < 0x80) 
-    {   if (1 < castl_pg.save_status) 
-            {--castl_pg.rank_index;}
+    printf(" save status:%x\n rank_index: %x\n rise rank twice: %x\n"
+    ,cstl_pg.save_status, cstl_pg.rank_index, cstl_pg.ris_rnk_twc);
+    if (cstl_pg.save_status < 0x80) 
+    {   if (1 < cstl_pg.save_status) 
+            {--cstl_pg.rank_index;}
     }
     else
     {   do
-        {   if (RNK_FIELD_MARSHAL <= castl_pg.rank_index) {break;}
-            castl_pg.rank_index += 0x10;
-            cont = castl_pg.ris_rnk_twc;
-            castl_pg.ris_rnk_twc = false;
+        {   if (RNK_FIELD_MARSHAL <= cstl_pg.rank_index) {break;}
+            cstl_pg.rank_index += 0x10;
+            cont = cstl_pg.ris_rnk_twc;
+            cstl_pg.ris_rnk_twc = false;
         } while (cont);
-        if (RNK_FIELD_MARSHAL < castl_pg.rank_index) 
-            {castl_pg.rank_index = RNK_FIELD_MARSHAL;}
+        if (RNK_FIELD_MARSHAL < cstl_pg.rank_index) 
+            {cstl_pg.rank_index = RNK_FIELD_MARSHAL;}
     }
-    if (castl_pg.rank_index < RNK_PRIVATE)
-        {castl_pg.rank_index = RNK_PRIVATE;}
-    return castl_pg.rank_index;
+    if (cstl_pg.rank_index < RNK_PRIVATE)
+        {cstl_pg.rank_index = RNK_PRIVATE;}
+    printf("rank index: %x\n", cstl_pg.rank_index);
+    return cstl_pg.rank_index;
 }
 
 word dmodt_offset, ind29a;

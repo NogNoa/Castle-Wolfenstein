@@ -21,6 +21,8 @@ bool b284 = false;
 uint IhbtIntr();
 #endif
 
+extern struct cs_pg_t cstl_pg;
+
 
 main()
 {
@@ -48,9 +50,6 @@ main()
     load_file("wolf.chr", wolf_font, CHR_FSIZE);
     if (Sum(Goober, 36) != sum_goober + wolf_font) {_exit(-1);}
     RdSysFnt(wolf_font);
-    for (c=0x80;c<0x100;++c)
-    {   putch(c);
-    }
     file_to_screen(1);
     if (wait_to_return()) /* play demo if the return key isn't pressed in time*/
         {load_demo();}
@@ -58,7 +57,7 @@ main()
     l1a = 0x8000;
     l18 = 0x8002;
     lpage_a = pg_a;
-    lcastle_pg = &castl_pg;
+    lcastle_pg = &cstl_pg;
     is_cstle_stt_60();
     if (!isDemo)
         {   rank_print();
@@ -110,9 +109,9 @@ extern byte rank_index;
 
 is_cstle_stt_60()
 {   
-    save_status = (castl_pg.save_status == 0x60) ?
+    save_status = (cstl_pg.save_status == 0x60) ?
                   0xff : 
-                  castl_pg.save_status;
+                  cstl_pg.save_status;
     controller = DEV_undefined; 
     rank_index = rank_calculate();
 }
