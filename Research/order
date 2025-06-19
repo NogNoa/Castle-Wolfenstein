@@ -1,24 +1,32 @@
 code:
 0           [c.obj]
-82       c  seg0_memmove  
+82       c  [memory.c]
+            seg0_memmove            seg0_move
             fixit
-            seg0_memcmpr
+            seg0_memcmpr            seg0_compare
             build_func_on_stack
             check_for_debugger
-       asm  inhibit_brk_prnt_scrn
-       asm  empty_interrupt
+       asm  [drawa.asm]
+       asm  inhibit_brk_prnt_scrn   IhbtIntr
+       asm  empty_interrupt         EmptIntr
+            [NA]
        asm  fun_speaker_3a1
        asm  fun_speaker_3d4
-         c  file_to_screen
-       asm  draw_field0
+         c  [memory.c]
+            file_to_screen
+            [drawa.asm]
+       asm  draw_CG                 DrawCG
+            [NA]
          c  pallete_2
          c  FUND_1000_05af
             FUND_1000_0555
             FUN_1000_0610
+         c  [main.c]
 640      c  main
          c is_cstle_stt
 9f0
-a21         start_menu
+a21         [game_files.c]
+            start_menu
             reverse_control
 c1d         resume_castle
             new_castle
@@ -31,39 +39,46 @@ f21         save_page_a
 f71         switch_page_a
 fe3         rank_calculate
 1055
-11ba        castle_indexize
+11ba        [config.c]
+            castle_indexize
 11ec
-129d        put_2_strings
+129d        [config.c]
+            put_2_strings
+            [games_files.c]
             load_demo
             wait_to_return
             load_file
             lack_of joystick
+            [NA]
             nope
             fun_1464
+            [config.c]
             is_Junior
 1585
-5a71   c    keyboard_config
-            select_monitor
+5a71   c    keyboard_config     kb_cnfg
+            select_monitor      
             print_to_position
-            ctrls_load_r
+            ctrls_load_r        r_ctrls_load
             ctrls_read
-            ctrls_load_w
+            ctrls_load_w        w_ctrls_load
             ctrls_write
-     asm    goober_function
-            draw_lower_middle
-            is_keystroke
-            get_stroke
-            Set_video_mode
-            seg_memget
-            seg_memset
-            BIOS_Video
-            redirect_sys_font
-            is_dos_2_10
-            del_inst_5ff9
-            call_stack
+            [cwa.asm]
+     asm    goober_function     Goober
+            draw_message        DrwMSG
+            is_keystroke        IsKStrok
+            get_stroke          GetStrok
+            Set_video_mode      setVideo
+            seg_memget          SegmGt
+            seg_memset          SegmSt
+            BIOS_Video          BiosVide
+            redirect_sys_font   RdSysFnt
+            is_dos_2_10         isDos210
+            del_inst_5ff9       DelInst5ff9
+            call_stack          CallStck
 6157    
 62bc     c  identify_key
-63fe    
+63fe
+6800        JoyLocate    
 68c2        joystick_config
             look_for_joystick
             fun_6ecc
@@ -71,7 +86,8 @@ fe3         rank_calculate
             speaker_617d
             thunk_sum_func
 6fb9    
-7031   asm  speak_99
+7031   asm  [sonara.asm]
+            speak_99
             stop_sound
             make_sound
             sum_func
