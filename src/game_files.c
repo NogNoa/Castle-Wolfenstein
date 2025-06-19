@@ -5,7 +5,8 @@
 
 byte prewrite_buffer[PAGE_SZ];
 char file_buffer[0x3ff4];
-byte* ptr_file_buffer = file_buffer;
+byte *ptr_file_buffer = file_buffer;
+byte rank_index;
 
 int checked_open(fn, flags)
 string fn;
@@ -21,30 +22,29 @@ int flags;
 
 start_menu()
 {
-    bool nochoice;
     char c;
     rank_print();
-    BiosVideo(0x200,0,0,RowColl(7,1));
+    BiosVideo(0x200, 0, 0, RowColl(7, 1));
     cputs("Press:");
-    BiosVideo(0x200,0,0,RowColl(9,6));
+    BiosVideo(0x200, 0, 0, RowColl(9, 6));
     cputs("Ctrl-N To create a new");
-    BiosVideo(0x200,0,0,RowColl(10,13));
+    BiosVideo(0x200, 0, 0, RowColl(10, 13));
     cputs("castle map only.");
-    BiosVideo(0x200,0,0,RowColl(11,13));
+    BiosVideo(0x200, 0, 0, RowColl(11, 13));
     cputs("(Saving your rank)");
-    BiosVideo(0x200,0,0,RowColl(13,6));
+    BiosVideo(0x200, 0, 0, RowColl(13, 6));
     cputs("Ctrl-R To create a new");
-    BiosVideo(0x200,0,0,RowColl(14,13));
+    BiosVideo(0x200, 0, 0, RowColl(14, 13));
     cputs("castle map and");
-    BiosVideo(0x200,0,0,RowColl(15,13));
+    BiosVideo(0x200, 0, 0, RowColl(15, 13));
     cputs("reset your rank to");
-    BiosVideo(0x200,0,0,RowColl(16,13));
+    BiosVideo(0x200, 0, 0, RowColl(16, 13));
     cputs("Private.");
-    BiosVideo(0x200,0,0,RowColl(18,6));
+    BiosVideo(0x200, 0, 0, RowColl(18, 6));
     cputs("ENTER to do nothing.");
-    do {
+    while (true)
+    {
         while (!IsKStrok());
-        nochoice = false;
         c = GetStrok();
         if (c == CTRL('R'))
         {   rank_index = RNK_PRIVATE;
@@ -55,21 +55,46 @@ start_menu()
 
         }
         else if (c != '\r')
-            {nochoice = true;}
-    } while (nochoice);
+        {
+            continue;
+        }
+        break;
+    }
 }
 
 reverse_control()
 {
-    ;
+    char c;
+    setVideo(PxlClrLo);
+    BiosVideo(0x200, 0, 0, RowColl(9, 2));
+    cputs("What controls do you wish to adjust ?");
+    BiosVideo(0x200, 0, 0, RowColl(11, 2));
+    cputs("Press: K to adjust keyboard controls");
+    BiosVideo(0x200, 0, 0, RowColl(13, 9));
+    cputs("J to adjust joystick controls");
+    while (true)
+    {   while (!IsKStrok());
+        c = GetStrok();
+        if ((c | 0x20) == 'k')
+        {   kb_cnfg();}
+        else if ((c | 0x20) == 'j')
+        {   if (lkfr_jystk() == 0)
+                {jystk_cnfg();}
+            else
+                {lack_jystk();}
+
+        }
+        else
+            {continue;}
+        break;
+    }
 }
 
 resume_castle(/*void*/)
 {
     setVideoMode(PxlClrLo);
-    BiosVideo(SET_CURSOR_POSITION, 0, 0, RowColl(13,6));
+    BiosVideo(SET_CURSOR_POSITION, 0, 0, RowColl(13, 6));
     cputs("Resuming where you left off...");
-    
 }
 
 char pg_a[PAGE_SZ];
@@ -77,7 +102,7 @@ struct cs_pg_t cstl_pg;
 
 ld_castle_page_w_ptr(filename, length)
 string filename;
-{   
+{
     int i;
     byte *cstl;
     cstl = (byte *) &cstl_pg;
@@ -112,15 +137,14 @@ string rank_table[8] = {
     "General",
     "Field Marshal"
 };
-byte rank_index;
-Rank_print()
+rank_print()
 {
     setVideoMode(PxlClrLo);
-    BiosVideo(SET_CURSOR_POSITION ,0, 0, RowColl(2,1));
+    BiosVideo(SET_CURSOR_POSITION, 0, 0, RowColl(2, 1));
     cputs("Your Rank is ");
     cputs(rank_table[rank_index >> 5]);
-    printf("\n rank index: 0x%x\n shifted: %x\n rank: %s", 
-        rank_index, rank_index >> 5, rank_table[rank_index >> 5]);
+    printf("\n rank index: 0x%x\n shifted: %x\n rank: %s",
+           rank_index, rank_index >> 5, rank_table[rank_index >> 5]);
     return;
 }
 
@@ -138,12 +162,12 @@ int pagenumb;
 }
 
 byte rank_calculate()
-{   
+{
     bool cont;
     printf(" save status:%x\n rank_index: %x\n rise rank twice: %x\n"
     ,cstl_pg.save_status, cstl_pg.rank_index, cstl_pg.ris_rnk_twc);
-    if (cstl_pg.save_status < 0x80) 
-    {   if (1 < cstl_pg.save_status) 
+    if (cstl_pg.save_status < 0x80)
+    {   if (1 < cstl_pg.save_status)
             {--cstl_pg.rank_index;}
     }
     else
@@ -169,13 +193,13 @@ extern bool horizontal;
 
 load_demo()
 {
-    byte* gfx_buffer;
+    byte *gfx_buffer;
     file_to_screen(2);
     ld_castle_page_w_ptr("demofile", CASTLE_FSIZE);
     load_file("demodata", dmodt_buffer, DEMODT_FSIZE);
     isDemo = true;
     horizontal = false;
-    gfx_buffer = dmodt_buffer +  1000;
+    gfx_buffer = dmodt_buffer + 1000;
     dmodt_offset = 0;
     ind29a = 0;
     GfxFileP = gfx_buffer;
@@ -200,7 +224,7 @@ bool wait_to_return()
     return true;
 }
 
-load_file(file_name,dest, length)
+load_file(file_name, dest, length)
 string file_name;
 byte *dest;
 int length;
@@ -219,3 +243,7 @@ int length;
 }
 
 
+lack_jystk()
+{   /*lack_of joystick*/
+    ;
+}
