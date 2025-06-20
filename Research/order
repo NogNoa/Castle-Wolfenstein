@@ -74,7 +74,9 @@ fe3         rank_calculate
 6157
        c  [peripherals.c]    
 62bc   c    identify_key
-63fe
+63fe        fun_63fe
+6420        wait_for_input
+64e8
 6800        JoyLocate    
 68c2        joystick_config
             look_for_joystick

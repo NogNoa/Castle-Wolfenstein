@@ -265,7 +265,8 @@ int length;
 
 lack_jystk()
 {   /*lack_of joystick*/
-    ;
+    wait_for_input(0,0x17, "\aNo joystick connected (Press space bar)", ' ');
+    controller = DEV_undefined;
 }
 
 int d2ae, d29c;
@@ -273,10 +274,8 @@ int d2ae, d29c;
 isPcJr()
 {
   byte bios_pattern;
-  /*
   SegMemSet(SingleStep+1, 0x34);
   SegMemSet(SingleStep+3, 0xff);
-  */
   if (SegmGt(0xf000, (byte *)0xffff) == 0xfd) /* from the PC Jr BIOS*/
   { pcjr = true;
     d2ae = 900;
@@ -287,8 +286,6 @@ isPcJr()
     d2ae = 3300;
     d29c = 600;
   }
-  /*
   SegMemSet(Breakpoint+1, 0xcd);
   SegMemSet(Breakpoint+3, 0x13);
-  */
 }
