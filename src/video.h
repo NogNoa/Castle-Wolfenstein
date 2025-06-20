@@ -24,3 +24,6 @@
 void BiosVideo(int A, int B, int C, int D);*/
 
 #define DISPLAY_BUFFER 0xb800
+
+#define BiosPuts(row, coll, str) (BiosVideo(SET_CURSOR_POSITION, 0, 0, RowColl((row), (coll))), \
+                    cputs(str))

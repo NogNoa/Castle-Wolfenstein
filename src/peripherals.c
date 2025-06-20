@@ -9,8 +9,7 @@ char stop_char;
 {
     char in_char;
     int i;
-    BiosVideo(SET_CURSOR_POSITION, 0, 0, (row << 8) + col);
-    cputs(str);
+    BiosPuts(row, col, str);
     in_char = (stop_char == '\0') ? 'a' : '\0';
     while (in_char != stop_char)
     {   if(!IsKStrok())
@@ -37,5 +36,10 @@ jystk_cnfg()
 
 lkfr_jystk()
 {   /*look for joystick*/
+    ;
+}
+
+prfl_jystk()
+{   /*profile_joystick*/
     ;
 }

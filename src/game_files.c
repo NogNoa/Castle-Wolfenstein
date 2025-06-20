@@ -2,6 +2,7 @@
 #include "files.h"
 #include "video.h"
 #include "game_f~1.h"
+#include "config.h"
 
 byte prewrite_buffer[PAGE_SZ];
 char file_buffer[0x3ff4];
@@ -24,24 +25,15 @@ start_menu()
 {
     char c;
     rank_print();
-    BiosVideo(0x200, 0, 0, RowColl(7, 1));
-    cputs("Press:");
-    BiosVideo(0x200, 0, 0, RowColl(9, 6));
-    cputs("Ctrl-N To create a new");
-    BiosVideo(0x200, 0, 0, RowColl(10, 13));
-    cputs("castle map only.");
-    BiosVideo(0x200, 0, 0, RowColl(11, 13));
-    cputs("(Saving your rank)");
-    BiosVideo(0x200, 0, 0, RowColl(13, 6));
-    cputs("Ctrl-R To create a new");
-    BiosVideo(0x200, 0, 0, RowColl(14, 13));
-    cputs("castle map and");
-    BiosVideo(0x200, 0, 0, RowColl(15, 13));
-    cputs("reset your rank to");
-    BiosVideo(0x200, 0, 0, RowColl(16, 13));
-    cputs("Private.");
-    BiosVideo(0x200, 0, 0, RowColl(18, 6));
-    cputs("ENTER to do nothing.");
+    BiosPuts(7, 1, "Press:");
+    BiosPuts(9, 6, "Ctrl-N To create a new");
+    BiosPuts(10, 13, "castle map only.");
+    BiosPuts(11, 13, "(Saving your rank)");
+    BiosPuts(13, 6, "Ctrl-R To create a new");
+    BiosPuts(14, 13, "castle map and");
+    BiosPuts(15, 13, "reset your rank to");
+    BiosPuts(16, 13, "Private.");
+    BiosPuts(18, 6, "ENTER to do nothing.");
     while (true)
     {
         while (!IsKStrok());
@@ -66,12 +58,9 @@ reverse_control()
 {
     char c;
     setVideo(PxlClrLo);
-    BiosVideo(0x200, 0, 0, RowColl(9, 2));
-    cputs("What controls do you wish to adjust ?");
-    BiosVideo(0x200, 0, 0, RowColl(11, 2));
-    cputs("Press: K to adjust keyboard controls");
-    BiosVideo(0x200, 0, 0, RowColl(13, 9));
-    cputs("J to adjust joystick controls");
+    BiosPuts(9, 2, "What controls do you wish to adjust ?");
+    BiosPuts(11, 2 , "Press: K to adjust keyboard controls");
+    BiosPuts(13, 9, "J to adjust joystick controls");
     while (true)
     {   while (!IsKStrok());
         c = GetStrok();
@@ -93,8 +82,7 @@ reverse_control()
 resume_castle(/*void*/)
 {
     setVideoMode(PxlClrLo);
-    BiosVideo(SET_CURSOR_POSITION, 0, 0, RowColl(13, 6));
-    cputs("Resuming where you left off...");
+    BiosPuts(13, 6, "Resuming where you left off...");
 }
 
 char pg_a[PAGE_SZ];
@@ -140,8 +128,7 @@ string rank_table[8] = {
 rank_print()
 {
     setVideoMode(PxlClrLo);
-    BiosVideo(SET_CURSOR_POSITION, 0, 0, RowColl(2, 1));
-    cputs("Your Rank is ");
+    BiosPuts(2, 1, "Your Rank is ");
     cputs(rank_table[rank_index >> 5]);
     printf("\n rank index: 0x%x\n shifted: %x\n rank: %s",
            rank_index, rank_index >> 5, rank_table[rank_index >> 5]);
