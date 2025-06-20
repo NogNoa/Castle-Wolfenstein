@@ -78,9 +78,9 @@ fe3         rank_calculate
 6420        wait_for_input
 64e8
 6800        JoyLocate    
-68c2        joystick_config
-            look_for_joystick
-            fun_6ecc
+68c2        joystick_config     jystk_cnfg
+            look_for_joystick   lkfr_jystk
+            profile_joystick    prfl_jystk
             trampoline
             speaker_617d
             thunk_sum_func
