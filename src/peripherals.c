@@ -29,9 +29,60 @@ char stop_char;
     for (;str[i] != '\0';++i) {cputs(" ");}
 }
 
+byte JoyXDur, JoyYDur;
+
 jystk_cnfg() 
 {   /*joystick config*/
-    ;
+    bool done;
+    byte centXdur, centYdur, leftXdur, upYdur, rightXdur;
+    uint ucentXdur, urightXdur, uupYdurm, ucentYdur, uleftXdur, temp;
+    while(!done)
+    {   SetVideo(PxlClrLo);
+        BiosPuts(11, 10, "Move your joystick");
+        BiosPuts(13, 10, "to the center position,");
+        BiosPuts(15, 10, "and press the space bar.");
+        wait_for_input(0, 0, "",' ');
+        prfl_jystk();
+        centXdur = JoyXDur;
+        centYdur = JoyYDur;
+        SetVideo(PxlClrLo);
+        BiosPuts(2, 1, "Move your joystick");
+        BiosPuts(4, 1, "to the upper left,");
+        BiosPuts(6, 1, "hold it there and");
+        BiosPuts(8, 1, "press the space bar.");
+        wait_for_input(0, 0, "",' ');
+        prfl_jystk();
+        leftXdur = JoyXDur;
+        upYdur = JoyYDur;
+        SetVideo(PxlClrLo);
+        BiosPuts(2, 20, "Move your joystick");
+        BiosPuts(4, 20, "to the upper right,");
+        BiosPuts(6, 20, "hold it there and");
+        BiosPuts(8, 20, "press the space bar.");
+        wait_for_input(0, 0, "",' ');
+        prfl_jystk();
+        rightXdur = JoyXDur;
+        SetVideo(PxlClrLo);
+        BiosPuts(18, 20, "Move your joystick");
+        BiosPuts(20, 20, "to the lower right,");
+        BiosPuts(22, 20, "hold it there and");
+        BiosPuts(24, 20, "press the space bar.");
+        wait_for_input(0, 0, "",' ');
+        prfl_jystk();
+        /*JoyYDur is downYdur*/
+        if (leftXdur < rightXdur && upYdur < JoyYDur)
+        {   ucentXdur = (uint) centXdur;
+            temp =  (uint) leftXdur;
+            int ax = ucentXdur - temp;
+            long dax = (long) ax / 2;
+            int bx = temp + (int) dax;
+            ax = (int) rightXdur;
+            int cx = ucentXdur;
+            urightXdur = ax;
+            ax -=cx;
+            long dax = (long) ax / 2;
+        }
+    }
 }
 
 lkfr_jystk()
