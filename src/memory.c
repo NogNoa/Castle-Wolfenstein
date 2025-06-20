@@ -47,15 +47,11 @@ fixit()
         _exit(-1);
     }
     SegmSt(CGA_Space, (byte*) 1, 0);
-    /*
     SegMemSet(SingleStep+1, 0x34);
     SegMemSet(SingleStep+3, 0xff);
-    */
     SegMemSet(DetectedHardware, SegMemGet(DetectedHardware) & 0xcf | 0x10);
-    /*
     SegMemSet(Breakpoint+1, 0xcd);
     SegMemSet(Breakpoint+3, 0x13);
-    */
 }
 
 bool seg0_compare(start,limit,source,reference)
@@ -102,17 +98,14 @@ bool build_func_on_stack(arg)
 int check_for_debugger()
 {
     int back;
-    /*
     if (SegMemGet(Breakpoint+1) != 0xcd || SegMemGet(Breakpoint+3) != 0x13)
         {   _exit(-1); //doesn't return
         }
     else
-    */
     {   isDos210();
         back = Goober(0x26, (ORRERY));
         if (back > -1) {_exit(-1);}
         else {return 0;}
-        /*si = 0x40*/
     }
 }
 
@@ -121,10 +114,8 @@ extern byte RGB_monitor;
 
 file_to_screen(file_chc)
 {
-    /*
     SegMemSet(SingleStep+1, 0x34);
     SegMemSet(SingleStep+3, 0xff);
-    */
     switch(file_chc)
     {case 2:
         GfxFileP = file_buffer;
@@ -145,9 +136,7 @@ file_to_screen(file_chc)
         break;
     default: return;
     }
-    /*
     SegMemSet(Breakpoint+1, 0xcd);
     SegMemSet(Breakpoint+3, 0x13);
-    */
 }
 

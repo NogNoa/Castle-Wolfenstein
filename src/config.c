@@ -1,6 +1,5 @@
 #include "cw.h"
 #include "video.h"
-#include "IVT.h"
 #include "FCNTL.H"
 #include "config.h"
 

@@ -3,6 +3,8 @@
 #include "video.h"
 #include "game_f~1.h"
 #include "config.h"
+#include "IVT.h"
+#include "memory.h"
 
 byte prewrite_buffer[PAGE_SZ];
 char file_buffer[0x3ff4];
