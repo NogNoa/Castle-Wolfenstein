@@ -72,15 +72,11 @@ jystk_cnfg()
         /*JoyYDur is downYdur*/
         if (leftXdur < rightXdur && upYdur < JoyYDur)
         {   ucentXdur = (uint) centXdur;
-            temp =  (uint) leftXdur;
-            int ax = ucentXdur - temp;
-            long dax = (long) ax / 2;
-            int bx = temp + (int) dax;
-            ax = (int) rightXdur;
-            int cx = ucentXdur;
-            urightXdur = ax;
-            ax -=cx;
-            long dax = (long) ax / 2;
+            uleftXdur =  (uint) leftXdur; /*bp.0*/
+            uleftXdur =  uleftXdur + (long) (ucentXdur - uleftXdur) / 2;
+            urightXdur = (uint) rightXdur;
+            uint local_d = ucentXdur + (long) (rightXdur - ucentXdur) / 2;
+
         }
     }
 }
