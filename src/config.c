@@ -2,62 +2,15 @@
 #include "video.h"
 #include "IVT.h"
 #include "FCNTL.H"
-#include "memory.h"
 #include "config.h"
-
-extern byte* file_buffer;
-
-/*void*/
-castle_indexize(/*void*/)
-{
-    int i;
-    byte * si;
-
-    for (i=1; i < 0x40; ++i)
-      {file_buffer[i * PAGE_SZ + 0x50] = (byte) i;}
-}
-
-bool pcjr;
-
-put_2_strings(line4, line5)
-string line4, *line5;
-{   
-    if (pcjr) {setVideoMode(TxtGreyWd);}
-    else {setVideoMode(TxtGreyThn);}
-    BiosVideo(SET_CURSOR_POSITION, 0, 0, RowColl(4,1));
-    cputs(line4);
-    cputs(line5);
-}
-
-int d2ae, d29c;
-
-isPcJr()
-{
-  byte bios_pattern;
-  /*
-  SegMemSet(SingleStep+1, 0x34);
-  SegMemSet(SingleStep+3, 0xff);
-  */
-  if (SegmGt(0xf000, (byte *)0xffff) == 0xfd) /* from the PC Jr BIOS*/
-  { pcjr = true;
-    d2ae = 900;
-    d29c = 200;
-  }
-  else
-  { pcjr = false;
-    d2ae = 3300;
-    d29c = 600;
-  }
-  /*
-  SegMemSet(Breakpoint+1, 0xcd);
-  SegMemSet(Breakpoint+3, 0x13);
-  */
-}
 
 extern byte RGB_monitor;
 
 
-keyboard_config(void) {}
+kb_cnfg(void) 
+{ /*keyboard config*/
+      ;
+}
 
 select_monitor() 
 {

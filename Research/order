@@ -39,23 +39,19 @@ f21         save_page_a
 f71         switch_page_a
 fe3         rank_calculate
 1055
-11ba        [config.c]
-            castle_indexize
+11ba        castle_indexize
 11ec
-129d        [config.c]
-            put_2_strings
-            [games_files.c]
+129d        put_2_strings
             load_demo
             wait_to_return
             load_file
             lack_of joystick
-            [NA]
             nope
             fun_1464
-            [config.c]
-            is_Junior
+            is_Junior           isPcJr
 1585
-5a71   c    keyboard_config     kb_cnfg
+5a71   c    [config.c]
+            keyboard_config     kb_cnfg
             select_monitor      
             print_to_position
             ctrls_load_r        r_ctrls_load

@@ -78,11 +78,11 @@ reverse_control()
         if ((c | 0x20) == 'k')
         {   kb_cnfg();}
         else if ((c | 0x20) == 'j')
-        {   if (lkfr_jystk() == 0)
+        {   /*if (lkfr_jystk() == 0)
                 {jystk_cnfg();}
             else
                 {lack_jystk();}
-
+            */
         }
         else
             {continue;}
@@ -108,7 +108,7 @@ string filename;
     cstl = (byte *) &cstl_pg;
     load_file(filename, file_buffer, length);
     for (i=0; i < PAGE_SZ; ++i)
-    {   cstl_pg[i] = ptr_file_buffer[i];
+    {   cstl[i] = ptr_file_buffer[i];
     }
 }
 
@@ -186,6 +186,27 @@ byte rank_calculate()
     return cstl_pg.rank_index;
 }
 
+/*void*/
+castle_indexize(/*void*/)
+{
+    int i;
+
+    for (i=1; i < 0x40; ++i)
+      {file_buffer[i * PAGE_SZ + 0x50] = (byte) i;}
+}
+
+bool pcjr;
+
+put_2_strings(line4, line5)
+string line4, *line5;
+{   
+    if (pcjr) {setVideoMode(TxtGreyWd);}
+    else {setVideoMode(TxtGreyThn);}
+    BiosVideo(SET_CURSOR_POSITION, 0, 0, RowColl(4,1));
+    cputs(line4);
+    cputs(line5);
+}
+
 word dmodt_offset, ind29a;
 bool isDemo = false;
 byte dmodt_buffer[DEMODT_FSIZE];
@@ -207,7 +228,6 @@ load_demo()
 }
 
 word error_encountered;
-extern bool pcjr;
 
 bool wait_to_return()
 {
@@ -246,4 +266,29 @@ int length;
 lack_jystk()
 {   /*lack_of joystick*/
     ;
+}
+
+int d2ae, d29c;
+
+isPcJr()
+{
+  byte bios_pattern;
+  /*
+  SegMemSet(SingleStep+1, 0x34);
+  SegMemSet(SingleStep+3, 0xff);
+  */
+  if (SegmGt(0xf000, (byte *)0xffff) == 0xfd) /* from the PC Jr BIOS*/
+  { pcjr = true;
+    d2ae = 900;
+    d29c = 200;
+  }
+  else
+  { pcjr = false;
+    d2ae = 3300;
+    d29c = 600;
+  }
+  /*
+  SegMemSet(Breakpoint+1, 0xcd);
+  SegMemSet(Breakpoint+3, 0x13);
+  */
 }
