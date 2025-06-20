@@ -35,7 +35,8 @@ jystk_cnfg()
 {   /*joystick config*/
     bool done;
     byte centXdur, centYdur, leftXdur, upYdur, rightXdur;
-    uint ucentXdur, urightXdur, uupYdurm, ucentYdur, uleftXdur, temp;
+    byte bcentXdur, bcentYdur, bleftXdur, bupYdur;
+    uint ucentXdur, urightXdur, uupYdur, ucentYdur, uleftXdur, temp;
     while(!done)
     {   SetVideo(PxlClrLo);
         BiosPuts(11, 10, "Move your joystick");
@@ -73,9 +74,13 @@ jystk_cnfg()
         if (leftXdur < rightXdur && upYdur < JoyYDur)
         {   ucentXdur = (uint) centXdur;
             uleftXdur =  (uint) leftXdur; /*bp.0*/
-            uleftXdur =  uleftXdur + (long) (ucentXdur - uleftXdur) / 2;
+            bleftXdur =  uleftXdur + (long) (ucentXdur - uleftXdur) / 2;
             urightXdur = (uint) rightXdur;
-            uint local_d = ucentXdur + (long) (rightXdur - ucentXdur) / 2;
+            bcentXdur = ucentXdur + (long) (rightXdur - ucentXdur) / 2;
+            ucentYdur = (uint) centYdur;
+            uupYdur = (uint) upYdur;
+            local_16 = ucentYdur - uupYdur;
+            bupYdur = uupYdur + (long) local_16 / 2;
 
         }
     }
