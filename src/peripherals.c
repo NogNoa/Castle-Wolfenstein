@@ -25,7 +25,7 @@ char stop_char;
 
         }
     }
-    BiosVideo(SET_CURSOR_POSITION, 0, 0, (row << 8) + col);
+    BiosVideo(SET_CURSOR_POSITION, 0, 0, RowColl(row, col));
     for (;str[i] != '\0';++i) {cputs(" ");}
 }
 
@@ -34,7 +34,7 @@ byte JoyXDur, JoyYDur;
 jystk_cnfg() 
 {   /*joystick config*/
     bool done;
-    byte centXdur, centYdur, leftXdur, upYdur, rightXdur;
+    byte centXdur, centYdur, leftXdur, upYdur, rightXdur, downYdur;
     byte bcentXdur, bcentYdur, bleftXdur, bupYdur;
     uint ucentXdur, urightXdur, uupYdur, ucentYdur, uleftXdur, temp;
     while(!done)
@@ -70,8 +70,8 @@ jystk_cnfg()
         BiosPuts(24, 20, "press the space bar.");
         wait_for_input(0, 0, "",' ');
         prfl_jystk();
-        /*JoyYDur is downYdur*/
-        if (leftXdur < rightXdur && upYdur < JoyYDur)
+        downYdur = JoyYDur;
+        if (leftXdur < rightXdur && upYdur < downYdur)
         {   ucentXdur = (uint) centXdur;
             uleftXdur =  (uint) leftXdur; /*bp.0*/
             bleftXdur =  uleftXdur + (long) (ucentXdur - uleftXdur) / 2;
@@ -79,10 +79,21 @@ jystk_cnfg()
             bcentXdur = ucentXdur + (long) (rightXdur - ucentXdur) / 2;
             ucentYdur = (uint) centYdur;
             uupYdur = (uint) upYdur;
-            local_16 = ucentYdur - uupYdur;
-            bupYdur = uupYdur + (long) local_16 / 2;
-
+            bupYdur = uupYdur + (long) (ucentYdur - uupYdur) / 2;
+            bcentYdur = ucentYdur + (long) (downYdur - ucentYdur) / 2;
+            if (uleftXdur < bleftXdur && 
+                bcentXdur < urightXdur && 
+                bupYdur < upYdur &&
+                bcentYdur < downYdur)
+                {done = true;}
         }
+    }
+    if (!done)
+    {   SetVideo(PxlClrLo);
+        BiosPuts(19, 4, "Turn your joystick 90 degrees (one");
+        BiosPuts(21, 4, "quarter turn), press the space bar");
+        BiosPuts(23, 4, "and try again");
+        wait_for_input(0, 0, "",' ');
     }
 }
 
