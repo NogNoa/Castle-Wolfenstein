@@ -3,11 +3,13 @@ mc1 game_f~1 > ..\game_f.err
 mc1 config > ..\config.err 
 mc1 memory > ..\memory.err 
 mc1 main > ..\main.err 
+mc1 periph~1 > ..\periph.err
 rem mc1 rank 
 mc2 game_f~1
 mc2 config 
 mc2 memory 
-mc2 main 
+mc2 main
+mc2 periph~1
 rem mc2 rank 
 
 del cwa.OBJ
@@ -21,5 +23,5 @@ rename cwa.OBJ ..\src\cwa.OBJ
 rename drawa.OBJ ..\src\drawa.OBJ
 rename sonara.OBJ ..\src\sonara.OBJ
 cd ..\src
-b:link b:c MEMORY drawa MAIN config game_f~1 cwa sonara,cw,cw,b:mc
+b:link b:c MEMORY drawa MAIN config game_f~1 cwa periph~1 sonara,cw,cw,b:mc
 rename cw.exe ..\bin\cw.exe

@@ -71,7 +71,8 @@ fe3         rank_calculate
             is_dos_2_10         isDos210
             del_inst_5ff9       DelInst5ff9
             call_stack          CallStck
-6157    
+6157
+         c  [peripherals.c]    
 62bc     c  identify_key
 63fe
 6800        JoyLocate    

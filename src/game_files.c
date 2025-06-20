@@ -78,11 +78,11 @@ reverse_control()
         if ((c | 0x20) == 'k')
         {   kb_cnfg();}
         else if ((c | 0x20) == 'j')
-        {   /*if (lkfr_jystk() == 0)
+        {   if (lkfr_jystk() == 0)
                 {jystk_cnfg();}
             else
                 {lack_jystk();}
-            */
+
         }
         else
             {continue;}
