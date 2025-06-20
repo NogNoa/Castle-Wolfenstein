@@ -1,31 +1,31 @@
 code:
-0           [c.obj]
-82       c  [memory.c]
+0         [c.obj]
+82     c  [memory.c]
             seg0_memmove            seg0_move
             fixit
             seg0_memcmpr            seg0_compare
             build_func_on_stack
             check_for_debugger
-       asm  [drawa.asm]
-       asm  inhibit_brk_prnt_scrn   IhbtIntr
-       asm  empty_interrupt         EmptIntr
-            [NA]
-       asm  fun_speaker_3a1
-       asm  fun_speaker_3d4
-         c  [memory.c]
+     asm  [drawa.asm]
+     asm    inhibit_brk_prnt_scrn   IhbtIntr
+     asm    empty_interrupt         EmptIntr
+          [NA]
+     asm    fun_speaker_3a1
+     asm    fun_speaker_3d4
+       c  [memory.c]
             file_to_screen
-            [drawa.asm]
-       asm  draw_CG                 DrawCG
-            [NA]
-         c  pallete_2
-         c  FUND_1000_05af
+          [drawa.asm]
+     asm    draw_CG                 DrawCG
+          [NA]
+       c    pallete_2
+       c    FUND_1000_05af
             FUND_1000_0555
             FUN_1000_0610
-         c  [main.c]
-640      c  main
-         c is_cstle_stt
+       c  [main.c]
+640    c    main
+       c    is_cstle_stt
 9f0
-a21         [game_files.c]
+a21       [game_files.c]
             start_menu
             reverse_control
 c1d         resume_castle
@@ -50,7 +50,7 @@ fe3         rank_calculate
             fun_1464
             is_Junior           isPcJr
 1585
-5a71   c    [config.c]
+5a71   c  [config.c]
             keyboard_config     kb_cnfg
             select_monitor      
             print_to_position
@@ -58,7 +58,7 @@ fe3         rank_calculate
             ctrls_read
             ctrls_load_w        w_ctrls_load
             ctrls_write
-            [cwa.asm]
+          [cwa.asm]
      asm    goober_function     Goober
             draw_message        DrwMSG
             is_keystroke        IsKStrok
@@ -72,8 +72,8 @@ fe3         rank_calculate
             del_inst_5ff9       DelInst5ff9
             call_stack          CallStck
 6157
-         c  [peripherals.c]    
-62bc     c  identify_key
+       c  [peripherals.c]    
+62bc   c    identify_key
 63fe
 6800        JoyLocate    
 68c2        joystick_config
@@ -83,7 +83,7 @@ fe3         rank_calculate
             speaker_617d
             thunk_sum_func
 6fb9    
-7031   asm  [sonara.asm]
+7031 asm  [sonara.asm]
             speak_99
             stop_sound
             make_sound
@@ -91,10 +91,10 @@ fe3         rank_calculate
 7087    
 7143        sleep_squared
 7151        
-7d89        [mc.lib]
+7d89      [mc.lib]
 
 Data:   
-            [c.obj]
+          [c.obj]
             fixit
             inhibit_brk_prnt_scrn
             ...
