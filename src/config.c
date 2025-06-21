@@ -62,8 +62,8 @@ string massage;
     cputs(massage);
 }
 
-bool horizontal, vertical;
-byte b2ba, b4ac3[0xb], b4ace[0xb], b4ad9[0xb], b4ae4[0xb];
+bool horizontal, sagital;
+byte b2ba, LC_L_RC[0xb], RC_LC[0xb], UC_YCU[0xb], YC_UC[0xb];
 
 char controller;
 
@@ -79,13 +79,13 @@ r_ctrls_load()
         _exit(-1);
     }
     ctrls_read(fd, &horizontal, 0l, 1);
-    ctrls_read(fd, &vertical, 1l, 1);
+    ctrls_read(fd, &sagital, 1l, 1);
     ctrls_read(fd, &b2ba, 2l, 1);
     ctrls_read(fd, &RGB_monitor, 3l, 1);
-    ctrls_read(fd, b4ac3, 4l, 0xb);
-    ctrls_read(fd, b4ace, 0xfl, 0xb);
-    ctrls_read(fd, b4ad9, 0x1al, 0xb);
-    ctrls_read(fd, b4ae4, 0x25l, 0xb);
+    ctrls_read(fd, LC_L_RC, 4l, 0xb);
+    ctrls_read(fd, RC_LC, 0xfl, 0xb);
+    ctrls_read(fd, UC_YCU, 0x1al, 0xb);
+    ctrls_read(fd, YC_UC, 0x25l, 0xb);
     close(fd);
 }
 
@@ -112,13 +112,13 @@ int w_ctrls_load()
     exit(-1);
   }
     ctrls_write(fd, &horizontal, 0l, 1);
-    ctrls_write(fd, &vertical, 1l, 1);
+    ctrls_write(fd, &sagital, 1l, 1);
     ctrls_write(fd, &b2ba, 2l, 1);
     ctrls_write(fd, &RGB_monitor, 3l, 1);
-    ctrls_write(fd, b4ac3, 4l, 0xb);
-    ctrls_write(fd, b4ace, 0xfl, 0xb);
-    ctrls_write(fd, b4ad9, 0x1al, 0xb);
-    ctrls_write(fd, b4ae4, 0x25l, 0xb);
+    ctrls_write(fd, LC_L_RC, 4l, 0xb);
+    ctrls_write(fd, RC_LC, 0xfl, 0xb);
+    ctrls_write(fd, UC_YCU, 0x1al, 0xb);
+    ctrls_write(fd, YC_UC, 0x25l, 0xb);
     close(fd);
 }
 

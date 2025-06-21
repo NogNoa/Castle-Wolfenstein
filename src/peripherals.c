@@ -30,13 +30,16 @@ char stop_char;
 }
 
 byte JoyXDur, JoyYDur;
+extern bool sagital;
+extern byte LC_L_RC[11], RC_LC[11], UC_YCU[11], YC_UC[11];
 
 jystk_cnfg() 
 {   /*joystick config*/
-    bool done;
+    bool done = false;
     byte centXdur, centYdur, leftXdur, upYdur, rightXdur, downYdur;
-    byte bcentXdur, bcentYdur, bleftXdur, bupYdur;
-    uint ucentXdur, urightXdur, uupYdur, ucentYdur, uleftXdur, temp;
+    byte brightXdur, bdownYdur, bleftXdur, bupYdur;
+    uint ucentXdur, urightXdur, uupYdur, ucentYdur, uleftXdur, yupdiff;
+    char *shoot, *aim;
     while(!done)
     {   SetVideo(PxlClrLo);
         BiosPuts(11, 10, "Move your joystick");
@@ -76,17 +79,35 @@ jystk_cnfg()
             uleftXdur =  (uint) leftXdur; /*bp.0*/
             bleftXdur = uleftXdur + (uint) ((long) (ucentXdur - uleftXdur) / 2);
             urightXdur = (uint) rightXdur;
-            bcentXdur = ucentXdur + (uint) ((long) (urightXdur - ucentXdur) / 2);
+            brightXdur = ucentXdur + (uint) ((long) (urightXdur - ucentXdur) / 2);
             uupYdur = (uint) upYdur;
             ucentYdur = (uint) centYdur;
-            uint yupdiff = ucentYdur - uupYdur;
+            yupdiff = ucentYdur - uupYdur;
             bupYdur = uupYdur + (uint) ((long) yupdiff / 2);
-            bcentYdur = ucentYdur + (uint) ((long) ((uint) downYdur - ucentYdur) / 2);
+            bdownYdur = ucentYdur + (uint) ((long) ((uint) downYdur - ucentYdur) / 2);
             if (uleftXdur < bleftXdur && 
-                bcentXdur < urightXdur && 
+                brightXdur < urightXdur && 
                 bupYdur < upYdur &&
-                bcentYdur < downYdur)
-                {done = true;}
+                bdownYdur < downYdur)
+                {   LC_L_RC[0] = LC_L_RC[1] = LC_L_RC[2] = bleftXdur + 1;
+                    LC_L_RC[3] = LC_L_RC[7] = -1;
+                    LC_L_RC[4] = LC_L_RC[5] = LC_L_RC[6] = leftXdur;
+                    LC_L_RC[8] = LC_L_RC[9] = LC_L_RC[10] = brightXdur;
+                    RC_LC[0] = RC_LC[1] = RC_LC[2] = brightXdur - 1;
+                    RC_LC[3] = -1;
+                    RC_LC[4] = RC_LC[5] = RC_LC[6] = bdownYdur;
+                    RC_LC[7] = -2;
+                    RC_LC[8] = RC_LC[9] = RC_LC[10] = -6;
+                    UC_YCU[0] = UC_YCU[4] = UC_YCU[8] = bupYdur + 1;
+                    UC_YCU[1] = UC_YCU[5] = UC_YCU[9] = bdownYdur;
+                    UC_YCU[2] = UC_YCU[6] = UC_YCU[10] = upYdur;
+                    UC_YCU[3] = UC_YCU[7] = -1;
+                    YC_UC[0] = YC_UC[4] = YC_UC[8] = bdownYdur - 1;
+                    YC_UC[1] = YC_UC[5] = YC_UC[9] = -6;
+                    YC_UC[2] = YC_UC[6] = YC_UC[10] = bupYdur;
+                    YC_UC[3] = YC_UC[7] = -2;
+                    done = true;
+                }
         }
     }
     if (!done)
@@ -96,6 +117,26 @@ jystk_cnfg()
         BiosPuts(23, 4, "and try again");
         wait_for_input(0, 0, "",' ');
     }
+    SetVideo(PxlClrLo);
+    if (!sagital)
+    {   shoot = "front";
+        aim = "back";
+    }
+    else
+    {   shoot = "back";
+        aim = "front";
+    }
+    BiosVideo(SET_CURSOR_POSITION, 0, 0, RowColl(5, 1));
+    cprintf("You now shoot with the %s button", shoot);
+    BiosVideo(SET_CURSOR_POSITION, 0, 0, RowColl(7, 1));
+    cprintf("and aim with the %s button.", aim);
+    BiosPuts(10, 9, "Press the ESC key");
+    BiosVideo(SET_CURSOR_POSITION, 0, 0, RowColl(12, 1));
+    cprintf("to shoot with the %s button, and", aim);
+    BiosVideo(SET_CURSOR_POSITION, 0, 0, RowColl(14, 1));
+    cprintf("aim with the %s button.", shoot);
+    BiosPuts(17, 1, "Press the space bar to keep");
+    BiosPuts(19, 1, "the buttons as they currently are.");
 }
 
 lkfr_jystk()

@@ -99,7 +99,7 @@ int check_for_debugger()
 {
     int back;
     if (SegMemGet(Breakpoint+1) != 0xcd || SegMemGet(Breakpoint+3) != 0x13)
-        {   _exit(-1); //doesn't return
+        {   _exit(-1); /*doesn't return*/
         }
     else
     {   isDos210();
