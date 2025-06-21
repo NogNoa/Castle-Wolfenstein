@@ -39,6 +39,7 @@ jystk_cnfg()
     byte centXdur, centYdur, leftXdur, upYdur, rightXdur, downYdur;
     byte brightXdur, bdownYdur, bleftXdur, bupYdur;
     uint ucentXdur, urightXdur, uupYdur, ucentYdur, uleftXdur, yupdiff;
+    char stroke;
     char *shoot, *aim;
     while(!done)
     {   SetVideo(PxlClrLo);
@@ -137,6 +138,19 @@ jystk_cnfg()
     cprintf("aim with the %s button.", shoot);
     BiosPuts(17, 1, "Press the space bar to keep");
     BiosPuts(19, 1, "the buttons as they currently are.");
+    stroke = '\0';
+    while ((stroke != ESC && (stroke != ' '))) {
+        if (Is_Keystroke() != 0) {
+        stroke = (char)get_stroke();
+        }
+    }
+    if (stroke == ESC) {
+        sagital = !sagital;
+    }
+    BYTE_1a27_02ba = 0;
+    BiosPuts(23, 14, "Saving data...");
+    uleftXdur = ctrls_load_w();
+    return uleftXdur;
 }
 
 lkfr_jystk()
