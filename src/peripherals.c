@@ -74,22 +74,14 @@ jystk_cnfg()
         if (leftXdur < rightXdur && upYdur < downYdur)
         {   ucentXdur = (uint) centXdur;
             uleftXdur =  (uint) leftXdur; /*bp.0*/
-
-            uint ax;
-            uint bx;
-            bx = uleftXdur + (uint) ((long) (ucentXdur - uleftXdur) / 2); /*bleftXdur*/
-            uint cx;
+            bleftXdur = uleftXdur + (uint) ((long) (ucentXdur - uleftXdur) / 2);
             urightXdur = (uint) rightXdur;
-            ax = (uint) ((long) (urightXdur - ucentXdur) / 2);
-            cx = ucentXdur + ax; /*bcentXdur*/
-
-            bleftXdur =  uleftXdur + (long) (ucentXdur - uleftXdur) / 2;
-            urightXdur = (uint) rightXdur;
-            bcentXdur = ucentXdur + (long) (rightXdur - ucentXdur) / 2;
-            ucentYdur = (uint) centYdur;
+            bcentXdur = ucentXdur + (uint) ((long) (urightXdur - ucentXdur) / 2);
             uupYdur = (uint) upYdur;
-            bupYdur = uupYdur + (long) (ucentYdur - uupYdur) / 2;
-            bcentYdur = ucentYdur + (long) (downYdur - ucentYdur) / 2;
+            ucentYdur = (uint) centYdur;
+            uint yupdiff = ucentYdur - uupYdur;
+            bupYdur = uupYdur + (uint) ((long) yupdiff / 2);
+            bcentYdur = ucentYdur + (uint) ((long) ((uint) downYdur - ucentYdur) / 2);
             if (uleftXdur < bleftXdur && 
                 bcentXdur < urightXdur && 
                 bupYdur < upYdur &&
