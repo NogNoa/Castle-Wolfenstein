@@ -74,6 +74,15 @@ jystk_cnfg()
         if (leftXdur < rightXdur && upYdur < downYdur)
         {   ucentXdur = (uint) centXdur;
             uleftXdur =  (uint) leftXdur; /*bp.0*/
+
+            uint ax;
+            uint bx;
+            bx = uleftXdur + (uint) ((long) (ucentXdur - uleftXdur) / 2); /*bleftXdur*/
+            uint cx;
+            urightXdur = (uint) rightXdur;
+            ax = (uint) ((long) (urightXdur - ucentXdur) / 2);
+            cx = ucentXdur + ax; /*bcentXdur*/
+
             bleftXdur =  uleftXdur + (long) (ucentXdur - uleftXdur) / 2;
             urightXdur = (uint) rightXdur;
             bcentXdur = ucentXdur + (long) (rightXdur - ucentXdur) / 2;
