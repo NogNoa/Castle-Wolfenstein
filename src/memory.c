@@ -30,7 +30,6 @@ byte patch_3fff[4] = "\x8c\xc5\x8e\xd5";
 
 fixit()
 {
-    byte p;
     if (pcjr && isDos210())
     {   if (seg0_compare(0, (10)-1, (byte *) (0x1a71), (byte *) (test_1a71)))
             {seg0_move((10), (byte *) (0x1a71), (byte *) (patch_1a71));}
@@ -93,7 +92,7 @@ bool build_func_on_stack(arg)
   return (fnstk[0] == 0x1000);
 }
 
-#define ORRERY (&build_func_on_stack + 0x1F)
+#define ORRERY ((byte*) &build_func_on_stack + 0x1F)
 
 int check_for_debugger()
 {

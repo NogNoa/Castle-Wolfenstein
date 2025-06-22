@@ -1,5 +1,4 @@
 #include "cw.h"
-#include "doscall.h"
 #include "video.h"
 #include "IVT.h"
 #include "memory.h"
@@ -20,8 +19,6 @@ bool b284 = false;
 #ifdef PRODEBUG
 uint IhbtIntr();
 #endif
-
-extern struct cs_pg_t cstl_pg;
 
 
 main()

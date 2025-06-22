@@ -28,10 +28,5 @@ src/CW.MAP
 
 #Game Files
 bin/
-src/Vocab
-src/wolf.chr
-src/titlepix
-src/presser
-src/ctrls
-src/castle
+
 

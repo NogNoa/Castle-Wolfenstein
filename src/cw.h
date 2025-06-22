@@ -13,7 +13,7 @@ typedef char bool;
 #define PAGE_SZ 0x100
 
 #ifndef LATTICE
-typedef char byte;
+typedef unsigned char byte;
 #endif
 
 #ifndef NULL

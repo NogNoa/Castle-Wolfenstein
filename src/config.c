@@ -51,7 +51,6 @@ select_monitor()
     w_ctrls_load();
     print_to_position(14, 22,"\t\t ");
   }
-  return;
 }
 
 print_to_position(column, row, massage) 

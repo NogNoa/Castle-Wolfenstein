@@ -87,7 +87,7 @@ resume_castle(/*void*/)
     BiosPuts(13, 6, "Resuming where you left off...");
 }
 
-char pg_a[PAGE_SZ];
+byte pg_a[PAGE_SZ];
 struct cs_pg_t cstl_pg;
 
 ld_castle_page_w_ptr(filename, length)
@@ -134,7 +134,6 @@ rank_print()
     cputs(rank_table[rank_index >> 5]);
     printf("\n rank index: 0x%x\n shifted: %x\n rank: %s",
            rank_index, rank_index >> 5, rank_table[rank_index >> 5]);
-    return;
 }
 
 signed_error load_page_a(pagenumb)
@@ -262,7 +261,6 @@ int d2ae, d29c;
 
 isPcJr()
 {
-  byte bios_pattern;
   SegMemSet(SingleStep+1, 0x34);
   SegMemSet(SingleStep+3, 0xff);
   if (SegmGt(0xf000, (byte *)0xffff) == 0xfd) /* from the PC Jr BIOS*/
