@@ -6,12 +6,24 @@
 #include "IVT.h"
 #include "memory.h"
 
-byte prewrite_buffer[PAGE_SZ];
+#ifdef __WATCOMC__
+#include "console.h"
+#include "FCNTL.H"
+#include "ibm.h"
+#include "io1.h"
+#include "cwa.h"
+#include "peripherals.h"
+#include "config.h"
+int Goober(int p1, byte* dest);
+void rank_print(void);
+#endif
+
+byte prewrite_buffer[0x100];
 char file_buffer[0x3ff4];
-byte *ptr_file_buffer = file_buffer;
+char* ptr_file_buffer = file_buffer;
 byte rank_index;
 
-int checked_open(fn, flags)
+inline int checked_open(fn, flags)
 string fn;
 int flags;
 {   int fildsc;
@@ -23,7 +35,7 @@ int flags;
     return fildsc;
 }
 
-start_menu()
+void start_menu(void)
 {
     char c;
     rank_print();
@@ -56,10 +68,10 @@ start_menu()
     }
 }
 
-reverse_control()
+void reverse_control(void)
 {
     char c;
-    setVideo(PxlClrLo);
+    setVideoMode(PxlClrLo);
     BiosPuts(9, 2, "What controls do you wish to adjust ?");
     BiosPuts(11, 2 , "Press: K to adjust keyboard controls");
     BiosPuts(13, 9, "J to adjust joystick controls");
@@ -81,7 +93,7 @@ reverse_control()
     }
 }
 
-resume_castle(/*void*/)
+void resume_castle(void)
 {
     setVideoMode(PxlClrLo);
     BiosPuts(13, 6, "Resuming where you left off...");
@@ -90,7 +102,7 @@ resume_castle(/*void*/)
 byte pg_a[PAGE_SZ];
 struct cs_pg_t cstl_pg;
 
-ld_castle_page_w_ptr(filename, length)
+void ld_castle_page_w_ptr(filename, length)
 string filename;
 {
     int i;
@@ -102,8 +114,9 @@ string filename;
     }
 }
 
-write_to_file(file_name)
-char* file_name;
+
+void write_to_file(file_name)
+string file_name;
 {
     int fildsc, i;
     ptr_file_buffer = file_buffer;
@@ -127,12 +140,13 @@ string rank_table[8] = {
     "General",
     "Field Marshal"
 };
-rank_print()
+
+void rank_print(void)
 {
     setVideoMode(PxlClrLo);
     BiosPuts(2, 1, "Your Rank is ");
     cputs(rank_table[rank_index >> 5]);
-    printf("\n rank index: 0x%x\n shifted: %x\n rank: %s",
+    cprintf("\n rank index: 0x%x\n shifted: %x\n rank: %s",
            rank_index, rank_index >> 5, rank_table[rank_index >> 5]);
 }
 
@@ -149,10 +163,10 @@ int pagenumb;
     else {return -1;}
 }
 
-byte rank_calculate()
+byte rank_calculate(void)
 {
     bool cont;
-    printf(" save status:%x\n rank_index: %x\n rise rank twice: %x\n"
+    cprintf(" save status:%x\n rank_index: %x\n rise rank twice: %x\n"
     ,cstl_pg.save_status, cstl_pg.rank_index, cstl_pg.ris_rnk_twc);
     if (cstl_pg.save_status < 0x80)
     {   if (1 < cstl_pg.save_status)
@@ -170,12 +184,12 @@ byte rank_calculate()
     }
     if (cstl_pg.rank_index < RNK_PRIVATE)
         {cstl_pg.rank_index = RNK_PRIVATE;}
-    printf("rank index: %x\n", cstl_pg.rank_index);
+    cprintf("rank index: %x\n", cstl_pg.rank_index);
     return cstl_pg.rank_index;
 }
 
-/*void*/
-castle_indexize(/*void*/)
+void
+castle_indexize(void)
 {
     int i;
 
@@ -185,8 +199,8 @@ castle_indexize(/*void*/)
 
 bool pcjr;
 
-put_2_strings(line4, line5)
-string line4, *line5;
+void put_2_strings(line4, line5)
+string line4, line5;
 {   
     if (pcjr) {setVideoMode(TxtGreyWd);}
     else {setVideoMode(TxtGreyThn);}
@@ -200,7 +214,7 @@ bool isDemo = false;
 byte dmodt_buffer[DEMODT_FSIZE];
 extern bool horizontal;
 
-load_demo()
+void load_demo(void)
 {
     byte *gfx_buffer;
     file_to_screen(2);
@@ -217,7 +231,7 @@ load_demo()
 
 word error_encountered;
 
-bool wait_to_return()
+bool wait_to_return(void)
 {
     long limit, li;
     if (error_encountered) {return 1;}
@@ -232,7 +246,7 @@ bool wait_to_return()
     return true;
 }
 
-load_file(file_name, dest, length)
+int load_file(file_name, dest, length)
 string file_name;
 byte *dest;
 int length;
@@ -242,16 +256,18 @@ int length;
     if (Goober(0x23, dest) > 0) {_exit(-1);}
     fildsc = status = checked_open(file_name, 0x8000);
     if (-1 < read(fildsc, dest, length))
-    {   status = close(fildsc);
-        return status;    
-    }  
-    put_2_strings("Error reading ", file_name);
-    if (fildsc > -1) {close(fildsc);}
-    _exit(-1);
+    {   status = close(fildsc);    
+    }
+    else
+    {   put_2_strings("Error reading ", file_name);
+        if (fildsc > -1) {close(fildsc);}
+        _exit(-1);
+    }
+    return status;
 }
 
 
-lack_jystk()
+void lack_jystk(void)
 {   /*lack_of joystick*/
     wait_for_input(0,0x17, "\aNo joystick connected (Press space bar)", ' ');
     controller = DEV_undefined;
@@ -259,7 +275,7 @@ lack_jystk()
 
 int d2ae, d29c;
 
-isPcJr()
+void isPcJr(void)
 {
   SegMemSet(SingleStep+1, 0x34);
   SegMemSet(SingleStep+3, 0xff);

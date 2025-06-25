@@ -2,7 +2,12 @@
 #define SET_CURSOR_POSITION 0x200
 #define SET_BACKGROUND 0xb00
 
-/* int RowColl(byte row, byte coll); */
+#ifdef __WATCOMC__
+int RowColl(char row, char coll);
+int setVideoMode(char mode_p);
+void BiosVideo(int A, int B, int C, int D);
+#endif
+
 #define RowColl(row, coll) (((row) - 1) << 8 | ((coll) - 1))
 
 
@@ -18,10 +23,9 @@
 #define JR_TINY      8
 #define JR_WIDE      9
 
+
 /*CGA Colours*/ 
 #define CGA_BLUE         1
-/* int setVideoMode(char mode_p);
-void BiosVideo(int A, int B, int C, int D);*/
 
 #define DISPLAY_BUFFER 0xb800
 

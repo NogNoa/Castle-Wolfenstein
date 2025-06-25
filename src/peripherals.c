@@ -1,9 +1,19 @@
 #include "cw.h"
 #include "video.h"
 
-extern bool isDemo;
+#ifdef __WATCOMC__
+#include "cwa.h"
+#include "conio.h"
+#include "config.h"
 
-wait_for_input(col, row, str, stop_char)
+void prfl_jystk(void);
+#endif
+
+extern bool isDemo;
+byte BYTE_1a27_02ba;
+
+void wait_for_input(col, row, str, stop_char)
+int col, row;
 string str;
 char stop_char;
 {
@@ -33,7 +43,7 @@ byte JoyXDur, JoyYDur;
 extern bool sagital;
 extern byte LC_L_RC[11], RC_LC[11], UC_YCU[11], YC_UC[11];
 
-jystk_cnfg() 
+uint jystk_cnfg(void)
 {   /*joystick config*/
     bool done = false;
     byte centXdur, centYdur, leftXdur, upYdur, rightXdur, downYdur;
@@ -42,7 +52,7 @@ jystk_cnfg()
     char stroke;
     char *shoot, *aim;
     while(!done)
-    {   SetVideo(PxlClrLo);
+    {   setVideoMode(PxlClrLo);
         BiosPuts(11, 10, "Move your joystick");
         BiosPuts(13, 10, "to the center position,");
         BiosPuts(15, 10, "and press the space bar.");
@@ -50,7 +60,7 @@ jystk_cnfg()
         prfl_jystk();
         centXdur = JoyXDur;
         centYdur = JoyYDur;
-        SetVideo(PxlClrLo);
+        setVideoMode(PxlClrLo);
         BiosPuts(2, 1, "Move your joystick");
         BiosPuts(4, 1, "to the upper left,");
         BiosPuts(6, 1, "hold it there and");
@@ -59,7 +69,7 @@ jystk_cnfg()
         prfl_jystk();
         leftXdur = JoyXDur;
         upYdur = JoyYDur;
-        SetVideo(PxlClrLo);
+        setVideoMode(PxlClrLo);
         BiosPuts(2, 20, "Move your joystick");
         BiosPuts(4, 20, "to the upper right,");
         BiosPuts(6, 20, "hold it there and");
@@ -67,7 +77,7 @@ jystk_cnfg()
         wait_for_input(0, 0, "",' ');
         prfl_jystk();
         rightXdur = JoyXDur;
-        SetVideo(PxlClrLo);
+        setVideoMode(PxlClrLo);
         BiosPuts(18, 20, "Move your joystick");
         BiosPuts(20, 20, "to the lower right,");
         BiosPuts(22, 20, "hold it there and");
@@ -112,13 +122,13 @@ jystk_cnfg()
         }
     }
     if (!done)
-    {   SetVideo(PxlClrLo);
+    {   setVideoMode(PxlClrLo);
         BiosPuts(19, 4, "Turn your joystick 90 degrees (one");
         BiosPuts(21, 4, "quarter turn), press the space bar");
         BiosPuts(23, 4, "and try again");
         wait_for_input(0, 0, "",' ');
     }
-    SetVideo(PxlClrLo);
+    setVideoMode(PxlClrLo);
     if (!sagital)
     {   shoot = "front";
         aim = "back";
@@ -140,8 +150,8 @@ jystk_cnfg()
     BiosPuts(19, 1, "the buttons as they currently are.");
     stroke = '\0';
     while ((stroke != ESC && (stroke != ' '))) {
-        if (Is_Keystroke() != 0) {
-        stroke = (char)get_stroke();
+        if (IsKStrok() != 0) {
+        stroke = (char)GetStrok();
         }
     }
     if (stroke == ESC) {
@@ -149,16 +159,16 @@ jystk_cnfg()
     }
     BYTE_1a27_02ba = 0;
     BiosPuts(23, 14, "Saving data...");
-    uleftXdur = ctrls_load_w();
+    uleftXdur = w_ctrls_load();
     return uleftXdur;
 }
 
-lkfr_jystk()
+int lkfr_jystk(void)
 {   /*look for joystick*/
     ;
 }
 
-prfl_jystk()
+void prfl_jystk(void)
 {   /*profile_joystick*/
     ;
 }

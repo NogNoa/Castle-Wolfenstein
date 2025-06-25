@@ -1,6 +1,5 @@
 #ifndef PROG_CW
 #define PROG_CW
-
 typedef char * string;
 typedef unsigned int uint;
 typedef unsigned int word;
@@ -12,17 +11,28 @@ typedef char bool;
 
 #define PAGE_SZ 0x100
 
+#ifndef __WATCOMC__
+#define void* byte*
+#define void
+#define inline
+
+#else
+#include "STDLIB.H";
+int sum(int *list, int len);
+#endif /* __WATCOMC__ */
+
 #ifndef LATTICE
-typedef unsigned char byte;
-#endif
+typedef char byte;
+#endif /* LATTICE */
 
 #ifndef NULL
 #define NULL 0
-#endif
+#endif /* NULL */
 
 #define PRODEBUG
 
 #define CTRL(c) (0x40^c)
 #define ESC (0x40^'[')
 
-#endif
+#endif /* PROG_CW */ 
+

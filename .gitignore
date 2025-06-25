@@ -21,12 +21,9 @@ cw.lk1
 dosbox/HD/
 .vs/
 visual studio/
-.vscode/
+bin/
+.idea/
+src/prototypes/
 
 #App map
 src/CW.MAP
-
-#Game Files
-bin/
-
-

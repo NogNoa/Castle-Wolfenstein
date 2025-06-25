@@ -3,15 +3,27 @@
 #include "FCNTL.H"
 #include "config.h"
 
+#ifdef __WATCOMC__ 
+#include "conio.h"
+#include "cwa.h"
+#include "anti_debug.h"
+#include "io1.h"
+#include "game_files.h"
+#include "CtrlConfig.h"
+
+int w_ctrls_load(void);
+void print_to_position(byte column, byte row, string massage);
+#endif
+
 extern byte RGB_monitor;
 
 
-kb_cnfg(void) 
+void kb_cnfg(void) 
 { /*keyboard config*/
       ;
 }
 
-select_monitor() 
+void select_monitor(void) 
 {
   byte oldRGB;
   char key;
@@ -53,8 +65,8 @@ select_monitor()
   }
 }
 
-print_to_position(column, row, massage) 
-byte column, row;
+void print_to_position(column, row, massage) 
+byte column, row; 
 string massage;
 {
     BiosVideo(SET_CURSOR_POSITION, 0, 0, (int)row << 8 | column);
@@ -67,7 +79,7 @@ byte b2ba, LC_L_RC[0xb], RC_LC[0xb], UC_YCU[0xb], YC_UC[0xb];
 char controller;
 
 
-r_ctrls_load()
+void r_ctrls_load(void)
 {
     int fd;
     if (check_for_debugger()) {_exit(-1);}
@@ -96,13 +108,13 @@ int fd; byte *buf; long offset; int nbytes;
     length = read(fd, buf, nbytes);
     if (length != nbytes)
     {   put_2_strings("Error reading control file!", "");
-        printf("%x",offset);
+        cprintf("%x",offset);
         _exit(-1);
     }
     return length;
 }
 
-int w_ctrls_load()
+int w_ctrls_load(void)
 {
   int fd;
   fd = open("ctrls",O_RAW | O_WRONLY);
@@ -118,7 +130,7 @@ int w_ctrls_load()
     ctrls_write(fd, RC_LC, 0xfl, 0xb);
     ctrls_write(fd, UC_YCU, 0x1al, 0xb);
     ctrls_write(fd, YC_UC, 0x25l, 0xb);
-    close(fd);
+    return close(fd);
 }
 
 int ctrls_write(ctrls, buffer, offset, length)

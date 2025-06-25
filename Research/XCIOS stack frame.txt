@@ -1,0 +1,16 @@
+XCIOS:
+    XCIOS.stack = sp0
+    sp1 = bp1 = sp0 - 0c
+    [bp1+10] = fd
+    [bp1+12] = flags
+    [bp1+14] = file_block
+8a0c:
+    8a0c.stack = sp2 = sp0 - 0e
+    bp1 = sp2 + 2
+    bp1+6 = sp2 + 8
+    bp1+8 = sp2 + a
+89bc:
+    89bc.stack = sp3 = sp0 - 10
+    bp1 = sp3 + 4
+    bp1+3 = sp3 + 7
+    

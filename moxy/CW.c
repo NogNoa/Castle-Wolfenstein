@@ -1,11 +1,12 @@
 #include "cw.h"
+#include "memory.h"
 
 byte d7716, d9e8e;
 byte *p7717;
 int d7712, d7714;
 bool b4b3c;
 
-byte f3a1(void)
+byte speaker_3a1(void)
 {
     byte al;
     bool cf, ct;
@@ -17,11 +18,11 @@ byte f3a1(void)
     cf = al & 1;
     al >>= 1;
     ct = d7712 & 1;
-    d7712 = (d7712 >> 1) | (cf << 0x10);
+    d7712 = (d7712 >> 1) | ((int) cf << 0xf);
     cf = d7714 & 1;
-    d7714 = (d7714 >> 1) | (ct << 0x10);
+    d7714 = (d7714 >> 1) | ((int) ct << 0xf);
     ct = cf;
-    bx = (d7714 >> 1) | (cf << 0x10);
+    bx = (d7714 >> 1) | ((int) cf << 0xf);
     d7714 = (int) al ^ bx;
     al = (byte) d7714;
     if (d9e8e < al || !b4b3c)

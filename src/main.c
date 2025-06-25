@@ -1,3 +1,4 @@
+
 #include "cw.h"
 #include "video.h"
 #include "IVT.h"
@@ -6,8 +7,22 @@
 #include "config.h"
 #include "game_f~1.h"
 
-int sum_goober = 0x18c9;
+
+#ifdef __WATCOMC__
+#include "conio.h"
+#include "anti_debug.h"
+#include "sonara.h"
+#include "cwa.h"
+void is_cstle_stt_60(void);
+void rank_print(void);
+void start_menu(void);
+void reverse_control(void);
+#else
 extern int Goober[36];
+#endif
+
+int sum_goober = 0x18c9;
+
 byte RGB_monitor;
 bool make_sound;
 byte wolf_vocab[VOCAB_FSIZE];
@@ -20,10 +35,10 @@ bool b284 = false;
 uint IhbtIntr();
 #endif
 
-
+void
 main()
 {
-    int inbtintr, l1a, l18, goob0, goob1, stroke, c;
+    int l1a, l18, stroke;
     byte *lpage_a;
     bool cont;
     struct cs_pg_t *lcastle_pg;
@@ -44,7 +59,7 @@ main()
     SegMemSet(Breakpoint + 3,0xfc-0xe9);
     load_file("vocab",wolf_vocab, VOCAB_FSIZE);
     load_file("wolf.chr", wolf_font, CHR_FSIZE);
-    if (Sum(Goober, 36) != sum_goober + wolf_font) {_exit(-1);}
+    if (Sum(Goober, 36) != sum_goober + (int) wolf_font) {_exit(-1);}
     RdSysFnt(wolf_font);
     file_to_screen(1);
     if (wait_to_return()) /* play demo if the return key isn't pressed in time*/
@@ -97,7 +112,8 @@ main()
 byte save_status;
 extern byte rank_index;
 
-is_cstle_stt_60()
+void
+is_cstle_stt_60(void)
 {   
     save_status = (cstl_pg.save_status == 0x60) ?
                   0xff : 

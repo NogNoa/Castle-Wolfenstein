@@ -1,10 +1,25 @@
 .radix 16
-name:                       place   length  meaning
-keyboard-horizontal-flip:   0       1       {0: move= left, shoot=right; 1: opposite}
-joystick-sagital-flip:      1       1       {0:shoot=front,   aim= back; 1: opposite}
+name:                       place   length def   meaning
+keyboard-horizontal-flip:   0       1      1    {0: move= left, shoot=right; 1: opposite}
+joystick-sagital-flip:      1       1      0    {0:shoot=front,   aim= back; 1: opposite}
                             2       1
-rgb-monitor:                3       1       {1: RGB-monitor; 0: not; 0x59: undefined}
-LC+3L3RC3:                  4       b
-RC-3LC3:                    f       b
-UC+YCU3:                   1a       b
-YC-UC3:                    25       b
+rgb-monitor:                3       1      0    {1: RGB-monitor; 0: not; 0x59: undefined}
+LC+3L3RC3:                  4       b      1A *3, FF, 01 *3, FF, 4A *3
+RC-3LC3:                    f       b      49 *3, FE, 19 *3, FE, FA *3
+UC+YCU3:                    1a      b      {26 54 0E FF} *2, 26 54 0E
+YC-UC3:                     25      b      {53 FA 25 FE} *2, 53 FA 25
+
+JoySeq0 = LC+ * 3 , ff, L  * 3, ff, RC * 3
+JoySeq1 = RC- * 3 , fe, LC * 3, fe, fa * 3
+JoySeq2 = {UC+, YC, U , ff} * 2, UC+, YC, U
+JoySeq3 = {YC-, fa, UC, fe} * 2, YC-, fa, UC
+
+default:
+    L = 1
+    U = 0E
+    YC = 54
+    UC = 25 = (54 + 0E) / 2 = 62 / 2 = 31 ???
+    LC = 19
+    RC = 4A
+    XC = (19 * 2 - 1)//2 = 18
+    R = (4A * 2 - 18)//2 = 4A - 0C = 3E

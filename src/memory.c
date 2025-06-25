@@ -5,7 +5,14 @@
 #include "IVT.h"
 #include "files.h"
 
-seg0_move(numBytes, dest, source)
+#ifdef __WATCOMC__
+#include "console.h"
+#include "cwa.h"
+#include "game_f~1.h"
+#include "drawa.h"
+#endif
+
+void seg0_move(numBytes, dest, source)
 int numBytes;
 byte *dest;
 byte *source;
@@ -28,16 +35,16 @@ byte patch_3fff[4] = "\x8c\xc5\x8e\xd5";
 #define CGA_Space 0xb800
 #define DetectedHardware 0x400010l
 
-fixit()
+void fixit(void)
 {
     if (pcjr && isDos210())
-    {   if (seg0_compare(0, (10)-1, (byte *) (0x1a71), (byte *) (test_1a71)))
+    {   if (seg0_mem_compare(0, (10)-1, (byte *) (0x1a71), (byte *) (test_1a71)))
             {seg0_move((10), (byte *) (0x1a71), (byte *) (patch_1a71));}
-        if (seg0_compare(0, (10)-1, (byte *) (0x22c2), (byte *) (test_22c2)))
+        if (seg0_mem_compare(0, (10)-1, (byte *) (0x22c2), (byte *) (test_22c2)))
             {seg0_move((10), (byte *) (0x22c2), (byte *) (patch_1a71));}
-        if (seg0_compare(0, (8)-1, (byte *) (0x3ebd), (byte *) (test_3ebd)))
+        if (seg0_mem_compare(0, (8)-1, (byte *) (0x3ebd), (byte *) (test_3ebd)))
             {seg0_move((8), (byte *) (0x3ebd), (byte *) (patch_3ebd));};
-        if (seg0_compare(0, (4)-1, (byte *) (0x3fff), (byte *) (test_3fff)))
+        if (seg0_mem_compare(0, (4)-1, (byte *) (0x3fff), (byte *) (test_3fff)))
             {seg0_move((4), (byte *) (0x3fff), (byte *) (patch_3fff));}
     }
     if (SegmSt(CGA_Space, (byte*)1, 0xa5) != 0xa5) /*tryna to poke color screen buffer, is it there?*/
@@ -53,7 +60,7 @@ fixit()
     SegMemSet(Breakpoint+3, 0x13);
 }
 
-bool seg0_compare(start,limit,source,reference)
+bool seg0_mem_compare(start, limit,source, reference)
 int start, limit;
 byte *source;
 byte *reference;
@@ -73,6 +80,7 @@ byte *reference;
 extern byte* dflt_drv;
 
 bool build_func_on_stack(arg)
+int arg;
 {
   int fnstk[8];
   fnstk[0] = 0x1b8;
@@ -94,24 +102,23 @@ bool build_func_on_stack(arg)
 
 #define ORRERY ((byte*) &build_func_on_stack + 0x1F)
 
-int check_for_debugger()
+int check_for_debugger(void)
 {
     int back;
     if (SegMemGet(Breakpoint+1) != 0xcd || SegMemGet(Breakpoint+3) != 0x13)
         {   _exit(-1); /*doesn't return*/
         }
-    else
-    {   isDos210();
-        back = Goober(0x26, (ORRERY));
-        if (back > -1) {_exit(-1);}
-        else {return 0;}
-    }
+    isDos210();
+    back = Goober(0x26, (ORRERY));
+    if (back > -1) {_exit(-1);}
+    return 0;
 }
 
 extern bool pcjr;
 extern byte RGB_monitor;
 
-file_to_screen(file_chc)
+void file_to_screen(file_chc)
+int file_chc;
 {
     SegMemSet(SingleStep+1, 0x34);
     SegMemSet(SingleStep+3, 0xff);
