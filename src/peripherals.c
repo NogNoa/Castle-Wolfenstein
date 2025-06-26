@@ -10,7 +10,8 @@ void prfl_jystk(void);
 #endif
 
 extern bool isDemo;
-byte BYTE_1a27_02ba;
+byte joyCunfag;
+bool JoyBut1, JoyBut2;
 
 void wait_for_input(col, row, str, stop_char)
 int col, row;
@@ -153,7 +154,7 @@ uint jystk_cnfg(void)
     if (stroke == ESC) {
         sagital = !sagital;
     }
-    BYTE_1a27_02ba = 0;
+    joyCunfag = 0;
     PositCPuts(23, 14, "Saving data...");
     uleftXdur = w_ctrls_load();
     return uleftXdur;
@@ -161,10 +162,12 @@ uint jystk_cnfg(void)
 
 int lkfr_jystk(void)
 {   /*look for joystick*/
-    ;
+    prfl_jystk();
+    return JoyXDur == (byte) -1;
 }
 
 void prfl_jystk(void)
 {   /*profile_joystick*/
-    ;
+    JoyBut1 = JoyBut2 = false;
+    out(0x201,)
 }
