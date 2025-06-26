@@ -39,15 +39,15 @@ void start_menu(void)
 {
     char c;
     rank_print();
-    BiosPuts(7, 1, "Press:");
-    BiosPuts(9, 6, "Ctrl-N To create a new");
-    BiosPuts(10, 13, "castle map only.");
-    BiosPuts(11, 13, "(Saving your rank)");
-    BiosPuts(13, 6, "Ctrl-R To create a new");
-    BiosPuts(14, 13, "castle map and");
-    BiosPuts(15, 13, "reset your rank to");
-    BiosPuts(16, 13, "Private.");
-    BiosPuts(18, 6, "ENTER to do nothing.");
+    PositCPuts(7, 1, "Press:");
+    PositCPuts(9, 6, "Ctrl-N To create a new");
+    PositCPuts(10, 13, "castle map only.");
+    PositCPuts(11, 13, "(Saving your rank)");
+    PositCPuts(13, 6, "Ctrl-R To create a new");
+    PositCPuts(14, 13, "castle map and");
+    PositCPuts(15, 13, "reset your rank to");
+    PositCPuts(16, 13, "Private.");
+    PositCPuts(18, 6, "ENTER to do nothing.");
     while (true)
     {
         while (!IsKStrok());
@@ -72,9 +72,9 @@ void reverse_control(void)
 {
     char c;
     setVideoMode(PxlClrLo);
-    BiosPuts(9, 2, "What controls do you wish to adjust ?");
-    BiosPuts(11, 2 , "Press: K to adjust keyboard controls");
-    BiosPuts(13, 9, "J to adjust joystick controls");
+    PositCPuts(9, 2, "What controls do you wish to adjust ?");
+    PositCPuts(11, 2 , "Press: K to adjust keyboard controls");
+    PositCPuts(13, 9, "J to adjust joystick controls");
     while (true)
     {   while (!IsKStrok());
         c = GetStrok();
@@ -96,7 +96,7 @@ void reverse_control(void)
 void resume_castle(void)
 {
     setVideoMode(PxlClrLo);
-    BiosPuts(13, 6, "Resuming where you left off...");
+    PositCPuts(13, 6, "Resuming where you left off...");
 }
 
 byte pg_a[PAGE_SZ];
@@ -144,7 +144,7 @@ string rank_table[8] = {
 void rank_print(void)
 {
     setVideoMode(PxlClrLo);
-    BiosPuts(2, 1, "Your Rank is ");
+    PositCPuts(2, 1, "Your Rank is ");
     cputs(rank_table[rank_index >> 5]);
     cprintf("\n rank index: 0x%x\n shifted: %x\n rank: %s",
            rank_index, rank_index >> 5, rank_table[rank_index >> 5]);

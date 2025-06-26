@@ -43,7 +43,7 @@ main()
     bool cont;
     struct cs_pg_t *lcastle_pg;
     setVideoMode(PxlClrLo);
-    BiosPuts(2,2, "072684");
+    PositCPuts(2,2, "072684");
     sum_goober = Sum(Goober, 0x24);
     isPcJr();
     if (IhbtIntr() < 0) {_exit(-1);}
@@ -72,12 +72,12 @@ main()
     is_cstle_stt_60();
     if (!isDemo)
         {   rank_print();
-            BiosPuts(9,8, "What controls do you want ?");
-            BiosPuts(11,11, "Press: K for keyboard");
-            BiosPuts(13,18, "J for joystick");
-            BiosPuts(21,3, "Press Ctrl-N to start a new game");
-            BiosPuts(22,3, "Press Ctrl-R to reverse controls");
-            BiosPuts(23,3, "Press Ctrl-Q to select monitor type");
+            PositCPuts(9,8, "What controls do you want ?");
+            PositCPuts(11,11, "Press: K for keyboard");
+            PositCPuts(13,18, "J for joystick");
+            PositCPuts(21,3, "Press Ctrl-N to start a new game");
+            PositCPuts(22,3, "Press Ctrl-R to reverse controls");
+            PositCPuts(23,3, "Press Ctrl-Q to select monitor type");
             do {
                 while (!IsKStrok());
                 cont = false;

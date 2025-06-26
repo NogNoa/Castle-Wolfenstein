@@ -8,7 +8,7 @@ int setVideoMode(char mode_p);
 void BiosVideo(int A, int B, int C, int D);
 #endif
 
-#define RowColl(row, coll) (((row) - 1) << 8 | ((coll) - 1))
+#define RowColl(row, coll) ((int) ((row) - 1) << 8 | ((coll) - 1))
 
 
 /*video modes*/
@@ -29,5 +29,7 @@ void BiosVideo(int A, int B, int C, int D);
 
 #define DISPLAY_BUFFER 0xb800
 
-#define BiosPuts(row, coll, str) (BiosVideo(SET_CURSOR_POSITION, 0, 0, RowColl((row), (coll))), \
+#define PositCPuts(row, coll, str) (BiosVideo(SET_CURSOR_POSITION, 0, 0, RowColl((row), (coll))), \
                     cputs(str))
+#define PositCPrintf(row, coll, format, var) (BiosVideo(SET_CURSOR_POSITION, 0, 0, RowColl((row), (coll))), \
+                    cprintf(format, var))

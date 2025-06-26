@@ -19,7 +19,7 @@ char stop_char;
 {
     char in_char;
     int i;
-    BiosPuts(row, col, str);
+    PositCPuts(row, col, str);
     in_char = (stop_char == '\0') ? 'a' : '\0';
     while (in_char != stop_char)
     {   if(!IsKStrok())
@@ -53,35 +53,35 @@ uint jystk_cnfg(void)
     char *shoot, *aim;
     while(!done)
     {   setVideoMode(PxlClrLo);
-        BiosPuts(11, 10, "Move your joystick");
-        BiosPuts(13, 10, "to the center position,");
-        BiosPuts(15, 10, "and press the space bar.");
+        PositCPuts(11, 10, "Move your joystick");
+        PositCPuts(13, 10, "to the center position,");
+        PositCPuts(15, 10, "and press the space bar.");
         wait_for_input(0, 0, "",' ');
         prfl_jystk();
         centXdur = JoyXDur;
         centYdur = JoyYDur;
         setVideoMode(PxlClrLo);
-        BiosPuts(2, 1, "Move your joystick");
-        BiosPuts(4, 1, "to the upper left,");
-        BiosPuts(6, 1, "hold it there and");
-        BiosPuts(8, 1, "press the space bar.");
+        PositCPuts(2, 1, "Move your joystick");
+        PositCPuts(4, 1, "to the upper left,");
+        PositCPuts(6, 1, "hold it there and");
+        PositCPuts(8, 1, "press the space bar.");
         wait_for_input(0, 0, "",' ');
         prfl_jystk();
         leftXdur = JoyXDur;
         upYdur = JoyYDur;
         setVideoMode(PxlClrLo);
-        BiosPuts(2, 20, "Move your joystick");
-        BiosPuts(4, 20, "to the upper right,");
-        BiosPuts(6, 20, "hold it there and");
-        BiosPuts(8, 20, "press the space bar.");
+        PositCPuts(2, 20, "Move your joystick");
+        PositCPuts(4, 20, "to the upper right,");
+        PositCPuts(6, 20, "hold it there and");
+        PositCPuts(8, 20, "press the space bar.");
         wait_for_input(0, 0, "",' ');
         prfl_jystk();
         rightXdur = JoyXDur;
         setVideoMode(PxlClrLo);
-        BiosPuts(18, 20, "Move your joystick");
-        BiosPuts(20, 20, "to the lower right,");
-        BiosPuts(22, 20, "hold it there and");
-        BiosPuts(24, 20, "press the space bar.");
+        PositCPuts(18, 20, "Move your joystick");
+        PositCPuts(20, 20, "to the lower right,");
+        PositCPuts(22, 20, "hold it there and");
+        PositCPuts(24, 20, "press the space bar.");
         wait_for_input(0, 0, "",' ');
         prfl_jystk();
         downYdur = JoyYDur;
@@ -123,9 +123,9 @@ uint jystk_cnfg(void)
     }
     if (!done)
     {   setVideoMode(PxlClrLo);
-        BiosPuts(19, 4, "Turn your joystick 90 degrees (one");
-        BiosPuts(21, 4, "quarter turn), press the space bar");
-        BiosPuts(23, 4, "and try again");
+        PositCPuts(19, 4, "Turn your joystick 90 degrees (one");
+        PositCPuts(21, 4, "quarter turn), press the space bar");
+        PositCPuts(23, 4, "and try again");
         wait_for_input(0, 0, "",' ');
     }
     setVideoMode(PxlClrLo);
@@ -137,17 +137,13 @@ uint jystk_cnfg(void)
     {   shoot = "back";
         aim = "front";
     }
-    BiosVideo(SET_CURSOR_POSITION, 0, 0, RowColl(5, 1));
-    cprintf("You now shoot with the %s button", shoot);
-    BiosVideo(SET_CURSOR_POSITION, 0, 0, RowColl(7, 1));
-    cprintf("and aim with the %s button.", aim);
-    BiosPuts(10, 9, "Press the ESC key");
-    BiosVideo(SET_CURSOR_POSITION, 0, 0, RowColl(12, 1));
-    cprintf("to shoot with the %s button, and", aim);
-    BiosVideo(SET_CURSOR_POSITION, 0, 0, RowColl(14, 1));
-    cprintf("aim with the %s button.", shoot);
-    BiosPuts(17, 1, "Press the space bar to keep");
-    BiosPuts(19, 1, "the buttons as they currently are.");
+    PositCPrintf(5, 1, "You now shoot with the %s button", shoot);
+    PositCPrintf(7, 1, "and aim with the %s button.", aim);
+    PositCPuts(10, 9, "Press the ESC key");
+    PositCPrintf(12, 1, "to shoot with the %s button, and", aim);
+    PositCPrintf(14, 1, "aim with the %s button.", shoot);
+    PositCPuts(17, 1, "Press the space bar to keep");
+    PositCPuts(19, 1, "the buttons as they currently are.");
     stroke = '\0';
     while ((stroke != ESC && (stroke != ' '))) {
         if (IsKStrok() != 0) {
@@ -158,7 +154,7 @@ uint jystk_cnfg(void)
         sagital = !sagital;
     }
     BYTE_1a27_02ba = 0;
-    BiosPuts(23, 14, "Saving data...");
+    PositCPuts(23, 14, "Saving data...");
     uleftXdur = w_ctrls_load();
     return uleftXdur;
 }

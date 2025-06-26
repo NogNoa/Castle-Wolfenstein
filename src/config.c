@@ -69,8 +69,7 @@ void print_to_position(column, row, massage)
 byte column, row; 
 string massage;
 {
-    BiosVideo(SET_CURSOR_POSITION, 0, 0, (int)row << 8 | column);
-    cputs(massage);
+    PositCPuts(row, column, massage);
 }
 
 bool horizontal, sagital;
