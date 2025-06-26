@@ -13,21 +13,21 @@ data	segment	byte public 'data'
        JoyButton1           db 0
        JoyButton2           db 0
        joystick_buffer      db 300d dup(0)
-       extern JoyXDuration: byte
-       extern JoyYDuration: byte
+       extern JoyXDur: byte
+       extern JoyYDur: byte
 data ENDS
 PROG    SEGMENT BYTE PUBLIC 'PROG'
-        PUBLIC  Sum
+        PUBLIC  Sum, prflJyst
         ASSUME  CS:PROG, DS:data
 
-prflJystk proc near
+prflJyst proc near
 ;
        MOV        byte ptr [JoyButton1],0                          ;= FALSE
        MOV        byte ptr [JoyButton2],0                          ;= FALSE
        MOV        DI,word ptr [ptr_joystick_buffer]                ;= 1a27:9d54
        MOV        DX,201
        OUT        DX,AL                                            ;"fire joysticks four one-shots"
-       MOV        CX,fa
+       MOV        CX,0fa
 sample_joystick:
        IN         AL,DX
        AND        AL,JoyA_Axes
@@ -35,9 +35,9 @@ sample_joystick:
        JZ         sample_button1
        INC        DI
        LOOPNZ     sample_joystick
-       MOV        byte ptr [JoyXDuration],ff                     ;joystick buffer exhusted
+       MOV        byte ptr [JoyXDur],0ff                     ;joystick buffer exhusted
                 
-       MOV        byte ptr [JoyYDuration],ff
+       MOV        byte ptr [JoyYDur],0ff
                 
        JMP        Epilog
        NOP
@@ -56,9 +56,9 @@ sample_button2:
                 
 clear_duration:
        MOV        DI,word ptr [ptr_joystick_buffer]                  ;= 1a27:9d54
-       MOV        byte ptr [JoyXDuration],0
+       MOV        byte ptr [JoyXDur],0
                 
-       MOV        byte ptr [JoyYDuration],0
+       MOV        byte ptr [JoyYDur],0
 mesure_Duration:  
        MOV        AL,byte ptr [DI]
        INC        DI
@@ -66,16 +66,16 @@ mesure_Duration:
        JZ         Epilog
        TEST       AL,JoyA_AxisX
        JZ         check_Y_duration
-       INC        byte ptr [JoyXDuration]
+       INC        byte ptr [JoyXDur]
 check_Y_duration:
        TEST       AL,JoyA_AxisY
        JZ         mesure_Duration
-       INC        byte ptr [JoyYDuration]
+       INC        byte ptr [JoyYDur]
        JMP        mesure_Duration
 Epilog:
        POP        BP
        RET
-prflJystk     endp
+prflJyst     endp
 
 
 Sum proc near

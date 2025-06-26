@@ -6,7 +6,7 @@
 #include "conio.h"
 #include "config.h"
 
-void prfl_jystk(void);
+void prflJystk(void);
 #endif
 
 extern bool isDemo;
@@ -58,7 +58,7 @@ uint jystk_cnfg(void)
         PositCPuts(13, 10, "to the center position,");
         PositCPuts(15, 10, "and press the space bar.");
         wait_for_input(0, 0, "",' ');
-        prfl_jystk();
+        prflJystk();
         centXdur = JoyXDur;
         centYdur = JoyYDur;
         setVideoMode(PxlClrLo);
@@ -67,7 +67,7 @@ uint jystk_cnfg(void)
         PositCPuts(6, 1, "hold it there and");
         PositCPuts(8, 1, "press the space bar.");
         wait_for_input(0, 0, "",' ');
-        prfl_jystk();
+        prflJystk();
         leftXdur = JoyXDur;
         upYdur = JoyYDur;
         setVideoMode(PxlClrLo);
@@ -76,7 +76,7 @@ uint jystk_cnfg(void)
         PositCPuts(6, 20, "hold it there and");
         PositCPuts(8, 20, "press the space bar.");
         wait_for_input(0, 0, "",' ');
-        prfl_jystk();
+        prflJystk();
         rightXdur = JoyXDur;
         setVideoMode(PxlClrLo);
         PositCPuts(18, 20, "Move your joystick");
@@ -84,7 +84,7 @@ uint jystk_cnfg(void)
         PositCPuts(22, 20, "hold it there and");
         PositCPuts(24, 20, "press the space bar.");
         wait_for_input(0, 0, "",' ');
-        prfl_jystk();
+        prflJystk();
         downYdur = JoyYDur;
         if (leftXdur < rightXdur && upYdur < downYdur)
         {   ucentXdur = (uint) centXdur;
@@ -162,12 +162,6 @@ uint jystk_cnfg(void)
 
 int lkfr_jystk(void)
 {   /*look for joystick*/
-    prfl_jystk();
+    prflJystk();
     return JoyXDur == (byte) -1;
-}
-
-void prfl_jystk(void)
-{   /*profile_joystick*/
-    JoyBut1 = JoyBut2 = false;
-    out(0x201,)
 }
