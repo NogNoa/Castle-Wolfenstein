@@ -16,11 +16,41 @@ void print_to_position(byte column, byte row, string massage);
 #endif
 
 extern byte RGB_monitor;
+extern bool horizontal;
 
 
 void kb_cnfg(void) 
 { /*keyboard config*/
-      ;
+  char *move, *shoot;
+  char stroke;
+  setVideoMode(PxlClrLo);
+  if (!horizontal)
+  { move = "left";
+    shoot = "right";
+  }
+  else
+  { move = "right";
+    shoot = "left";
+  }
+  PositCPrintf(5, 1, "You now move with your %s hand",move);
+  PositCPrintf(7, 1, "and shoot with your %s hand.",shoot);
+  print_to_position(8, 9, "Press the ESC key");
+  PositCPrintf(12, 1, "to move with your %s hand, and", shoot);
+  PositCPrintf(14, 1, "shoot with your %s hand.", move);
+  print_to_position(0, 16, "Press the space bar to keep");
+  print_to_position(0, 18, "the controls as they currently are.");
+  stroke = '\0';
+  while (stroke != ESC && (stroke != ' ')) {
+    if (IsKStrok() != 0) {
+      stroke = (char)GetStrok();
+    }
+  }
+  if (stroke == ESC) {
+    horizontal = !horizontal;
+    BiosVideo(SET_CURSOR_POSITION, 0, 0, RowColl((23), (14)));
+    print_to_position(13, 22, "Saving data...");
+    w_ctrls_load();
+  }
 }
 
 void select_monitor(void) 
