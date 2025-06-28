@@ -22,5 +22,8 @@ rename cwa.OBJ ..\src\cwa.OBJ
 rename drawa.OBJ ..\src\drawa.OBJ
 rename sonara.OBJ ..\src\sonara.OBJ
 cd ..\src
-b:link b:c MEMORY drawa MAIN config game_f~1 cwa periph~1 sonara,cw,cw,b:mc > ..\link.err
+b:link b:c MEMORY drawa MAIN config game_f~1 cwa periph~1 sonara,cw,cw,b:mc /map /line > ..\link.err
 rename cw.exe ..\bin\cw.exe
+cd ..
+type asm.err game_f.err config.err memory.err main.err periph.err link.err > cw.err
+cd src

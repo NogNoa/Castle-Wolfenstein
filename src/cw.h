@@ -12,7 +12,6 @@ typedef char bool;
 #define PAGE_SZ 0x100
 
 #ifndef __WATCOMC__
-#define void* byte*
 #define void
 #define inline
 
