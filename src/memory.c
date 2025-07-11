@@ -151,16 +151,39 @@ paragraph para_2ac;
 void fund_555(p)
 paragraph p;
 {
-    byte a;
-    byte *si;
     para_2ac = p;
-    a = file_page_a[p << 4 + 0xf2];
-    si = 0x10;
-
-    while (si > -1)
-    {if (a == 580[si/4]) {582[si/4]();return}; si -= 4}
-    return;
-    580 = [0x50,0x30,0x40,0x20,0x10];
-    582 = [fun3090, fun3aa0, fun3566, fun3566, fun3566]
+    switch (file_page_a[para_2ac << 4 + 0x70])
+    {
+        case 0x10:
+        case 0x20:
+        case 0x40:
+            /* fun3566();*/
+            break;
+        case 0x30:
+            /*fun3aa0();*/
+            break;
+        case 0x50:
+            /*fun3090();*/
+            break;
+    }
 }
 
+void fund_5af(void)
+{
+    switch (file_page_a[para_2ac << 4 + 0x70])
+    {
+        case 0x10:
+            /* fun2dd4();*/
+            break;
+        case 0x20:
+            /* fun4d91();*/
+        case 0x30:
+            /* fun3820();*/
+            break;
+        case 0x40:
+            /* fun34db();*/
+        case 0x50:
+            /* fun303a();*/
+            break;
+    }
+}
