@@ -146,3 +146,21 @@ int file_chc;
     SegMemSet(Breakpoint+3, 0x13);
 }
 
+paragraph para_2ac;
+
+void fund_555(p)
+paragraph p;
+{
+    byte a;
+    byte *si;
+    para_2ac = p;
+    a = file_page_a[p << 4 + 0xf2];
+    si = 0x10;
+
+    while (si > -1)
+    {if (a == 580[si/4]) {582[si/4]();return}; si -= 4}
+    return;
+    580 = [0x50,0x30,0x40,0x20,0x10];
+    582 = [fun3090, fun3aa0, fun3566, fun3566, fun3566]
+}
+
