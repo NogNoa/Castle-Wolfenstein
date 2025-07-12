@@ -4,6 +4,7 @@
 #include "video.h"
 #include "IVT.h"
 #include "files.h"
+#include "game_f~1.h"
 
 #ifdef __WATCOMC__
 #include "console.h"
@@ -147,7 +148,6 @@ int file_chc;
 }
 
 paragraph para_2ac;
-extern byte* pg_a;
 
 void fund_555(p)
 paragraph p;
@@ -206,7 +206,6 @@ padded byte
  < 80 -> load   castle
 >= 80 -> create castle
 */
-extern struct cs_pg_t cstl_pg;
 
 void write_rank(rank_index)
 {

@@ -37,3 +37,18 @@ in function resume_castle (cs:c1d) load_page_a is called with castle_page[0x40] 
     page_a is not reffered to in this function
 in function new_castle (CS:cb5) load_page_a is asked to load page 1 from "sektor"
 in function reload_castle () load_page_a is asked to load page 1 from either "castle" or "backup"
+
+cs:0567:
+cs:05bc: 
+cs:061f: file_page_a[70+10para]
+
+cs:079b: file_page_a
+cs:10ca: file_page_a
+
+cs:10cd: file_page_a[4b]
+cs:10fa: file_page_a[4c]
+cs:1123: file_page_a[49]
+
+cs:160d:
+cs:1614:
+cs:161f: file_page_a[80]

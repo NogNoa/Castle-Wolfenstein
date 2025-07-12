@@ -102,7 +102,14 @@ fe3         rank_calculate
 
 Data:   
           [c.obj]
-            fixit
-            inhibit_brk_prnt_scrn
+            stack_top
+            stack_base
+          [memory.c]
+            test | patch (1a71|22c2|3ebd|3fff)
+            "Color graphics card not installed\n\r" 
+            "Program cannot execute"
+          [drawa.asm]
+            int_frust
+            
             ...
             read_to_small_buffer/write_to_file
