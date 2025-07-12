@@ -187,3 +187,28 @@ void fund_5af(void)
             break;
     }
 }
+
+void fun610(void)
+{
+    byte id;
+    id = file_page_a[para_2ac << 4 + 0x70]
+    if (id != 0x10 && id != 0x20)
+    {
+        /* fun1f3d() */
+    }
+}
+
+int castle_load;
+/*
+padded byte
+==  0 -> resume  
+ < 80 -> load   castle
+>= 80 -> create castle
+*/
+
+void write_rank(rank_index)
+{
+    castle_page.rank_index = (byte) rank_index;
+    if (castle_load != 0)
+        {castle_page.ris_rnk_twc = false;}
+}
