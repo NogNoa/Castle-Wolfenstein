@@ -147,12 +147,13 @@ int file_chc;
 }
 
 paragraph para_2ac;
+extern byte* pg_a;
 
 void fund_555(p)
 paragraph p;
 {
     para_2ac = p;
-    switch (file_page_a[para_2ac << 4 + 0x70])
+    switch (pg_a[para_2ac << 4 + 0x70])
     {
         case 0x10:
         case 0x20:
@@ -170,7 +171,7 @@ paragraph p;
 
 void fund_5af(void)
 {
-    switch (file_page_a[para_2ac << 4 + 0x70])
+    switch (pg_a[para_2ac << 4 + 0x70])
     {
         case 0x10:
             /* fun2dd4();*/
@@ -191,7 +192,7 @@ void fund_5af(void)
 void fun610(void)
 {
     byte id;
-    id = file_page_a[para_2ac << 4 + 0x70]
+    id = pg_a[para_2ac << 4 + 0x70];
     if (id != 0x10 && id != 0x20)
     {
         /* fun1f3d() */
@@ -205,10 +206,11 @@ padded byte
  < 80 -> load   castle
 >= 80 -> create castle
 */
+extern struct cs_pg_t cstl_pg;
 
 void write_rank(rank_index)
 {
-    castle_page.rank_index = (byte) rank_index;
+    cstl_pg.rank_index = (byte) rank_index;
     if (castle_load != 0)
-        {castle_page.ris_rnk_twc = false;}
+        {cstl_pg.ris_rnk_twc = false;}
 }
