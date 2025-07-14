@@ -52,14 +52,14 @@ main()
     if (RGB_monitor == 'Y')
         {select_monitor();}
     outer_loop:
-    ptr_file_buffer = file_buffer;
-    cprintf("setup\n:file_buffer: $%x\nptr_file_buffer: $%x\n",  file_buffer, ptr_file_buffer);
+    cprintf("setup:file_buffer: $%xptr_file_buffer: $%x\n",  file_buffer, ptr_file_buffer);
     /* file buffer: $3674 ptr_file_buffer: $3674*/
     file_to_screen(0);
-    cprintf("file_to_screen:\nfile_buffer: $%x\nptr_file_buffer: $%x\n",  file_buffer, ptr_file_buffer);
+    cprintf("file_to_screen:file_buffer: $%xptr_file_buffer: $%x\n",  file_buffer, ptr_file_buffer);
     /* file buffer 36b4 ptr_file_buffer: 0*/
     /* diabling file to screen somehow zeroes ptr_file_buffer - file_buffer from C94A*/
     ld_castle_page_w_ptr("castle", PAGE_SZ);
+    return;
     SegMemSet(Breakpoint + 1,~(byte)0x32);
     SegMemSet(Breakpoint + 3,0xfc-0xe9);
     load_file("vocab",wolf_vocab, VOCAB_FSIZE);
