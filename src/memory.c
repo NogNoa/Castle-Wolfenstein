@@ -136,11 +136,12 @@ int file_chc;
         break;
     case 0:
         GfxFileP = file_buffer;
-        /*load_file("titlepix", file_buffer, PIX_FSIZE);*/
+        load_file("titlepix", file_buffer, PIX_FSIZE);
         /* load_file set nptr_file_buffer to null*/
-        cprintf("load_file:\nfile_buffer: $%x\nptr_file_buffer: $%x\n",  file_buffer, ptr_file_buffer);
+        cprintf("file_to_screen:\nfile_buffer: $%x\nptr_file_buffer: $%x\n",  file_buffer, ptr_file_buffer);
+        break;
         BiosVideo(SET_VIDEO_MODE | ((pcjr) ? JR_TINY : PxlClrLo), 0, 0, 0);
-        if (RGB_monitor && !pcjr) {BiosVideo(SET_BACKGROUND, CGA_BLUE, 0, 0);}
+        if (RGB_monitor && !pcjr) {BiosVideo(SET_BACKGROUND, CGA_BLUE, 0, 0);} 
         DrawCG(file_buffer);
         break;
     default: return;

@@ -255,10 +255,12 @@ int length;
 {
     int fildsc, status;
     isDos210();
-    if (Goober(0x23, dest) > 0) {_exit(-1);}
+    /*if (Goober(0x23, dest) > 0) {_exit(-1);} */
     fildsc = status = checked_open(file_name, 0x8000);
     if (-1 < read(fildsc, dest, length))
-    {   status = close(fildsc);    
+    {   cprintf("load_file:\nfile_buffer: $%x\nptr_file_buffer: $%x\n",  file_buffer, ptr_file_buffer);
+        /*reads faults*/
+        status = close(fildsc);    
     }
     else
     {   put_2_strings("Error reading ", file_name);
