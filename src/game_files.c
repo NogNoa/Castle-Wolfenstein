@@ -109,7 +109,7 @@ string filename;
     byte *cstl;
     cstl = (byte *) &cstl_pg;
     load_file(filename, file_buffer, length);
-    cprintf("ptr_file_buffer = file_buffer[%x]\n", ptr_file_buffer - file_buffer);
+    cprintf("ld_castle: ptr_file_buffer = file_buffer[$%x]\n", ptr_file_buffer - file_buffer);
     for (i=0; i < PAGE_SZ; ++i)
     {   cstl[i] = ptr_file_buffer[i];
     }

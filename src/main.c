@@ -53,7 +53,9 @@ main()
         {select_monitor();}
     outer_loop:
     ptr_file_buffer = file_buffer;
-    file_to_screen(0);
+    cprintf("main: ptr_file_buffer = file_buffer[$%x]\n", ptr_file_buffer - file_buffer);
+    /* file_to_screen(0);*/ 
+    /* diabling file to screen somehow zeroes ptr_file_buffer - file_buffer back*/
     ld_castle_page_w_ptr("castle", PAGE_SZ);
     SegMemSet(Breakpoint + 1,~(byte)0x32);
     SegMemSet(Breakpoint + 3,0xfc-0xe9);
