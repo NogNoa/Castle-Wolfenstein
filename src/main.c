@@ -70,6 +70,7 @@ main()
     lpage_a = pg_a;
     lcastle_pg = &cstl_pg;
     is_cstle_stt_60();
+    return 0;
     if (!isDemo)
         {   rank_print();
             PositCPuts(9,8, "What controls do you want ?");

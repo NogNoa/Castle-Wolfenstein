@@ -14,10 +14,10 @@ void lack_jystk(void);
 struct cs_pg_t
 {
     byte prefix[0x60];
-    byte save_status;
-    byte s1[0x6c - 0x61];
-    bool ris_rnk_twc;
-    byte rank_index;
+    byte save_status; /*0x60*/
+    byte s1[0x6c - 0x61]; 
+    bool ris_rnk_twc; /*0x6c*/
+    byte rank_index; /*0x6d*/
     byte suffix[PAGE_SZ - 0x6e];
 };
 extern byte pg_a[];

@@ -147,13 +147,15 @@ int file_chc;
     SegMemSet(Breakpoint+3, 0x13);
 }
 
+byte pg_a[PAGE_SZ];
+byte* pg_a_70 = pg_a + 0x70;
 paragraph para_2ac;
 
 void fund_555(p)
 paragraph p;
 {
     para_2ac = p;
-    switch (pg_a[para_2ac << 4 + 0x70])
+    switch (pg_a_70[para_2ac << 4])
     {
         case 0x10:
         case 0x20:
@@ -171,7 +173,7 @@ paragraph p;
 
 void fund_5af(void)
 {
-    switch (pg_a[para_2ac << 4 + 0x70])
+    switch (pg_a_70[para_2ac << 4])
     {
         case 0x10:
             /* fun2dd4();*/
@@ -192,7 +194,7 @@ void fund_5af(void)
 void fun610(void)
 {
     byte id;
-    id = pg_a[para_2ac << 4 + 0x70];
+    id = pg_a_70[para_2ac << 4];
     if (id != 0x10 && id != 0x20)
     {
         /* fun1f3d() */

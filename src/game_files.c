@@ -99,7 +99,7 @@ void resume_castle(void)
     PositCPuts(13, 6, "Resuming where you left off...");
 }
 
-byte pg_a[PAGE_SZ];
+
 struct cs_pg_t cstl_pg;
 
 void ld_castle_page_w_ptr(filename, length)
@@ -109,9 +109,11 @@ string filename;
     byte *cstl;
     cstl = (byte *) &cstl_pg;
     load_file(filename, file_buffer, length);
+    cprintf("ptr_file_buffer = file_buffer[%x]\n", ptr_file_buffer - file_buffer);
     for (i=0; i < PAGE_SZ; ++i)
     {   cstl[i] = ptr_file_buffer[i];
     }
+    
 }
 
 
@@ -146,8 +148,8 @@ void rank_print(void)
     setVideoMode(PxlClrLo);
     PositCPuts(2, 1, "Your Rank is ");
     cputs(rank_table[rank_index >> 5]);
-    cprintf("\n rank index: 0x%x\n shifted: %x\n rank: %s",
-           rank_index, rank_index >> 5, rank_table[rank_index >> 5]);
+    cprintf("\n rank index: 0x%x\n shifted: %x\n rank: %s\n first rank: %s",
+           rank_index, rank_index >> 5, rank_table[rank_index >> 5], *rank_table);
 }
 
 signed_error load_page_a(pagenumb)
