@@ -19,8 +19,8 @@ void rank_print(void);
 #endif
 
 byte prewrite_buffer[0x100];
-char file_buffer[0x3ff4];
-char* ptr_file_buffer = file_buffer;
+byte file_buffer[0x3ff4];
+byte* ptr_file_buffer = file_buffer;
 byte rank_index;
 
 inline int checked_open(fn, flags)
