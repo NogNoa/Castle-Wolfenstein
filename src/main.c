@@ -59,7 +59,6 @@ main()
     /* file buffer 36b4 ptr_file_buffer: 0*/
     /* diabling file to screen somehow zeroes ptr_file_buffer - file_buffer from C94A*/
     ld_castle_page_w_ptr("castle", PAGE_SZ);
-    return;
     SegMemSet(Breakpoint + 1,~(byte)0x32);
     SegMemSet(Breakpoint + 3,0xfc-0xe9);
     load_file("vocab",wolf_vocab, VOCAB_FSIZE);
