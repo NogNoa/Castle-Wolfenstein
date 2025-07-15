@@ -31,6 +31,10 @@ byte b77e[3] = {0};
 byte wolf_font[CHR_FSIZE];
 bool b284 = false;
 
+extern bool joyCunfag;
+extern int cstl_load_var;
+
+
 #ifdef PRODEBUG
 uint IhbtIntr();
 #endif
@@ -107,6 +111,20 @@ main()
             } while (cont);
         if (controller == DEV_joystick && !lkfr_jystk())  
             {lack_jystk();}
+        }
+        if (controller == DEV_joystick && joyCunfag == 0x59)
+            {jystk_cnfg();}
+        if (cstl_load_var == 0)
+            {resume_castle();}
+        else if (cstl_load_var < 0x80)
+        {   setVideoMode(PxlClrLo);
+            PositCPuts(13, 6, "Loading castle, please wait...");
+            reload_castle();
+        }
+        else
+        {   setVideoMode(PxlClrLo);
+            PositCPuts(13, 4, "Creating new castle, please wait...");
+            new_castle();
         }
     }
     /**/

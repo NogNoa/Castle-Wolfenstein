@@ -23,6 +23,8 @@ byte file_buffer[FBUF_SIZE];
 byte* ptr_file_buffer = file_buffer;
 byte rank_index;
 
+extern int cstl_load_var;
+
 inline int checked_open(fn, flags)
 string fn;
 int flags;
@@ -97,8 +99,22 @@ void resume_castle(void)
 {
     setVideoMode(PxlClrLo);
     PositCPuts(13, 6, "Resuming where you left off...");
+    ld_castle_page_w_ptr("castle", CASTLE_FSIZE);
+    rank_write(rank_index);
+    load_page_a(cstl_pg.pgaind);
+
+    cputs("partial implementation\n");
 }
 
+void new_castle(void)
+{
+    cputs("unimplemented\n");
+}
+
+void reload_castle(void)
+{
+    cputs("unimplemented\n");
+}
 
 struct cs_pg_t cstl_pg;
 
@@ -189,6 +205,13 @@ byte rank_calculate(void)
         {cstl_pg.rank_index = RNK_PRIVATE;}
     cprintf("rank index: %x\n", cstl_pg.rank_index);
     return cstl_pg.rank_index;
+}
+
+void rank_write(rnk_ind)
+{
+    cstl_pg.rank_index = (byte) rnk_ind;
+    if (cstl_load_var)
+        {cstl_pg.ris_rnk_twc = false;}
 }
 
 void
