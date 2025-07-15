@@ -32,7 +32,7 @@ c1d         resume_castle
             new_castle
             reload_castle
 da7         ld_castle_page_w_ptr
-            write_to_file
+            save_castle
             rank_print
 ec8         load_page_a
 f21         save_page_a

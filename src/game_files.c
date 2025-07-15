@@ -5,6 +5,7 @@
 #include "config.h"
 #include "IVT.h"
 #include "memory.h"
+#include "FCNTL.H"
 
 #ifdef __WATCOMC__
 #include "console.h"
@@ -18,8 +19,7 @@ int Goober(int p1, byte* dest);
 void rank_print(void);
 #endif
 
-byte prewrite_buffer[0x100];
-byte file_buffer[0x4100];
+byte file_buffer[FBUF_SIZE];
 byte* ptr_file_buffer = file_buffer;
 byte rank_index;
 
@@ -116,15 +116,15 @@ string filename;
 }
 
 
-void write_to_file(file_name)
+void save_castle(file_name)
 string file_name;
 {
     int fildsc, i;
     ptr_file_buffer = file_buffer;
     for (i=0; i < PAGE_SZ; ++i) 
-        {ptr_file_buffer[i] = prewrite_buffer[i];}
-    fildsc = checked_open(file_name, 0x8001);
-    if (write(fildsc, file_buffer, 0x3ff4) < 0)
+        {ptr_file_buffer[i] = cstl_pg[i];}
+    fildsc = checked_open(file_name, O_RAW | O_WRONLY);
+    if (write(fildsc, file_buffer, CASTLE_FSIZE) < 0)
     {    put_2_strings("Error writing file ", file_name);
         _exit(-1);
     }
@@ -147,8 +147,8 @@ void rank_print(void)
     setVideoMode(PxlClrLo);
     PositCPuts(2, 1, "Your Rank is ");
     cputs(rank_table[rank_index >> 5]);
-    cprintf("\n rank index: 0x%x\n shifted: %x\n rank: %s\n first rank: %s",
-           rank_index, rank_index >> 5, rank_table[rank_index >> 5], *rank_table);
+    /*cprintf("\n rank index: 0x%x\n shifted: %x\n rank: %s\n first rank: %s",
+           rank_index, rank_index >> 5, rank_table[rank_index >> 5], *rank_table);*/
 }
 
 signed_error load_page_a(pagenumb)
@@ -255,7 +255,7 @@ int length;
     int fildsc, status;
     isDos210();
     if (Goober(0x23, dest) > 0) {_exit(-1);} 
-    fildsc = status = checked_open(file_name, 0x8000);
+    fildsc = status = checked_open(file_name, O_RAW);
     if (-1 < read(fildsc, dest, length))
     {   status = close(fildsc);    
     }
