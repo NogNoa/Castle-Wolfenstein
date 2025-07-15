@@ -19,7 +19,7 @@ void rank_print(void);
 #endif
 
 byte prewrite_buffer[0x100];
-byte file_buffer[0x3ff4];
+byte file_buffer[0x4100];
 byte* ptr_file_buffer = file_buffer;
 byte rank_index;
 
@@ -109,7 +109,6 @@ string filename;
     byte *cstl;
     cstl = (byte *) &cstl_pg;
     load_file(filename, file_buffer, length);
-    cprintf("ld_castle: ptr_file_buffer = file_buffer[$%x]\n", ptr_file_buffer - file_buffer);
     for (i=0; i < PAGE_SZ; ++i)
     {   cstl[i] = ptr_file_buffer[i];
     }
@@ -257,11 +256,8 @@ int length;
     isDos210();
     /*if (Goober(0x23, dest) > 0) {_exit(-1);} */
     fildsc = status = checked_open(file_name, 0x8000);
-    cprintf("load_file: file_buffer: $%x ptr_file_buffer: $%x &ptr_file_buffer: $%x\n",  file_buffer, ptr_file_buffer, &ptr_file_buffer);
     if (-1 < read(fildsc, dest, length))
-    {   cprintf("load_file: file_buffer: $%x ptr_file_buffer: $%x &ptr_file_buffer: $%x\n",  file_buffer, ptr_file_buffer, &ptr_file_buffer);
-        /*reads faults*/
-        status = close(fildsc);    
+    {   status = close(fildsc);    
     }
     else
     {   put_2_strings("Error reading ", file_name);

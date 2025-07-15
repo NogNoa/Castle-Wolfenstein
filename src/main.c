@@ -52,18 +52,13 @@ main()
     if (RGB_monitor == 'Y')
         {select_monitor();}
     outer_loop:
-    cprintf("setup:file_buffer: $%xptr_file_buffer: $%x\n",  file_buffer, ptr_file_buffer);
-    /* file buffer: $3674 ptr_file_buffer: $3674*/
     file_to_screen(0);
-    cprintf("file_to_screen:file_buffer: $%xptr_file_buffer: $%x\n",  file_buffer, ptr_file_buffer);
-    /* file buffer 36b4 ptr_file_buffer: 0*/
-    /* diabling file to screen somehow zeroes ptr_file_buffer - file_buffer from C94A*/
     ld_castle_page_w_ptr("castle", PAGE_SZ);
     SegMemSet(Breakpoint + 1,~(byte)0x32);
     SegMemSet(Breakpoint + 3,0xfc-0xe9);
     load_file("vocab",wolf_vocab, VOCAB_FSIZE);
     load_file("wolf.chr", wolf_font, CHR_FSIZE);
-    if (Sum(Goober, 36) != sum_goober + (int) wolf_font) {_exit(-1);}
+    /*if (Sum(Goober, 0x24) != sum_goober + (int) wolf_font) {_exit(-1);}*/
     RdSysFnt(wolf_font);
     file_to_screen(1);
     if (wait_to_return()) /* play demo if the return key isn't pressed in time*/
@@ -74,7 +69,6 @@ main()
     lpage_a = pg_a;
     lcastle_pg = &cstl_pg;
     is_cstle_stt_60();
-    return 0;
     if (!isDemo)
         {   rank_print();
             PositCPuts(9,8, "What controls do you want ?");
