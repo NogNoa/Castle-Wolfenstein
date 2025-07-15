@@ -254,7 +254,7 @@ int length;
 {
     int fildsc, status;
     isDos210();
-    /*if (Goober(0x23, dest) > 0) {_exit(-1);} */
+    if (Goober(0x23, dest) > 0) {_exit(-1);} 
     fildsc = status = checked_open(file_name, 0x8000);
     if (-1 < read(fildsc, dest, length))
     {   status = close(fildsc);    

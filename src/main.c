@@ -58,7 +58,7 @@ main()
     SegMemSet(Breakpoint + 3,0xfc-0xe9);
     load_file("vocab",wolf_vocab, VOCAB_FSIZE);
     load_file("wolf.chr", wolf_font, CHR_FSIZE);
-    /*if (Sum(Goober, 0x24) != sum_goober + (int) wolf_font) {_exit(-1);}*/
+    if (Sum(Goober, 0x24) != sum_goober + (int) wolf_font) {_exit(-1);}
     RdSysFnt(wolf_font);
     file_to_screen(1);
     if (wait_to_return()) /* play demo if the return key isn't pressed in time*/

@@ -15,7 +15,7 @@ data	segment	byte public 'data'
         dflt_drv db 0
         Key_scan_code db  0
         Is_Extended_Code db 0
-        GfxFileP db 0
+        GfxFileP dw 0
 data ENDS
 PROG    SEGMENT BYTE PUBLIC 'PROG'
         PUBLIC  Goober, isDos210, SegmSt, SegmGt, CallStck, IsKStrok, GetStrok, setVideo, BiosVide, DrwMSG, RdSysFnt
