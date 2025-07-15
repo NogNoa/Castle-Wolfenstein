@@ -120,9 +120,11 @@ void save_castle(file_name)
 string file_name;
 {
     int fildsc, i;
+    byte *cstl;
+    cstl = (byte *) &cstl_pg;
     ptr_file_buffer = file_buffer;
     for (i=0; i < PAGE_SZ; ++i) 
-        {ptr_file_buffer[i] = cstl_pg[i];}
+        {ptr_file_buffer[i] = cstl[i];}
     fildsc = checked_open(file_name, O_RAW | O_WRONLY);
     if (write(fildsc, file_buffer, CASTLE_FSIZE) < 0)
     {    put_2_strings("Error writing file ", file_name);

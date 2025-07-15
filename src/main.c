@@ -68,8 +68,9 @@ main()
     l18 = 0x8002;
     lpage_a = pg_a;
     lcastle_pg = &cstl_pg;
-    is_cstle_stt_60();
+    is_cstle_stt_60(); /*controller = undefined*/;
     if (!isDemo)
+    {   while (controller == DEV_undefined)
         {   rank_print();
             PositCPuts(9,8, "What controls do you want ?");
             PositCPuts(11,11, "Press: K for keyboard");
@@ -104,7 +105,10 @@ main()
                     cont = true;
                 }
             } while (cont);
+        if (controller == DEV_joystick && !lkfr_jystk())  
+            {lack_jystk();}
         }
+    }
     /**/
 }
 
