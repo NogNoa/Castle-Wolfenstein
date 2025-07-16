@@ -22,6 +22,7 @@ PROG    SEGMENT BYTE PUBLIC 'PROG'
 
 prflJyst proc near
 ;
+       push       BP
        MOV        byte ptr [JoyButton1],0                          ;= FALSE
        MOV        byte ptr [JoyButton2],0                          ;= FALSE
        MOV        DI,word ptr [ptr_joystick_buffer]                ;= 1a27:9d54

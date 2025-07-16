@@ -109,7 +109,7 @@ main()
                     cont = true;
                 }
             } while (cont);
-        if (controller == DEV_joystick && !lkfr_jystk())  
+        if (controller == DEV_joystick && !lkfr_jystk())
             {lack_jystk();}
         }
         if (controller == DEV_joystick && joyCunfag == 0x59)
