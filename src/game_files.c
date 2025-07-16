@@ -22,6 +22,7 @@ void rank_print(void);
 byte file_buffer[FBUF_SIZE];
 byte* ptr_file_buffer = file_buffer;
 byte rank_index;
+bool b2aa;
 
 extern int cstl_load_var;
 
@@ -95,6 +96,9 @@ void reverse_control(void)
     }
 }
 
+word error_encountered;
+
+
 void resume_castle(void)
 {
     setVideoMode(PxlClrLo);
@@ -102,8 +106,16 @@ void resume_castle(void)
     ld_castle_page_w_ptr("castle", CASTLE_FSIZE);
     rank_write(rank_index);
     load_page_a(cstl_pg.pgaind);
-
-    cputs("partial implementation\n");
+    if (!cstl_pg.unltm) {b2aa = true;}
+    cstl_pg.save_status = 1;
+    save_castle("castle");
+    if (!build_func_on_stack(35)) 
+        {cstl_pg.save_status = 0;}
+    else
+    {   cstl_pg.save_status = 0x40;
+        error_encountered = cstl_pg.e47 + cstl_pg.pgaind;
+        error_encountered |= 0xAA;
+    }
 }
 
 void new_castle(void)
@@ -254,8 +266,6 @@ void load_demo(void)
     GfxFileP = gfx_buffer;
     load_page_a(1);
 }
-
-word error_encountered;
 
 bool wait_to_return(void)
 {
