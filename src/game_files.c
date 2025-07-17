@@ -24,8 +24,6 @@ byte* ptr_file_buffer = file_buffer;
 byte rank_index;
 bool b2aa;
 
-extern int cstl_load_var;
-
 inline int checked_open(fn, flags)
 string fn;
 int flags;
@@ -113,7 +111,7 @@ void resume_castle(void)
         {cstl_pg.save_status = 0;}
     else
     {   cstl_pg.save_status = 0x40;
-        error_encountered = cstl_pg.e47 + cstl_pg.pgaind;
+        error_encountered = cstl_pg.bulletCount + cstl_pg.pgaind;
         error_encountered |= 0xAA;
     }
 }
@@ -198,7 +196,7 @@ byte rank_calculate(void)
 {
     bool cont;
     cprintf(" save status:%x\n rank_index: %x\n rise rank twice: %x\n"
-    ,cstl_pg.save_status, cstl_pg.rank_index, cstl_pg.ris_rnk_twc);
+    ,cstl_pg.save_status, cstl_pg.rank_index, cstl_pg.plans);
     if (cstl_pg.save_status < 0x80)
     {   if (1 < cstl_pg.save_status)
             {--cstl_pg.rank_index;}
@@ -207,8 +205,8 @@ byte rank_calculate(void)
     {   do
         {   if (RNK_FIELD_MARSHAL <= cstl_pg.rank_index) {break;}
             cstl_pg.rank_index += 0x10;
-            cont = cstl_pg.ris_rnk_twc;
-            cstl_pg.ris_rnk_twc = false;
+            cont = cstl_pg.plans;
+            cstl_pg.plans = false;
         } while (cont);
         if (RNK_FIELD_MARSHAL < cstl_pg.rank_index) 
             {cstl_pg.rank_index = RNK_FIELD_MARSHAL;}
@@ -219,11 +217,19 @@ byte rank_calculate(void)
     return cstl_pg.rank_index;
 }
 
+int cstl_load_var;
+/*
+padded byte
+==  0 -> resume  
+ < 80 -> load   castle
+>= 80 -> create castle
+*/
+
 void rank_write(rnk_ind)
 {
     cstl_pg.rank_index = (byte) rnk_ind;
     if (cstl_load_var)
-        {cstl_pg.ris_rnk_twc = false;}
+        {cstl_pg.plans = false;}
 }
 
 void

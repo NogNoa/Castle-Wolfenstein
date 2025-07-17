@@ -201,17 +201,5 @@ void fun610(void)
     }
 }
 
-int cstl_load_var;
-/*
-padded byte
-==  0 -> resume  
- < 80 -> load   castle
->= 80 -> create castle
-*/
 
-void write_rank(rank_index)
-{
-    cstl_pg.rank_index = (byte) rank_index;
-    if (cstl_load_var != 0)
-        {cstl_pg.ris_rnk_twc = false;}
-}
+

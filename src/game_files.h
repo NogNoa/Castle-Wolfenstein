@@ -16,13 +16,13 @@ struct cs_pg_t
     byte prefix[0x40];
     byte pgaind; /*page a index 0x40*/
     byte s0[0x47 - 0x41];
-    byte e47;
+    byte bulletCount;
     byte s1[0x51 - 0x48];
     byte unltm; /*unlock time 0x51*/
     byte s2[0x60 - 0x52];
     byte save_status; /*0x60*/
     byte s3[0x6c - 0x61];
-    bool ris_rnk_twc; /*0x6c*/
+    bool plans; /*0x6c*/
     byte rank_index; /*0x6d*/
     byte suffix[PAGE_SZ - 0x6e];
 };
