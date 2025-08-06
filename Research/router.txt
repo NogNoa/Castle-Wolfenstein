@@ -1,0 +1,18 @@
+1 6fb9 start and stop sound 1x
+2 6fc0 start and stop sound 2x
+3 
+4 6fe0
+5 7024 empty_gun_sound
+6 7031 speak_99
+7 70b6
+8 
+9 70a4
+a 6fe0 
+b 7106 FUN_speaker_7106
+c 7087
+d 70ce FUN_speaker_70ce
+e 70e6
+f 70fe
+10 7121
+11
+12 7042 stop_sound

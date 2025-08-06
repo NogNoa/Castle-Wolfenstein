@@ -9,6 +9,7 @@
 *.o
 *.err
 *.lst
+*.record
 
 #Watcom
 cw.tgt
