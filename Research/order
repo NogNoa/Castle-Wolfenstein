@@ -50,6 +50,9 @@ fe3         rank_calculate
             fun_1464
             is_Junior           isPcJr
 1585
+4426   c  [quort.c]
+          
+
 5a71   c  [config.c]
             keyboard_config     kb_cnfg
             select_monitor      

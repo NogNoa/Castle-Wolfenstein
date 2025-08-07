@@ -111,13 +111,15 @@ void resume_castle(void)
         {cstl_pg.save_status = 0;}
     else
     {   cstl_pg.save_status = 0x40;
-        error_encountered = cstl_pg.bulletCount + cstl_pg.pgaind;
-        error_encountered |= 0xAA;
+        error_encountered = (cstl_pg.bulletCount + cstl_pg.pgaind) | 0xAA;
     }
 }
 
 void new_castle(void)
 {
+    int index;
+    ld_castle_page_w_ptr("sektor", CASTLE_FSIZE);
+    index = castle_indexize()
     cputs("unimplemented\n");
 }
 
@@ -232,13 +234,14 @@ void rank_write(rnk_ind)
         {cstl_pg.plans = false;}
 }
 
-void
+int
 castle_indexize(void)
 {
     int i;
 
     for (i=1; i < 0x40; ++i)
       {file_buffer[i * PAGE_SZ + 0x50] = (byte) i;}
+    return i;
 }
 
 bool pcjr;
