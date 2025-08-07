@@ -4,11 +4,13 @@ mc1 config > ..\config.err
 mc1 memory > ..\memory.err 
 mc1 main > ..\main.err 
 mc1 periph~1 > ..\periph.err 
+mc1 quort > ..\quort.err
 mc2 game_f~1
 mc2 config 
 mc2 memory 
 mc2 main
 mc2 periph~1
+mc2 quort
 
 
 del cwa.OBJ
@@ -22,8 +24,8 @@ rename cwa.OBJ ..\src\cwa.OBJ
 rename drawa.OBJ ..\src\drawa.OBJ
 rename sonara.OBJ ..\src\sonara.OBJ
 cd ..\src
-b:link b:c MEMORY drawa MAIN config game_f~1 cwa periph~1 sonara,cw,cw,b:mc /map /line > ..\link.err
+b:link b:c MEMORY drawa MAIN quort config game_f~1 cwa periph~1 sonara,cw,cw,b:mc /map /line > ..\link.err
 rename cw.exe ..\bin\cw.exe
 cd ..
-type asm.err game_f.err config.err memory.err main.err periph.err link.err > cw.err
+type asm.err game_f.err config.err quort.err memory.err main.err periph.err link.err > cw.err
 cd bin

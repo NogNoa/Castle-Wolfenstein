@@ -10,6 +10,8 @@ data	segment	byte public 'data'
         int_frust dw 000d, 0000
         carousel_count dw 0
         pr_flag db 0
+        prng0 dw 0acb6
+        prng1 dw 038fa
         extern isDemo: byte
         extern GfxFileP: word
 data ENDS
@@ -79,18 +81,18 @@ SPK03A1 proc near
     push es
     cmp  byte ptr [isDemo], 0
     jnz  step
-    mov  si, 0x40
+    mov  si, 40
     mov  es, si
-    mov  bx, 0x6c
+    mov  bx, 6c
     mov  al, byte ptr es:[bx]
 carousel:
     shr  al, 1
-    ror  word ptr [0x7712], 1
-    ror  word ptr [0x7714], 1
-    mov  bx, word ptr [0x7714]
+    ror  word ptr [prng0], 1
+    ror  word ptr [prng1], 1
+    mov  bx, word ptr [prng1]
     ror  bx, 1
     xor  ax, bx
-    mov  word ptr [0x7714], ax
+    mov  word ptr [prng1], ax
     mov  ah, 0
     pop  es
     pop  bp
@@ -100,10 +102,10 @@ carousel:
 play_resume:
     cmp  byte ptr [pr_flag], 0
     jne  epilog
-    in   al, 0x61
-    and  al, 0xfe
+    in   al, 61
+    and  al, 0fe
     xor  al, 2
-    out  0x61, al
+    out  61, al
 epilog:
     pop  ax
 return:
@@ -112,7 +114,8 @@ step:
     inc  word ptr [GfxFileP]
     mov  si, word ptr [GfxFileP]
     mov  al, byte ptr [si]
-    jmp  0x14
+    jmp  carousel
+SPK03A1 endp
 
 PROG ends
 end
