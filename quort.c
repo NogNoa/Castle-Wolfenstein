@@ -2,26 +2,24 @@
 
 f4426(void)
 {
-    int i,j, b, lc, la;
-    byte spk, bl, al;
-    for (i=1; i <= 60; ++i)
+    int spi,i, b, lc, la;
+    byte spk, temp;
+    for (spi=1; spi <= 60; ++spi)
     {   do
-        {   spk = (byte) SPK_03A1();
+        {   spk = (byte) SPK03A1();
             spk <<= 1;
-            if (i & 1)
+            if (spi & 1)
             {
                 spk ^= 1;
             }
-        } while (!spk || 0x3f <= spk || spk == i );
+        } while (!spk || 0x3f <= spk || spk == spi );
         lc = spk << 8 + 701;
-        la = i << 8 + 701;
-        for(j=0; j < 0x100; ++j)
-        {   if (j == 073) {j = 78}
-            bl = lc[j];
-            al = la[j];
-            lc[j] = al;
-            la[j] = bl;
-            temp = bl;
+        la = spi << 8 + 701;
+        for(i=0; i < 0x100; ++i)
+        {   if (i == 0x49) {i = 0x4e;}
+            temp = lc[i];
+            lc[i] = la[i];
+            la[i] = temp;
         }
     }
 }

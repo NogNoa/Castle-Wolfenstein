@@ -8,6 +8,10 @@
 ;
 data	segment	byte public 'data'
         int_frust dw 000d, 0000
+        carousel_count dw 0
+        pr_flag db 0
+        extern isDemo: byte
+        extern GfxFileP: word
 data ENDS
 PROG    SEGMENT BYTE PUBLIC 'PROG' 
         PUBLIC  DrawCG, IhbtIntr
@@ -68,5 +72,47 @@ pixel_loop:
     pop   bp
     ret   
 DrawCG endp
+;
+SPK03A1 proc near
+;
+    push bp
+    push es
+    cmp  byte ptr [isDemo], 0
+    jnz  step
+    mov  si, 0x40
+    mov  es, si
+    mov  bx, 0x6c
+    mov  al, byte ptr es:[bx]
+carousel:
+    shr  al, 1
+    ror  word ptr [0x7712], 1
+    ror  word ptr [0x7714], 1
+    mov  bx, word ptr [0x7714]
+    ror  bx, 1
+    xor  ax, bx
+    mov  word ptr [0x7714], ax
+    mov  ah, 0
+    pop  es
+    pop  bp
+    cmp  byte ptr [carousel_count], al
+    jbe  return
+    push ax
+play_resume:
+    cmp  byte ptr [pr_flag], 0
+    jne  epilog
+    in   al, 0x61
+    and  al, 0xfe
+    xor  al, 2
+    out  0x61, al
+epilog:
+    pop  ax
+return:
+    ret  
+step:
+    inc  word ptr [GfxFileP]
+    mov  si, word ptr [GfxFileP]
+    mov  al, byte ptr [si]
+    jmp  0x14
+
 PROG ends
 end
