@@ -3,7 +3,7 @@
 
 f4426(void)
 {
-    int spi,i, b;
+    word spi, i;
     byte *lc, *la;
     byte spk, temp;
     for (spi=1; spi <= 60; ++spi)
@@ -14,9 +14,9 @@ f4426(void)
             {
                 spk ^= 1;
             }
-        } while (!spk || 0x3f <= spk || spk == spi );
-        lc = spk << 8 + file_buffer;
-        la = spi << 8 + file_buffer;
+        } while (0 == spk || 0x3f <= spk || spk == spi );
+        lc = file_buffer + ((word) spk << 8);
+        la = file_buffer + (spi << 8);
         for(i=0; i < 0x100; ++i)
         {   if (i == 0x49) {i = 0x4e;}
             temp = lc[i];

@@ -80,7 +80,7 @@ SPK03A1 proc near
     push bp
     push es
     cmp  byte ptr [isDemo], 0
-    jnz  step
+    jnz  demo_seed
     mov  si, 40
     mov  es, si
     mov  bx, 6c
@@ -110,7 +110,7 @@ epilog:
     pop  ax
 return:
     ret  
-step:
+demo_seed:
     inc  word ptr [GfxFileP]
     mov  si, word ptr [GfxFileP]
     mov  al, byte ptr [si]
