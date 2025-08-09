@@ -131,7 +131,6 @@ main()
 }
 
 byte save_status;
-extern byte rank_index;
 
 void
 is_cstle_stt_60(void)

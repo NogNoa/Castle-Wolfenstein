@@ -1,5 +1,6 @@
 #include "cw.h"
 #include "files.h"
+#include "game_f~1.h"
 
 scramble_castle(void)
 {
@@ -29,12 +30,12 @@ scramble_castle(void)
 f44db(void)
 {
     int pg, parity, j;
-    byte fb_midpg[8][0x10];
+    byte (*fb_midpg)[0x10]; /* 8 rows */
     byte al, spk;
     for (pg = 1; pg < 0x3f; ++pg)
-    {   fb_midpg = file_buffer + PAGE_SZ*pg + PAGE_SZ/2;
+    {   fb_midpg = (byte (*)[0x10]) (file_buffer + PAGE_SZ*pg + PAGE_SZ/2);
         parity = 0;
-        for (j=0; j < 8;++j;)
+        for (j=0; j < 8;++j)
         {   if (fb_midpg[j][0] & 0xf0 == 0x10)
             {
                 spk = SpkRng();

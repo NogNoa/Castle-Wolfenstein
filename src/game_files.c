@@ -121,7 +121,7 @@ void new_castle(void)
     ld_castle_page_w_ptr("sektor", CASTLE_FSIZE);
     castle_indexize();
     scramble_castle();
-    f44db()
+    f44db();
     cputs("unimplemented\n");
 }
 

@@ -29,6 +29,8 @@ struct cs_pg_t
 extern byte pg_a[];
 extern struct cs_pg_t cstl_pg;
 extern bool isDemo;
+extern byte rank_index;
+
 
 #define RNK_PRIVATE 0x10
 #define RNK_COLONEL 0x80
