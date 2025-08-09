@@ -120,7 +120,8 @@ void new_castle(void)
     int index;
     ld_castle_page_w_ptr("sektor", CASTLE_FSIZE);
     castle_indexize();
-    f4426();
+    scramble_castle();
+    f44db()
     cputs("unimplemented\n");
 }
 

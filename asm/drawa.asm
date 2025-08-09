@@ -16,7 +16,7 @@ data	segment	byte public 'data'
         extern GfxFileP: word
 data ENDS
 PROG    SEGMENT BYTE PUBLIC 'PROG' 
-        PUBLIC  DrawCG, IhbtIntr
+        PUBLIC  DrawCG, IhbtIntr, SpkRng
         ASSUME  CS:PROG, DS:data
 IhbtIntr proc near
     PUSH         BP
@@ -75,7 +75,7 @@ pixel_loop:
     ret   
 DrawCG endp
 ;
-SPK03A1 proc near
+SpkRng proc near
 ;
     push bp
     push es
@@ -115,7 +115,7 @@ demo_seed:
     mov  si, word ptr [GfxFileP]
     mov  al, byte ptr [si]
     jmp  carousel
-SPK03A1 endp
+SpkRng endp
 
 PROG ends
 end
