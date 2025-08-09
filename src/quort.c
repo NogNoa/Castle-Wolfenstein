@@ -28,17 +28,31 @@ scramble_castle(void)
 
 f44db(void)
 {
-    int pg, lc, l4, j, si;
+    int pg, fb_midpg, l4, j, si;
     byte al, spk;
     for (pg = 1; pg < 0x3f; ++pg)
-    {   lc = pg*PAGE_SZ + PAGE_SZ/2 + 0x2bd;
+    {   fb_midpg = file_buffer + PAGE_SZ*pg + PAGE_SZ/2;
         l4 = 0;
         for (j=0; j <= 0x70;j +=0x10;)
-        {   if (lc[j] & 0xf0 == 0x10)
+        {   if (fb_midpg[j] & 0xf0 == 0x10)
             {
                 spk = SpkRng();
                 if (10 < (spk & 15)) {spk -= 6;}
-                lc[j+2] = 0
+                fb_midpg[j+2] = 0;
+                fb_midpg[j+7] = spk & 15;
+                fb_midpg[j+6] = 0;
+                fb_midpg[j+0xc] = 0;
+                fb_midpg[j+9] = (byte) SpkRng();
+                spk = (byte)SpkRng();
+                fb_midpg[j+8] = (spk < 0xd0) ? 0 :
+                (spk < 0xf8) ? 1 : 2; 
+                if (1 < ++l4) 
+                {   l4 = 0;
+                    if (SpkRng() < rank_index / 2)
+                    {   fb_midpg[j+6] = 1;
+                        fb_midpg[j] = 0x20;
+                    }
+                }
             }
         }
     }
