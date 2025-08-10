@@ -2,6 +2,9 @@
 #include "files.h"
 #include "game_f~1.h"
 
+typedef byte room[0x10];
+typedef room floor[0x8];
+
 scramble_castle(void)
 {
     word spj, i;
@@ -30,29 +33,30 @@ scramble_castle(void)
 f44db(void)
 {
     int pg, parity, j;
-    byte (*fb_midpg)[0x10]; /* 8 rows */
+    floor *flr;
+    room * rm;
     byte al, spk;
     for (pg = 1; pg < 0x3f; ++pg)
-    {   fb_midpg = (byte (*)[0x10]) (file_buffer + PAGE_SZ*pg + PAGE_SZ/2);
+    {   flr = (floor *) file_buffer + PAGE_SZ*pg + PAGE_SZ/2;
         parity = 0;
         for (j=0; j < 8;++j)
-        {   if (fb_midpg[j][0] & 0xf0 == 0x10)
-            {
-                spk = SpkRng();
+        {   rm = flr[j];
+            if (rm[0] & 0xf0 == 0x10)
+            {   spk = SpkRng();
                 if (10 < (spk & 15)) {spk -= 6;}
-                fb_midpg[j][2] = 0;
-                fb_midpg[j][7] = spk & 15;
-                fb_midpg[j][6] = 0;
-                fb_midpg[j][0xc] = 0;
-                fb_midpg[j][9] = (byte) SpkRng();
+                rm[2] = 0;
+                rm[7] = spk & 15;
+                rm[6] = 0;
+                rm[0xc] = 0;
+                rm[9] = (byte) SpkRng();
                 spk = (byte)SpkRng();
-                fb_midpg[j][8] = (spk < 0xd0) ? 0 :
+                rm[8] = (spk < 0xd0) ? 0 :
                 (spk < 0xf8) ? 1 : 2; 
                 if (1 < ++parity) 
                 {   parity = 0;
                     if (SpkRng() < rank_index / 2)
-                    {   fb_midpg[j][6] = 1;
-                        fb_midpg[j][0] = 0x20;
+                    {   rm[6] = 1;
+                        rm[0] = 0x20;
                     }
                 }
             }
