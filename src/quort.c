@@ -104,28 +104,28 @@ void f46c2(void)
 
 {
     byte nib_hi;
-    byte *flr0;
-    byte *flr1;
+    room * flr0;
+    room * flr1;
     byte k;
     int pg;
     int i;
     int j;
     
-    for (pg = 2; pg < 0xb; pg = pg + 1) 
-    {   flr0 = (file_buffer + PAGE_SZ*pg        + PAGE_SZ/2);
-        flr1 = (file_buffer + PAGE_SZ*(pg + 32) + PAGE_SZ/2);
-        for (i = 0; i < 0x71; i = i + 0x10) 
-        {   nib_hi = flr0[i] & 0xf0;
+    for (pg = 2; pg < 0xb; ++pg) 
+    {   flr0 = (room *)  (file_buffer + PAGE_SZ*pg        + PAGE_SZ/2);
+        flr1 = (room *)  (file_buffer + PAGE_SZ*(pg + 0x20) + PAGE_SZ/2);
+        for (i = 0; i <= 7; ++i) 
+        {   nib_hi = flr0[i][0] & 0xf0;
             if ((nib_hi == 0x10) || (nib_hi == 0x20)) 
-            {   for (j = 0; j < 0x71; j = j + 0x10) 
+            {   for (j = 0; j <= 7; ++j) 
                 {   k = 0;
-                    if ((flr1[j] & 0xf0) == 0) 
-                    {   flr0[i+1] = flr1[j+1];
+                    if ((flr1[j][0] & 0xf0) == 0) 
+                    {   flr0[i][1] = flr1[j][1];
                         for(k=0; 0x10 > k;++k) 
-                        {   fl1[j + k] = flr0[i + k];}
-                        flr0[i] = 0;
-                        j = 0x70;
-                        i = 0x70;
+                        {   fl1[j][k] = flr0[i][k];}
+                        flr0[i][0] = 0;
+                        j = 7;
+                        i = 7;
                     }
                 }
             }
