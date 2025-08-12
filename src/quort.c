@@ -99,3 +99,44 @@ void f45e9(void)
     }
     return;
 }
+
+void __cdecl16near FUN_1000_46c2(void)
+
+{
+  byte bVar1;
+  int iVar2;
+  int iVar3;
+  uint uVar4;
+  byte *pbVar5;
+  byte k;
+  int pg;
+  int i;
+  int j;
+  
+  for (pg = 2; pg < 0xb; pg = pg + 1) {
+    iVar2 = pg * 0x100 + 0x33d;
+    iVar3 = pg * 0x100 + 0x353d;
+    for (i = 0; i < 0x71; i = i + 0x10) {
+      bVar1 = *(byte *)(iVar2 + i) & 0xf0;
+      if ((bVar1 == 0x10) || (bVar1 == 0x20)) {
+        for (j = 0; j < 0x71; j = j + 0x10) {
+          pbVar5 = (byte *)(iVar3 + j);
+          k = 0;
+          if ((*pbVar5 & 0xf0) == 0) {
+            *(byte *)(iVar2 + i + 1) = pbVar5[1];
+            while( true ) {
+              uVar4 = (uint)k;
+              if (uVar4 != 0xf && 0xe < k) break;
+              k = k + 1;
+              *(undefined1 *)(iVar3 + j + uVar4) = *(undefined1 *)(iVar2 + i + uVar4);
+            }
+            *(undefined1 *)(iVar2 + i) = 0;
+            j = 0x70;
+            i = 0x70;
+          }
+        }
+      }
+    }
+  }
+  return;
+}
