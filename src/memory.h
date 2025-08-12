@@ -12,9 +12,9 @@ void file_to_screen(int file_chc);
 
 #define long_ptr(S, I) ((long)S << 0x10 | I)
 
-#define SegMemSet(A, b)    (SegmSt((int) ((A) >> 0x10), (char *) (A), (byte) (b)))
-#define WSegMem_Set(A, w)  ((SegMemSet((long) A, w)),   (SegMemSet((long) A+1, w >> 8)))
-#define LSeg_Mem_Set(A, l) ((WSegMem_Set(A, l)), (WSegMem_Set(A+2, l >> 0x10)))
+#define SegMemSet(Aseg, bval)    (SegmSt((int) ((Aseg) >> 0x10), (char *) (Aseg), (byte) (bval)))
+#define WSegMem_Set(Aseg, wval)  ((SegMemSet((long) Aseg, wval)),   (SegMemSet((long) Aseg+1, wval >> 8)))
+#define LSeg_Mem_Set(Aseg, lval) ((WSegMem_Set(Aseg, lval)), (WSegMem_Set(Aseg+2, lval >> 0x10)))
 
 #define SegMemGet(Aseg)       (SegmGt((int) ((Aseg) / PAGE_SZ), (byte *) (Aseg)))
 #define WSegMem_Get(Aseg)  ((SegMemGet((long)Aseg)) | (SegMemGet((long) Aseg+1)) << 8)

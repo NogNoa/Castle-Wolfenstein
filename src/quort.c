@@ -33,11 +33,11 @@ scramble_castle(void)
 f44db(void)
 {
     int pg, parity, j;
-    floor *flr;
-    room * rm;
+    room * flr;
+    byte * rm;
     byte al, spk;
     for (pg = 1; pg < 0x3f; ++pg)
-    {   flr = (floor *) file_buffer + PAGE_SZ*pg + PAGE_SZ/2;
+    {   flr = (room *) (file_buffer + PAGE_SZ*pg + PAGE_SZ/2);
         parity = 0;
         for (j=0; j < 8;++j)
         {   rm = flr[j];
@@ -66,36 +66,36 @@ f44db(void)
 
 void f45e9(void)
 {
-  byte (*fb_midpg)[0x10]; /* 8 rows */
-  byte spk, nibble_j, carry_over, j;
-  int pg, i;
-  
-  carry_over = 0xf; 
-  j = 0;
-  for (pg = 1; pg < 0x3f; pg = pg + 1) {
-    fb_midpg = (byte (*)[0x10]) (file_buffer + PAGE_SZ*pg + PAGE_SZ/2);
-    for (i = 0; i <= 0x7; i = i + 0x1) {
-      if ((fb_midpg[i][0] & 0xf0) == 0x30) {
-        /* at first the nibble goes up to f
-        but then it's 0 twice in a row instead*/
-        nibble_j = j & 0xf;
-        if (nibble_j == 0xf) {
-          nibble_j = carry_over;
-          carry_over = 0;
+    room * flr;
+    byte * rm;
+    byte spk, nibble_j, carry_over, j;
+    int pg, i;
+    carry_over = 0xf; 
+    j = 0;
+    for (pg = 1; pg < 0x3f; pg = pg + 1) 
+    {   flr = (room *) (file_buffer + PAGE_SZ*pg + PAGE_SZ/2);
+        for (i = 0; i <= 0x7; i = i + 0x1) 
+        {   rm = flr[i];
+            if ((rm[0] & 0xf0) == 0x30) 
+            { /* at first the nibble goes up to f
+                but then it's 0 twice in a row instead*/
+                nibble_j = j & 0xf;
+                if (nibble_j == 0xf) 
+                {   nibble_j = carry_over;
+                    carry_over = 0;
+                }
+                rm[2] = nibble_j;
+                spk = (byte) SpkRng();
+                f4910(spk);
+                rm[4] = spk;
+                spk = (byte) SpkRng();
+                rm[3] = spk;
+                rm[7] = 0;
+                j = j + 1;
+            }
+            else if ((rm[0] & 0xf0) == 0x50) 
+            {   rm[3] = 1;}  
         }
-        fb_midpg[i][2] = nibble_j;
-        spk = (byte) SpkRng();
-        f4910(spk);
-        fb_midpg[i][4] = spk;
-        spk = (byte) SpkRng();
-        fb_midpg[i][3] = spk;
-        fb_midpg[i][7] = 0;
-        j = j + 1;
-      }
-      else if ((fb_midpg[i][0] & 0xf0) == 0x50) {
-        fb_midpg[i][3] = 1;
-      }
     }
-  }
-  return;
+    return;
 }
