@@ -1,0 +1,24 @@
+CG_format:
+    file = field[*]
+    field = line[*]
+    line = byte[*]
+    byte = pixel[4]
+
+interlaced.file = field[2]
+progressive.file = field[1]
+
+full_screen = interlaced(mode=4)
+DEMOMESG = progressive(mode=4)
+
+full_screen.field = line[103]
+full_screen.line = byte[80]
+
+demomesg.field = line[39]
+demomesg.line = byte[32]
+
+mode4.pixel = {0: BG, 
+               1: {R=0x55,G=0xff,B=0xff}, 
+               2: {R=0xff,G=0x55,B=0xff},
+               3: {R=0xff,G=0xff,B=0xff}}[byte]
+
+TITLEPIX, ESCPIX1, EXCPIX2: full_screen
