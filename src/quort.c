@@ -86,7 +86,7 @@ void f45e9(void)
                 }
                 rm[2] = nibble_j;
                 spk = (byte) SpkRng();
-                f4910(spk);
+                wait_x10(spk);
                 rm[4] = spk;
                 spk = (byte) SpkRng();
                 rm[3] = spk;
@@ -122,7 +122,7 @@ void f46c2(void)
                     if ((flr1[j][0] & 0xf0) == 0) 
                     {   flr0[i][1] = flr1[j][1];
                         for(k=0; 0x10 > k;++k) 
-                        {   fl1[j][k] = flr0[i][k];}
+                        {   flr1[j][k] = flr0[i][k];}
                         flr0[i][0] = 0;
                         j = 7;
                         i = 7;
@@ -132,4 +132,10 @@ void f46c2(void)
         }
     }
     return;
+}
+
+void wait_x10(time)
+{
+    int i;
+    for (i = time * 10; i > 0; --i) {}
 }

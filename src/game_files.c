@@ -122,6 +122,11 @@ void new_castle(void)
     castle_indexize();
     scramble_castle();
     f44db();
+    f45e9();
+    rank_write(rank_index);
+    scramble_castle();
+    f46c2();
+    load_page_a(1);
     cputs("unimplemented\n");
 }
 
