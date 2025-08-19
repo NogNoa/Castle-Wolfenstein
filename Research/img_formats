@@ -20,5 +20,20 @@ mode4.pixel = {0: BG,
                1: {R=0x55,G=0xff,B=0xff}, 
                2: {R=0xff,G=0x55,B=0xff},
                3: {R=0xff,G=0xff,B=0xff}}[byte]
+}
 
 TITLEPIX, ESCPIX1, EXCPIX2: full_screen
+
+Font_format:
+file = letter[4]
+row = letter[0x20]
+letter = byte[8]
+byte = pixel[8]
+byte = pixel_row
+bit = pixel
+
+cga_text.pixel = {
+                0: {0,0,0}
+                1: {0xff, 0xff, 0xff}
+}
+    
