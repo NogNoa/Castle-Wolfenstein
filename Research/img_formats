@@ -16,6 +16,10 @@ full_screen.line = byte[80]
 demomesg.field = line[39]
 demomesg.line = byte[32]
 
+loc.x = 4 * byte_i + 
+loc.y(progressive) = line_i
+loc.y(interlaced) = 2 * line_i + field_i
+
 mode4.pixel = {0: BG, 
                1: {R=0x55,G=0xff,B=0xff}, 
                2: {R=0xff,G=0x55,B=0xff},
@@ -29,11 +33,13 @@ file = letter[4]
 row = letter[0x20]
 letter = byte[8]
 byte = pixel[8]
-byte = pixel_row
 bit = pixel
+
+loc.x = 8 * letter_i + pix_i
+loc.y = 8 * row_i + byte_i
 
 cga_text.pixel = {
                 0: {0,0,0}
                 1: {0xff, 0xff, 0xff}
 }
-    
+
