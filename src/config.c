@@ -99,7 +99,7 @@ void print_to_position(column, row, massage)
 byte column, row; 
 string massage;
 {
-    PositCPuts(row, column, massage);
+    PositCPuts(row+1, column+1, massage);
 }
 
 bool horizontal, sagital;
