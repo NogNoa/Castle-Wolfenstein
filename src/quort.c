@@ -133,8 +133,8 @@ void f46c2(void)
     }
 }
 
-byte f4862(byte call)
-
+byte f4862(call)
+byte call;
 {
   byte checked;
   byte ref;
@@ -165,7 +165,7 @@ void f47a3(void)
   int i;
   int j;
   
-  cstl_pg.s_43 = f4862((byte)speaker_rng());
+  cstl_pg.s_43 = f4862((byte)SpkRng());
   for (par = 1; par < 9; par = par + 1) {
     k = par * 0x10;
     if (pg_a_70[k] == 0x20) {
@@ -173,13 +173,13 @@ void f47a3(void)
       pg_a_70[k + 6] = 0;
     }
   }
-  cstl_pg.page_a# = 1;
-  cstl_pg.s_4b = (byte)speaker_rng() | 0x80;
-  cstl_pg.bullets# = 10;
-  cstl_pg.granades# = 0;
+  cstl_pg.pgaind = 1;
+  cstl_pg.s_4b = (byte)SpkRng() | 0x80;
+  cstl_pg.bulletCount = 10;
+  cstl_pg.granadeCount = 0;
   cstl_pg.s_4c = 0;
-  cstl_pg.unlock_time = 0;
-  cstl_pg.field82_0x52 = 0;
+  cstl_pg.unlktm = 0;
+  cstl_pg.s_52 = 0;
   cstl_pg.save_status = 0;
   cstl_pg.s_41 = 0;
   cstl_pg.s_42 = 0;

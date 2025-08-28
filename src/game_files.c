@@ -104,7 +104,7 @@ void resume_castle(void)
     ld_castle_page_w_ptr("castle", CASTLE_FSIZE);
     rank_write(rank_index);
     load_page_a(cstl_pg.pgaind);
-    if (!cstl_pg.unltm) {b2aa = true;}
+    if (!cstl_pg.unlktm) {b2aa = true;}
     cstl_pg.save_status = 1;
     save_castle("castle");
     if (!build_func_on_stack(35)) 

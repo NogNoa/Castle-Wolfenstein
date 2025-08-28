@@ -27,7 +27,7 @@ struct cs_pg_t
     byte s_4c;
     byte s_4d;
     byte s1[0x51 - 0x4e];
-    byte unltm; /*unlock time 0x51*/
+    byte unlktm; /*unlock time 0x51*/
     byte s_52;
     byte par_ray_ind;
     byte s2[0x59 - 0x54];
@@ -41,6 +41,7 @@ struct cs_pg_t
     byte suffix[PAGE_SZ - 0x87];
 };
 extern byte pg_a[];
+extern byte* pg_a_70;
 extern struct cs_pg_t cstl_pg;
 extern bool isDemo;
 extern byte rank_index;
