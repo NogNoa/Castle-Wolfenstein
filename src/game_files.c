@@ -127,7 +127,16 @@ void new_castle(void)
     scramble_castle();
     f46c2();
     load_page_a(1);
-    cputs("unimplemented\n");
+    f47a3();
+    cstl_pg.save_status = 1;
+    save_castle("castle");
+    cstl_pg.save_status = 0;
+    save_castle("backup");
+    cstl_pg.s_4d = 0;
+    if (build_func_on_stack(35))
+    {   cstl_pg.save_status = 0x40;
+        error_encountered = cstl_pg.s_43 + 0x40;
+    }
 }
 
 void reload_castle(void)

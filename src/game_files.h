@@ -15,16 +15,30 @@ struct cs_pg_t
 {
     byte prefix[0x40];
     byte pgaind; /*page a index 0x40*/
-    byte s0[0x47 - 0x41];
+    byte s_41;
+    byte s_42;
+    byte s_43;
+    byte s0[0x47 - 0x44];
     byte bulletCount;
-    byte s1[0x51 - 0x48];
+    byte granadeCount;
+    byte uniform;
+    byte vest;
+    byte s_4b;
+    byte s_4c;
+    byte s_4d;
+    byte s1[0x51 - 0x4e];
     byte unltm; /*unlock time 0x51*/
-    byte s2[0x60 - 0x52];
-    byte save_status; /*0x60*/
-    byte s3[0x6c - 0x61];
+    byte s_52;
+    byte par_ray_ind;
+    byte s2[0x59 - 0x54];
+    byte s_59;
+    byte s3[0x6c - 0x60];
     bool plans; /*0x6c*/
     byte rank_index; /*0x6d*/
-    byte suffix[PAGE_SZ - 0x6e];
+    byte s_6e;
+    byte save_status; /*0x6f*/
+    byte table_4_4[4][4]; /*0x70*/
+    byte suffix[PAGE_SZ - 0x87];
 };
 extern byte pg_a[];
 extern struct cs_pg_t cstl_pg;

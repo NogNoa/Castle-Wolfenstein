@@ -112,7 +112,7 @@ void f46c2(void)
     int j;
     
     for (pg = 2; pg < 0xb; ++pg) 
-    {   flr0 = (room *)  (file_buffer + PAGE_SZ*pg        + PAGE_SZ/2);
+    {   flr0 = (room *)  (file_buffer + PAGE_SZ* pg         + PAGE_SZ/2);
         flr1 = (room *)  (file_buffer + PAGE_SZ*(pg + 0x20) + PAGE_SZ/2);
         for (i = 0; i <= 7; ++i) 
         {   nib_hi = flr0[i][0] & 0xf0;
@@ -131,7 +131,67 @@ void f46c2(void)
             }
         }
     }
-    return;
+}
+
+byte f4862(byte call)
+
+{
+  byte checked;
+  byte ref;
+  char i;
+  byte j;
+  
+  i = 0x3f;
+  do {
+    do {
+      ref = ++call & 0x3f;
+    } while (pg_a[ref] & 0x38);
+    j = 1;
+    checked = pg_a_70[j*0x10 + 1];
+    while (j < 9 && checked != ref &&
+            (checked + 8 != ref) && (checked - 8 != ref)) {
+      ++j;
+    }
+    --i;
+  } while ((j < 9) && i);
+  return ref;
+}
+
+void f47a3(void)
+
+{
+  int k;
+  int par;
+  int i;
+  int j;
+  
+  cstl_pg.s_43 = f4862((byte)speaker_rng());
+  for (par = 1; par < 9; par = par + 1) {
+    k = par * 0x10;
+    if (pg_a_70[k] == 0x20) {
+      pg_a_70[k] = 0x10;
+      pg_a_70[k + 6] = 0;
+    }
+  }
+  cstl_pg.page_a# = 1;
+  cstl_pg.s_4b = (byte)speaker_rng() | 0x80;
+  cstl_pg.bullets# = 10;
+  cstl_pg.granades# = 0;
+  cstl_pg.s_4c = 0;
+  cstl_pg.unlock_time = 0;
+  cstl_pg.field82_0x52 = 0;
+  cstl_pg.save_status = 0;
+  cstl_pg.s_41 = 0;
+  cstl_pg.s_42 = 0;
+  cstl_pg.uniform = 0;
+  cstl_pg.vest = 0;
+  cstl_pg.s_59 = 0;
+  for (i = 0; i < 4; i = i + 1) {
+    for (j = 0; j < 4; j = j + 1) {
+      cstl_pg.table_4_4[i][j] = 0;
+    }
+  }
+  return;
 }
 
 void wait_x10(time)
