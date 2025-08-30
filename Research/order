@@ -34,9 +34,9 @@ c1d         resume_castle
 da7         ld_castle_page_w_ptr
             save_castle
             rank_print
-ec8         load_page_a
-f21         save_page_a
-f71         switch_page_a
+ec8         load_room_pg
+f21         save_room_pg
+f71         switch_room_pg
 fe3         rank_calculate
 1055
 11ba        castle_indexize

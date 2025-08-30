@@ -103,7 +103,7 @@ void resume_castle(void)
     PositCPuts(13, 6, "Resuming where you left off...");
     ld_castle_page_w_ptr("castle", CASTLE_FSIZE);
     rank_write(rank_index);
-    load_page_a(cstl_pg.pgaind);
+    load_room_pg(cstl_pg.pgaind);
     if (!cstl_pg.unlktm) {b2aa = true;}
     cstl_pg.save_status = 1;
     save_castle("castle");
@@ -126,8 +126,8 @@ void new_castle(void)
     rank_write(rank_index);
     scramble_castle();
     f46c2();
-    load_page_a(1);
-    f47a3();
+    load_room_pg(1);
+    cstl_reset();
     cstl_pg.save_status = 1;
     save_castle("castle");
     cstl_pg.save_status = 0;
@@ -197,7 +197,7 @@ void rank_print(void)
            rank_index, rank_index >> 5, rank_table[rank_index >> 5], *rank_table);*/
 }
 
-signed_error load_page_a(pagenumb)
+signed_error load_room_pg(pagenumb)
 int pagenumb;
 {
     int i;
@@ -289,7 +289,7 @@ void load_demo(void)
     dmodt_offset = 0;
     ind29a = 0;
     GfxFileP = gfx_buffer;
-    load_page_a(1);
+    load_room_pg(1);
 }
 
 bool wait_to_return(void)

@@ -29,26 +29,26 @@ save castle does the opposite. copies a page from castle_page to where PTR_file_
 Load_castle_page_w/_ptr always load castle_page with the page pointed to by PTR_file_buffer, 
     which for now seem to always be page 0
 
-load_demo (CS:12dd) load demofile into file_buffer and load page 1 into file_page_a (DS:82)
+load_demo (CS:12dd) load demofile into file_buffer and load page 1 into file_room_pg (DS:82)
 
-the function load_page_a (CS:ec8) load a single page in range 0..3d 
-    from file_buffer to file_page_a
-in function resume_castle (cs:c1d) load_page_a is called with castle_page[0x40] to load a page from "castle"
-    page_a is not reffered to in this function
-in function new_castle (CS:cb5) load_page_a is asked to load page 1 from "sektor"
-in function reload_castle () load_page_a is asked to load page 1 from either "castle" or "backup"
+the function load_room_pg (CS:ec8) load a single page in range 0..3d 
+    from file_buffer to file_room_pg
+in function resume_castle (cs:c1d) load_room_pg is called with castle_page[0x40] to load a page from "castle"
+    room_pg is not reffered to in this function
+in function new_castle (CS:cb5) load_room_pg is asked to load page 1 from "sektor"
+in function reload_castle () load_room_pg is asked to load page 1 from either "castle" or "backup"
 
 cs:0567:
 cs:05bc: 
-cs:061f: file_page_a[70+10para]
+cs:061f: file_room_pg[70+10para]
 
-cs:079b: file_page_a
-cs:10ca: file_page_a
+cs:079b: file_room_pg
+cs:10ca: file_room_pg
 
-cs:10cd: file_page_a[4b]
-cs:10fa: file_page_a[4c]
-cs:1123: file_page_a[49]
+cs:10cd: file_room_pg[4b]
+cs:10fa: file_room_pg[4c]
+cs:1123: file_room_pg[49]
 
 cs:160d:
 cs:1614:
-cs:161f: file_page_a[80]
+cs:161f: file_room_pg[80]

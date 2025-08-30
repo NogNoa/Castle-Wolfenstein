@@ -8,7 +8,7 @@ I'll call it castle_page and the function load_castle_page_w/_ptr
 size is 3FF4
 
 040: room_id 
-    page_a ordinal
+     room page ordinal
 041: movemnt direction  #bitmapped 0000 ><^v
 042: aiming direction   #bitmapped 0000 ><^v
 043: error_id - 40

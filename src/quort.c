@@ -133,7 +133,7 @@ void f46c2(void)
     }
 }
 
-byte f4862(call)
+byte pga_search(call)
 byte call;
 {
   byte checked;
@@ -157,7 +157,7 @@ byte call;
   return ref;
 }
 
-void f47a3(void)
+void cstl_reset(void)
 
 {
   int k;
@@ -165,7 +165,7 @@ void f47a3(void)
   int i;
   int j;
   
-  cstl_pg.s_43 = f4862((byte)SpkRng());
+  cstl_pg.s_43 = pga_search((byte)SpkRng());
   for (par = 1; par < 9; par = par + 1) {
     k = par * 0x10;
     if (pg_a_70[k] == 0x20) {
