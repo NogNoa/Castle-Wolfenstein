@@ -9,7 +9,6 @@
 #ifdef __WATCOMC__
 #include "console.h"
 #include "cwa.h"
-#include "game_f~1.h"
 #include "drawa.h"
 #endif
 
@@ -147,7 +146,7 @@ int file_chc;
     SegMemSet(Breakpoint+3, 0x13);
 }
 
-byte rm_pg[PAGE_SZ];
+room rm_pg;
 byte* rm_pg_70 = rm_pg + 0x70;
 paragraph para_2ac;
 

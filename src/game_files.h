@@ -40,17 +40,16 @@ struct cs_pg_t
     byte table_4_4[4][4]; /*0x70*/
     byte suffix[PAGE_SZ - 0x87];
 };
-struct tile
+typedef byte room[PAGE_SZ];
+
+typedef struct _castle_buffer
 {
-    byte val[8];
-};
-typedef struct _room
-{
-    struct tile val[8];
-} room;
+    struct cs_pg_t header;
+    room rooms[0x3d];
+} castle_buffer;
 
 
-extern byte rm_pg[];
+extern room rm_pg;
 extern byte* rm_pg_70;
 extern struct cs_pg_t cstl_pg;
 extern bool isDemo;
