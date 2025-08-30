@@ -7,15 +7,38 @@ I'll call it castle_page and the function load_castle_page_w/_ptr
 
 size is 3FF4
 
-040: page_a ordinal
+040: room_id 
+    page_a ordinal
+041: movemnt direction  #bitmapped 0000 ><^v
+042: aiming direction   #bitmapped 0000 ><^v
 043: error_id - 40
+044: x-coordinate of player in the room     
+045: y-coordinate of player in the room
+046: isTransition
+047: number bullets
 048: number of granades.
-04d: ?
-051: ?
-06c: if non-zero increment rank_index towards 0xf0 twich
+049: uniform
+04a: vest
+04b: aim (alchohol decrese)
+04c: bonk timer
+04d: room timer
+04f: rooms visited
+051: action timer
+052: isBusy
+053: paragraph array index
+059: bitmapped keys
+06c: has_plans 
+    if non-zero increment rank_index towards 0xf0 twich
 06d: rank_index
-06f: save status: 
-    0 ok, resuming 
-    1..80 error, loading from backup
+06f: Game status: 
+    0 ongoing, resuming 
+    1..80 Game Overed, loading from backup
+        40 Caught
+        50 killed
+        60 suicide
     80..ff error, creating new file
-    ff no save, creating new file
+    ff win, creating new file
+
+
+decryption of a significant part of the page 0 structure by 
+    guindev@retroachievements.org (https://retroachievements.org/user/guindev)
