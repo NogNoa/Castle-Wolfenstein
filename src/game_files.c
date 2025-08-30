@@ -20,7 +20,7 @@ void rank_print(void);
 #endif
 
 byte file_buffer[FBUF_SIZE];
-byte* ptr_file_buffer = file_buffer;
+byte* pg0_file_buffer = file_buffer;
 byte rank_index;
 bool b2aa;
 
@@ -154,7 +154,7 @@ string filename;
     cstl = (byte *) &cstl_pg;
     load_file(filename, file_buffer, length);
     for (i=0; i < PAGE_SZ; ++i)
-    {   cstl[i] = ptr_file_buffer[i];
+    {   cstl[i] = pg0_file_buffer[i];
     }
     
 }
@@ -166,9 +166,9 @@ string file_name;
     int fildsc, i;
     byte *cstl;
     cstl = (byte *) &cstl_pg;
-    ptr_file_buffer = file_buffer;
+    pg0_file_buffer = file_buffer;
     for (i=0; i < PAGE_SZ; ++i) 
-        {ptr_file_buffer[i] = cstl[i];}
+        {pg0_file_buffer[i] = cstl[i];}
     fildsc = checked_open(file_name, O_RAW | O_WRONLY);
     if (write(fildsc, file_buffer, CASTLE_FSIZE) < 0)
     {    put_2_strings("Error writing file ", file_name);

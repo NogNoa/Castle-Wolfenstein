@@ -2,8 +2,8 @@
 #include "files.h"
 #include "game_f~1.h"
 
-typedef byte room[0x10];
-typedef room floor[0x8];
+typedef byte paragraph[0x10];
+typedef paragraph floor[0x8];
 
 scramble_castle(void)
 {
@@ -33,11 +33,11 @@ scramble_castle(void)
 f44db(void)
 {
     int pg, parity, j;
-    room * flr;
+    paragraph * flr;
     byte * rm;
     byte al, spk;
     for (pg = 1; pg < 0x3f; ++pg)
-    {   flr = (room *) (file_buffer + PAGE_SZ*pg + PAGE_SZ/2);
+    {   flr = (paragraph *) (file_buffer + PAGE_SZ*pg + PAGE_SZ/2);
         parity = 0;
         for (j=0; j < 8;++j)
         {   rm = flr[j];
@@ -66,14 +66,14 @@ f44db(void)
 
 void f45e9(void)
 {
-    room * flr;
+    paragraph * flr;
     byte * rm;
     byte spk, nibble_j, carry_over, j;
     int pg, i;
     carry_over = 0xf; 
     j = 0;
     for (pg = 1; pg < 0x3f; pg = pg + 1) 
-    {   flr = (room *) (file_buffer + PAGE_SZ*pg + PAGE_SZ/2);
+    {   flr = (paragraph *) (file_buffer + PAGE_SZ*pg + PAGE_SZ/2);
         for (i = 0; i <= 0x7; i = i + 0x1) 
         {   rm = flr[i];
             if ((rm[0] & 0xf0) == 0x30) 
@@ -104,16 +104,16 @@ void f46c2(void)
 
 {
     byte nib_hi;
-    room * flr0;
-    room * flr1;
+    paragraph * flr0;
+    paragraph * flr1;
     byte k;
     int pg;
     int i;
     int j;
     
     for (pg = 2; pg < 0xb; ++pg) 
-    {   flr0 = (room *)  (file_buffer + PAGE_SZ* pg         + PAGE_SZ/2);
-        flr1 = (room *)  (file_buffer + PAGE_SZ*(pg + 0x20) + PAGE_SZ/2);
+    {   flr0 = (paragraph *)  (file_buffer + PAGE_SZ* pg         + PAGE_SZ/2);
+        flr1 = (paragraph *)  (file_buffer + PAGE_SZ*(pg + 0x20) + PAGE_SZ/2);
         for (i = 0; i <= 7; ++i) 
         {   nib_hi = flr0[i][0] & 0xf0;
             if ((nib_hi == 0x10) || (nib_hi == 0x20)) 

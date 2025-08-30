@@ -148,10 +148,10 @@ int file_chc;
 
 room rm_pg;
 byte* rm_pg_70 = rm_pg + 0x70;
-paragraph para_2ac;
+para_ind para_2ac;
 
 void fund_555(p)
-paragraph p;
+para_ind p;
 {
     para_2ac = p;
     switch (rm_pg_70[para_2ac << 4])
