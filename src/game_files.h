@@ -40,7 +40,8 @@ struct cs_pg_t
     byte table_4_4[4][4]; /*0x70*/
     byte suffix[PAGE_SZ - 0x87];
 };
-typedef byte room[PAGE_SZ];
+typedef byte page[PAGE_SZ];
+typedef page room;
 
 typedef struct _castle_buffer
 {

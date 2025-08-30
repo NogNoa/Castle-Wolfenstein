@@ -5,10 +5,11 @@
 typedef byte paragraph[0x10];
 typedef paragraph floor[0x8];
 
+
 scramble_castle(void)
 {
     word spj, i;
-    byte *fb_pgk, *fb_pgj;
+    room *roomk, *roomj;
     byte spk, temp;
     for (spj=1; spj <= 60; ++spj)
     {   while (true)
@@ -19,13 +20,13 @@ scramble_castle(void)
             if (0 < spk && spk < 0x40 && spk != spj)
                 {break;}
         }
-        fb_pgk = file_buffer + ((word) spk << 8);
-        fb_pgj = file_buffer + (spj << 8);
+        roomk = (room *) file_buffer + ((word) spk << 8);
+        roomj = (room *) file_buffer + (spj << 8);
         for(i=0; i < PAGE_SZ; ++i)
         {   if (i == 0x49) {i = 0x4e;}
-            temp = fb_pgk[i];
-            fb_pgk[i] = fb_pgj[i];
-            fb_pgj[i] = temp;
+            temp = *roomk[i];
+            *roomk[i] = *roomj[i];
+            *roomj[i] = temp;
         }
     }
 }
@@ -33,14 +34,14 @@ scramble_castle(void)
 f44db(void)
 {
     int pg, parity, j;
-    paragraph * flr;
+    floor * flr;
     byte * rm;
     byte al, spk;
     for (pg = 1; pg < 0x3f; ++pg)
-    {   flr = (paragraph *) (file_buffer + PAGE_SZ*pg + PAGE_SZ/2);
+    {   flr = (floor *) (file_buffer + PAGE_SZ*pg + PAGE_SZ/2);
         parity = 0;
         for (j=0; j < 8;++j)
-        {   rm = flr[j];
+        {   rm = *flr[j];
             if (rm[0] & 0xf0 == 0x10)
             {   spk = SpkRng();
                 if (10 < (spk & 15)) {spk -= 6;}
@@ -66,16 +67,16 @@ f44db(void)
 
 void f45e9(void)
 {
-    paragraph * flr;
+    floor * flr;
     byte * rm;
     byte spk, nibble_j, carry_over, j;
     int pg, i;
     carry_over = 0xf; 
     j = 0;
     for (pg = 1; pg < 0x3f; pg = pg + 1) 
-    {   flr = (paragraph *) (file_buffer + PAGE_SZ*pg + PAGE_SZ/2);
+    {   flr = (floor *) (file_buffer + PAGE_SZ*pg + PAGE_SZ/2);
         for (i = 0; i <= 0x7; i = i + 0x1) 
-        {   rm = flr[i];
+        {   rm = *flr[i];
             if ((rm[0] & 0xf0) == 0x30) 
             { /* at first the nibble goes up to f
                 but then it's 0 twice in a row instead*/
@@ -104,26 +105,26 @@ void f46c2(void)
 
 {
     byte nib_hi;
-    paragraph * flr0;
-    paragraph * flr1;
+    floor * flr0;
+    floor * flr1;
     byte k;
     int pg;
     int i;
     int j;
     
     for (pg = 2; pg < 0xb; ++pg) 
-    {   flr0 = (paragraph *)  (file_buffer + PAGE_SZ* pg         + PAGE_SZ/2);
-        flr1 = (paragraph *)  (file_buffer + PAGE_SZ*(pg + 0x20) + PAGE_SZ/2);
+    {   flr0 = (floor *)  (file_buffer + PAGE_SZ* pg         + PAGE_SZ/2);
+        flr1 = (floor *)  (file_buffer + PAGE_SZ*(pg + 0x20) + PAGE_SZ/2);
         for (i = 0; i <= 7; ++i) 
-        {   nib_hi = flr0[i][0] & 0xf0;
+        {   nib_hi = *flr0[i][0] & 0xf0;
             if ((nib_hi == 0x10) || (nib_hi == 0x20)) 
             {   for (j = 0; j <= 7; ++j) 
                 {   k = 0;
-                    if ((flr1[j][0] & 0xf0) == 0) 
-                    {   flr0[i][1] = flr1[j][1];
+                    if ((*flr1[j][0] & 0xf0) == 0) 
+                    {   *flr0[i][1] = *flr1[j][1];
                         for(k=0; 0x10 > k;++k) 
-                        {   flr1[j][k] = flr0[i][k];}
-                        flr0[i][0] = 0;
+                        {   *flr1[j][k] = *flr0[i][k];}
+                        *flr0[i][0] = 0;
                         j = 7;
                         i = 7;
                     }
