@@ -145,9 +145,9 @@ byte call;
   do {
     do {
       ref = ++call & 0x3f;
-    } while (pg_a[ref] & 0x38);
+    } while (rm_pg[ref] & 0x38);
     j = 1;
-    checked = pg_a_70[j*0x10 + 1];
+    checked = rm_pg_70[j*0x10 + 1];
     while (j < 9 && checked != ref &&
             (checked + 8 != ref) && (checked - 8 != ref)) {
       ++j;
@@ -168,9 +168,9 @@ void cstl_reset(void)
   cstl_pg.s_43 = pga_search((byte)SpkRng());
   for (par = 1; par < 9; par = par + 1) {
     k = par * 0x10;
-    if (pg_a_70[k] == 0x20) {
-      pg_a_70[k] = 0x10;
-      pg_a_70[k + 6] = 0;
+    if (rm_pg_70[k] == 0x20) {
+      rm_pg_70[k] = 0x10;
+      rm_pg_70[k + 6] = 0;
     }
   }
   cstl_pg.pgaind = 1;

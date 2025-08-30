@@ -70,7 +70,7 @@ main()
     b284 = false;
     l1a = 0x8000;
     l18 = 0x8002;
-    lroom_pg = pg_a;
+    lroom_pg = rm_pg;
     lcastle_pg = &cstl_pg;
     is_cstle_stt_60(); /*controller = undefined*/;
     if (!isDemo)

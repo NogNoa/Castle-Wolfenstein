@@ -204,7 +204,7 @@ int pagenumb;
     if ((0 < pagenumb) && (pagenumb < 0x3d))
     {   pagenumb <<= 8;
         for (i=0; i < PAGE_SZ; ++i)
-            {pg_a[i] = file_buffer[pagenumb++];}
+            {rm_pg[i] = file_buffer[pagenumb++];}
         return 0;
     }
     else {return -1;}
