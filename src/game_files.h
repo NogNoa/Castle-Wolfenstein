@@ -25,15 +25,15 @@ struct cs_pg_t
     byte granadeCount;
     byte uniform;
     byte vest;
-    byte s_4b;
-    byte s_4c;
-    byte s_4d;
+    byte pl_aim;
+    byte bonk_timer;
+    byte room_timer;
     byte s1[0x51 - 0x4e];
-    byte unlktm; /*unlock time 0x51*/
-    byte s_52;
+    byte act_timer; /*unlock time 0x51*/
+    bool is_looting;
     byte par_ray_ind;
     byte s2[0x59 - 0x54];
-    byte s_59;
+    byte keys;
     byte s3[0x6c - 0x60];
     bool plans; /*0x6c*/
     byte rank_index; /*0x6d*/

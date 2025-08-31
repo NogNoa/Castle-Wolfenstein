@@ -175,18 +175,18 @@ void cstl_reset(void)
         }
     }
     cstl_pg.rm_id = 1;
-    cstl_pg.s_4b = (byte)SpkRng() | 0x80;
+    cstl_pg.pl_aim = (byte)SpkRng() | 0x80;
     cstl_pg.bulletCount = 10;
     cstl_pg.granadeCount = 0;
-    cstl_pg.s_4c = 0;
-    cstl_pg.unlktm = 0;
-    cstl_pg.s_52 = 0;
+    cstl_pg.bonk_timer = 0;
+    cstl_pg.act_timer = 0;
+    cstl_pg.is_looting = 0;
     cstl_pg.save_status = 0;
     cstl_pg.mov_dir = 0;
     cstl_pg.aim_dir = 0;
     cstl_pg.uniform = 0;
     cstl_pg.vest = 0;
-    cstl_pg.s_59 = 0;
+    cstl_pg.keys = 0;
     for (i = 0; i < 4; i = i + 1) {
         for (j = 0; j < 4; j = j + 1) {
         cstl_pg.table_4_4[i][j] = 0;

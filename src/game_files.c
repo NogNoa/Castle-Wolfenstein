@@ -86,7 +86,6 @@ void reverse_control(void)
                 {jystk_cnfg();}
             else
                 {lack_jystk();}
-
         }
         else
             {continue;}
@@ -104,7 +103,7 @@ void resume_castle(void)
     ld_castle_page_w_ptr("castle", CASTLE_FSIZE);
     rank_write(rank_index);
     load_room_pg(cstl_pg.rm_id);
-    if (!cstl_pg.unlktm) {b2aa = true;}
+    if (!cstl_pg.act_timer) {b2aa = true;}
     cstl_pg.save_status = 1;
     save_castle("castle");
     if (!build_func_on_stack(35)) 
@@ -132,7 +131,7 @@ void new_castle(void)
     save_castle("castle");
     cstl_pg.save_status = 0;
     save_castle("backup");
-    cstl_pg.s_4d = 0;
+    cstl_pg.room_timer = 0;
     if (build_func_on_stack(35))
     {   cstl_pg.save_status = 0x40;
         error_encountered = cstl_pg.tile_pl_rm + 0x40;
