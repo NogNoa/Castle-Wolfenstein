@@ -11,7 +11,7 @@ size is 3FF4
      room page ordinal
 041: movemnt direction  #bitmapped 0000 ><^v
 042: aiming direction   #bitmapped 0000 ><^v
-043: error_id - 40
+043: tile position of player    #error_id - 40
 044: x-coordinate of player in the room     
 045: y-coordinate of player in the room
 046: isTransition

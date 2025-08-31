@@ -103,7 +103,7 @@ void resume_castle(void)
     PositCPuts(13, 6, "Resuming where you left off...");
     ld_castle_page_w_ptr("castle", CASTLE_FSIZE);
     rank_write(rank_index);
-    load_room_pg(cstl_pg.pgaind);
+    load_room_pg(cstl_pg.rm_id);
     if (!cstl_pg.unlktm) {b2aa = true;}
     cstl_pg.save_status = 1;
     save_castle("castle");
@@ -111,7 +111,7 @@ void resume_castle(void)
         {cstl_pg.save_status = 0;}
     else
     {   cstl_pg.save_status = 0x40;
-        error_encountered = (cstl_pg.bulletCount + cstl_pg.pgaind) | 0xAA;
+        error_encountered = (cstl_pg.bulletCount + cstl_pg.rm_id) | 0xAA;
     }
 }
 

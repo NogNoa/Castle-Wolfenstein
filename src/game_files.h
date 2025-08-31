@@ -14,11 +14,13 @@ void lack_jystk(void);
 struct cs_pg_t
 {
     byte prefix[0x40];
-    byte pgaind; /*page a index 0x40*/
-    byte s_41;
-    byte s_42;
-    byte s_43;
-    byte s0[0x47 - 0x44];
+    byte rm_id; /*page a index 0x40*/
+    byte mov_dir;
+    byte aim_dir;
+    byte tile_pl_rm;
+    byte x_pl_rm;
+    byte y_pl_rm;
+    byte is_trans;
     byte bulletCount;
     byte granadeCount;
     byte uniform;

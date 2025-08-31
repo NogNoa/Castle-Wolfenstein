@@ -134,28 +134,28 @@ void f46c2(void)
     }
 }
 
-byte pga_search(call)
+byte fnd_fr_tile(call)
 byte call;
 {
     byte checked;
-    byte ref;
+    byte tile;
     char i;
     byte j;
     
     i = 0x3f;
     do {
         do {
-            ref = ++call & 0x3f;
-        } while (rm_pg[ref] & 0x38);
+            tile = ++call & 0x3f;
+        } while (rm_pg[tile] & 0x38);
         j = 1;
         checked = rm_pg_70[j*0x10 + 1];
         while (j < 9 && 
-            checked != ref &&
-            (checked + 8 != ref) && 
-            (checked - 8 != ref)){++j;}
+            checked != tile &&
+            (checked + 8 != tile) && 
+            (checked - 8 != tile)){++j;}
         --i;
     } while ((j < 9) && i);
-    return ref;
+    return tile;
 }
 
 void cstl_reset(void)
@@ -166,7 +166,7 @@ void cstl_reset(void)
     int i;
     int j;
     
-    cstl_pg.s_43 = pga_search((byte)SpkRng());
+    cstl_pg.tile_pl_rm = fnd_fr_tile((byte)SpkRng());
     for (par = 1; par < 9; par = par + 1) {
         k = par * 0x10;
         if (rm_pg_70[k] == 0x20) {
@@ -174,7 +174,7 @@ void cstl_reset(void)
         rm_pg_70[k + 6] = 0;
         }
     }
-    cstl_pg.pgaind = 1;
+    cstl_pg.rm_id = 1;
     cstl_pg.s_4b = (byte)SpkRng() | 0x80;
     cstl_pg.bulletCount = 10;
     cstl_pg.granadeCount = 0;
@@ -182,8 +182,8 @@ void cstl_reset(void)
     cstl_pg.unlktm = 0;
     cstl_pg.s_52 = 0;
     cstl_pg.save_status = 0;
-    cstl_pg.s_41 = 0;
-    cstl_pg.s_42 = 0;
+    cstl_pg.mov_dir = 0;
+    cstl_pg.aim_dir = 0;
     cstl_pg.uniform = 0;
     cstl_pg.vest = 0;
     cstl_pg.s_59 = 0;
