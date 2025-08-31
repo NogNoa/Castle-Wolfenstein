@@ -43,7 +43,16 @@ struct cs_pg_t
     byte suffix[PAGE_SZ - 0x87];
 };
 typedef byte page[PAGE_SZ];
-typedef page room;
+
+
+typedef struct _room
+{
+    byte tl_tble[0x40];
+    byte rm40[0x30];
+    byte rm70[0x10][9];
+} room;
+
+
 
 typedef struct _castle_buffer
 {
@@ -53,7 +62,6 @@ typedef struct _castle_buffer
 
 
 extern room rm_pg;
-extern byte* rm_pg_70;
 extern struct cs_pg_t cstl_pg;
 extern bool isDemo;
 extern byte rank_index;

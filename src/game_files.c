@@ -135,7 +135,7 @@ void new_castle(void)
     cstl_pg.s_4d = 0;
     if (build_func_on_stack(35))
     {   cstl_pg.save_status = 0x40;
-        error_encountered = cstl_pg.s_43 + 0x40;
+        error_encountered = cstl_pg.tile_pl_rm + 0x40;
     }
 }
 
@@ -201,10 +201,11 @@ signed_error load_room_pg(pagenumb)
 int pagenumb;
 {
     int i;
+    page *rmp = (page *) &rm_pg;
     if ((0 < pagenumb) && (pagenumb < 0x3d))
     {   pagenumb <<= 8;
         for (i=0; i < PAGE_SZ; ++i)
-            {rm_pg[i] = file_buffer[pagenumb++];}
+            {*rmp[i] = file_buffer[pagenumb++];}
         return 0;
     }
     else {return -1;}

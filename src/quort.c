@@ -9,7 +9,7 @@ typedef paragraph floor[0x8];
 void scramble_castle(void)
 {
     word spj, i;
-    room *roomk, *roomj;
+    page *roomk, *roomj;
     byte spk, temp;
     for (spj=1; spj <= 60; ++spj)
     {   while (true)
@@ -20,8 +20,8 @@ void scramble_castle(void)
             if (0 < spk && spk < 0x40 && spk != spj)
                 {break;}
         }
-        roomk = (room *) file_buffer + ((word) spk << 8);
-        roomj = (room *) file_buffer + (spj << 8);
+        roomk = (page *) file_buffer + ((word) spk << 8);
+        roomj = (page *) file_buffer + (spj << 8);
         for(i=0; i < PAGE_SZ; ++i)
         {   if (i == 0x49) {i = 0x4e;}
             temp = *roomk[i];
@@ -146,9 +146,9 @@ byte call;
     do {
         do {
             tile = ++call & 0x3f;
-        } while (rm_pg[tile] & 0x38);
+        } while (rm_pg.tl_tble[tile] & 0x38);
         j = 1;
-        checked = rm_pg_70[j*0x10 + 1];
+        checked = rm_pg.rm70[j][1];
         while (j < 9 && 
             checked != tile &&
             (checked + 8 != tile) && 
@@ -169,9 +169,9 @@ void cstl_reset(void)
     cstl_pg.tile_pl_rm = fnd_fr_tile((byte)SpkRng());
     for (par = 1; par < 9; par = par + 1) {
         k = par * 0x10;
-        if (rm_pg_70[k] == 0x20) {
-        rm_pg_70[k] = 0x10;
-        rm_pg_70[k + 6] = 0;
+        if (rm_pg.rm70[par][0] == 0x20) {
+        rm_pg.rm70[par][0] = 0x10;
+        rm_pg.rm70[k][6] = 0;
         }
     }
     cstl_pg.rm_id = 1;

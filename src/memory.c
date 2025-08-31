@@ -147,14 +147,13 @@ int file_chc;
 }
 
 room rm_pg;
-byte* rm_pg_70 = rm_pg + 0x70;
 para_ind para_2ac;
 
 void fund_555(p)
 para_ind p;
 {
     para_2ac = p;
-    switch (rm_pg_70[para_2ac << 4])
+    switch (rm_pg.rm70[para_2ac][0])
     {
         case 0x10:
         case 0x20:
@@ -172,7 +171,7 @@ para_ind p;
 
 void fund_5af(void)
 {
-    switch (rm_pg_70[para_2ac << 4])
+    switch (rm_pg.rm70[para_2ac][0])
     {
         case 0x10:
             /* fun2dd4();*/
@@ -193,7 +192,7 @@ void fund_5af(void)
 void fun610(void)
 {
     byte id;
-    id = rm_pg_70[para_2ac << 4];
+    id = rm_pg.rm70[para_2ac][0];
     if (id != 0x10 && id != 0x20)
     {
         /* fun1f3d() */
