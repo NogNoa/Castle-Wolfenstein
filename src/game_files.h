@@ -40,7 +40,8 @@ struct cs_pg_t
     byte s_6e;
     byte save_status; /*0x6f*/
     byte table_4_4[4][4]; /*0x70*/
-    byte suffix[PAGE_SZ - 0x87];
+    byte s4[0xc0 - 0x87];
+    byte rm_table[0x40]; /*0xc0*/
 };
 typedef byte page[PAGE_SZ];
 
@@ -68,5 +69,8 @@ extern byte rank_index;
 
 
 #define RNK_PRIVATE 0x10
-#define RNK_COLONEL 0x80
-#define RNK_FIELD_MARSHAL 0xf0
+#define RNK_CORPORAL 0x20
+#define RNK_CAPTAIN 0x80
+#define RNK_COLONEL 0xA0
+#define RNK_GENERAL 0xC0
+#define RNK_FIELD_MARSHAL 0xF0

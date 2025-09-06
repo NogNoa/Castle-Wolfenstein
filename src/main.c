@@ -130,12 +130,10 @@ main()
     /**/
 }
 
-byte save_status;
-
 void
 is_cstle_stt_60(void)
 {   
-    save_status = (cstl_pg.save_status == 0x60) ?
+    cstl_load_var = (cstl_pg.save_status == 0x60) ?
                   0xff : 
                   cstl_pg.save_status;
     controller = DEV_undefined; 

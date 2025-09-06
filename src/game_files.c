@@ -55,10 +55,10 @@ void start_menu(void)
         c = GetStrok();
         if (c == CTRL('R'))
         {   rank_index = RNK_PRIVATE;
-            cstl_pg.save_status = 0xff;
+            cstl_load_var = 0xff;
         }
         else if (c == CTRL('N'))
-        {   cstl_pg.save_status = 0xff;
+        {   cstl_load_var = 0xff;
 
         }
         else if (c != '\r')
@@ -140,7 +140,21 @@ void new_castle(void)
 
 void reload_castle(void)
 {
-    cputs("unimplemented\n");
+    if (cstl_pg.rank_index < RNK_CORPORAL)
+        {ld_castle_page_w_ptr("castle", CASTLE_FSIZE);}
+    else 
+        {ld_castle_page_w_ptr("backup", CASTLE_FSIZE);}
+    rank_write(rank_index);
+    load_room_pg(1);
+    cstl_reset();
+    cstl_pg.save_status = 1;
+    save_castle("castle");
+    cstl_pg.room_timer = 0;
+    cstl_pg.save_status = 0;
+    if (build_func_on_stack(35))
+    {   cstl_pg.save_status = 0x40;
+        error_encountered = 0x40;
+    }
 }
 
 struct cs_pg_t cstl_pg;
