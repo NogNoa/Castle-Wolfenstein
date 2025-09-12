@@ -7,6 +7,7 @@
     print_screen_handler  equ 14
 ;
 data	segment	byte public 'data'
+        PUBLIC prng0, prng1
         int_frust dw 000d, 0000
         carousel_count dw 0
         pr_flag db 0

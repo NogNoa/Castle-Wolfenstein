@@ -288,7 +288,11 @@ string line4, line5;
 
 word dmodt_offset, ind29a;
 bool isDemo = false;
-byte dmodt_buffer[DEMODT_FSIZE];
+struct {
+    byte f0[500];
+    byte f1[500];
+    byte gfx_buffer[GFX_BSIZE];
+}   dmodt_buffer;
 extern bool horizontal;
 
 void load_demo(void)
@@ -299,7 +303,7 @@ void load_demo(void)
     load_file("demodata", dmodt_buffer, DEMODT_FSIZE);
     isDemo = true;
     horizontal = false;
-    gfx_buffer = dmodt_buffer + 1000;
+    gfx_buffer = dmodt_buffer.gfx_buffer;
     dmodt_offset = 0;
     ind29a = 0;
     GfxFileP = gfx_buffer;

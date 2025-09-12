@@ -34,7 +34,7 @@ byte *pdmodt;
 
 extern bool joyCunfag;
 extern int cstl_load_var;
-
+extern int prng0, prng1;
 
 #ifdef PRODEBUG
 uint IhbtIntr();
@@ -131,9 +131,10 @@ main()
         {   (&cstl_pg.s_80)[i] = 0;}
         fun728c();
         setVideoMode(PxlClrLo);
-        pdmodt = dmodt_buffer;
-
-        GfxFileP = dmodt_buffer.gfx_buffer
+        pdmodt = (byte *) &dmodt_buffer;
+        prng0 = 0xacb6;
+        prng1 = 0x38fa;
+        GfxFileP = dmodt_buffer.gfx_buffer;
 
     }
     /**/
