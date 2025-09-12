@@ -28,4 +28,4 @@ b:link b:c MEMORY drawa MAIN quort config game_f~1 cwa periph~1 sonara,cw,cw,b:m
 rename cw.exe ..\bin\cw.exe
 cd ..
 type asm.err game_f.err config.err quort.err memory.err main.err periph.err link.err > cw.err
-cd bin
+cd src

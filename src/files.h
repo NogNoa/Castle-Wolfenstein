@@ -9,3 +9,4 @@
 extern char file_buffer[FBUF_SIZE];
 extern byte* ptr_file_buffer;
 extern byte* GfxFileP;
+extern byte dmodt_buffer[DEMODT_FSIZE];

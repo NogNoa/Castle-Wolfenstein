@@ -30,6 +30,7 @@ byte b77e[3] = {0};
 
 byte wolf_font[CHR_FSIZE];
 bool b284 = false;
+byte *pdmodt;
 
 extern bool joyCunfag;
 extern int cstl_load_var;
@@ -129,6 +130,11 @@ main()
         for (i=0; i<0x48; ++i)
         {   (&cstl_pg.s_80)[i] = 0;}
         fun728c();
+        setVideoMode(PxlClrLo);
+        pdmodt = dmodt_buffer;
+
+        GfxFileP = dmodt_buffer.gfx_buffer
+
     }
     /**/
 }
@@ -149,7 +155,6 @@ byte a9ea0[0x20];
 byte
 olget9ea0()
 {
-    puts("undefined");
     byte old;
     
     if (i9ec0 == i9ec2) {
