@@ -231,12 +231,12 @@ RdSysFnt proc near ; Redirect System Font
     mov     si, 0
     mov     es, si
     mov     bx, GFX_8by8_Font+2
-    mov     word ptr es:[bx], ds
+    mov     word ptr es:[bx], ds ; 0:GFX_8by8_Font.segment <- data
     mov     bx, GFX_8by8_Font
-    mov     word ptr es:[bx], ax
-    mov     ax, 0
+    mov     word ptr es:[bx], ax ; 0:GFX_8by8_Font.offset <- font_pointer
+    mov     ax, 0                ; return <- 0
     mov     bx, ds
-    mov     es, bx
+    mov     es, bx                ; es <- data
     pop     bp
     ret
 RdSysFnt endp

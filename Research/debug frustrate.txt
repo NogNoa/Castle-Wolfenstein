@@ -38,7 +38,7 @@ ff4c:3411 overflows to absolute 0:28d1
 
  134c
   cd0a
- 2:01ca
+ 201ca = 2000:1ca
 
 the second function
 chceks 0:d for cd.

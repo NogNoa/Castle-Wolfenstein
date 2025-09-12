@@ -42,7 +42,7 @@ uint IhbtIntr();
 void
 main()
 {
-    int l1a, l18, stroke;
+    int l1a, l18, stroke, i;
     byte *lroom_pg;
     bool cont;
     struct cs_pg_t *lcastle_pg;
@@ -70,7 +70,7 @@ main()
     b284 = false;
     l1a = 0x8000;
     l18 = 0x8002;
-    lroom_pg = rm_pg;
+    lroom_pg = (byte *) &rm_pg;
     lcastle_pg = &cstl_pg;
     is_cstle_stt_60(); /*controller = undefined*/;
     if (!isDemo)
@@ -126,6 +126,9 @@ main()
             PositCPuts(13, 4, "Creating new castle, please wait...");
             new_castle();
         }
+        for (i=0; i<0x48; ++i)
+        {   (&cstl_pg.s_80)[i] = 0;}
+        fun728c();
     }
     /**/
 }
@@ -140,3 +143,33 @@ is_cstle_stt_60(void)
     rank_index = rank_calculate();
 }
 
+int i9ec0, i9ec2;
+byte a9ea0[0x20];
+
+byte
+olget9ea0()
+{
+    puts("undefined");
+    byte old;
+    
+    if (i9ec0 == i9ec2) {
+        return 0;
+    }
+    old = a9ea0[i9ec0];
+    a9ea0[i9ec0] = 0;
+    i9ec0 = (i9ec0 + 1) % 0x20;
+    return old;
+}
+
+
+byte
+get_9ea0()
+{
+    return olget9ea0();
+}
+
+void 
+fun728c()
+{
+    while (get_9ea0());
+}

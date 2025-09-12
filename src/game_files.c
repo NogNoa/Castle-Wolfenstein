@@ -36,6 +36,14 @@ int flags;
     return fildsc;
 }
 
+int cstl_load_var;
+/*
+padded byte
+==  0 -> resume  
+ < 80 -> load   castle
+>= 80 -> create castle
+*/
+
 void start_menu(void)
 {
     char c;
@@ -248,14 +256,6 @@ byte rank_calculate(void)
     cprintf("rank index: %x\n", cstl_pg.rank_index);
     return cstl_pg.rank_index;
 }
-
-int cstl_load_var;
-/*
-padded byte
-==  0 -> resume  
- < 80 -> load   castle
->= 80 -> create castle
-*/
 
 void rank_write(rnk_ind)
 {

@@ -99,8 +99,14 @@ fe3         rank_calculate
             make_sound
             sum_func
 7087    
-7143        sleep_squared
-7151        
+7143        wait_squared
+7151        fun_7158_BX0
+            fun_7158_BXA       
+71a7    
+728c        fun728c
+            get_9ea0
+            olget9ea0
+            set9ea0
 7d89      [mc.lib]
 
 Data:   

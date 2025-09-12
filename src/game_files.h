@@ -33,14 +33,15 @@ struct cs_pg_t
     bool is_looting;
     byte par_ray_ind;
     byte s2[0x59 - 0x54];
-    byte keys;
-    byte s3[0x6c - 0x60];
+    byte keys; /*0x59*/
+    byte s3[0x6c - 0x5a];
     bool plans; /*0x6c*/
     byte rank_index; /*0x6d*/
     byte s_6e;
     byte save_status; /*0x6f*/
     byte table_4_4[4][4]; /*0x70*/
-    byte s4[0xc0 - 0x87];
+    byte s_80; /*0x80*/
+    byte s4[0xc0 - 0x81];
     byte rm_table[0x40]; /*0xc0*/
 };
 typedef byte page[PAGE_SZ];
