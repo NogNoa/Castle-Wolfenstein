@@ -29,12 +29,13 @@ byte wolf_vocab[VOCAB_FSIZE];
 byte b77e[3] = {0};
 
 byte wolf_font[CHR_FSIZE];
-bool b284 = false;
+bool b284, b4ac0;
 byte *pdmodt;
 
 extern bool joyCunfag;
 extern int cstl_load_var;
 extern int prng0, prng1;
+extern word error_encountered, dmodt_offset, dminpind;
 
 #ifdef PRODEBUG
 uint IhbtIntr();
@@ -68,64 +69,66 @@ main()
     file_to_screen(1);
     if (wait_to_return()) /* play demo if the return key isn't pressed in time*/
         {load_demo();}
-    b284 = false;
-    l1a = 0x8000;
-    l18 = 0x8002;
-    lroom_pg = (byte *) &rm_pg;
-    lcastle_pg = &cstl_pg;
-    is_cstle_stt_60(); /*controller = undefined*/;
-    if (!isDemo)
-    {   while (controller == DEV_undefined)
-        {   rank_print();
-            PositCPuts(9,8, "What controls do you want ?");
-            PositCPuts(11,11, "Press: K for keyboard");
-            PositCPuts(13,18, "J for joystick");
-            PositCPuts(21,3, "Press Ctrl-N to start a new game");
-            PositCPuts(22,3, "Press Ctrl-R to reverse controls");
-            PositCPuts(23,3, "Press Ctrl-Q to select monitor type");
-            do {
-                while (!IsKStrok());
-                cont = false;
-                stroke = GetStrok();
-                switch (stroke)
-                {
-                case (CTRL('N')):
-                    start_menu();
-                    break;
-                case (CTRL('R')):
-                    reverse_control();
-                    break;
-                case (CTRL('Q')):
-                    select_monitor();
-                    break;
-                case ('K'):
-                case ('k'):
-                    controller = DEV_keyboard;
-                    break;
-                case ('J'):
-                case ('j'):
-                    controller = DEV_joystick;
-                    break;
-                default:
-                    cont = true;
-                }
-            } while (cont);
-        if (controller == DEV_joystick && !lkfr_jystk())
-            {lack_jystk();}
-        }
-        if (controller == DEV_joystick && joyCunfag == 0x59)
-            {jystk_cnfg();}
-        if (cstl_load_var == 0)
-            {resume_castle();}
-        else if (cstl_load_var < 0x80)
-        {   setVideoMode(PxlClrLo);
-            PositCPuts(13, 6, "Loading castle, please wait...");
-            reload_castle();
-        }
-        else
-        {   setVideoMode(PxlClrLo);
-            PositCPuts(13, 4, "Creating new castle, please wait...");
-            new_castle();
+    while (true)
+    {   b284 = false;
+        l1a = 0x8000;
+        l18 = 0x8002;
+        lroom_pg = (byte *) &rm_pg;
+        lcastle_pg = &cstl_pg;
+        is_cstle_stt_60(); /*controller = undefined*/;
+        if (!isDemo)
+        {   while (controller == DEV_undefined)
+            {   rank_print();
+                PositCPuts(9,8, "What controls do you want ?");
+                PositCPuts(11,11, "Press: K for keyboard");
+                PositCPuts(13,18, "J for joystick");
+                PositCPuts(21,3, "Press Ctrl-N to start a new game");
+                PositCPuts(22,3, "Press Ctrl-R to reverse controls");
+                PositCPuts(23,3, "Press Ctrl-Q to select monitor type");
+                do {
+                    while (!IsKStrok());
+                    cont = false;
+                    stroke = GetStrok();
+                    switch (stroke)
+                    {
+                    case (CTRL('N')):
+                        start_menu();
+                        break;
+                    case (CTRL('R')):
+                        reverse_control();
+                        break;
+                    case (CTRL('Q')):
+                        select_monitor();
+                        break;
+                    case ('K'):
+                    case ('k'):
+                        controller = DEV_keyboard;
+                        break;
+                    case ('J'):
+                    case ('j'):
+                        controller = DEV_joystick;
+                        break;
+                    default:
+                        cont = true;
+                    }
+                } while (cont);
+            if (controller == DEV_joystick && !lkfr_jystk())
+                {lack_jystk();}
+            }
+            if (controller == DEV_joystick && joyCunfag == 0x59)
+                {jystk_cnfg();}
+            if (cstl_load_var == 0)
+                {resume_castle();}
+            else if (cstl_load_var < 0x80)
+            {   setVideoMode(PxlClrLo);
+                PositCPuts(13, 6, "Loading castle, please wait...");
+                reload_castle();
+            }
+            else
+            {   setVideoMode(PxlClrLo);
+                PositCPuts(13, 4, "Creating new castle, please wait...");
+                new_castle();
+            }
         }
         for (i=0; i<0x48; ++i)
         {   (&cstl_pg.s_80)[i] = 0;}
@@ -141,9 +144,14 @@ main()
             setVideoMode(PxlClrLo);
             PositCPuts(13,11,"Saving the game");
         }
-        
+        save_room_pg();
+        save_castle("castle");
     }
-    /**/
+    b4ac0 = false;
+    isDemo = false;
+    dminpind = 0;
+    dmodt_offset = 0;
+    goto outer_loop;
 }
 
 void
@@ -188,5 +196,5 @@ fun728c()
 
 
 game()
-{   puts("not nearly implemented")
+{   puts("not nearly implemented");
 }

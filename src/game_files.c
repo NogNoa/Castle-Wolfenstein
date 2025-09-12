@@ -304,7 +304,7 @@ string line4, line5;
     cputs(line5);
 }
 
-word dmodt_offset, ind29a;
+word dmodt_offset, dminpind;
 bool isDemo = false;
 struct {
     byte f0[500];
@@ -315,16 +315,16 @@ extern bool horizontal;
 
 void load_demo(void)
 {
-    byte *gfx_buffer;
+    byte *dmgfx_buffer;
     file_to_screen(2);
     ld_castle_page_w_ptr("demofile", CASTLE_FSIZE);
     load_file("demodata", &dmodt_buffer, DEMODT_FSIZE);
     isDemo = true;
     horizontal = false;
-    gfx_buffer = dmodt_buffer.gfx_buffer;
+    dmgfx_buffer = dmodt_buffer.gfx_buffer;
     dmodt_offset = 0;
-    ind29a = 0;
-    GfxFileP = gfx_buffer;
+    dminpind = 0;
+    GfxFileP = dmgfx_buffer;
     load_room_pg(1);
 }
 
