@@ -135,7 +135,13 @@ main()
         prng0 = 0xacb6;
         prng1 = 0x38fa;
         GfxFileP = dmodt_buffer.gfx_buffer;
-
+        game();
+        if (isDemo || error_encountered) {break;}
+        if (!cstl_pg.save_status) {
+            setVideoMode(PxlClrLo);
+            PositCPuts(13,11,"Saving the game");
+        }
+        
     }
     /**/
 }
@@ -178,4 +184,9 @@ void
 fun728c()
 {
     while (get_9ea0());
+}
+
+
+game()
+{   puts("not nearly implemented")
 }

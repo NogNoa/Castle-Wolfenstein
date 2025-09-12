@@ -232,6 +232,24 @@ int pagenumb;
     else {return -1;}
 }
 
+void save_room_pg(void)
+{   byte rmid;
+    byte** pfilbuf;
+    byte* rmpg;
+    int i;
+    word pg;
+    rmid = cstl_pg.rm_id;
+    pfilbuf = &file_buffer;
+    pg = rmid << 8;
+    rmpg = rm_pg;
+    for (i=0; i < 0x100; ++i, ++pg)
+    {
+        pfilbuf[pg] = rmpg[i];
+    }
+
+    
+}
+
 byte rank_calculate(void)
 {
     bool cont;
