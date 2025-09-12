@@ -234,17 +234,17 @@ int pagenumb;
 
 void save_room_pg(void)
 {   byte rmid;
-    byte** pfilbuf;
+    page* pfilbuf;
     byte* rmpg;
     int i;
     word pg;
     rmid = cstl_pg.rm_id;
-    pfilbuf = &file_buffer;
-    pg = rmid << 8;
-    rmpg = rm_pg;
-    for (i=0; i < 0x100; ++i, ++pg)
+    pfilbuf = (page *) &file_buffer;
+    pg = rmid;
+    rmpg = (byte *) &rm_pg;
+    for (i=0; i < PAGE_SZ; ++i)
     {
-        pfilbuf[pg] = rmpg[i];
+        pfilbuf[pg][i] = rmpg[i];
     }
 
     
@@ -318,7 +318,7 @@ void load_demo(void)
     byte *gfx_buffer;
     file_to_screen(2);
     ld_castle_page_w_ptr("demofile", CASTLE_FSIZE);
-    load_file("demodata", dmodt_buffer, DEMODT_FSIZE);
+    load_file("demodata", &dmodt_buffer, DEMODT_FSIZE);
     isDemo = true;
     horizontal = false;
     gfx_buffer = dmodt_buffer.gfx_buffer;
