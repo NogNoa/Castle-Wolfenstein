@@ -1,42 +1,42 @@
 
 #include "cw.h"
 
-int strt_9ea0, stop_9ea0;
-byte a9ea0[0x20];
+int qstart, qstop;
+byte queue[0x20];
 
 void 
-fun728c()
+clear_queue()
 {
-    while (get_9ea0());
+    while (qpull());
 }
 
 
 byte
-get_9ea0()
+qpull()
 {
-    return olget9ea0();
+    return olqpull();
 }
 
 byte
-olget9ea0()
+olqpull()
 {
     byte back;
     
-    if (strt_9ea0 == stop_9ea0) {
+    if (qstart == qstop) {
         return 0;
     }
-    back = a9ea0[strt_9ea0];
-    a9ea0[strt_9ea0++] = 0;
-    strt_9ea0 %= 0x20;
+    back = queue[qstart];
+    queue[qstart++] = 0;
+    qstart %= 0x20;
     return back;
 }
 
 void
-set_9ea0(call)
+qpush(call)
 byte call;
 {
-  a9ea0[stop_9ea0++] = call;
-  stop_9ea0 %= 0x20;
+  queue[qstop++] = call;
+  qstop %= 0x20;
 }
 
 game()

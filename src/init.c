@@ -167,7 +167,7 @@ main()
         }
         for (i=0; i<0x48; ++i)
         {   (&cstl_pg.s_80)[i] = 0;}
-        fun728c();
+        clear_queue();
         setVideoMode(PxlClrLo);
         pdmodt = (byte *) &dmodt_buffer;
         prng0 = 0xacb6;

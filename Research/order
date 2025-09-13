@@ -102,10 +102,10 @@ fe3         rank_calculate
 7151        fun_7158_BX0
             fun_7158_BXA       
 71a7    
-728c        fun728c
-            get_9ea0
-            olget9ea0
-            set9ea0
+728c        clear_queue
+            qpull
+            olqpull
+            qpush
 7318        f7318
 7341        game
 7854
