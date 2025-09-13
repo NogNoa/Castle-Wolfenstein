@@ -1,7 +1,7 @@
 
 #include "cw.h"
 
-int i9ec0, i9ec2;
+int strt_9ea0, stop_9ea0;
 byte a9ea0[0x20];
 
 void 
@@ -20,17 +20,24 @@ get_9ea0()
 byte
 olget9ea0()
 {
-    byte old;
+    byte back;
     
-    if (i9ec0 == i9ec2) {
+    if (strt_9ea0 == stop_9ea0) {
         return 0;
     }
-    old = a9ea0[i9ec0];
-    a9ea0[i9ec0] = 0;
-    i9ec0 = (i9ec0 + 1) % 0x20;
-    return old;
+    back = a9ea0[strt_9ea0];
+    a9ea0[strt_9ea0++] = 0;
+    strt_9ea0 %= 0x20;
+    return back;
 }
 
+void
+set_9ea0(call)
+byte call;
+{
+  a9ea0[stop_9ea0++] = call;
+  stop_9ea0 %= 0x20;
+}
 
 game()
 {   puts("not nearly implemented");
