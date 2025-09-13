@@ -1,10 +1,11 @@
 
 #include "cw.h"
+#include "IVT.h"
+#include "memory.h"
 
 int d2ae, d29c;
 extern bool pcjr;
 
-#include "IVT.h"
 
 void isPcJr(void)
 {

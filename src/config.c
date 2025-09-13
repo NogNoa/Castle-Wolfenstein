@@ -105,7 +105,7 @@ string massage;
 bool horizontal, sagital;
 byte b2ba, LC_L_RC[0xb], RC_LC[0xb], UC_YCU[0xb], YC_UC[0xb];
 
-char controller;
+
 
 
 void r_ctrls_load(void)

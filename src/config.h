@@ -1,7 +1,7 @@
 #define DEV_undefined (byte)  -1
 #define DEV_keyboard 0
 #define DEV_joystick 1
-extern char controller;
+
 
 #ifdef __WATCOMC__
 void r_ctrls_load(void);
