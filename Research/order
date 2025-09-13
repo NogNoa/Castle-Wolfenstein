@@ -21,11 +21,10 @@ code:
        c    FUND_1000_05af
             FUND_1000_0555
             FUN_1000_0610
-       c  [main.c]
+       c  [init.c]
 640    c    main
 9f0    c    is_cstle_stt
-a21       [game_files.c]
-            start_menu
+a21    c    start_menu
             reverse_control
 c1d         resume_castle
             new_castle
@@ -37,9 +36,10 @@ ec8         load_room_pg
 f21         save_room_pg
 f71         switch_room_pg
 fe3         rank_calculate
-1055
-11ba        castle_indexize
-11ec
+1055        write_rank
+1072
+11ba        sektor_indexize
+11ec        f11ec
 129d        put_2_strings
             load_demo
             wait_to_return

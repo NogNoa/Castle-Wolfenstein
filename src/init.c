@@ -24,7 +24,7 @@ void is_cstle_stt_60(void);
 void start_menu(void);
 void reverse_control(void);
 #else
-extern int Goober[36];
+extern int Goober(); /*int[36]*/
 #endif
 
 struct cs_pg_t cstl_pg;
@@ -282,7 +282,7 @@ void new_castle(void)
 {
     int index;
     ld_castle_page_w_ptr("sektor", CASTLE_FSIZE);
-    castle_indexize();
+    sektor_indexize();
     scramble_castle();
     f44db();
     f45e9();
@@ -439,7 +439,7 @@ void rank_write(rnk_ind)
 }
 
 int
-castle_indexize(void)
+sektor_indexize(void)
 {
     int i;
 
@@ -504,7 +504,7 @@ int length;
 {
     int fildsc, status;
     isDos210();
-    /*if (Goober(0x23, dest) > 0) {_exit(-1);} */
+    if (Goober(0x23, dest) > 0) {_exit(-1);} 
     fildsc = status = checked_open(file_name, O_RAW);
     if (-1 < read(fildsc, dest, length))
     {   status = close(fildsc);    
