@@ -3,6 +3,8 @@
 #include "files.h"
 #include "FCNTL.H"
 #include "config.h"
+#include "IVT.h"
+#include "memory.h"
 
 extern bool isDemo;
 extern word dmodt_offset, dminpind, error_encountered;
@@ -92,4 +94,25 @@ void lack_jystk(void)
 {   /*lack_of joystick*/
     wait_for_input(0,0x17, "\aNo joystick connected (Press space bar)", ' ');
     controller = DEV_undefined;
+}
+
+int d2ae, d29c;
+
+
+void isPcJr(void)
+{
+  SegMemSet(SingleStep+1, 0x34);
+  SegMemSet(SingleStep+3, 0xff);
+  if (SegmGt(0xf000, (byte *)0xffff) == 0xfd) /* from the PC Jr BIOS*/
+  { pcjr = true;
+    d2ae = 900;
+    d29c = 200;
+  }
+  else
+  { pcjr = false;
+    d2ae = 3300;
+    d29c = 600;
+  }
+  SegMemSet(Breakpoint+1, 0xcd);
+  SegMemSet(Breakpoint+3, 0x13);
 }
