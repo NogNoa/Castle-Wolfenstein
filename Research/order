@@ -23,8 +23,7 @@ code:
             FUN_1000_0610
        c  [main.c]
 640    c    main
-       c    is_cstle_stt
-9f0
+9f0    c    is_cstle_stt
 a21       [game_files.c]
             start_menu
             reverse_control
@@ -107,6 +106,12 @@ fe3         rank_calculate
             get_9ea0
             olget9ea0
             set9ea0
+7318        f7318
+7341        game
+7854
+7ba0        shoot
+7c24
+7ca0        f7ca0
 7d89      [mc.lib]
 
 Data:   
