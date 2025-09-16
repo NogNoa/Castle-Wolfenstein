@@ -1,7 +1,7 @@
 #include "cw.h"
 #include "files.h"
 #include "video.h"
-#include "game_f~1.h"
+#include "init.h"
 #include "config.h"
 #include "IVT.h"
 #include "memory.h"
@@ -326,6 +326,11 @@ void reload_castle(void)
 void ld_castle_page_w_ptr(filename, length)
 string filename;
 {
+    /* load file in argument to file_buffer
+    file_buffer <- filename [..length]
+    copies page 0 of the file to cstl_pg
+    cstl_pg <- filename[..PAGE_SZ]
+    */
     int i;
     byte *cstl;
     cstl = (byte *) &cstl_pg;
@@ -333,13 +338,15 @@ string filename;
     for (i=0; i < PAGE_SZ; ++i)
     {   cstl[i] = pg0_file_buffer[i];
     }
-    
 }
 
 
 void save_castle(file_name)
 string file_name;
 {
+    /* copies file buffer to disk 
+    file_name <- file_buffer [..CASTLE_FSIZE]
+    */
     int fildsc, i;
     byte *cstl;
     cstl = (byte *) &cstl_pg;
@@ -377,6 +384,9 @@ void rank_print(void)
 signed_error load_room_pg(pagenumb)
 int pagenumb;
 {
+    /* copies argued page from file_buffer to rm_pg
+        rm_pg <- file_buffer.pages[pagenumb]
+    */
     int i;
     page *rmp = (page *) &rm_pg;
     if ((0 < pagenumb) && (pagenumb < 0x3d))
@@ -389,7 +399,11 @@ int pagenumb;
 }
 
 void save_room_pg(void)
-{   byte rmid;
+{   
+    /* copies rm pg to the page designated by rm_id
+    file_buffer.pages[cstl_pg.rm_id] <- rm_pg
+    */
+    byte rmid;
     page* pfilbuf;
     byte* rmpg;
     int i;

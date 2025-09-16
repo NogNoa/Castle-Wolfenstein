@@ -4,7 +4,7 @@
 #include "video.h"
 #include "IVT.h"
 #include "files.h"
-#include "game_f~1.h"
+#include "init.h"
 
 #ifdef __WATCOMC__
 #include "console.h"

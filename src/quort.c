@@ -1,6 +1,6 @@
 #include "cw.h"
 #include "files.h"
-#include "game_f~1.h"
+#include "init.h"
 
 typedef byte paragraph[0x10];
 typedef paragraph floor[0x8];
@@ -8,20 +8,19 @@ typedef paragraph floor[0x8];
 
 void scramble_castle(void)
 {
-    word spj, i;
+    word rmj, i;
     page *roomk, *roomj;
-    byte spk, temp;
-    for (spj=1; spj <= 60; ++spj)
+    byte rmk, temp;
+    for (rmj=1; rmj < 0x3D; ++rmj) /*rmj not in pages 3D..40*/
     {   while (true)
-        {   spk = (byte) SpkRng();
-            spk <<= 1;
-            if (spj & 1)
-                {spk ^= 1;}
-            if (0 < spk && spk < 0x40 && spk != spj)
+        {   rmk = (byte) SpkRng();
+            rmk <<= 1;
+            if (rmj & 1) {rmk ^= 1;} /*if rmj odd, so is rmk and v.v*/
+            if (0 < rmk && rmk < 0x40 && rmk != rmj) /* find diffrent*/
                 {break;}
         }
-        roomk = (page *) file_buffer + ((word) spk << 8);
-        roomj = (page *) file_buffer + (spj << 8);
+        roomk = (page *) file_buffer + ((word) rmk << 8);
+        roomj = (page *) file_buffer + (rmj << 8);
         for(i=0; i < PAGE_SZ; ++i)
         {   if (i == 0x49) {i = 0x4e;}
             temp = *roomk[i];

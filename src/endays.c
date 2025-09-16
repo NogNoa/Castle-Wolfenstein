@@ -39,6 +39,15 @@ byte call;
   qstop %= 0x20;
 }
 
+void
+qpara_push(call)
+uint call;
+{
+  call &= 0xf;
+  if (call > 4){ vall >>= 2;}
+  qpush((byte)call);
+}
+
 game()
 {   puts("not nearly implemented");
 }

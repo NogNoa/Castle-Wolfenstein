@@ -102,11 +102,12 @@ fe3         rank_calculate
 7151        fun_7158_BX0
             fun_7158_BXA       
 71a7    
-728c        clear_queue
+728c      [endays]
+            clear_queue
             qpull
             olqpull
             qpush
-7318        f7318
+7318        qpara_push
 7341        game
 7854
 7ba0        shoot

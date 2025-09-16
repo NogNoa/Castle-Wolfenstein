@@ -2,8 +2,14 @@ The function at CS:0da7 load_page_b_w/_ptr load either of: castle, sektor, backu
 They are all in the same format
 the first 40 bytes are always identical, 100 bytes are identical up to few variables
 
-hence file_page_b always refer to a page of the same format
+hence room_page always refer to a page of the same format
 I'll call it castle_page and the function load_castle_page_w/_ptr
+
+the castle pages are devided to pages. the first page contain various data about the game state. 
+the next 38 pages are identical in format and represent rooms in the castle. 
+The last page, which is C bytes short- unclear.
+The data page is loaded to castle_page, the current room data is loaded to room_page. 
+
 
 size is 3FF4
 
@@ -24,7 +30,7 @@ size is 3FF4
 04d: room timer
 04f: rooms visited
 051: action timer
-052: isBusy
+052: isLooting
 053: paragraph array index
 059: bitmapped keys
 06c: has_plans 
