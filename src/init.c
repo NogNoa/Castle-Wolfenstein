@@ -192,8 +192,8 @@ main()
 void
 is_cstle_stt_60(void)
 {   
-    cstl_load_var = (cstl_pg.save_status == 0x60) ?
-                  0xff : 
+    cstl_load_var = (cstl_pg.save_status == SS_Suicide) ?
+                  SS_Escaped : 
                   cstl_pg.save_status;
     controller = DEV_undefined; 
     rank_index = rank_calculate();
@@ -271,9 +271,9 @@ void resume_castle(void)
     cstl_pg.save_status = 1;
     save_castle("castle");
     if (!build_func_on_stack(35)) 
-        {cstl_pg.save_status = 0;}
+        {cstl_pg.save_status = SS_Ongoing;}
     else
-    {   cstl_pg.save_status = 0x40;
+    {   cstl_pg.save_status = SS_Caught;
         error_encountered = (cstl_pg.bulletCount + cstl_pg.rm_id) | 0xAA;
     }
 }
@@ -293,11 +293,11 @@ void new_castle(void)
     cstl_reset();
     cstl_pg.save_status = 1;
     save_castle("castle");
-    cstl_pg.save_status = 0;
+    cstl_pg.save_status = SS_Ongoing0;
     save_castle("backup");
     cstl_pg.room_timer = 0;
     if (build_func_on_stack(35))
-    {   cstl_pg.save_status = 0x40;
+    {   cstl_pg.save_status = SS_Caught;
         error_encountered = cstl_pg.tile_pl_rm + 0x40;
     }
 }
@@ -314,9 +314,9 @@ void reload_castle(void)
     cstl_pg.save_status = 1;
     save_castle("castle");
     cstl_pg.room_timer = 0;
-    cstl_pg.save_status = 0;
+    cstl_pg.save_status = SS_Ongoing;
     if (build_func_on_stack(35))
-    {   cstl_pg.save_status = 0x40;
+    {   cstl_pg.save_status = SS_Caught;
         error_encountered = 0x40;
     }
 }
@@ -425,7 +425,7 @@ byte rank_calculate(void)
     bool cont;
     cprintf(" save status:%x\n rank_index: %x\n rise rank twice: %x\n"
     ,cstl_pg.save_status, cstl_pg.rank_index, cstl_pg.plans);
-    if (cstl_pg.save_status < 0x80)
+    if (cstl_pg.save_status < SS_Error)
     {   if (1 < cstl_pg.save_status)
             {--cstl_pg.rank_index;}
     }

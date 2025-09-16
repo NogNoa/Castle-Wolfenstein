@@ -5,6 +5,7 @@
     DISPLAY_BUFFER equ 0b800
     control_break_handler equ 6c
     print_screen_handler  equ 14
+    sys8255_control equ 0x61
 ;
 data	segment	byte public 'data'
         PUBLIC prng0, prng1
@@ -13,6 +14,7 @@ data	segment	byte public 'data'
         pr_flag db 0
         prng0 dw 0acb6
         prng1 dw 038fa
+        dnt_tgl_snd db 0
         extern isDemo: byte
         extern GfxFileP: word
 data ENDS
@@ -23,7 +25,7 @@ IhbtIntr proc near
     PUSH         BP
     PUSH         ES
     CLI
-    LES          BX,dword ptr int_frust 
+    LES          BX,dword ptr [int_frust]
     CMP          byte ptr ES:[BX],0cd
     JNZ          frustration_failure
     ADD          BX,2
@@ -117,6 +119,22 @@ demo_seed:
     mov  al, byte ptr [si]
     jmp  carousel
 SpkRng endp
+
+TglSpkr proc near
+;
+    push ax
+    cmp  byte ptr [dnt_tgl_snd], 0
+    jnz epilog
+    in al, sys8255_control
+    and al, 0fe
+    xor al, 2
+    out sys8255_control, al
+epilog:
+    pop ax
+return:
+    ret
+
+
 
 PROG ends
 end

@@ -69,6 +69,14 @@ extern bool isDemo;
 extern byte rank_index;
 
 
+/*save status*/
+#define SS_Ongoing 0
+#define SS_Caught 0x40
+#define SS_Suicide 0x60
+#define SS_Error 0x80
+#define SS_Escaped 0xFF
+
+/* rank */
 #define RNK_PRIVATE 0x10
 #define RNK_CORPORAL 0x20
 #define RNK_CAPTAIN 0x80

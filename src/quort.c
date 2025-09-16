@@ -8,6 +8,11 @@ typedef paragraph floor[0x8];
 
 void scramble_castle(void)
 {
+    /* scramble whole pages from the room area
+    only even with even and odd with odd
+    [1..3C:2] <=> [1..40:2]
+    [2..3D:2] <=> [2..39:2]
+    */
     word rmj, i;
     page *roomk, *roomj;
     byte rmk, temp;
@@ -32,31 +37,33 @@ void scramble_castle(void)
 
 void f44db(void)
 {
+    /* randomize variable in the 2nd half of each room
+    */
     int pg, parity, j;
     floor * flr;
-    byte * rm;
+    byte * par;
     byte al, spk;
     for (pg = 1; pg < 0x3f; ++pg)
     {   flr = (floor *) (file_buffer + PAGE_SZ*pg + PAGE_SZ/2);
         parity = 0;
         for (j=0; j < 8;++j)
-        {   rm = *flr[j];
-            if (rm[0] & 0xf0 == 0x10)
+        {   par = *flr[j];
+            if (par[0] & 0xf0 == 0x10)
             {   spk = SpkRng();
                 if (10 < (spk & 15)) {spk -= 6;}
-                rm[2] = 0;
-                rm[7] = spk & 15;
-                rm[6] = 0;
-                rm[0xc] = 0;
-                rm[9] = (byte) SpkRng();
+                par[2] = 0;
+                par[7] = spk & 15;
+                par[6] = 0;
+                par[0xc] = 0;
+                par[9] = (byte) SpkRng();
                 spk = (byte)SpkRng();
-                rm[8] = (spk < 0xd0) ? 0 :
+                par[8] = (spk < 0xd0) ? 0 :
                 (spk < 0xf8) ? 1 : 2; 
                 if (1 < ++parity) 
                 {   parity = 0;
                     if (SpkRng() < rank_index / 2)
-                    {   rm[6] = 1;
-                        rm[0] = 0x20;
+                    {   par[6] = 1;
+                        par[0] = 0x20;
                     }
                 }
             }
@@ -74,7 +81,7 @@ void f45e9(void)
     j = 0;
     for (pg = 1; pg < 0x3f; pg = pg + 1) 
     {   flr = (floor *) (file_buffer + PAGE_SZ*pg + PAGE_SZ/2);
-        for (i = 0; i <= 0x7; i = i + 0x1) 
+        for (i = 0; i < 8; i = i + 0x1) 
         {   rm = *flr[i];
             if ((rm[0] & 0xf0) == 0x30) 
             { /* at first the nibble goes up to f
