@@ -78,6 +78,7 @@ pixel_loop:
     ret   
 DrawCG endp
 ;
+;
 SpkRng proc near
 ;
     push bp
@@ -100,15 +101,20 @@ carousel:
     pop  es
     pop  bp
     cmp  byte ptr [carousel_count], al
-    jbe  return
+    jbe  TglSpkr::return
+SpkRng endp
+
+
+TglSpkr proc near
+;
     push ax
 play_resume:
     cmp  byte ptr [pr_flag], 0
     jne  epilog
-    in   al, 61
+    in   al, sys8255_control
     and  al, 0fe
     xor  al, 2
-    out  61, al
+    out  sys8255_control, al
 epilog:
     pop  ax
 return:
@@ -118,22 +124,7 @@ demo_seed:
     mov  si, word ptr [GfxFileP]
     mov  al, byte ptr [si]
     jmp  carousel
-SpkRng endp
-
-TglSpkr proc near
-;
-    push ax
-    cmp  byte ptr [dnt_tgl_snd], 0
-    jnz epilog
-    in al, sys8255_control
-    and al, 0fe
-    xor al, 2
-    out sys8255_control, al
-epilog:
-    pop ax
-return:
-    ret
-
+TglSpkr endp
 
 
 PROG ends
