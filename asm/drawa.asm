@@ -14,7 +14,6 @@ data	segment	byte public 'data'
         pr_flag db 0
         prng0 dw 0acb6
         prng1 dw 038fa
-        dnt_tgl_snd db 0
         extern isDemo: byte
         extern GfxFileP: word
 data ENDS
@@ -102,7 +101,7 @@ carousel:
     pop  bp
     cmp  byte ptr [carousel_count], al
     jbe  return
-TglSpkr proc near
+TglSpkr label word
     push ax
 play_resume:
     cmp  byte ptr [pr_flag], 0
@@ -120,7 +119,6 @@ demo_seed:
     mov  si, word ptr [GfxFileP]
     mov  al, byte ptr [si]
     jmp  carousel
-TglSpkr endp
 SpkRng endp
 
 

@@ -44,7 +44,7 @@ qpara_push(call)
 uint call;
 {
   call &= 0xf;
-  if (call > 4){ vall >>= 2;}
+  if (call > 4){ call >>= 2;}
   qpush((byte)call);
 }
 
