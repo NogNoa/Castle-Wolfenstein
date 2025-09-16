@@ -5,7 +5,7 @@
     DISPLAY_BUFFER equ 0b800
     control_break_handler equ 6c
     print_screen_handler  equ 14
-    sys8255_control equ 0x61
+    sys8255_control equ 61
 ;
 data	segment	byte public 'data'
         PUBLIC prng0, prng1
@@ -19,7 +19,7 @@ data	segment	byte public 'data'
         extern GfxFileP: word
 data ENDS
 PROG    SEGMENT BYTE PUBLIC 'PROG' 
-        PUBLIC  DrawCG, IhbtIntr, SpkRng
+        PUBLIC  DrawCG, IhbtIntr, SpkRng, TglSpkr
         ASSUME  CS:PROG, DS:data
 IhbtIntr proc near
     PUSH         BP
@@ -101,12 +101,8 @@ carousel:
     pop  es
     pop  bp
     cmp  byte ptr [carousel_count], al
-    jbe  TglSpkr::return
-SpkRng endp
-
-
+    jbe  return
 TglSpkr proc near
-;
     push ax
 play_resume:
     cmp  byte ptr [pr_flag], 0
@@ -125,6 +121,7 @@ demo_seed:
     mov  al, byte ptr [si]
     jmp  carousel
 TglSpkr endp
+SpkRng endp
 
 
 PROG ends
