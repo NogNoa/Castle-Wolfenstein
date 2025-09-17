@@ -1,6 +1,9 @@
+/*BiosVideo functions*/
 #define SET_VIDEO_MODE 0
 #define SET_CURSOR_POSITION 0x200
-#define SET_BACKGROUND 0xb00
+#define SET_PAL_BG_BRDR 0xb00
+
+#define PAL_RGY 0x100
 
 #ifdef __WATCOMC__
 int RowColl(char row, char coll);

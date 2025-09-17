@@ -15,10 +15,10 @@ code:
             file_to_screen
           [drawa.asm]
      asm    draw_CG                 DrawCG
-          [NA]
+          [memory.c]
        c    pallete_2
+       c    FUND_1000_0555
        c    FUND_1000_05af
-            FUND_1000_0555
             FUN_1000_0610
        c  [init.c]
 640    c    main

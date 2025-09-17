@@ -67,6 +67,7 @@ extern room rm_pg;
 extern struct cs_pg_t cstl_pg;
 extern bool isDemo;
 extern byte rank_index;
+extern word error_encountered;
 
 
 /*save status*/

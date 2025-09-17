@@ -137,7 +137,7 @@ int file_chc;
         GfxFileP = file_buffer;
         load_file("titlepix", file_buffer, PIX_FSIZE);
         BiosVideo(SET_VIDEO_MODE | ((pcjr) ? JR_TINY : PxlClrLo), 0, 0, 0);
-        if (RGB_monitor && !pcjr) {BiosVideo(SET_BACKGROUND, CGA_BLUE, 0, 0);} 
+        if (RGB_monitor && !pcjr) {BiosVideo(SET_PAL_BG_BRDR, CGA_BLUE, 0, 0);} 
         DrawCG(file_buffer);
         break;
     default: return;
@@ -145,6 +145,16 @@ int file_chc;
     SegMemSet(Breakpoint+1, 0xcd);
     SegMemSet(Breakpoint+3, 0x13);
 }
+
+void pallete_2(void)
+{
+    BiosVideo(SET_PAL_BG_BRDR, PAL_RGY, 0, 0);
+    if (sum(SegmSt, 0xe) != 0xebfe)
+    {   cstl_pg.save_status = SS_Caught;
+        error_encountered = true;
+    }
+}
+
 
 room rm_pg;
 para_ind para_2ac;
