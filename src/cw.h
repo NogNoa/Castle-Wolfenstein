@@ -33,6 +33,7 @@ typedef char byte;
 
 #define CTRL(c) (0x40^c)
 #define ESC (0x40^'[')
+#define KEY_F1 0xbb
 
 #endif /* PROG_CW */ 
 

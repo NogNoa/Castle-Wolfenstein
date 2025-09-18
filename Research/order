@@ -108,9 +108,17 @@ fe3         rank_calculate
             qpush
 7318        qpara_push
 7341        game
-7854
+7854        f7854
+            loot_clear
+            f789e
+            f7a4d
+            f7a65
+            f7a8a
+            f7ad2
+            f7b4f
 7ba0        shoot
-7c24
+7c24        f7c24
+            f7c78
 7ca0        f7ca0
 7d89      [mc.lib]
 

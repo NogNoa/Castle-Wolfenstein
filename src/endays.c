@@ -1,5 +1,9 @@
 
 #include "cw.h"
+#include "video.h"
+#include "init.h"
+
+extern bool pcjr;
 
 int qstart, qstop;
 byte queue[0x20];
@@ -50,4 +54,37 @@ uint call;
 
 game()
 {   puts("not nearly implemented");
+}
+
+bool b2aa;
+
+void f7ca0(void)
+{
+  char c = '\0';
+  if (cstl_pg.s_87 == cstl_pg.rm_id)
+    {stop_sound();}
+  if (!pcjr)
+    {SetVideo(TxtGreyThn);}
+  else
+    {SetVideo(TxtGreyWd);}
+  PositCPuts(2,1,"A>");
+  while (c != KEY_F1 && c != ESC)
+  {   while (!IsKStrok())
+      c = (char) GetStroke();
+      if (!c)
+      { c = (char) GetStroke();
+        if (c < 0x80) {c += 0x80;}
+        else {c = '\0';}
+      }
+  }
+  if (c == KEY_F1)
+  { fgame_1585();
+    if (cstl_pg.s_87 == cstl_pg.rm_id) {speak_99();}
+    if (cstl_pg.act_timer) {b2aa = true;}
+  }
+  else
+  {
+    BiosVideo(SET_CURSOR_POSITION, 0, 0, 0);
+    _exit(-1);
+  }
 }

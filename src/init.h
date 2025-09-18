@@ -41,7 +41,9 @@ struct cs_pg_t
     byte save_status; /*0x6f*/
     byte table_4_4[4][4]; /*0x70*/
     byte s_80; /*0x80*/
-    byte s4[0xc0 - 0x81];
+    byte s4[0x87 - 0x81];
+    byte s_87;
+    byte s5[0xc0 - 0x88];
     byte rm_table[0x40]; /*0xc0*/
 };
 typedef byte page[PAGE_SZ];
