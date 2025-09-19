@@ -7,7 +7,13 @@
        JoyA_Axes     equ    3
        JoyA_Butt1    equ    10
        JoyA_Butt2    equ    20
+       PitCount2     equ    42
+       PitMode       equ    43
        sys8255_control equ  61
+       Binary        equ 0
+       SquareWave    equ 6
+       RWLittleEndian equ 30
+       Counter2Select equ 80
 data	segment	byte public 'data'
 ;
        dnt_toggle_sound     db 0
@@ -118,13 +124,13 @@ MkSon proc near
 ;
        cmp byte ptr [dnt_toggle_sound], 0
        jnz return
-       mov al, 0b6
-       out 43, al
+       mov al, Binary + SquareWave + RWLittleEndian + Counter2Select
+       out PitMode, al
        mov bx, word ptr [spk_divisor]
        mov al, bl
-       out 42, al
+       out PitCount2, al
        mov al, bh
-       out 42, al
+       out PitCount2, al
        in al, sys8255_control
        or al, 3
        out sys8255_control, al

@@ -87,16 +87,16 @@ fe3         rank_calculate
 6ecc      [sonara.asm]
        asm  profile_joystick    prfl_jystk
    compile  router
-6f7d        conditional_sound
+6f7d        conditional_sound   CondSon
 6f89   jump table
 6fb9   asm  start/stop_sound_1x
        asm  start/stop_sound_2x
             fun_6fe0
             empty_gun_sound    
-7031        speak_99
-            stop_sound
-            make_sound
-            sum_func
+7031        speak_99            Speak99
+            stop_sound          StpSon
+            make_sound          MkSon
+            sum_func            Sum
 7087    
 7143        wait_squared
 7151        fun_7158_BX0
