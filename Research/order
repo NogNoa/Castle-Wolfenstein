@@ -50,6 +50,7 @@ fe3         rank_calculate
 1585        f1585
             f16ae
             wolf_draw
+1893
 4426   c  [quort.c]
           
 
@@ -83,17 +84,15 @@ fe3         rank_calculate
 6800        JoyLocate    
 68c2        joystick_config     jystk_cnfg
        c    look_for_joystick   lkfr_jystk
+6ecc      [sonara.asm]
        asm  profile_joystick    prfl_jystk
-   compile  trampoline
-            speaker_617d
-
+   compile  router
+6f7d        conditional_sound
 6f89   jump table
-
-6fb9      [sonara.asm]  
-       asm  fun_6fb9
-            fun_6fc0
+6fb9   asm  start/stop_sound_1x
+       asm  start/stop_sound_2x
             fun_6fe0
-            fun_7024    
+            empty_gun_sound    
 7031        speak_99
             stop_sound
             make_sound

@@ -4,6 +4,7 @@
 #include "init.h"
 
 extern bool pcjr;
+extern bool b2aa;
 
 int qstart, qstop;
 byte queue[0x20];
@@ -56,13 +57,12 @@ game()
 {   puts("not nearly implemented");
 }
 
-bool b2aa;
 
 void f7ca0(void)
 {
   char c = '\0';
   if (cstl_pg.s_87 == cstl_pg.rm_id)
-    {stop_sound();}
+    {StpSon();}
   if (!pcjr)
     {SetVideo(TxtGreyThn);}
   else
@@ -79,7 +79,7 @@ void f7ca0(void)
   }
   if (c == KEY_F1)
   { fgame_1585();
-    if (cstl_pg.s_87 == cstl_pg.rm_id) {speak_99();}
+    if (cstl_pg.s_87 == cstl_pg.rm_id) {Speak99();}
     if (cstl_pg.act_timer) {b2aa = true;}
   }
   else

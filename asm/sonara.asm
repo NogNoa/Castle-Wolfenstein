@@ -7,12 +7,17 @@
        JoyA_Axes     equ    3
        JoyA_Butt1    equ    10
        JoyA_Butt2    equ    20
+       sys8255_control equ  61
 data	segment	byte public 'data'
 ;
+       dnt_toggle_sound     db 0
        ptr_joystick_buffer  dw OFFSET joystick_buffer
        JoyButton1           db 0
        JoyButton2           db 0
        joystick_buffer      db 300d dup(0)
+       shld_son             db 0
+       spk_divisor          dw 0
+       carsl_cnt            db 0
        extern JoyXDur: byte
        extern JoyYDur: byte
 data ENDS
@@ -78,6 +83,54 @@ Epilog:
        RET
 prflJyst     endp
 
+
+CondSon proc near
+;
+       cmp byte ptr [shld_son], 0
+       JZ  epilog
+       call MkSon
+epilog:
+       pop BP
+       ret
+CondSon      endp
+
+
+Speak99 proc near
+;
+       mov byte ptr [shld_son], 0ff
+       mov word ptr [spk_divisor], 099
+       call MkSon
+       jmp CondSon
+Speak99     endp
+
+
+StpSon proc near
+;
+       mov byte ptr [shld_son], 0
+       in al, sys8255_control
+       and al, 0fe
+       out sys8255_control, al
+       jmp CondSon
+StpSon      endp
+
+
+MkSon proc near
+;
+       cmp byte ptr [dnt_toggle_sound], 0
+       jnz return
+       mov al, 0b6
+       out 43, al
+       mov bx, word ptr [spk_divisor]
+       mov al, bl
+       out 42, al
+       mov al, bh
+       out 42, al
+       in al, sys8255_control
+       or al, 3
+       out sys8255_control, al
+return:
+       ret
+MkSon       endp
 
 Sum proc near
 ;

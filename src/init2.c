@@ -117,7 +117,12 @@ void isPcJr(void)
   SegMemSet(Breakpoint+3, 0x13);
 }
 
-byte[24][40] table_789e;
+void fgame_1585(void)
+{
+    cputs("unimplemented");
+}
+
+byte table_789e[24][40];
 
 void wolf_draw(str, color, row, ln_start, col)
 char * str;
@@ -134,7 +139,7 @@ char * str;
             if (*str == 0xb9)
             {   BiosVideo(0xb9 | WRITE_CHAR_COLOR, BlueFG, 1, 0);}
             else
-            {   BiosVideo(*str | WRITE_CHAR_COLOR, (byte) color, 1, 0)}
+            {   BiosVideo(*str | WRITE_CHAR_COLOR, (byte) color, 1, 0);}
             table_789e[row][col] = *str;
             ++col;
         }
