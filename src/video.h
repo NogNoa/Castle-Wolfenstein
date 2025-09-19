@@ -1,6 +1,7 @@
 /*BiosVideo functions*/
 #define SET_VIDEO_MODE 0
 #define SET_CURSOR_POSITION 0x200
+#define WRITE_CHAR_COLOR 0x900
 #define SET_PAL_BG_BRDR 0xb00
 
 #define PAL_RGY 0x100
@@ -25,6 +26,19 @@ void BiosVideo(int A, int B, int C, int D);
 #define MDA          7
 #define JR_TINY      8
 #define JR_WIDE      9
+
+/*Text Mode Colors*/
+#define BlackFG 0
+#define BlueFG 1
+#define GreenFG 2
+#define CyanFG 3
+#define RedFG 4
+#define MagentaFG 5
+#define BrownFG 6
+#define GreyFG 7
+#define BrightFG 8
+#define YellowFG (BrownFG | BrightFG)
+#define WhiteFG (GreyFG | BrightFG)
 
 
 /*CGA Colours*/ 

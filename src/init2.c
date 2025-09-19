@@ -116,3 +116,27 @@ void isPcJr(void)
   SegMemSet(Breakpoint+1, 0xcd);
   SegMemSet(Breakpoint+3, 0x13);
 }
+
+byte[24][40] table_789e;
+
+void wolf_draw(str, color, row, ln_start, col)
+char * str;
+{
+    for (;*str != '\0';++str)
+    {
+        if (*str == '\r')
+        {   ++row;
+            if (row > 24) {row = 0;}
+            col = ln_start;
+        }
+        else
+        {   BiosVideo(SET_CURSOR_POSITION, 0, 0, 0x100*row + col);
+            if (*str == 0xb9)
+            {   BiosVideo(0xb9 | WRITE_CHAR_COLOR, BlueFG, 1, 0);}
+            else
+            {   BiosVideo(*str | WRITE_CHAR_COLOR, (byte) color, 1, 0)}
+            table_789e[row][col] = *str;
+            ++col;
+        }
+    }
+}
