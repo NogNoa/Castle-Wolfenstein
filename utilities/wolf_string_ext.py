@@ -13,8 +13,9 @@ with open("./resources/CW.exe", "rb") as file:
     file.seek(strings_offset + DATA_SEGMENT_in_FILE)
     scroll = file.read(strings_end - strings_offset)
 
-offset = 0
-
 while scroll:
     scroll.lstrip(b'\0')
-    
+    offset = strings_end - len(scroll)
+    string, scroll = scroll.split(b'\0')
+    string = CGA.draw_w_costume_font(string, font)
+    string.save("%x.png" % offset)
