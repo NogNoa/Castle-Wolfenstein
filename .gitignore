@@ -29,3 +29,6 @@ src/prototypes/
 
 #App map
 src/CW.MAP
+
+utilities/resources/
+utilities/CGA.py

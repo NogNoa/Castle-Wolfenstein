@@ -135,7 +135,11 @@ char * str;
             col = ln_start;
         }
         else
-        {   BiosVideo(SET_CURSOR_POSITION, 0, 0, 0x100*row + col);
+        {   /* write charecter once in row and col
+               in blue if the charecter is an SS insignia
+               in argument color otherwise
+            */
+            BiosVideo(SET_CURSOR_POSITION, 0, 0, 0x100*row + col);
             if (*str == 0xb9)
             {   BiosVideo(0xb9 | WRITE_CHAR_COLOR, BlueFG, 1, 0);}
             else
