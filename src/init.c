@@ -257,9 +257,6 @@ void reverse_control(void)
     }
 }
 
-
-
-
 void resume_castle(void)
 {
     setVideoMode(PxlClrLo);
@@ -321,8 +318,6 @@ void reload_castle(void)
     }
 }
 
-
-
 void ld_castle_page_w_ptr(filename, length)
 string filename;
 {
@@ -339,7 +334,6 @@ string filename;
     {   cstl[i] = pg0_file_buffer[i];
     }
 }
-
 
 void save_castle(file_name)
 string file_name;
@@ -416,8 +410,6 @@ void save_room_pg(void)
     {
         pfilbuf[pg][i] = rmpg[i];
     }
-
-    
 }
 
 byte rank_calculate(void)

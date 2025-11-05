@@ -3,7 +3,7 @@
 #include "init.h"
 
 typedef byte paragraph[0x10];
-typedef paragraph floor[0x8];
+typedef paragraph amud[0x8];
 
 
 void scramble_castle(void)
@@ -37,22 +37,23 @@ void scramble_castle(void)
 
 void f44db(void)
 {
-    /* randomize variable in the 2nd half of each room
+    /* swetting up variables in each paragraph 
+    in the 2nd half of each page
     */
     int pg, parity, j;
-    floor * flr;
+    amud * flr;
     byte * par;
     byte al, spk;
     for (pg = 1; pg < 0x3f; ++pg)
-    {   flr = (floor *) (file_buffer + PAGE_SZ*pg + PAGE_SZ/2);
+    {   flr = (amud *) (file_buffer + PAGE_SZ*pg + PAGE_SZ/2);
         parity = 0;
         for (j=0; j < 8;++j)
         {   par = *flr[j];
             if (par[0] & 0xf0 == 0x10)
             {   spk = SpkRng();
-                if (10 < (spk & 15)) {spk -= 6;}
+                if (10 < (spk & 0xf)) {spk -= 6;} 
                 par[2] = 0;
-                par[7] = spk & 15;
+                par[7] = spk & 0xf;
                 par[6] = 0;
                 par[0xc] = 0;
                 par[9] = (byte) SpkRng();
@@ -73,17 +74,17 @@ void f44db(void)
 
 void f45e9(void)
 {
-    floor * flr;
-    byte * rm;
+    amud * flr;
+    byte * par;
     byte spk, nibble_j, carry_over, j;
     int pg, i;
     carry_over = 0xf; 
     j = 0;
     for (pg = 1; pg < 0x3f; pg = pg + 1) 
-    {   flr = (floor *) (file_buffer + PAGE_SZ*pg + PAGE_SZ/2);
+    {   flr = (amud *) (file_buffer + PAGE_SZ*pg + PAGE_SZ/2);
         for (i = 0; i < 8; i = i + 0x1) 
-        {   rm = *flr[i];
-            if ((rm[0] & 0xf0) == 0x30) 
+        {   par = *flr[i];
+            if ((par[0] & 0xf0) == 0x30) 
             { /* at first the nibble goes up to f
                 but then it's 0 twice in a row instead*/
                 nibble_j = j & 0xf;
@@ -91,17 +92,17 @@ void f45e9(void)
                 {   nibble_j = carry_over;
                     carry_over = 0;
                 }
-                rm[2] = nibble_j;
+                par[2] = nibble_j;
                 spk = (byte) SpkRng();
                 wait_x10(spk);
-                rm[4] = spk;
+                par[4] = spk;
                 spk = (byte) SpkRng();
-                rm[3] = spk;
-                rm[7] = 0;
+                par[3] = spk;
+                par[7] = 0;
                 j = j + 1;
             }
-            else if ((rm[0] & 0xf0) == 0x50) 
-            {   rm[3] = 1;}  
+            else if ((par[0] & 0xf0) == 0x50) 
+            {   par[3] = 1;}  
         }
     }
     return;
@@ -111,16 +112,16 @@ void f46c2(void)
 
 {
     byte nib_hi;
-    floor * flr0;
-    floor * flr1;
+    amud * flr0;
+    amud * flr1;
     byte k;
     int pg;
     int i;
     int j;
     
     for (pg = 2; pg < 0xb; ++pg) 
-    {   flr0 = (floor *)  (file_buffer + PAGE_SZ* pg         + PAGE_SZ/2);
-        flr1 = (floor *)  (file_buffer + PAGE_SZ*(pg + 0x20) + PAGE_SZ/2);
+    {   flr0 = (amud *)  (file_buffer + PAGE_SZ* pg         + PAGE_SZ/2);
+        flr1 = (amud *)  (file_buffer + PAGE_SZ*(pg + 0x20) + PAGE_SZ/2);
         for (i = 0; i <= 7; ++i) 
         {   nib_hi = *flr0[i][0] & 0xf0;
             if ((nib_hi == 0x10) || (nib_hi == 0x20)) 
