@@ -8,7 +8,7 @@
 
 extern bool isDemo;
 extern word dmodt_offset, dminpind, error_encountered;
-extern char controller;
+extern byte controller;
 
 #ifdef __WATCOMC__
 #include "conio.h"

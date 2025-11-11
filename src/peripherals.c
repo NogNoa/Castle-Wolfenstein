@@ -51,7 +51,7 @@ uint jystk_cnfg(void)
     byte brightXdur, bdownYdur, bleftXdur, bupYdur;
     uint ucentXdur, urightXdur, uupYdur, ucentYdur, uleftXdur, yupdiff;
     char stroke;
-    char *shoot, *aim;
+    string shoot, *aim;
     while(!done)
     {   setVideoMode(PxlClrLo);
         PositCPuts(11, 10, "Move your joystick");

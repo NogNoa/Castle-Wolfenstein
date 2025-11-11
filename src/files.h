@@ -7,7 +7,7 @@
 #define PIX_FSIZE 0x4000
 #define FBUF_SIZE 0x4100
 
-extern char file_buffer[FBUF_SIZE];
+extern byte file_buffer[FBUF_SIZE];
 extern byte* ptr_file_buffer;
 extern byte* GfxFileP;
 extern struct {
