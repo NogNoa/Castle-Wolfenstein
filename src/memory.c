@@ -150,7 +150,7 @@ int file_chc;
 void pallete_2(void)
 {
     BiosVideo(SET_PAL_BG_BRDR, PAL_RGY, 0, 0);
-    if (Sum((byte*)SegmSt, 0xe) != 0xebfe)
+    if (Sum(SegmSt, 0xe) != 0xebfe)
     {   cstl_pg.save_status = SS_Caught;
         error_encountered = true;
     }

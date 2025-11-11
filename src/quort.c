@@ -118,7 +118,7 @@ void f46c2(void)
     byte nib_hi;
     amud * flr0;
     amud * flr1;
-    signed char k;
+    char k;
     int pg;
     int i;
     int j;
@@ -149,8 +149,7 @@ byte fnd_fr_tile(call)
 byte call;
 {
     byte checked;
-    char i;
-    signed char tile, j;
+    char i, tile, j;
     
     i = 0x3f;
     do {

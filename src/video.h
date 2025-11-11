@@ -11,7 +11,7 @@ int setVideoMode(char mode_p);
 void BiosVideo(int A, int B, int C, int D);
 #endif
 
-//int RowColl(char row, char coll);
+/* int RowColl(char row, char coll); */
 #define RowColl(row, coll) ((int) ((row) - 1) << 8 | ((coll) - 1))
 
 
