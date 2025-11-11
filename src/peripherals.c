@@ -23,7 +23,7 @@ char stop_char;
     PositCPuts(row, col, str);
     in_char = (stop_char == '\0') ? 'a' : '\0';
     while (in_char != stop_char)
-    {   if(!IsKStrok())
+    {   if(!IsKstroke())
         {   if (isDemo)
             {   in_char = stop_char;
                 for (i = 0; i <= 2000; ++i) {}
@@ -31,7 +31,7 @@ char stop_char;
             }
         }
         else
-        {   in_char = (char) GetStrok();
+        {   in_char = (char) Getstroke();
             if (stop_char == '\0') {in_char = stop_char;}
 
         }
@@ -42,7 +42,7 @@ char stop_char;
 
 byte JoyXDur, JoyYDur;
 extern bool sagital;
-extern byte LC_L_RC[11], RC_LC[11], UC_YCU[11], YC_UC[11];
+extern byte LC_L_RC[11], RC_DC[11], UC_DC_U[11], DC_UC[11];
 
 uint jystk_cnfg(void)
 {   /*joystick config*/
@@ -105,19 +105,19 @@ uint jystk_cnfg(void)
                     LC_L_RC[3] = LC_L_RC[7] = -1;
                     LC_L_RC[4] = LC_L_RC[5] = LC_L_RC[6] = leftXdur;
                     LC_L_RC[8] = LC_L_RC[9] = LC_L_RC[10] = brightXdur;
-                    RC_LC[0] = RC_LC[1] = RC_LC[2] = brightXdur - 1;
-                    RC_LC[3] = -1;
-                    RC_LC[4] = RC_LC[5] = RC_LC[6] = bdownYdur;
-                    RC_LC[7] = -2;
-                    RC_LC[8] = RC_LC[9] = RC_LC[10] = -6;
-                    UC_YCU[0] = UC_YCU[4] = UC_YCU[8] = bupYdur + 1;
-                    UC_YCU[1] = UC_YCU[5] = UC_YCU[9] = bdownYdur;
-                    UC_YCU[2] = UC_YCU[6] = UC_YCU[10] = upYdur;
-                    UC_YCU[3] = UC_YCU[7] = -1;
-                    YC_UC[0] = YC_UC[4] = YC_UC[8] = bdownYdur - 1;
-                    YC_UC[1] = YC_UC[5] = YC_UC[9] = -6;
-                    YC_UC[2] = YC_UC[6] = YC_UC[10] = bupYdur;
-                    YC_UC[3] = YC_UC[7] = -2;
+                    RC_DC[0] = RC_DC[1] = RC_DC[2] = brightXdur - 1;
+                    RC_DC[3] = -1;
+                    RC_DC[4] = RC_DC[5] = RC_DC[6] = bdownYdur;
+                    RC_DC[7] = -2;
+                    RC_DC[8] = RC_DC[9] = RC_DC[10] = -6;
+                    UC_DC_U[0] = UC_DC_U[4] = UC_DC_U[8] = bupYdur + 1;
+                    UC_DC_U[1] = UC_DC_U[5] = UC_DC_U[9] = bdownYdur;
+                    UC_DC_U[2] = UC_DC_U[6] = UC_DC_U[10] = upYdur;
+                    UC_DC_U[3] = UC_DC_U[7] = -1;
+                    DC_UC[0] = DC_UC[4] = DC_UC[8] = bdownYdur - 1;
+                    DC_UC[1] = DC_UC[5] = DC_UC[9] = -6;
+                    DC_UC[2] = DC_UC[6] = DC_UC[10] = bupYdur;
+                    DC_UC[3] = DC_UC[7] = -2;
                     done = true;
                 }
         }
@@ -147,8 +147,8 @@ uint jystk_cnfg(void)
     PositCPuts(19, 1, "the buttons as they currently are.");
     stroke = '\0';
     while ((stroke != ESC && (stroke != ' '))) {
-        if (IsKStrok() != 0) {
-        stroke = (char)GetStrok();
+        if (IsKstroke() != 0) {
+        stroke = (char)Getstroke();
         }
     }
     if (stroke == ESC) {

@@ -9,20 +9,33 @@
 
 #ifdef __WATCOMC__
 #include "console.h"
-#include "FCNTL.H"
 #include "ibm.h"
 #include "io1.h"
 #include "cwa.h"
 #include "peripherals.h"
-#include "config.h"
 #include "conio.h"
 #include "anti_debug.h"
 #include "sonara.h"
-int Goober(int p1, byte* dest);
+#include "quort.h"
+#include "init2.h"
+#include "endays.h"
 void rank_print(void);
 void is_cstle_stt_60(void);
 void start_menu(void);
 void reverse_control(void);
+void fun728c(void);
+int game(void);
+void rank_write(int);
+int castle_indexize(void);
+bool wait_to_return(void);
+void load_demo(void);
+void lack_jystk(void);
+void resume_castle(void);
+void reload_castle(void);
+void new_castle(void);
+void save_room_pg(void);
+void save_castle(string file_name);
+byte rank_calculate(void);
 #else
 extern int Goober(); /*int[36]*/
 #endif
@@ -121,9 +134,9 @@ main()
                 PositCPuts(22,3, "Press Ctrl-R to reverse controls");
                 PositCPuts(23,3, "Press Ctrl-Q to select monitor type");
                 do {
-                    while (!IsKStrok());
+                    while (!IsKstroke());
                     cont = false;
-                    stroke = GetStrok();
+                    stroke = Getstroke();
                     switch (stroke)
                     {
                     case (CTRL('N')):
@@ -215,8 +228,8 @@ void start_menu(void)
     PositCPuts(18, 6, "ENTER to do nothing.");
     while (true)
     {
-        while (!IsKStrok());
-        c = GetStrok();
+        while (!IsKstroke());
+        c = Getstroke();
         if (c == CTRL('R'))
         {   rank_index = RNK_PRIVATE;
             cstl_load_var = 0xff;
@@ -241,8 +254,8 @@ void reverse_control(void)
     PositCPuts(11, 2 , "Press: K to adjust keyboard controls");
     PositCPuts(13, 9, "J to adjust joystick controls");
     while (true)
-    {   while (!IsKStrok());
-        c = GetStrok();
+    {   while (!IsKstroke());
+        c = Getstroke();
         if ((c | 0x20) == 'k')
         {   kb_cnfg();}
         else if ((c | 0x20) == 'j')

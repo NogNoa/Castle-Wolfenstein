@@ -2,9 +2,13 @@
 #include "files.h"
 #include "init.h"
 
+#ifdef __WATCOMC__
+#include "drawa.h"
+void wait_x10(int time);
+#endif
+
 typedef byte paragraph[0x10];
 typedef paragraph amud[0x8];
-
 
 void scramble_castle(void)
 {
@@ -43,13 +47,13 @@ void f44db(void)
     int pg, parity, j;
     amud * flr;
     byte * par;
-    byte al, spk;
+    byte spk;
     for (pg = 1; pg < 0x3f; ++pg)
     {   flr = (amud *) (file_buffer + PAGE_SZ*pg + PAGE_SZ/2);
         parity = 0;
         for (j=0; j < 8;++j)
         {   par = *flr[j];
-            if (par[0] & 0xf0 == 0x10)
+            if ((par[0] & 0xf0) == 0x10)
             {   spk = SpkRng();
                 if (10 < (spk & 0xf)) {spk -= 6;} 
                 par[2] = 0;
@@ -114,7 +118,7 @@ void f46c2(void)
     byte nib_hi;
     amud * flr0;
     amud * flr1;
-    byte k;
+    signed char k;
     int pg;
     int i;
     int j;
@@ -145,9 +149,8 @@ byte fnd_fr_tile(call)
 byte call;
 {
     byte checked;
-    byte tile;
     char i;
-    byte j;
+    signed char tile, j;
     
     i = 0x3f;
     do {

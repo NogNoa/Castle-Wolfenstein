@@ -6,6 +6,15 @@
 extern bool pcjr;
 extern bool b2aa;
 
+#ifdef __WATCOMC__
+#include "conio.h"
+#include "sonara.h"
+#include "cwa.h"
+#include "init2.h"
+byte qpull(void);
+byte olqpull(void);
+#endif
+
 int qstart, qstop;
 byte queue[0x20];
 
@@ -64,12 +73,12 @@ void f7ca0(void)
   if (cstl_pg.s_87 == cstl_pg.rm_id)
     {StpSon();}
   if (!pcjr)
-    {SetVideo(TxtGreyThn);}
+    {setVideoMode(TxtGreyThn);}
   else
-    {SetVideo(TxtGreyWd);}
+    {setVideoMode(TxtGreyWd);}
   PositCPuts(2,1,"A>");
   while (c != KEY_F1 && c != ESC)
-  {   while (!IsKStrok())
+  {   while (!IsKstroke())
       c = (char) GetStroke();
       if (!c)
       { c = (char) GetStroke();

@@ -41,8 +41,8 @@ void kb_cnfg(void)
   print_to_position(0, 18, "the controls as they currently are.");
   stroke = '\0';
   while (stroke != ESC && (stroke != ' ')) {
-    if (IsKStrok() != 0) {
-      stroke = (char)GetStrok();
+    if (IsKstroke() != 0) {
+      stroke = (char)Getstroke();
     }
   }
   if (stroke == ESC) {
@@ -83,8 +83,8 @@ void select_monitor(void)
   print_to_position(0, 16,"a Non-RGB monitor hookup.");
   key = '\0';
   while ((key != ESC && (key != ' '))) {
-    if (IsKStrok() != 0) {
-      key = GetStrok();
+    if (IsKstroke() != 0) {
+      key = Getstroke();
     }
   }
   RGB_monitor = key == ESC;
@@ -103,7 +103,7 @@ string massage;
 }
 
 bool horizontal, sagital;
-byte LC_L_RC[0xb], RC_LC[0xb], UC_YCU[0xb], YC_UC[0xb];
+byte LC_L_RC[0xb], RC_DC[0xb], UC_DC_U[0xb], DC_UC[0xb];
 extern byte joyCunfag;
 
 
@@ -122,9 +122,9 @@ void r_ctrls_load(void)
     ctrls_read(fd, &joyCunfag, 2l, 1);
     ctrls_read(fd, &RGB_monitor, 3l, 1);
     ctrls_read(fd, LC_L_RC, 4l, 0xb);
-    ctrls_read(fd, RC_LC, 0xfl, 0xb);
-    ctrls_read(fd, UC_YCU, 0x1al, 0xb);
-    ctrls_read(fd, YC_UC, 0x25l, 0xb);
+    ctrls_read(fd, RC_DC, 0xfl, 0xb);
+    ctrls_read(fd, UC_DC_U, 0x1al, 0xb);
+    ctrls_read(fd, DC_UC, 0x25l, 0xb);
     close(fd);
 }
 
@@ -155,9 +155,9 @@ int w_ctrls_load(void)
     ctrls_write(fd, &joyCunfag, 2l, 1);
     ctrls_write(fd, &RGB_monitor, 3l, 1);
     ctrls_write(fd, LC_L_RC, 4l, 0xb);
-    ctrls_write(fd, RC_LC, 0xfl, 0xb);
-    ctrls_write(fd, UC_YCU, 0x1al, 0xb);
-    ctrls_write(fd, YC_UC, 0x25l, 0xb);
+    ctrls_write(fd, RC_DC, 0xfl, 0xb);
+    ctrls_write(fd, UC_DC_U, 0x1al, 0xb);
+    ctrls_write(fd, DC_UC, 0x25l, 0xb);
     return close(fd);
 }
 

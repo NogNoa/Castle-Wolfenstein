@@ -70,7 +70,7 @@ bool f1338()
     word la = (pcjr) ? 56000 : 53464;
     l6 = 0;
     for (l6 = 0; l6 < !pcjr << 16 | la; ++l6)
-    {   if (IsKstrok() && GetStrok() == '\r') {return false;}
+    {   if (IsKstroke() && Getstroke() == '\r') {return false;}
     }
     return true;
 }

@@ -8,6 +8,7 @@ void seg0_memmove(int numBytes, byte *dest, byte *source);
 int check_for_debugger(void);
 void fixit(void);
 void file_to_screen(int file_chc);
+bool build_func_on_stack(int arg);
 #endif
 
 #define long_ptr(S, I) ((long)S << 0x10 | I)

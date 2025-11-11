@@ -10,6 +10,7 @@
 #include "console.h"
 #include "cwa.h"
 #include "drawa.h"
+#include "sonara.h"
 #endif
 
 void seg0_move(numBytes, dest, source)
@@ -149,7 +150,7 @@ int file_chc;
 void pallete_2(void)
 {
     BiosVideo(SET_PAL_BG_BRDR, PAL_RGY, 0, 0);
-    if (sum(SegmSt, 0xe) != 0xebfe)
+    if (Sum((byte*)SegmSt, 0xe) != 0xebfe)
     {   cstl_pg.save_status = SS_Caught;
         error_encountered = true;
     }

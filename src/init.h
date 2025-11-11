@@ -5,10 +5,7 @@ void put_2_strings(string line4,string line5);
 int load_file(string file_name, byte * dest, int length);
 void ld_castle_page_w_ptr(string file_name, int size);
 signed_error load_room_pg(int pagenumb);
-bool wait_to_return(void);
-void load_demo(void);
-byte rank_calculate(void);
-void lack_jystk(void);
+int checked_open(string fn, int flags);
 #endif
 
 struct cs_pg_t

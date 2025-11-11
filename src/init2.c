@@ -10,6 +10,15 @@ extern bool isDemo;
 extern word dmodt_offset, dminpind, error_encountered;
 extern char controller;
 
+#ifdef __WATCOMC__
+#include "conio.h"
+#include "memory.h"
+#include "cwa.h"
+#include "init.h"
+#include "io1.h"
+#include "peripherals.h"
+#endif
+
 int
 sektor_indexize(void)
 {
@@ -61,8 +70,8 @@ bool wait_to_return(void)
     if (!pcjr) {limit = 119000l;}
     else {limit = 56000l;}
     for (li=0;li <= limit;++li)
-    {   if (IsKStrok())
-        {   if (GetStrok() == '\r')
+    {   if (IsKstroke())
+        {   if (Getstroke() == '\r')
                 {return false;}
         }
     }
