@@ -163,5 +163,5 @@ uint jystk_cnfg(void)
 int lkfr_jystk(void)
 {   /*look for joystick*/
     prflJystk();
-    return JoyXDur == (byte) -1;
+    return JoyXDur == -1;
 }

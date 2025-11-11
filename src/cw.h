@@ -23,6 +23,8 @@ int sum(int *list, int len);
 
 #ifndef LATTICE
 typedef char byte;
+/*  unfortunetly, unsigned char just don't exist in lc/mc's world
+    (nor does the signed qualifier for that matter) */
 #endif /* LATTICE */
 
 #ifndef NULL
