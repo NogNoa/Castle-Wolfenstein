@@ -21,7 +21,8 @@ extern bool horizontal;
 
 void kb_cnfg(void) 
 { /*keyboard config*/
-  string move, *shoot;
+  string move;
+  string shoot;
   char stroke;
   setVideoMode(PxlClrLo);
   if (!horizontal)

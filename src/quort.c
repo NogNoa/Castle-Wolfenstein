@@ -157,7 +157,7 @@ byte call;
             tile = ++call & 0x3f;
         } while (rm_pg.tl_tble[tile] & 0x38);
         j = 1;
-        checked = rm_pg.rm70[j][1];
+        checked = rm_pg.rm80[j -1][1];
         while (j < 9 && 
             checked != tile &&
             (checked + 8 != tile) && 
@@ -178,9 +178,9 @@ void cstl_reset(void)
     cstl_pg.tile_pl_rm = fnd_fr_tile((byte)SpkRng());
     for (par = 1; par < 9; par = par + 1) {
         k = par * 0x10;
-        if (rm_pg.rm70[par][0] == 0x20) {
-        rm_pg.rm70[par][0] = 0x10;
-        rm_pg.rm70[k][6] = 0;
+        if (rm_pg.rm80[par -1][0] == 0x20) {
+        rm_pg.rm80[par -1][0] = 0x10;
+        rm_pg.rm80[k -1][6] = 0;
         }
     }
     cstl_pg.rm_id = 1;

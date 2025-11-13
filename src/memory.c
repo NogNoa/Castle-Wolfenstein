@@ -165,12 +165,12 @@ void fund_555(p)
 para_ind p;
 {
     para_2ac = p;
-    switch (rm_pg.rm70[para_2ac][0])
+    switch (rm_pg.rm80[para_2ac -1][0])
     {
         case 0x10:
         case 0x20:
         case 0x40:
-            /* fun3566();*/
+            game_try_open();
             break;
         case 0x30:
             /*fun3aa0();*/
@@ -183,7 +183,7 @@ para_ind p;
 
 void fund_5af(void)
 {
-    switch (rm_pg.rm70[para_2ac][0])
+    switch (rm_pg.rm80[para_2ac -1][0])
     {
         case 0x10:
             /* fun2dd4();*/
@@ -204,7 +204,7 @@ void fund_5af(void)
 void fun610(void)
 {
     byte id;
-    id = rm_pg.rm70[para_2ac][0];
+    id = rm_pg.rm80[para_2ac -1][0];
     if (id != 0x10 && id != 0x20)
     {
         /* fun1f3d() */
