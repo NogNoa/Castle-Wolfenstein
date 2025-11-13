@@ -21,7 +21,7 @@ byte *source;
     byte v;
     for (i = 0; i <numBytes; i = i + 1) {
         v = source[i];
-        SegmSt(0, dest + i, v);
+        SegMemSet(dest + i, v);
     }
 }
 
@@ -84,9 +84,10 @@ bool build_func_on_stack(arg)
 int arg;
 {
   int fnstk[8];
+  int i;
   fnstk[0] = 0x1b8;
   fnstk[1] = 0xbb02;
-  fnstk[2] = 0x7c62;
+  fnstk[2] = &dmodt_buffer;
   fnstk[3] = 0x1b8;
   fnstk[4] = arg + 0xba00;
   fnstk[5] = *dflt_drv;
@@ -94,8 +95,8 @@ int arg;
   fnstk[7] = 0xcb;
   CallStck();
   fnstk[0] = 0x1000;
-  for (arg=1; arg < 8; ++arg)
-  {     fnstk[arg] = 0;
+  for (i=1; i < 8; ++i)
+  {     fnstk[i] = 0;
 
   }
   return (fnstk[0] == 0x1000);

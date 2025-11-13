@@ -18,3 +18,11 @@ so the code will end up something like
 
 however none of these registers is actually used directly after the call
 the code is cleaned from the stack
+
+This seem like there was a interupt there that was replaced by nop nop
+
+DATA:0x7c62 is the location of the demodata_buffer
+if interupt 13 is called than ah=2 is read sectors al=1 mean read 1 sector
+and drive:cylinder:head:sector map to dl:ch:dh:cl so default_drive:arg1:0:14
+the cylinder being variable but the sector not is weird though
+unfortunatly I have a zip not an original disk image.
