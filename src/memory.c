@@ -170,7 +170,7 @@ para_ind p;
         case 0x10:
         case 0x20:
         case 0x40:
-            game_try_open();
+            try_open();
             break;
         case 0x30:
             /*fun3aa0();*/
