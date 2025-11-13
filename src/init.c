@@ -457,5 +457,18 @@ void rank_write(rnk_ind)
         {cstl_pg.plans = false;}
 }
 
+struct {
+    word col;
+    word row;
+}col_row2b2;
 
+void sep_row_col(word rowcol)
+{
+    int l4, a, b;
+    l4 = rowcol;
+    a = rowcol & 7;
+    b = (l4 & 0x78) >> 3;
+    col_row2b2.col = a;
+    col_row2b2.row = b;
+}
 
