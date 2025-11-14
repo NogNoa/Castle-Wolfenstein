@@ -36,7 +36,10 @@ f21         save_room_pg
 f71         switch_room_pg
 fe3         rank_calculate
 1055        write_rank
-1072
+1072        f1702
+            get_crdinats
+10c4        f10c4
+          [init2]
 11ba        sektor_indexize
 11ec        f11ec
 129d        put_2_strings
@@ -51,6 +54,12 @@ fe3         rank_calculate
             f16ae
             wolf_draw
 1893
+303a      [game.c]
+            try_open_wkeys
+            try_open
+30fd
+37e1        clear_status_bar
+3820
 4426   c  [quort.c]
           
 

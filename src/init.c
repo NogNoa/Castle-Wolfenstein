@@ -462,13 +462,16 @@ struct {
     word row;
 }col_row2b2;
 
-void sep_row_col(word rowcol)
+void f1702(uint tile)
 {
-    int l4, a, b;
-    l4 = rowcol;
-    a = rowcol & 7;
-    b = (l4 & 0x78) >> 3;
-    col_row2b2.col = a;
-    col_row2b2.row = b;
+    get_crdinats(tile);
+    col_row2b2.row = (col_row2b2.row + 1) * 2;
+    col_row2b2.col =  col_row2b2.col * 4  + 3;
+}
+
+void get_crdinats(word rowcol)
+{
+    col_row2b2.col = rowcol & 7;
+    col_row2b2.row = (rowcol & 0x78) >> 3;
 }
 
