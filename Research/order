@@ -106,10 +106,12 @@ fe3         rank_calculate
             stop_sound          StpSon
             make_sound          MkSon
             sum_func            Sum
-7087    
+            f7087
+            f70a4
+70b6
 7143        wait_squared
-7151        fun_7158_BX0
-            fun_7158_BXA       
+7151        rng_iter_B0
+            rng_iter_B0       
 71a7    
 728c      [endays]
             clear_queue

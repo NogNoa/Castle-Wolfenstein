@@ -24,12 +24,12 @@ cd ..\asm
 d:ml /c cwa.asm > ..\asm.err
 d:ml /c drawa.asm >> ..\asm.err
 d:ml /c sonara.asm >> ..\asm.err
-rename cwa.OBJ ..\src\cwa.OBJ
-rename drawa.OBJ ..\src\drawa.OBJ
-rename sonara.OBJ ..\src\sonara.OBJ
+move cwa.OBJ ..\src\cwa.OBJ
+move drawa.OBJ ..\src\drawa.OBJ
+move sonara.OBJ ..\src\sonara.OBJ
 cd ..\src
 b:link b:c MEMORY drawa init init2 game quort config cwa periph~1 sonara endays ,cw,cw,b:mc /map /line > ..\link.err
-rename cw.exe ..\bin\cw.exe
+move cw.exe ..\bin\cw.exe
 cd ..
 type asm.err init.err init2.err game.err config.err quort.err memory.err endays.err periph.err link.err > cw.err
 cd src

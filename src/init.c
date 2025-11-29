@@ -460,16 +460,18 @@ void rank_write(rnk_ind)
 struct {
     word col;
     word row;
-}col_row2b2;
+} col_row2b2;
 
-void f1702(uint tile)
+void f1702(tile)
+word tile;
 {
     get_crdinats(tile);
     col_row2b2.row = (col_row2b2.row + 1) * 2;
     col_row2b2.col =  col_row2b2.col * 4  + 3;
 }
 
-void get_crdinats(word rowcol)
+void get_crdinats(rowcol)
+word rowcol;
 {
     col_row2b2.col = rowcol & 7;
     col_row2b2.row = (rowcol & 0x78) >> 3;
