@@ -14,8 +14,8 @@ bool build_func_on_stack(int arg);
 #define long_ptr(S, I) ((long)S << 0x10 | I)
 
 #define SegMemSet(Aseg, bval)    (SegmSt((int) ((Aseg) >> 0x10), (byte *) (Aseg), (byte) (bval)))
-#define WSegMem_Set(Aseg, wval)  ((SegMemSet((long) Aseg, wval)),   (SegMemSet((long) Aseg+1, wval >> 8)))
-#define LSeg_Mem_Set(Aseg, lval) ((WSegMem_Set(Aseg, lval)), (WSegMem_Set(Aseg+2, lval >> 0x10)))
+#define WSegMem_Set(Aseg, wval)  ((SegMemSet((long) Aseg, (byte) wval)),   (SegMemSet((long) Aseg+1, (byte)(wval >> 8))))
+#define LSeg_Mem_Set(Aseg, lval) ((WSegMem_Set(Aseg, (word) lval)), (WSegMem_Set(Aseg+2, (word)(lval >> 0x10))))
 
 #define SegMemGet(Aseg)       (SegmGt((int) ((Aseg) / PAGE_SZ), (byte *) (Aseg)))
 #define WSegMem_Get(Aseg)  ((SegMemGet((long)Aseg)) | (SegMemGet((long) Aseg+1)) << 8)
