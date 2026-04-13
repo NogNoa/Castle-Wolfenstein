@@ -1,0 +1,25 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Dosbox-X build",
+            "type": "shell",
+            "command": "dosbox/DOSBox.exe.lnk",
+            "args": [
+                "-exit",
+                "-c",
+                "make"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                // Reveal the output only if unrecognized errors occur.
+                "reveal": "silent"
+            },
+        }
+    ]
+}
