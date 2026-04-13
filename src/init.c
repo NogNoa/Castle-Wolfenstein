@@ -462,12 +462,12 @@ struct {
     word row;
 } col_row2b2;
 
-void f1702(tile)
+void f1072(tile)
 word tile;
 {
     get_crdinats(tile);
-    col_row2b2.row = (col_row2b2.row + 1) * 2;
-    col_row2b2.col =  col_row2b2.col * 4  + 3;
+    col_row2b2.row =  col_row2b2.row * 2 + 2;
+    col_row2b2.col =  col_row2b2.col * 4 + 3;
 }
 
 void get_crdinats(rowcol)
@@ -477,3 +477,43 @@ word rowcol;
     col_row2b2.row = (rowcol & 0x78) >> 3;
 }
 
+void f10c4(void)
+{
+    int i,j;
+    if (!rm_pg.ary_49[0])
+    {
+        for (i=0;i<9;++i)
+        {
+            rm_pg.tl_tble[i][0] |= 1;
+        }
+    }
+    if (!rm_pg.ary_49[1])
+    {
+        for (i=0;i<9;++i)
+        {
+            rm_pg.tl_tble[i][7] |= 2;
+        }
+    }
+    if (!rm_pg.ary_49[2])
+    {
+        for (j=0;j<8;++j)
+        {
+            rm_pg.tl_tble[0][j] |= 4;
+        }
+    }
+    if (!rm_pg.ary_49[3])
+    {
+        for (j=0;j<8;++j)
+        {
+            rm_pg.tl_tble[8][j] |= 8;
+        }
+    }
+    if (!rm_pg.ary_49[4])
+    {   for (i=0;i<9;++i)
+        {    for (j=0;j<8;++j)
+            {
+                rm_pg.tl_tble[i][j] &= ~0x10;
+            }
+        }
+    }
+}

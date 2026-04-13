@@ -48,8 +48,10 @@ typedef byte page[PAGE_SZ];
 
 typedef struct _room
 {
-    byte tl_tble[0x48];
-    byte rm48[0x38];
+    byte tl_tble[9][8];
+    byte;
+    byte ary_49[5];
+    byte rm4e[0x32];
     byte rm80[0x10][8];
 } room;
 
