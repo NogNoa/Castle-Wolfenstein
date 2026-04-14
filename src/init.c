@@ -92,7 +92,7 @@ uint IhbtIntr();
 void
 main()
 {
-    int l1a, l18, stroke, i;
+    int l1a, l18, i;
     byte *lroom_pg;
     bool cont;
     struct cs_pg_t *lcastle_pg;
@@ -134,10 +134,8 @@ main()
                 PositCPuts(22,3, "Press Ctrl-R to reverse controls");
                 PositCPuts(23,3, "Press Ctrl-Q to select monitor type");
                 do {
-                    while (!IsKstroke());
                     cont = false;
-                    stroke = Getstroke();
-                    switch (stroke)
+                    switch (wait_kb())
                     {
                     case (CTRL('N')):
                         start_menu();
@@ -228,8 +226,7 @@ void start_menu(void)
     PositCPuts(18, 6, "ENTER to do nothing.");
     while (true)
     {
-        while (!IsKstroke());
-        c = Getstroke();
+        c = wait_kb();
         if (c == CTRL('R'))
         {   rank_index = RNK_PRIVATE;
             cstl_load_var = 0xff;
@@ -254,8 +251,7 @@ void reverse_control(void)
     PositCPuts(11, 2 , "Press: K to adjust keyboard controls");
     PositCPuts(13, 9, "J to adjust joystick controls");
     while (true)
-    {   while (!IsKstroke());
-        c = Getstroke();
+    {   c = wait_kb();
         if ((c | 0x20) == 'k')
         {   kb_cnfg();}
         else if ((c | 0x20) == 'j')
@@ -502,8 +498,7 @@ void f10c4(void)
         }
     }
     if (!rm_pg.ary_49[3])
-    {
-        for (j=0;j<8;++j)
+    {   for (j=0;j<8;++j)
         {
             rm_pg.tl_tble[8][j] |= 8;
         }
@@ -516,4 +511,9 @@ void f10c4(void)
             }
         }
     }
+}
+
+inline char wait_kb(void)
+{   while (!IsKstroke());
+    return Getstroke();
 }

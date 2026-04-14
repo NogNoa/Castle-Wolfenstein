@@ -67,7 +67,7 @@ game()
 }
 
 
-void f7ca0(void)
+void escf1_prmpt(void)
 {
   char c = '\0';
   if (cstl_pg.s_87 == cstl_pg.rm_id)
@@ -78,8 +78,7 @@ void f7ca0(void)
     {setVideoMode(TxtGreyWd);}
   PositCPuts(2,1,"A>");
   while (c != KEY_F1 && c != ESC)
-  {   while (!IsKstroke())
-      c = (char) GetStroke();
+  {   c = (char) wait_kb();
       if (!c)
       { c = (char) GetStroke();
         if (c < 0x80) {c += 0x80;}
