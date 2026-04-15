@@ -5,6 +5,7 @@
 #include "config.h"
 #include "IVT.h"
 #include "memory.h"
+#include "init.h"
 
 extern bool isDemo;
 extern word dmodt_offset, dminpind, error_encountered;
@@ -14,7 +15,6 @@ extern byte controller;
 #include "conio.h"
 #include "memory.h"
 #include "cwa.h"
-#include "init.h"
 #include "io1.h"
 #include "peripherals.h"
 #endif
@@ -157,4 +157,25 @@ char * str;
             ++col;
         }
     }
+}
+
+int drcltb[11] = {
+     0,  0,  0, 0,
+    -1, -1, -1, 0,
+     1,  1,  1
+};
+int drrwtb[11] = {
+    0, 1, -1, 0,
+    0, 1, -1, 0,
+    0, 1, -1
+};
+
+uint in_front(position, direction)
+uint position;int direction;
+{
+    get_crdinats(position);
+    col_row2b2.col += drcltb[direction]; 
+    col_row2b2.row += drrwtb[direction];
+    position = (byte) col_row2b2.row << 3 | (col_row2b2.col & 7);
+    return position;
 }

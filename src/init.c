@@ -466,11 +466,11 @@ word tile;
     col_row2b2.col =  col_row2b2.col * 4 + 3;
 }
 
-void get_crdinats(rowcol)
-word rowcol;
+void get_crdinats(colrow)
+word colrow
 {
-    col_row2b2.col = rowcol & 7;
-    col_row2b2.row = (rowcol & 0x78) >> 3;
+    col_row2b2.col = colrow & 7;
+    col_row2b2.row = (colrow & 0x78) >> 3;
 }
 
 void f10c4(void)

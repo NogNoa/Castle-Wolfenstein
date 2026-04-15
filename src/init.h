@@ -55,7 +55,10 @@ typedef struct _room
     byte rm80[0x10][8];
 } room;
 
-
+extern struct {
+    word col;
+    word row;
+} col_row2b2;
 
 typedef struct _castle_buffer
 {
