@@ -8,6 +8,12 @@ signed_error load_room_pg(int pagenumb);
 int checked_open(string fn, int flags);
 #endif
 
+#define DIR_DOWN 1
+#define DIR_UP 2
+#define DIR_LEFT 4
+#define DIR_RIGHT 8
+
+
 struct cs_pg_t
 {
     byte prefix[0x40];
@@ -56,8 +62,8 @@ typedef struct _room
 } room;
 
 extern struct {
-    word col;
-    word row;
+    int col;
+    int row;
 } col_row2b2;
 
 typedef struct _castle_buffer

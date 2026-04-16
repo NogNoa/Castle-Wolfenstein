@@ -29,6 +29,33 @@ sektor_indexize(void)
     return i;
 }
 
+word a77a2[11] =
+{   0, 4,  8, 0,
+    2, 6, 10, 0,
+    1, 5,  9,
+
+};
+
+
+int f11ec(void)
+{   byte tl_pos;
+    uint front;
+    if (!cstl_pg.aim_dir) {return -1;}
+    tl_pos = cstl_pg.tile_pl_rm;
+    if 
+    (cstl_pg.aim_dir != DIR_UP)
+        {tl_pos += 8;}
+    if (rm_pg.tl_tble[tl_pos / 8][tl_pos % 8] & a77a2[cstl_pg.aim_dir] != 0) {return -1;}
+    front = in_front(cstl_pg.tile_pl_rm, cstl_pg.aim_dir);
+    if ((-1 < col_row2b2.col) && (col_row2b2.col < 8) &&
+        (-1 < col_row2b2.row) && (col_row2b2.row < 9))
+    {   if (rm_pg.tl_tble[front / 8][front % 8] & a77a2[cstl_pg.aim_dir] != 0)   
+            {return -1;}
+        else {return front;}
+    }
+    else {return -1;}
+}
+
 bool pcjr;
 
 void put_2_strings(line4, line5)

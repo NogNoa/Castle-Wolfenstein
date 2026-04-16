@@ -467,7 +467,7 @@ word tile;
 }
 
 void get_crdinats(colrow)
-word colrow
+word colrow;
 {
     col_row2b2.col = colrow & 7;
     col_row2b2.row = (colrow & 0x78) >> 3;
