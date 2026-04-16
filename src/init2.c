@@ -48,11 +48,8 @@ int f11ec(void)
     if (rm_pg.tl_tble[tl_pos / 8][tl_pos % 8] & a77a2[cstl_pg.aim_dir] != 0) {return -1;}
     front = in_front(cstl_pg.tile_pl_rm, cstl_pg.aim_dir);
     if ((-1 < col_row2b2.col) && (col_row2b2.col < 8) &&
-        (-1 < col_row2b2.row) && (col_row2b2.row < 9))
-    {   if (rm_pg.tl_tble[front / 8][front % 8] & a77a2[cstl_pg.aim_dir] != 0)   
-            {return -1;}
-        else {return front;}
-    }
+        (-1 < col_row2b2.row) && (col_row2b2.row < 9) &&
+        (rm_pg.tl_tble[front / 8][front % 8] & a77a2[cstl_pg.aim_dir] == 0)) {return front;}
     else {return -1;}
 }
 
@@ -186,23 +183,3 @@ char * str;
     }
 }
 
-int drcltb[11] = {
-     0,  0,  0, 0,
-    -1, -1, -1, 0,
-     1,  1,  1
-};
-int drrwtb[11] = {
-    0, 1, -1, 0,
-    0, 1, -1, 0,
-    0, 1, -1
-};
-
-uint in_front(position, direction)
-uint position;int direction;
-{
-    get_crdinats(position);
-    col_row2b2.col += drcltb[direction]; 
-    col_row2b2.row += drrwtb[direction];
-    position = (byte) col_row2b2.row << 3 | (col_row2b2.col & 7);
-    return position;
-}

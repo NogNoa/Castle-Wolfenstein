@@ -54,6 +54,7 @@ fe3         rank_calculate
 1585        f1585
             f16ae
             wolf_draw
+            [init3.c]
 1893
 18d4        in_front
 303a      [game.c]

@@ -1,6 +1,7 @@
 del ..\bin\cw.exe
 mc1 init > ..\init.err 
 mc1 init2 > ..\init2.err 
+mc1 init3 > ..\init3.err 
 mc1 config > ..\config.err 
 mc1 memory > ..\memory.err 
 mc1 endays > ..\endays.err 
@@ -9,6 +10,7 @@ mc1 quort > ..\quort.err
 mc1 game > ..\game.err
 mc2 init
 mc2 init2
+mc2 init3
 mc2 config 
 mc2 memory 
 mc2 endays
@@ -28,7 +30,7 @@ move cwa.OBJ ..\src\cwa.OBJ
 move drawa.OBJ ..\src\drawa.OBJ
 move sonara.OBJ ..\src\sonara.OBJ
 cd ..\src
-b:link b:c MEMORY drawa init init2 game quort config cwa periph~1 sonara endays ,cw,cw,b:mc /map /line > ..\link.err
+b:link b:c MEMORY drawa init init2 init3 game quort config cwa periph~1 sonara endays ,cw,cw,b:mc /map /line > ..\link.err
 move cw.exe ..\bin\cw.exe
 cd ..
 type asm.err init.err init2.err game.err config.err quort.err memory.err endays.err periph.err link.err > cw.err
